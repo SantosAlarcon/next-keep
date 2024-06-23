@@ -2,5 +2,48 @@
     padding: 3rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
+    width: 100%;
+}
+
+.note__page__title {
+    border-bottom: 1px #fff6 solid;
+    padding-bottom: 1rem;
+    width: 100%;
+}
+
+.note__page__markdown {
+    & a {
+        color: #bbf;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    & ul, & ol {
+        margin-left: 2.5rem;
+        line-height: 1.5rem;
+    }
+
+    & h1, h2, h3, h4, h5, h6 {
+        padding: .5rem 0;
+        border-bottom: 1px #fff3 solid;
+        margin: 1rem 0;
+    }
+
+    & table {
+        border: 3px #fff6 solid;
+        border-collapse: collapse;
+        width: 100%;
+
+        & th, td {
+            border: 1px #fff6 solid;
+            padding: .5rem;
+        }
+
+        & th {
+            background-color: #aaf1;
+        }
+    }
 }
