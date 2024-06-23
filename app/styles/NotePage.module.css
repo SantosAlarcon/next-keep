@@ -1,0 +1,6 @@
+.note__page__container {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
