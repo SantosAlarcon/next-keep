@@ -1,0 +1,36 @@
+.new__note__page__container {
+	padding: 2rem;
+	width: 100%;
+}
+
+.new__note__page__section {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	border: 1px #fff4 solid;
+	outline: none;
+	border-radius: .5rem;
+	padding: 1rem;
+	width: 100%;
+}
+
+.new__note__page__field {
+	border: none;
+	outline: none;
+	padding: .5rem 0;
+
+	&:not(:last-child) {
+		border-bottom: 1px #fff4 solid;
+	}
+}
+
+.new__note__page__title {
+	font-size: 1.5rem;
+	font-weight: 700;
+	font-family: inherit;
+	background: none;
+	border: none;
+	outline: none;
+	border-bottom: 1px #fff4 solid;
+	padding-bottom: .5rem;
+}

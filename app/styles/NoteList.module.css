@@ -1,0 +1,20 @@
+.note__list__container {
+	padding: .25rem 0 .25rem 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 1rem;
+	font-size: .85rem;
+}
+
+.note__item__container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: .25rem 0 .25rem .25rem;
+	border-radius: .5rem;
+	
+	&:hover {
+	    background-color: #fff6;
+	}
+}

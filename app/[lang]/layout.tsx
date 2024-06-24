@@ -14,6 +14,9 @@ export async function generateStaticParams() {
 export const metadata: Metadata = {
     title: "Next Keep",
     description: "Organize your thoughs in one place, everywhere",
+    icons: {
+	    icon: "/NextKeep.svg",
+    }
 };
 
 export default function RootLayout({
