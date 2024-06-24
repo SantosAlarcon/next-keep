@@ -15,7 +15,7 @@ const NoteList = ({group}: {group: string}) => {
     <ul className={NoteListStyles.note__list__container}>
 		{
 			notes.map((note: Note) => (
-				<Link href={`/notes/${note.id}`} key={note.id}>
+				<Link href={`/notes/${note.id}`} key={note.id} title={note.title}>
 				    <li key={note.id} className={NoteListStyles.note__item__container}>
 					    <span className={NoteListStyles.note__item__title}>{note.title}</span>
 					    <span className={NoteListStyles.note__item__fixated}>{note.isFixated ? <FixedIcon /> : <UnfixedIcon />}</span>

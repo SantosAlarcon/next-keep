@@ -11,6 +11,7 @@
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
+    "@mdxeditor/editor": "^3.6.1",
     "@next/mdx": "^14.2.4",
     "@types/mdx": "^2.0.13",
     "i18next": "^23.11.5",
