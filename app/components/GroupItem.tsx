@@ -1,16 +1,15 @@
-import React from "react";
 import GroupItemStyles from "@/app/styles/GroupItem.module.css";
-import NoteList from "./NoteList";
+import Link from "next/link";
 
 const GroupItem = ({ title, amount }: { title: string; amount: number }) => {
-	console.log(title);
 	return (
 		<li className={GroupItemStyles.group__item__container}>
-			<div className={GroupItemStyles.group__item__group}>
-				<span className={GroupItemStyles.group__item__title}>{title}</span>
-				{amount > 0 && <span className={GroupItemStyles.group__item__amount}>{amount}</span>}
-			</div>
-			{amount > 0 && <NoteList group={title} />}
+			<Link href={`/groups/${title}/`}>
+				<div className={GroupItemStyles.group__item__group}>
+					<span className={GroupItemStyles.group__item__title}>{title}</span>
+					{amount > 0 && <span className={GroupItemStyles.group__item__amount}>{amount}</span>}
+				</div>
+			</Link>
 		</li>
 	);
 };

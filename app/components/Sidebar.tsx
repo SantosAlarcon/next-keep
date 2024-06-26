@@ -14,7 +14,7 @@ const Sidebar = async ({params: {lang}}: {params: {lang: string}}) => {
 			<Link href="/" prefetch>
 				<Image src="/NextKeep.svg" alt="Next Keep logo" width="250" height="150" priority />
 			</Link>
-            <Link className={styles.sidebar__button} href="/notes/new">{t("create-note")}</Link>
+            <Link href="/notes/all">{t("all")}</Link>
 			<ul className={styles.sidebar__grouplist}>
 				{groups.map((group: string) => (
 					<GroupItem key={group} title={group} amount={getNotesByGroup(group).length} />

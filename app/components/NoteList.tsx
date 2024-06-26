@@ -1,13 +1,23 @@
-import React from 'react'
 import { getNotesByGroup } from '../utils/getNotesByGroup';
-import { Note } from '../types';
+import type { Note } from '../types';
 import NoteListStyles from "@/app/styles/NoteList.module.css"
 import FixedIcon from './icons/FixedIcon';
 import UnfixedIcon from './icons/UnfixedIcon';
 import Link from 'next/link';
+import { getAllNotes } from '../utils/getAllNotes';
 
 const NoteList = ({group}: {group: string}) => {
-    const notes = getNotesByGroup(group);
+    // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
+    let notes;
+
+    switch(group) {
+        case "all":
+            notes = getAllNotes();
+            break;
+        default:
+            notes = getNotesByGroup(group);
+            break;
+    }
 
     if (!notes) return null;
 

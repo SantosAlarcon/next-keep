@@ -1,5 +1,6 @@
 import { BlockTypeSelect, BoldItalicUnderlineToggles, headingsPlugin, listsPlugin, markdownShortcutPlugin, MDXEditor, type MDXEditorMethods, quotePlugin, thematicBreakPlugin, toolbarPlugin, UndoRedo } from '@mdxeditor/editor'
 import type { FC, MutableRefObject } from 'react'
+import "@mdxeditor/editor/style.css"
 
 interface EditorProps {
     markdown: string;
