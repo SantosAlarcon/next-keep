@@ -1,7 +1,7 @@
-.group__item__container {
+.sidebar__item__container {
 	display: flex;
 	flex-direction: column;
-	padding: .3rem;
+	padding: .3rem .3rem .3rem 0;
 	width: 100%;
 	border-radius: .25rem;
 
@@ -10,17 +10,17 @@
 	}
 }
 
-.group__item__group {
+.sidebar__item__group {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	gap: .5rem;
 }
 
-.group__item__title {
+.sidebar__item__title {
 	font-weight: 700;
 }
 
-.group__item__amount {
+.sidebar__item__amount {
 	font-size: .7rem;
 }

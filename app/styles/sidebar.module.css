@@ -13,11 +13,16 @@
     text-align: center;
 }
 
+.sidebar__separator {
+    width: 85%;
+    margin: 0 auto;
+	border: 1px #fff6 solid; 
+}
+
 .sidebar__grouplist {
         list-style: none;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
         width: 100%;
 }
 

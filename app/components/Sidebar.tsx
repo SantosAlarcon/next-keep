@@ -1,21 +1,25 @@
 import groups from "@/data/groups.json";
-import styles from "../styles/sidebar.module.css";
+import sidebarStyles from "../styles/sidebar.module.css";
 import Image from "next/image";
 import GroupItem from "./GroupItem";
+import SidebarItem from "./SidebarItem";
 import { getNotesByGroup } from "../utils/getNotesByGroup";
 import Link from "next/link";
 import initTranslations from "../i18n";
+import { getAllNotes } from "../utils/getAllNotes";
 
-const Sidebar = async ({params: {lang}}: {params: {lang: string}}) => {
-    const {t} = await initTranslations(lang, ["common"])
+const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
+	const { t } = await initTranslations(lang, ["common"])
 
 	return (
-		<aside className={styles.sidebar__container}>
-			<Link href="/" prefetch>
+		<aside className={sidebarStyles.sidebar__container}>
+			<Link href="/notes/all" prefetch>
 				<Image src="/NextKeep.svg" alt="Next Keep logo" width="250" height="150" priority />
 			</Link>
-            <Link href="/notes/all">{t("all")}</Link>
-			<ul className={styles.sidebar__grouplist}>
+			<SidebarItem key="all" title={t("all")} href="/notes/all" amount={getAllNotes().length} />
+			<hr className={sidebarStyles.sidebar__separator} />
+			<h3>{t("groups")}</h3>
+			<ul className={sidebarStyles.sidebar__grouplist}>
 				{groups.map((group: string) => (
 					<GroupItem key={group} title={group} amount={getNotesByGroup(group).length} />
 				))}
