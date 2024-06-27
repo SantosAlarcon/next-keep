@@ -1,5 +1,14 @@
 [
-    "Programación",
-    "Cosas frikis",
-    "Música Remember"
+    {
+		"id": "1",
+		"name": "Programación"
+    },
+    {
+		"id": "2",
+		"name": "Cosas frikis"
+    },
+    {
+		"id": "3",
+		"name": "Música Remember"
+    }
 ]

@@ -8,6 +8,11 @@ import Link from "next/link";
 import initTranslations from "../i18n";
 import { getAllNotes } from "../utils/getAllNotes";
 
+type Group = {
+	id: string;
+	name: string;
+}
+
 const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 	const { t } = await initTranslations(lang, ["common"])
 
@@ -20,8 +25,8 @@ const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 			<hr className={sidebarStyles.sidebar__separator} />
 			<h3>{t("groups")}</h3>
 			<ul className={sidebarStyles.sidebar__grouplist}>
-				{groups.map((group: string) => (
-					<GroupItem key={group} title={group} amount={getNotesByGroup(group).length} />
+				{groups.map((group: Group) => (
+					<GroupItem key={group.id} id={group.id} title={group.name} amount={getNotesByGroup(group.id).length} />
 				))}
 			</ul>
 		</aside>
