@@ -7,6 +7,8 @@ import { getNotesByGroup } from "../utils/getNotesByGroup";
 import Link from "next/link";
 import initTranslations from "../i18n";
 import { getAllNotes } from "../utils/getAllNotes";
+import { getAllPinnedNotes } from "../utils/getAllPinnedNotes";
+import { mainSidebarLinks } from "../constants";
 
 type Group = {
 	id: string;
@@ -21,7 +23,11 @@ const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 			<Link href="/notes/all" prefetch>
 				<Image src="/NextKeep.svg" alt="Next Keep logo" width="250" height="150" priority />
 			</Link>
-			<SidebarItem key="all" title={t("all")} href="/notes/all" amount={getAllNotes().length} />
+			<ul className={sidebarStyles.sidebar__grouplist}>
+			    {mainSidebarLinks.map((link) => (
+			        <SidebarItem icon={link.icon} key={link.name} title={t(link.name)} href={link.path} amount={link.name === "pinned" ? getAllPinnedNotes().length : getAllNotes().length} />
+			    ))}
+			</ul>
 			<hr className={sidebarStyles.sidebar__separator} />
 			<h3>{t("groups")}</h3>
 			<ul className={sidebarStyles.sidebar__grouplist}>

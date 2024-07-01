@@ -4,6 +4,6 @@ export type Note = {
     publishedDate: Date;
     updatedDate: Date;
     group: string | null;
-    isFixated: boolean;
+    isPinned: boolean;
     data: string;
 }

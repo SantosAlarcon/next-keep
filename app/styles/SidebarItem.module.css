@@ -5,7 +5,8 @@
 	width: 100%;
 	border-radius: .25rem;
 
-	&:hover, .active {
+	&:hover,
+	.active {
 		background-color: #fff6;
 	}
 }
@@ -15,6 +16,18 @@
 	justify-content: space-between;
 	align-items: center;
 	gap: .5rem;
+}
+
+.sidebar__item__left {
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+}
+
+.sidebar__item__icon {
+    @media (prefers-color-scheme: dark) {
+	filter: invert(1)
+    }
 }
 
 .sidebar__item__title {

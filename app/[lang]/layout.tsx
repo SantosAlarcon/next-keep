@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Lato } from "next/font/google";
 import "../styles/globals.css";
 import type { ReactNode } from "react";
 import i18NextConfig from "@/i18n.config";
 import Sidebar from "../components/Sidebar";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
 export async function generateStaticParams() {
     return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang={lang}>
-            <body className={inter.className}>
+            <body className={font.className}>
                 <Sidebar params={{lang: lang}} />
                 {children}
             </body>
