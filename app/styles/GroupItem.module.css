@@ -10,6 +10,11 @@
 	}
 }
 
+.group__item__selected {
+	background-color: #ff0;
+	color: #111;
+}
+
 .group__item__group {
 	display: flex;
 	justify-content: space-between;

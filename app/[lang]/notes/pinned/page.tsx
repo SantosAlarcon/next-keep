@@ -1,4 +1,3 @@
-
 import NoteList from "@/app/components/NoteList";
 import allNotesPageStyles from "@/app/styles/AllNotesPageStyles.module.css";
 

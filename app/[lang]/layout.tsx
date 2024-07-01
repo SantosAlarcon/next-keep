@@ -28,6 +28,7 @@ export default function RootLayout({
         lang: string;
     };
 }>) {
+
     return (
         <html lang={lang}>
             <body className={font.className}>

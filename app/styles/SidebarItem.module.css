@@ -11,6 +11,11 @@
 	}
 }
 
+.sidebar__item__selected {
+    background-color: #ff0;
+    color: #111;
+}
+
 .sidebar__item__group {
 	display: flex;
 	justify-content: space-between;
