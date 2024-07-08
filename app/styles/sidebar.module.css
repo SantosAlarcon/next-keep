@@ -38,3 +38,8 @@
         background-color: #66f;
     }
 }
+
+.sidebar__active {
+	background-color: #ff0;
+	color: #111;
+}

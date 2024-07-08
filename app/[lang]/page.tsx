@@ -5,7 +5,7 @@ async function Page({params: {lang}}: {params: {
     lang: string
 }}) {
 
-    //redirect("/notes/all")
+    redirect("/notes/all")
 
   return (
     <main className={styles.main}>

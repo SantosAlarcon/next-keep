@@ -8,7 +8,6 @@ const SidebarItem = ({ icon, title, href, amount }: { icon: string, title: strin
 	const currentPath = headerList.get("x-current-path")
 	const selected = currentPath?.includes(href)
 
-
 	return (
 		<li className={`${SidebarItemStyles.sidebar__item__container} ${selected && SidebarItemStyles.sidebar__item__selected}`}>
 			<Link href={href} passHref>

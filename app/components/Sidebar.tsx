@@ -9,7 +9,6 @@ import initTranslations from "../i18n";
 import { getAllNotes } from "../utils/getAllNotes";
 import { getAllPinnedNotes } from "../utils/getAllPinnedNotes";
 import { mainSidebarLinks } from "../constants";
-import {headers} from "next/headers"
 
 type Group = {
 	id: string;
