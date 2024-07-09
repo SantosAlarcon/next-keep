@@ -1,5 +1,3 @@
-
-
 export const note = "/note.svg"
 export const pinned = "/pinned.svg"
 

@@ -14,7 +14,7 @@
 }
 
 .sidebar__separator {
-    width: 85%;
+    width: 90%;
     margin: 0 auto;
 	border: 1px #fff6 solid; 
 }
@@ -45,7 +45,7 @@
 }
 
 .sidebar__active {
-	background-color: #ff0;
+	background-color: #66f;
 	color: #111;
 
     & img {
