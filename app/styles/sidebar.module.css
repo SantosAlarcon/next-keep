@@ -39,7 +39,16 @@
     }
 }
 
+.sidebar__item {
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+}
+
 .sidebar__active {
 	background-color: #ff0;
 	color: #111;
+
+    & img {
+        filter: invert(0);
+    }
 }

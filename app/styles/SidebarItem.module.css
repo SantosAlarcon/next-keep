@@ -1,7 +1,6 @@
 .sidebar__item__container {
 	display: flex;
 	flex-direction: column;
-	padding: .3rem .3rem .3rem 0;
 	width: 100%;
 	border-radius: .25rem;
 
@@ -9,11 +8,6 @@
 	.active {
 		background-color: #fff6;
 	}
-}
-
-.sidebar__item__selected {
-    background-color: #ff0;
-    color: #111;
 }
 
 .sidebar__item__group {
