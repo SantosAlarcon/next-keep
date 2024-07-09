@@ -9,6 +9,7 @@ const SidebarItem = ({ icon, title, href, amount }: { icon: string, title: strin
 			<ActiveLink href={href}>
 				<div className={SidebarItemStyles.sidebar__item__group}>
 					<div className={SidebarItemStyles.sidebar__item__left}>
+                        {/* @ts-ignore */}
 						<Image className={SidebarItemStyles.sidebar__item__icon} src={icon} width="24" height="24" priority />
 						<span className={SidebarItemStyles.sidebar__item__title}>{title}</span>
 					</div>

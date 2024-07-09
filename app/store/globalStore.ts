@@ -11,6 +11,7 @@ type GlobalMethods = {
     setSelectedNoteId: (id: string) => void,
 }
 
+// @ts-ignore
 export const globalStore = create<GlobalFields & GlobalMethods>(devtools((set) => ({
     selectedGroup: "0",
     selectedNoteId: "0",

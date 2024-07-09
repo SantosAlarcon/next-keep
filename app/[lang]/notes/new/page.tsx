@@ -1,17 +1,16 @@
 "use client";
 
-import React, { Suspense, useRef, useState } from "react";
 import NewNotePageStyles from "@/app/styles/NewNotePage.module.css";
 import type { Note } from "@/app/types";
+import React, { Suspense, useRef, useState } from "react";
 import "@mdxeditor/editor/style.css";
-import CustomMDXEditor from "@/app/components/CustomMDXEditor";
 import dynamic from "next/dynamic";
 
 const EditorComp = dynamic(() => import("@/app/components/CustomMDXEditor"), { ssr: false });
 
 const NewNotePage = () => {
 	const [newNote, setNewNote] = useState<Note>({
-		isFixated: false,
+		isPinned: false,
 		id: crypto.randomUUID(),
 		group: null,
 		title: "",
