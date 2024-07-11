@@ -1,32 +1,37 @@
 import NoteListStyles from "@/app/styles/NoteList.module.css"
-import Link from 'next/link';
 import { getAllNotes } from '../utils/getAllNotes';
 import { getAllPinnedNotes } from '../utils/getAllPinnedNotes';
 import { getNotesByGroup } from '../utils/getNotesByGroup';
 import FixedIcon from './icons/FixedIcon';
 import UnfixedIcon from './icons/UnfixedIcon';
 import { headers } from "next/headers";
+import ActiveLink from "./ui/ActiveLink";
+import ActiveNoteLink from "./ui/ActiveNoteLink";
 
-const NoteList = ({ group }: { group: string }) => {
+const NoteList = ({ group, selected }: { group: string, selected: string }) => {
 	// biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
 	let notes;
 
-    const headerss = headers()
-    const path = headerss.get("x-current-path")
+	//const headerss = headers()
+	//const path = headerss.get("x-current-path")
+	let path: string = "";
 
 	switch (group) {
-		case "all":
+		case "all": 
 			notes = getAllNotes();
+			path = "/notes/all";
 			break;
 		case "pinned":
 			notes = getAllPinnedNotes();
+			path = "/notes/pinned";
 			break;
 		default:
 			notes = getNotesByGroup(group);
+			path = `/groups/${group}`
 			break;
 	}
 
-    notes.sort((a,b) => a.date.localeCompare(b.date))
+	notes.sort((a, b) => a.date.localeCompare(b.date))
 
 	if (!notes) return null;
 
@@ -34,12 +39,12 @@ const NoteList = ({ group }: { group: string }) => {
 		<ul className={NoteListStyles.note__list__container}>
 			{
 				notes.map((note) => (
-					<Link href={`${path}/${note.id}`} key={note.id} title={note.title}>
+					<ActiveNoteLink selected={selected === note.id} href={`${path}/${note.id}`} key={note.id} title={note.title}>
 						<li key={note.id} className={NoteListStyles.note__item__container}>
 							<span className={NoteListStyles.note__item__title}>{note.title}</span>
 							<span className={NoteListStyles.note__item__pinned}>{note.isPinned ? <FixedIcon /> : <UnfixedIcon />}</span>
 						</li>
-					</Link>
+					</ActiveNoteLink>
 				))
 			}
 		</ul>

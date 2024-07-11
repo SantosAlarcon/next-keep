@@ -17,3 +17,8 @@
 	    background-color: #fff6;
 	}
 }
+
+.note__item__selected {
+	background-color: #44f;
+	color: #111;
+}
