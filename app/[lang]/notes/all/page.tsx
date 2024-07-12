@@ -1,5 +1,5 @@
 import NoteList from "@/app/components/NoteList";
-import allNotesPageStyles from "@/app/styles/AllNotesPageStyles.module.css";
+import allNotesPageStyles from "@/app/styles/AllNotesPage.module.css";
 
 const AllNotesPage = () => {
 	return (

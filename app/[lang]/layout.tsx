@@ -8,33 +8,36 @@ import Sidebar from "../components/Sidebar";
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
 export async function generateStaticParams() {
-    return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
+	return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
 }
 
 export const metadata: Metadata = {
-    title: "Next Keep",
-    description: "Organize your thoughs in one place, everywhere",
-    icons: {
-	    icon: "/NextKeep.svg",
-    }
+	title: {
+		template: "%s - Next Keep",
+		default: "Next Keep",
+	},
+	description: "Organize your thoughs in one place, everywhere",
+	icons: {
+		icon: "/NextKeep.svg",
+	}
 };
 
 export default function RootLayout({
-    children,
-    params: { lang },
+	children,
+	params: { lang },
 }: Readonly<{
-    children: ReactNode;
-    params: {
-        lang: string;
-    };
+	children: ReactNode;
+	params: {
+		lang: string;
+	};
 }>) {
 
-    return (
-        <html lang={lang}>
-            <body className={font.className}>
-                <Sidebar params={{lang: lang}} />
-                {children}
-            </body>
-        </html>
-    );
+	return (
+		<html lang={lang}>
+			<body className={font.className}>
+				<Sidebar params={{ lang: lang }} />
+				{children}
+			</body>
+		</html>
+	);
 }

@@ -2,7 +2,7 @@ import { getNoteById } from "@/app/utils/getNoteById";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import styles from "@/app/styles/NotePage.module.css"
-import allNotesPageStyles from "@/app/styles/AllNotesPageStyles.module.css"
+import allNotesPageStyles from "@/app/styles/AllNotesPage.module.css"
 import NoteList from "@/app/components/NoteList";
 
 const AllNotesPageIdPage = ({ params: { note } }: { params: { note: string } }) => {

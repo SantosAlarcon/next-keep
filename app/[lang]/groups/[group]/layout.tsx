@@ -1,16 +1,19 @@
-import React from 'react'
+import { getGroupById } from '@/app/utils/getGroupById'
+import React, { ReactNode } from 'react'
+import groupPageStyles from '@/app/styles/groupPage.module.css'
 
 export async function generateMetadata({params}) {
-    console.log(params)
+    const foundGroup = getGroupById(params.group)
+
     return {
-	title: `${params.group} - Next Keep`
+	title: `${foundGroup[0].name}`
     }
 }
 
-const GroupLayout = () => {
+const GroupLayout = ({children}: {children: ReactNode}) => {
 
   return (
-    <div>GroupLayout</div>
+	<div className={groupPageStyles.group__page__container}>{children}</div>
   )
 }
 
