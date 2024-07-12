@@ -4,16 +4,12 @@ import { getAllPinnedNotes } from '../utils/getAllPinnedNotes';
 import { getNotesByGroup } from '../utils/getNotesByGroup';
 import FixedIcon from './icons/FixedIcon';
 import UnfixedIcon from './icons/UnfixedIcon';
-import { headers } from "next/headers";
-import ActiveLink from "./ui/ActiveLink";
 import ActiveNoteLink from "./ui/ActiveNoteLink";
 
 const NoteList = ({ group, selected }: { group: string, selected: string }) => {
 	// biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
 	let notes;
 
-	//const headerss = headers()
-	//const path = headerss.get("x-current-path")
 	let path: string = "";
 
 	switch (group) {

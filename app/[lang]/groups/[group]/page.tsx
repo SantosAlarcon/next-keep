@@ -3,7 +3,7 @@ import NoteList from "@/app/components/NoteList";
 const GroupPage = ({ params: { group } }: { params: { group: string } }) => {
 	return (
 		<main>
-			<NoteList group={group} />
+			<NoteList selected={"group"} group={group} />
 		</main>
 	);
 };
