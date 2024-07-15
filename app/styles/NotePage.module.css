@@ -13,6 +13,9 @@
 }
 
 .note__page__markdown {
+    padding: 1.5rem;
+    width: 70%;
+
     & a {
         color: #bbf;
 
@@ -30,6 +33,11 @@
         padding: .5rem 0;
         border-bottom: 1px #fff3 solid;
         margin: 1rem 0;
+    }
+
+    & h1:first-child {
+        padding-top: 0;
+        margin-top: 0;
     }
 
     & table {
