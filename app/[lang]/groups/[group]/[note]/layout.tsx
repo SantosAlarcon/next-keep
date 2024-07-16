@@ -1,4 +1,4 @@
-import { getNoteById } from '@/app/utils/getNoteById'
+import { getNoteById } from '@/app/utils/notes/getNoteById'
 
 export async function generateMetadata({ params, locale }: any) {
 	const foundNote = getNoteById(params.note)

@@ -1,10 +1,10 @@
 import NoteList from '@/app/components/NoteList';
-import { getNoteById } from '@/app/utils/getNoteById';
+import allNotesPageStyles from '@/app/styles/AllNotesPage.module.css';
+import styles from '@/app/styles/NotePage.module.css';
+import { getNoteById } from '@/app/utils/notes/getNoteById';
 import React from 'react'
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import allNotesPageStyles from '@/app/styles/AllNotesPage.module.css';
-import styles from '@/app/styles/NotePage.module.css';
 
 const PinnedNoteIdPage = ({params: {note}}: {params: {note: string}}) => {
 	const foundNote = getNoteById(note);

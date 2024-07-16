@@ -1,4 +1,4 @@
-import { getNoteById } from '@/app/utils/getNoteById'
+import { getNoteById } from '@/app/utils/notes/getNoteById'
 import notes from "@/data/notes.json"
 import type { Metadata } from 'next'
 import styles from "@/app/styles/NotePage.module.css"

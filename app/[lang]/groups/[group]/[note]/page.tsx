@@ -1,4 +1,4 @@
-import { getNoteById } from '@/app/utils/getNoteById';
+import { getNoteById } from '@/app/utils/notes/getNoteById';
 import allNotesPageStyles from '@/app/styles/AllNotesPage.module.css'
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';

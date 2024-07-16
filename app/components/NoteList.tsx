@@ -1,7 +1,7 @@
 import NoteListStyles from "@/app/styles/NoteList.module.css"
-import { getAllNotes } from '../utils/getAllNotes';
-import { getAllPinnedNotes } from '../utils/getAllPinnedNotes';
-import { getNotesByGroup } from '../utils/getNotesByGroup';
+import { getAllNotes } from '../utils/notes/getAllNotes';
+import { getAllPinnedNotes } from '../utils/notes/getAllPinnedNotes';
+import { getNotesByGroup } from '../utils/notes/getNotesByGroup';
 import FixedIcon from './icons/FixedIcon';
 import UnfixedIcon from './icons/UnfixedIcon';
 import ActiveNoteLink from "./ui/ActiveNoteLink";

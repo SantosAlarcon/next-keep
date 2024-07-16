@@ -1,4 +1,4 @@
-import { getGroupById } from '@/app/utils/getGroupById'
+import { getGroupById } from '@/app/utils/groups/getGroupById'
 import React, { ReactNode } from 'react'
 import groupPageStyles from '@/app/styles/groupPage.module.css'
 

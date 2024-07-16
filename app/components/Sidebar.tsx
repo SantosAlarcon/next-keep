@@ -1,14 +1,14 @@
 import groups from "@/data/groups.json";
-import sidebarStyles from "../styles/sidebar.module.css";
 import Image from "next/image";
+import Link from "next/link";
+import { mainSidebarLinks } from "../constants";
+import initTranslations from "../i18n";
+import sidebarStyles from "../styles/sidebar.module.css";
+import { getAllNotes } from "../utils/notes/getAllNotes";
+import { getAllPinnedNotes } from "../utils/notes/getAllPinnedNotes";
+import { getNotesByGroup } from "../utils/notes/getNotesByGroup";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
-import { getNotesByGroup } from "../utils/getNotesByGroup";
-import Link from "next/link";
-import initTranslations from "../i18n";
-import { getAllNotes } from "../utils/getAllNotes";
-import { getAllPinnedNotes } from "../utils/getAllPinnedNotes";
-import { mainSidebarLinks } from "../constants";
 
 type Group = {
 	id: string;
