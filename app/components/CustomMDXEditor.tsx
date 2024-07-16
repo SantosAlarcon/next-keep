@@ -1,25 +1,18 @@
-import "@/app/styles/mdx-editor.css"
+import "@/app/styles/mdx-editor.css";
 
 import {
 	AdmonitionDirectiveDescriptor,
-	BlockTypeSelect,
-	BoldItalicUnderlineToggles,
-	CreateLink,
-	DiffSourceToggleWrapper,
-	InsertAdmonition,
-	InsertCodeBlock,
-	InsertFrontmatter,
-	InsertImage,
-	InsertTable,
-	ListsToggle,
+	KitchenSinkToolbar,
 	MDXEditor,
 	type MDXEditorMethods,
-	UndoRedo,
+	codeBlockPlugin,
+	codeMirrorPlugin,
 	diffSourcePlugin,
 	directivesPlugin,
 	frontmatterPlugin,
 	headingsPlugin,
 	imagePlugin,
+	linkDialogPlugin,
 	linkPlugin,
 	listsPlugin,
 	markdownShortcutPlugin,
@@ -49,18 +42,7 @@ const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef }) => {
 				toolbarPlugin({
 					toolbarContents: () => (
 						<>
-							<DiffSourceToggleWrapper>
-								<UndoRedo />
-								<BoldItalicUnderlineToggles />
-								<BlockTypeSelect />
-								<ListsToggle />
-								<CreateLink />
-								<InsertTable />
-								<InsertImage />
-								<InsertAdmonition />
-								<InsertFrontmatter />
-								<InsertCodeBlock />
-							</DiffSourceToggleWrapper>
+								<KitchenSinkToolbar />
 						</>
 					),
 				}),
@@ -70,10 +52,15 @@ const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef }) => {
 				thematicBreakPlugin(),
 				markdownShortcutPlugin(),
 				linkPlugin(),
+                linkDialogPlugin(),
 				frontmatterPlugin(),
 				tablePlugin(),
 				imagePlugin(),
 				diffSourcePlugin(),
+				codeBlockPlugin({ defaultCodeBlockLanguage: "txt" }),
+				codeMirrorPlugin({
+					codeBlockLanguages: { jsx: "JavaScript", css: "CSS", txt: "Text", html: "HTML", tsx: "TypeScript", python: "Python" },
+				}),
 			]}
 		/>
 	);

@@ -52,6 +52,7 @@
 
         & th {
             background-color: #aaf1;
+            font-weight: 700;
         }
     }
 }
