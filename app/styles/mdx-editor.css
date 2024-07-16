@@ -1,0 +1,10 @@
+.dark-editor-custom {
+    --font-mono: "JetBrainsMono Nerd Font";
+    --baseBg: rgb(25, 25, 50);
+    --basePageBg: rgb(50, 50, 75);
+    font-family: inherit;
+
+    & button {
+        font-family: inherit;
+    }
+}

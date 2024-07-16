@@ -9,6 +9,7 @@ import { getAllPinnedNotes } from "../utils/notes/getAllPinnedNotes";
 import { getNotesByGroup } from "../utils/notes/getNotesByGroup";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
+import NewNoteButton from "./ui/NewNoteButton";
 
 type Group = {
 	id: string;
@@ -23,6 +24,7 @@ const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 			<Link href="/notes/all" prefetch>
 				<Image src="/NextKeep.svg" alt="Next Keep logo" width="250" height="150" priority />
 			</Link>
+            <NewNoteButton title={t("create-note")} />
 			<ul className={sidebarStyles.sidebar__grouplist}>
 			    {mainSidebarLinks.map((link) => (
 			        <SidebarItem icon={link.icon} key={link.name} title={t(link.name)} href={link.path} amount={link.name === "pinned" ? getAllPinnedNotes().length : getAllNotes().length} />
