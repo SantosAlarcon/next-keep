@@ -5,10 +5,14 @@ import type { Note } from "@/app/types";
 import React, { Suspense, useRef, useState } from "react";
 import "@mdxeditor/editor/style.css";
 import dynamic from "next/dynamic";
+import i18next from "i18next"
+import { useTranslation } from "react-i18next";
 
 const EditorComp = dynamic(() => import("@/app/components/CustomMDXEditor"), { ssr: false });
 
-const NewNotePage = () => {
+const NewNotePage = ({params: {lang}}: {params: {lang: string}}) => {
+    const {t} = useTranslation("common")
+    console.log(t("title"))
 	const [newNote, setNewNote] = useState<Note>({
 		isPinned: false,
 		id: crypto.randomUUID(),

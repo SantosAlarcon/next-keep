@@ -4,5 +4,6 @@
     "create-note": "Create new note",
     "all": "All",
     "pinned": "Pinned",
-    "groups": "Groups"
+    "groups": "Groups",
+    "title": "Title"
 }

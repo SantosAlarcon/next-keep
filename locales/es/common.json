@@ -4,5 +4,6 @@
     "create-note": "Crear nueva nota",
     "all": "Todas",
     "pinned": "Fijadas",
-    "groups": "Grupos"
+    "groups": "Grupos",
+    "title": "Título"
 }

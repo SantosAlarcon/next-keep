@@ -30,6 +30,7 @@ interface EditorProps {
 }
 
 const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef }) => {
+
 	return (
 		<MDXEditor
 			className="dark-theme dark-editor dark-editor-custom"
@@ -60,8 +61,10 @@ const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef }) => {
 				codeBlockPlugin({ defaultCodeBlockLanguage: "txt" }),
 				codeMirrorPlugin({
 					codeBlockLanguages: { jsx: "JavaScript", css: "CSS", txt: "Text", html: "HTML", tsx: "TypeScript", python: "Python" },
-				}),
+				})
 			]}
+            // @ts-ignore
+            //translation={(key, defaultValue, interpolations) => {return t(key, defaultValue, interpolations)}}
 		/>
 	);
 };
