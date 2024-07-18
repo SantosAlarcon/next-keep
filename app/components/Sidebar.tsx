@@ -24,11 +24,11 @@ const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 			<Link href="/notes/all" prefetch>
 				<Image src="/NextKeep.svg" alt="Next Keep logo" width="250" height="150" priority />
 			</Link>
-            <NewNoteButton title={t("create-note")} />
+			<NewNoteButton title={t("create-note")} />
 			<ul className={sidebarStyles.sidebar__grouplist}>
-			    {mainSidebarLinks.map((link) => (
-			        <SidebarItem icon={link.icon} key={link.name} title={t(link.name)} href={link.path} amount={link.name === "pinned" ? getAllPinnedNotes().length : getAllNotes().length} />
-			    ))}
+				{mainSidebarLinks.map((link) => (
+					<SidebarItem icon={link.icon} key={link.name} title={t(link.name)} href={link.path} amount={link.name === "pinned" ? getAllPinnedNotes().length : getAllNotes().length} />
+				))}
 			</ul>
 			<hr className={sidebarStyles.sidebar__separator} />
 			<h3>{t("groups")}</h3>

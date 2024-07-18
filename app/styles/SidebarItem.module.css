@@ -24,9 +24,9 @@
 }
 
 .sidebar__item__icon {
-    @media (prefers-color-scheme: dark) {
-	filter: invert(1)
-    }
+	@media (prefers-color-scheme: dark) {
+		filter: invert(1)
+	}
 }
 
 .sidebar__item__title {

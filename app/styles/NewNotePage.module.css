@@ -1,6 +1,9 @@
 .new__note__page__container {
 	padding: 2rem;
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
 
 .new__note__page__section {
@@ -33,4 +36,5 @@
 	outline: none;
 	border-bottom: 1px #fff4 solid;
 	padding-bottom: .5rem;
+	width: 100%;
 }

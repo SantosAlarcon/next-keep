@@ -1,4 +1,4 @@
-import "@/app/styles/mdx-editor.css";
+"use client"
 
 import {
 	AdmonitionDirectiveDescriptor,
@@ -23,6 +23,8 @@ import {
 } from "@mdxeditor/editor";
 import type { FC, MutableRefObject } from "react";
 import "@mdxeditor/editor/style.css";
+import "@/app/styles/mdx-editor.css";
+import { useNewNoteStore } from "../store/newNoteStore";
 
 interface EditorProps {
 	markdown: string;
@@ -30,12 +32,19 @@ interface EditorProps {
 }
 
 const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef }) => {
+	const setNewNote = useNewNoteStore((state) => state.setNewNote)
+	
+	// When the Markdown changes, it updates the new note store
+	const changeHandler = () => {
+		setNewNote({ data: editorRef?.current?.getMarkdown() })
+	};
 
 	return (
 		<MDXEditor
 			className="dark-theme dark-editor dark-editor-custom"
 			ref={editorRef}
 			markdown={markdown}
+			onChange={changeHandler}
 			plugins={[
 				directivesPlugin({
 					directiveDescriptors: [AdmonitionDirectiveDescriptor],
@@ -43,7 +52,7 @@ const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef }) => {
 				toolbarPlugin({
 					toolbarContents: () => (
 						<>
-								<KitchenSinkToolbar />
+							<KitchenSinkToolbar />
 						</>
 					),
 				}),
@@ -53,7 +62,7 @@ const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef }) => {
 				thematicBreakPlugin(),
 				markdownShortcutPlugin(),
 				linkPlugin(),
-                linkDialogPlugin(),
+				linkDialogPlugin(),
 				frontmatterPlugin(),
 				tablePlugin(),
 				imagePlugin(),
@@ -63,8 +72,8 @@ const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef }) => {
 					codeBlockLanguages: { jsx: "JavaScript", css: "CSS", txt: "Text", html: "HTML", tsx: "TypeScript", python: "Python" },
 				})
 			]}
-            // @ts-ignore
-            //translation={(key, defaultValue, interpolations) => {return t(key, defaultValue, interpolations)}}
+		// @ts-ignore
+		//translation={(key, defaultValue, interpolations) => {return t(key, defaultValue, interpolations)}}
 		/>
 	);
 };
