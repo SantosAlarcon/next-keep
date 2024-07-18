@@ -35,6 +35,10 @@
         margin: 1rem 0;
     }
 
+    & h1 {
+	font-weight: 800;
+    }
+
     & h1:first-child {
         padding-top: 0;
         margin-top: 0;

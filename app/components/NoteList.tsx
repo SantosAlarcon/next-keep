@@ -27,7 +27,7 @@ const NoteList = ({ group, selected }: { group: string, selected: string }) => {
 			break;
 	}
 
-	notes.sort((a, b) => a.date.localeCompare(b.date))
+	notes.sort((a, b) => a.updatedDate.localeCompare(b.updatedDate))
 
 	if (!notes) return null;
 
