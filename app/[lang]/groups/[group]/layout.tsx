@@ -1,20 +1,20 @@
-import { getGroupById } from '@/app/utils/groups/getGroupById'
-import React, { ReactNode } from 'react'
-import groupPageStyles from '@/app/styles/groupPage.module.css'
+import groupPageStyles from "@/app/styles/groupPage.module.css";
+import { getGroupById } from "@/app/utils/groups/getGroupById";
+import type { ReactNode } from "react";
 
-export async function generateMetadata({params: {lang, group}}: {params: {lang: string, group: string}}) {
-    const foundGroup = getGroupById(group)
+export function generateMetadata({ params: { group } }: { params: { group: string } }) {
+    const foundGroup = getGroupById(group);
 
     return {
-	title: `${foundGroup[0].name}`
-    }
+        title: `${foundGroup[0].name}`,
+    };
 }
 
-const GroupLayout = ({children}: {children: ReactNode}) => {
+const GroupLayout = ({ children }: { children: ReactNode }) => {
 
-  return (
-	<div className={groupPageStyles.group__page__container}>{children}</div>
-  )
-}
+    return (
+            <div className={groupPageStyles.group__page__container}>{children}</div>
+    )
+};
 
-export default GroupLayout
+export default GroupLayout;
