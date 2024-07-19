@@ -4,13 +4,13 @@ import { useRef } from "react"
 import NewNotePageStyles from "@/app/styles/NewNotePage.module.css"
 import { useNewNoteStore } from "../store/newNoteStore"
 
-const LocalizedTitleInput = ({ placeholder }: { placeholder: string}) => {
+const LocalizedTitleInput = ({ placeholder }: { placeholder: string }) => {
 	const newNoteTitle = useNewNoteStore((state) => state.newNote.title)
 	const setNewNote = useNewNoteStore((state) => state.setNewNote)
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const onChangeHandler = () => {
-	    setNewNote({ title: inputRef.current?.value || "" })
+		setNewNote({ title: inputRef.current?.value })
 	}
 
 	return (

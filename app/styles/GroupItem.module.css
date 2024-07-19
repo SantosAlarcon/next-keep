@@ -4,14 +4,10 @@
 	width: 100%;
 	border-radius: .25rem;
 
-	&:hover, .active {
+	&:hover,
+	.active {
 		background-color: #fff6;
 	}
-}
-
-.group__item__selected {
-	background-color: #ff0;
-	color: #111;
 }
 
 .group__item__group {
@@ -19,10 +15,6 @@
 	justify-content: space-between;
 	align-items: center;
 	gap: .5rem;
-}
-
-.group__item__title {
-	font-weight: 400;
 }
 
 .group__item__amount {

@@ -33,7 +33,7 @@ const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 			<hr className={sidebarStyles.sidebar__separator} />
 			<h3>{t("groups")}</h3>
 			<ul className={sidebarStyles.sidebar__grouplist}>
-				{groups.map((group: Group) => (
+				{groups.sort((a, b) => a.name.localeCompare(b.name)).map((group: Group) => (
 					<GroupItem key={group.id} id={group.id} title={group.name} amount={getNotesByGroup(group.id).length} />
 				))}
 			</ul>
