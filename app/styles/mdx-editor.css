@@ -9,8 +9,14 @@
     }
 
     --accentBg: rgb(0, 0, 255);
+
+    height: 85svh;
+    border: 1px #fff6 solid;
+    border-radius: .5rem;
+    overflow-x: auto;
 }
 
 .mdxeditor-source-editor {
     background-color: #112;
+
 }

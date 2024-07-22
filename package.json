@@ -6,12 +6,12 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+   "lint": "next lint"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
-    "@mdxeditor/editor": "^3.8.0",
+    "@mdxeditor/editor": "^3.9.2",
     "@next/mdx": "^14.2.5",
     "@types/mdx": "^2.0.13",
     "i18next": "^23.12.2",
@@ -30,10 +30,10 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
-    "typescript": "^5.5.3",
     "@types/node": "^20.14.11",
     "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0"
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.5.3"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
