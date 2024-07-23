@@ -8,8 +8,8 @@ type newNoteFields = {
 		group: string | null,
 		data: string,
 		isPinned: boolean,
-		publishedDate: Date,
-		updatedDate: Date,
+		publishedDate: string,
+		updatedDate: string,
 	}
 }
 
@@ -26,8 +26,8 @@ const newNoteStore = (set) => ({
 		title: "",
 		isPinned: false,
 		data: "",
-		publishedDate: new Date(),
-		updatedDate: new Date(),
+		publishedDate: new Date().toISOString(),
+		updatedDate: new Date().toISOString(),
 	},
 	// @ts-ignore
 	setNewNote: (field) => set((state) => ({ newNote: { ...state.newNote, ...field } })),
