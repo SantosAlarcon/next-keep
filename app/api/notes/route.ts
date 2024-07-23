@@ -2,8 +2,6 @@ import { useNewNoteStore } from "@/app/store/newNoteStore";
 import { Note } from "@/app/types";
 import { getAllNotes } from "@/app/utils/notes/getAllNotes";
 import { getNoteById } from "@/app/utils/notes/getNoteById";
-import { NextApiRequest } from "next";
-import { NextURL } from "next/dist/server/web/next-url";
 
 export async function GET() {
     const notes = getAllNotes();

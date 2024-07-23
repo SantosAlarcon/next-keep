@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model groups {
+  id    String @id @default(cuid())
+  title String
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model notes {
+  id            String @id @default(cuid())
+  publishedDate String
+  updatedDate   String
+  title         String
+  group         String
+  isPinned      Boolean
+  data          String
+}

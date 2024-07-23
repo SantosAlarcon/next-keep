@@ -18,6 +18,7 @@ type Group = {
 
 const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 	const { t } = await initTranslations(lang, ["common"])
+	console.log(groups)
 
 	return (
 		<aside className={sidebarStyles.sidebar__container}>
