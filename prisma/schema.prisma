@@ -19,7 +19,7 @@ model notes {
   publishedDate String
   updatedDate   String
   title         String
-  group         String
+  group         String?
   isPinned      Boolean
   data          String
 }

@@ -1,4 +1,4 @@
-import { prismaClient } from "../PrismaClient";
+import { prismaClient } from "../../PrismaClient";
 
 export const getAllGroupsDB = async () => {
 
