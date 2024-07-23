@@ -1,4 +1,4 @@
-import groups from "@/data/groups.json";
+//import groups from "@/data/groups.json";
 import Image from "next/image";
 import Link from "next/link";
 import { mainSidebarLinks } from "../constants";
@@ -10,15 +10,18 @@ import { getNotesByGroup } from "../utils/notes/getNotesByGroup";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import NewNoteButton from "./ui/NewNoteButton";
+import { getAllGroups } from "../utils/database/groups/getAllGroups";
 
 type Group = {
 	id: string;
-	name: string;
+	title: string;
 }
 
 const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 	const { t } = await initTranslations(lang, ["common"])
-	console.log(groups)
+    const groups = await getAllGroups();
+
+    console.log(groups);
 
 	return (
 		<aside className={sidebarStyles.sidebar__container}>
@@ -34,8 +37,8 @@ const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 			<hr className={sidebarStyles.sidebar__separator} />
 			<h3>{t("groups")}</h3>
 			<ul className={sidebarStyles.sidebar__grouplist}>
-				{groups.sort((a, b) => a.name.localeCompare(b.name)).map((group: Group) => (
-					<GroupItem key={group.id} id={group.id} title={group.name} amount={getNotesByGroup(group.id).length} />
+				{groups?.sort((a, b) => a.title.localeCompare(b.title)).map((group: Group) => (
+					<GroupItem key={group.id} id={group.id} title={group.title} amount={getNotesByGroup(group.id).length} />
 				))}
 			</ul>
 		</aside>

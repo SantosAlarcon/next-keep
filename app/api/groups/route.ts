@@ -1,11 +1,10 @@
 import { getGroupById } from "@/app/utils/database/groups/getGroupById";
-import { createNewGroup } from "@/app/utils/groups/createNewGroup";
-import { deleteGroupById } from "@/app/utils/groups/deleteGroupById";
-import { getAllGroupsDB } from "@/app/utils/groups/getAllGroupsDB";
-import { updateGroupById } from "@/app/utils/groups/updateGroupById";
+import { getAllGroups } from "@/app/utils/database/groups/getAllGroups";
+import { createNewGroup } from "@/app/utils/database/groups/createNewGroup";
+import { updateGroupById } from "@/app/utils/database/groups/updateGroupById";
+import { deleteGroupById } from "@/app/utils/database/groups/deleteGroupById";
 
-export async function GET(req) {
-    
+export async function GET(req) { 
     const searchParams: URLSearchParams = req.nextUrl.searchParams;
     const id = searchParams.get("id")
     const hasSort = searchParams.has("sort")
@@ -18,11 +17,11 @@ export async function GET(req) {
 
     // If the sort parameter is present, it returns the group list ordered by the title alphabetically
     if (hasSort) {
-        const groups = await getAllGroupsDB();
+        const groups = await getAllGroups();
         return Response.json(groups?.sort((a, b) => a.title.localeCompare(b.title)))
     }
 
-	const groups = await getAllGroupsDB();
+	const groups = await getAllGroups();
 	return Response.json(groups);
 }
 

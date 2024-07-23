@@ -1,12 +1,12 @@
 import groupPageStyles from "@/app/styles/groupPage.module.css";
-import { getGroupById } from "@/app/utils/groups/getGroupById";
+import { getGroupById } from "@/app/utils/database/groups/getGroupById";
 import type { ReactNode } from "react";
 
-export function generateMetadata({ params: { group } }: { params: { group: string } }) {
-    const foundGroup = getGroupById(group);
+export async function generateMetadata({ params: { group } }: { params: { group: string } }) {
+    const foundGroup = await getGroupById(group)
 
     return {
-        title: `${foundGroup[0].name}`,
+        title: `${foundGroup?.title}`,
     };
 }
 
