@@ -3,8 +3,9 @@ import { getAllGroups } from "@/app/utils/database/groups/getAllGroups";
 import { createNewGroup } from "@/app/utils/database/groups/createNewGroup";
 import { updateGroupById } from "@/app/utils/database/groups/updateGroupById";
 import { deleteGroupById } from "@/app/utils/database/groups/deleteGroupById";
+import { NextRequest } from "next/server";
 
-export async function GET(req) { 
+export async function GET(req: NextRequest) { 
     const searchParams: URLSearchParams = req.nextUrl.searchParams;
     const id = searchParams.get("id")
     const hasSort = searchParams.has("sort")
@@ -25,7 +26,7 @@ export async function GET(req) {
 	return Response.json(groups);
 }
 
-export async function POST(req) {
+export async function POST(req: NextRequest) {
     const body = await req.json();
 
     if (!(body.hasOwnProperty("title"))) {
@@ -39,7 +40,7 @@ export async function POST(req) {
 
 }
 
-export async function DELETE(req) {
+export async function DELETE(req: NextRequest) {
     const searchParams: URLSearchParams = req.nextUrl.searchParams;
     const id = searchParams.get("id")
 
@@ -58,7 +59,7 @@ export async function DELETE(req) {
     return Response.json({message: `The item with ID ${id} has been removed from the DB`}, {status: 200})
 }
 
-export async function PATCH(req) {
+export async function PATCH(req: NextRequest) {
     const searchParams: URLSearchParams = req.nextUrl.searchParams;
     const id = searchParams.get("id")
     const body = await req.json()

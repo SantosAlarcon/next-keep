@@ -76,6 +76,7 @@ export async function PUT(req) {
         isPinned: body.isPinned
     }
 
+    // @ts-ignore
     const updateSuccess = await updateNoteById(id, updatedNote);
 
 	if (!updateSuccess) {
