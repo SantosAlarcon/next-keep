@@ -34,5 +34,9 @@
 }
 
 .sidebar__item__amount {
+	border: 1px #fff3 solid;
 	font-size: .7rem;
+	border-radius: 100%;
+	background-color: #1125;
+	padding: 0 .25rem;
 }

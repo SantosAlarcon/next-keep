@@ -1,4 +1,4 @@
-import { getNoteById } from "@/app/utils/notes/getNoteById";
+import { getNoteById } from "@/app/utils/database/notes/getNoteById";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import styles from "@/app/styles/NotePage.module.css"
@@ -7,8 +7,8 @@ import NoteList from "@/app/components/NoteList";
 import remarkHtml from "remark-html";
 import rehypeHighlight from "rehype-highlight";
 
-const AllNotesPageIdPage = ({ params: { note } }: { params: { note: string } }) => {
-	const foundNote = getNoteById(note);
+const AllNotesPageIdPage = async ({ params: { note } }: { params: { note: string } }) => {
+	const foundNote = await getNoteById(note);
 	return (
 		<main className={allNotesPageStyles.all__notes__page__container}>
 			<NoteList group="all" selected={note} />

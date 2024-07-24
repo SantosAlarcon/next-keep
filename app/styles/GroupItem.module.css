@@ -17,6 +17,14 @@
 	gap: .5rem;
 }
 
+.group__item__title {
+    font-size: .9rem;
+}
+
 .group__item__amount {
+	border: 1px #fff6 solid;
 	font-size: .7rem;
+	border-radius: 100%;
+	background-color: #1125;
+	padding: 0 .25rem;
 }
