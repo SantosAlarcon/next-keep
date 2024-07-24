@@ -1,0 +1,22 @@
+.save__button__container {
+    padding: .5rem 1rem;
+    display: flex;
+    gap: 1rem;
+    border-radius: .5rem;
+    width: fit-content;
+    border: none;
+    outline: none;
+    background: #44a;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        background: #66a;
+    }
+}
+
+.save__button__title {
+    font-size: 0.85rem;
+}

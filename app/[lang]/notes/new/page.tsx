@@ -7,21 +7,23 @@ import initTranslations from "@/app/i18n";
 import { useNewNoteStore } from "@/app/store/newNoteStore";
 import { editorRef } from "@/app/utils/editorRef";
 import dynamic from "next/dynamic";
+import SaveNote from "@/app/components/ui/SaveNote";
 
 const EditorComp = dynamic(() => import("@/app/components/CustomMDXEditor"), { ssr: false });
 
 const NewNotePage = async ({ params: { lang } }: { params: { lang: string } }) => {
-	const { t } = await initTranslations(lang, ["common"]);
-	const newNote = useNewNoteStore.getState().newNote;
+    const { t } = await initTranslations(lang, ["common"]);
+    const newNote = useNewNoteStore.getState().newNote;
 
-	return (
-		<main className={NewNotePageStyles.new__note__page__container}>
-			<Suspense fallback={<Spinner width="128px" height="128px" />}>
-				<LocalizedTitleInput placeholder={t("title")} />
-				<EditorComp editorRef={editorRef} markdown={newNote.data} />
-			</Suspense>
-		</main>
-	);
+    return (
+        <main className={NewNotePageStyles.new__note__page__container}>
+            <Suspense fallback={<Spinner width="128px" height="128px" />}>
+                <LocalizedTitleInput placeholder={t("title")} />
+                <EditorComp editorRef={editorRef} markdown={newNote.data} />
+                <SaveNote title={t("save-note")} />
+            </Suspense>
+        </main>
+    );
 };
 
 export default NewNotePage;
