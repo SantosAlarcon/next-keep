@@ -1,12 +1,12 @@
 import NoteListStyles from "@/app/styles/NoteList.module.css"
-import { getAllNotes } from '../utils/notes/getAllNotes';
-import { getAllPinnedNotes } from '../utils/notes/getAllPinnedNotes';
-import { getNotesByGroup } from '../utils/notes/getNotesByGroup';
+import { getAllNotes } from '../utils/database/notes/getAllNotes';
+import { getAllPinnedNotes } from '../utils/database/notes/getAllPinnedNotes';
+import { getNotesByGroup } from '../utils/database/notes/getNotesByGroup';
 import FixedIcon from './icons/FixedIcon';
 import UnfixedIcon from './icons/UnfixedIcon';
 import ActiveNoteLink from "./ui/ActiveNoteLink";
 
-const NoteList = ({ group, selected }: { group: string, selected: string }) => {
+const NoteList = async ({ group, selected }: { group: string, selected: string }) => {
 	// biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
 	let notes;
 
@@ -14,20 +14,20 @@ const NoteList = ({ group, selected }: { group: string, selected: string }) => {
 
 	switch (group) {
 		case "all": 
-			notes = getAllNotes();
+			notes = await getAllNotes();
 			path = "/notes/all";
 			break;
 		case "pinned":
-			notes = getAllPinnedNotes();
+			notes = await getAllPinnedNotes();
 			path = "/notes/pinned";
 			break;
 		default:
-			notes = getNotesByGroup(group);
+			notes = await getNotesByGroup(group);
 			path = `/groups/${group}`
 			break;
 	}
 
-	notes.sort((a, b) => a.updatedDate.localeCompare(b.updatedDate))
+	notes?.sort((a, b) => b.updatedDate.localeCompare(a.updatedDate))
 
 	if (!notes) return null;
 

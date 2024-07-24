@@ -1,14 +1,25 @@
-import { useNewNoteStore } from "@/app/store/newNoteStore";
 import type { Note } from "@/app/types";
+import { useNewNoteStore } from "@/app/store/newNoteStore";
 import { createNewNote } from "@/app/utils/database/notes/createNewNote";
 import { deleteNoteById } from "@/app/utils/database/notes/deleteNoteById";
 import { getAllNotes } from "@/app/utils/database/notes/getAllNotes";
-import { getNoteById } from "@/app/utils/notes/getNoteById";
+import { getNoteById } from "@/app/utils/database/notes/getNoteById";
 import { NextURL } from "next/dist/server/web/next-url";
+import { NextRequest } from "next/server";
+import { updateNoteById } from "@/app/utils/database/notes/updateNoteById";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+    const searchParams: URLSearchParams = req.nextUrl.searchParams;
+    const id = searchParams.get("id")
+
+    // If ID is provided in the search params, it returns the note with that ID
+    if (id) {
+	const foundNote = await getNoteById(id)
+	return Response.json(foundNote, {status: 200})
+    }
+
+    // If ID is not provided in the search params, it returns all the notes sorted by the updated date.
     const notes = await getAllNotes()
-
     // @ts-ignore
     notes.sort((a: Note, b: Note) => b.updatedDate.localeCompare(a.updatedDate))
 
@@ -28,6 +39,7 @@ export async function POST(req: Request) {
     newNote.title = res.title
     newNote.data = res.data
     newNote.group = res.group
+    newNote.isPinned = res.isPinned
 
     // Call the createNewNote function
     const creationSuccess = await createNewNote(newNote);
@@ -49,26 +61,28 @@ export async function PUT(req) {
     const body = await req.json()
 
     // If ID is not provided in the search params, it returns an error
-    if (id === null) {
+    if (!id) {
         return Response.json({message: "You need to provide the note ID"}, {status: 401})
     }
 
-    const foundNote: Note = getNoteById(id);
+    const foundNote = await getNoteById(id);
 
     const updatedNote = {
         ...foundNote,
         title: body.title,
         data: body.data,
-        updatedDate: new Date(),
+        updatedDate: new Date().toISOString(),
         group: body.group,
         isPinned: body.isPinned
     }
 
-    const notes = getAllNotes();
-    const updatedNotes = notes.filter((note: Note) => note.id !== id)
-    updatedNotes.push(updatedNote)
+    const updateSuccess = await updateNoteById(id, updatedNote);
 
-    return Response.json(updatedNotes, {status: 202})
+	if (!updateSuccess) {
+		return Response.json({message: "The note with that ID doesn't exist in the DB"}, {status: 400})
+	}
+
+    return Response.json({message: `The note with the ID ${id} has been updated in the DB`}, {status: 202})
 
 }
 

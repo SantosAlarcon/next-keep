@@ -1,8 +1,8 @@
 export type Note = {
     id: string;
     title: string;
-    publishedDate: Date;
-    updatedDate: Date;
+    publishedDate: string;
+    updatedDate: string;
     group: string | null;
     isPinned: boolean;
     data: string;

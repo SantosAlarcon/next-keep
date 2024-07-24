@@ -1,7 +1,10 @@
 import GroupItemStyles from "@/app/styles/GroupItem.module.css";
 import ActiveLink from "./ui/ActiveLink"
+import { getNotesByGroup } from "../utils/database/notes/getNotesByGroup";
 
-const GroupItem = ({ id, title, amount }: { id: string, title: string; amount: number }) => {
+const GroupItem = async ({ id, title}: { id: string, title: string; }) => {
+	const groupNotes = await getNotesByGroup(id);
+	const amount = groupNotes ? groupNotes.length : 0;
 	return (
 		<li className={GroupItemStyles.group__item__container}>
 			<ActiveLink href={`/groups/${id}`}>

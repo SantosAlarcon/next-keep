@@ -11,7 +11,7 @@
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
-    "@mdxeditor/editor": "^3.9.2",
+    "@mdxeditor/editor": "^3.10.0",
     "@next/mdx": "^14.2.5",
     "@prisma/client": "^5.17.0",
     "@types/mdx": "^2.0.13",
@@ -33,7 +33,7 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
-    "@types/node": "^20.14.11",
+    "@types/node": "^20.14.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "typescript": "^5.5.4"

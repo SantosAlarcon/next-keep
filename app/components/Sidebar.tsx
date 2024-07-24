@@ -1,16 +1,15 @@
-//import groups from "@/data/groups.json";
 import Image from "next/image";
 import Link from "next/link";
 import { mainSidebarLinks } from "../constants";
 import initTranslations from "../i18n";
 import sidebarStyles from "../styles/sidebar.module.css";
-import { getAllNotes } from "../utils/notes/getAllNotes";
-import { getAllPinnedNotes } from "../utils/notes/getAllPinnedNotes";
-import { getNotesByGroup } from "../utils/notes/getNotesByGroup";
+import { getAllNotes } from "../utils/database/notes/getAllNotes";
+import { getAllPinnedNotes } from "../utils/database/notes/getAllPinnedNotes";
+import { getNotesByGroup } from "../utils/database/notes/getNotesByGroup";
+import { getAllGroups } from "../utils/database/groups/getAllGroups";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import NewNoteButton from "./ui/NewNoteButton";
-import { getAllGroups } from "../utils/database/groups/getAllGroups";
 
 type Group = {
 	id: string;
@@ -19,9 +18,12 @@ type Group = {
 
 const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 	const { t } = await initTranslations(lang, ["common"])
-    const groups = await getAllGroups();
 
-    console.log(groups);
+	const [notes, pinnedNotes, groups] = await Promise.all([
+		getAllNotes(),
+		getAllPinnedNotes(),
+		getAllGroups(),
+	]);
 
 	return (
 		<aside className={sidebarStyles.sidebar__container}>
@@ -31,14 +33,15 @@ const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 			<NewNoteButton title={t("create-note")} />
 			<ul className={sidebarStyles.sidebar__grouplist}>
 				{mainSidebarLinks.map((link) => (
-					<SidebarItem icon={link.icon} key={link.name} title={t(link.name)} href={link.path} amount={link.name === "pinned" ? getAllPinnedNotes().length : getAllNotes().length} />
+					// @ts-ignore
+					<SidebarItem icon={link.icon} key={link.name} title={t(link.name)} href={link.path} amount={link.name === "pinned" ? pinnedNotes?.length : notes?.length} />
 				))}
 			</ul>
 			<hr className={sidebarStyles.sidebar__separator} />
 			<h3>{t("groups")}</h3>
 			<ul className={sidebarStyles.sidebar__grouplist}>
 				{groups?.sort((a, b) => a.title.localeCompare(b.title)).map((group: Group) => (
-					<GroupItem key={group.id} id={group.id} title={group.title} amount={getNotesByGroup(group.id).length} />
+					<GroupItem key={group.id} id={group.id} title={group.title} />
 				))}
 			</ul>
 		</aside>
