@@ -14,7 +14,7 @@
 
 .note__page__markdown {
     padding: 1.5rem;
-    width: 70%;
+    width: 100%;
 
     & a {
         color: #bbf;
