@@ -1,0 +1,18 @@
+.pinned__button__container {
+    width: fit-content;
+    border: none;
+    outline: none;
+    padding: .5rem;
+    border-radius: .7rem;
+    background-color: #44f;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #66f;
+    }
+
+    & > * {
+        transform: rotate(45deg);
+    }
+}

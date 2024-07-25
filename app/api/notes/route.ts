@@ -4,8 +4,8 @@ import { createNewNote } from "@/app/utils/database/notes/createNewNote";
 import { deleteNoteById } from "@/app/utils/database/notes/deleteNoteById";
 import { getAllNotes } from "@/app/utils/database/notes/getAllNotes";
 import { getNoteById } from "@/app/utils/database/notes/getNoteById";
-import { NextURL } from "next/dist/server/web/next-url";
-import { NextRequest } from "next/server";
+import type { NextURL } from "next/dist/server/web/next-url";
+import type { NextRequest } from "next/server";
 import { updateNoteById } from "@/app/utils/database/notes/updateNoteById";
 
 export async function GET(req: NextRequest) {
@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
     return Response.json(notes, {status: 200})
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     const res = await req.json()
 
     // If there is no text and title in the request body, it shows an 400 error
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
 }
 
 // @ts-ignore
-export async function PUT(req) {
+export async function PUT(req: NextRequest) {
     const searchParams: URLSearchParams = req.nextUrl.searchParams;
     const id = searchParams.get("id")
     const body = await req.json()
@@ -88,7 +88,7 @@ export async function PUT(req) {
 }
 
 // @ts-ignore
-export async function DELETE(req) {
+export async function DELETE(req: NextRequest) {
     const searchParams: NextURL = req.nextUrl;
     const id = searchParams.searchParams.get("id")
 

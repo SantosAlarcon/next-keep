@@ -38,7 +38,7 @@ const NoteList = async ({ group, selected }: { group: string, selected: string }
 					<ActiveNoteLink selected={selected === note.id} href={`${path}/${note.id}`} key={note.id} title={note.title}>
 						<li key={note.id} className={NoteListStyles.note__item__container}>
 							<span className={NoteListStyles.note__item__title}>{note.title}</span>
-							<span className={NoteListStyles.note__item__pinned}>{note.isPinned ? <FixedIcon /> : <UnfixedIcon />}</span>
+							<span className={NoteListStyles.note__item__pinned}>{note.isPinned ? <FixedIcon width="20px" height="20px" /> : <UnfixedIcon width="20px" height="20px" />}</span>
 						</li>
 					</ActiveNoteLink>
 				))

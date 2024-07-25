@@ -7,5 +7,7 @@
     "groups": "Grupos",
     "title": "Título",
     "save-note": "Guardar nota",
-    "last-update": "Última actualización"
+    "last-update": "Última actualización",
+    "publish-date": "Fecha de publicación",
+    "toggle-pin": "Conmutar fijado"
 }
