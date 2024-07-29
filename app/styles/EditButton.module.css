@@ -1,16 +1,16 @@
-.pinned__button__container {
-    width: fit-content;
+.edit__button__container {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: white;
+    height: fit-content;
     padding: var(--button-padding);
-    border-radius: .7rem;
+    border-radius: .5rem;
     background-color: #44f;
     transition: all .2s ease-in-out;
     cursor: pointer;
 
     &:hover {
         background-color: #66f;
-    }
-
-    & > * {
-        transform: rotate(45deg);
     }
 }
