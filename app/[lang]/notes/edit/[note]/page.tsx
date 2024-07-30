@@ -1,6 +1,6 @@
 import LocalizedTitleInput from "@/app/components/LocalizedTitleInput";
-import SaveNote from "@/app/components/ui/SaveNote";
 import Spinner from "@/app/components/ui/Spinner";
+import UpdateNoteButton from "@/app/components/ui/UpdateNoteButton";
 import initTranslations from "@/app/i18n";
 import { getNoteById } from "@/app/utils/database/notes/getNoteById";
 import { editorRef } from "@/app/utils/editorRef";
@@ -15,13 +15,13 @@ const EditNotePage = async ({ params: { note, lang } }: { params: { note: string
 	const { t } = await initTranslations(lang, ["common"]);
 
 	return (
-		<Suspense fallback={<Spinner width="128px" height="128px" />}>
-			<main className={styles.note__page__container}>
+		<main className={styles.note__page__container}>
+			<Suspense fallback={<Spinner width="128px" height="128px" />}>
 				<LocalizedTitleInput placeholder={t("title")} title={foundNote?.title} />
 				<EditorComp editorRef={editorRef} markdown={foundNote?.data} />
-				<SaveNote title={t("save-note")} />
-			</main>
-		</Suspense>
+				<UpdateNoteButton label={t("update-note")} />
+			</Suspense>
+		</main>
 	);
 };
 

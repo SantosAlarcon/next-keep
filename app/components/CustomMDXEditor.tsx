@@ -25,6 +25,8 @@ import type { FC, MutableRefObject } from "react";
 import "@mdxeditor/editor/style.css";
 import "@/app/styles/mdx-editor.css";
 import { useNewNoteStore } from "../store/newNoteStore";
+import { useUpdateNoteStore } from "../store/updateNoteStore";
+import { getURL } from "next/dist/shared/lib/utils";
 
 interface EditorProps {
 	markdown: string;
@@ -33,10 +35,24 @@ interface EditorProps {
 
 const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef }) => {
 	const setNewNote = useNewNoteStore((state) => state.setNewNote)
-	
+	const setUpdateNote = useUpdateNoteStore((state) => state.setUpdateNote)
+	let url: string = "";
+
+	try {
+		url = getURL();
+	} catch (error) {
+		console.error("Failed to get URL:", error);
+	}
+
+	const isEdit = url.includes("edit")
+
 	// When the Markdown changes, it updates the new note store
 	const changeHandler = () => {
-		setNewNote({ data: editorRef?.current?.getMarkdown() })
+		if (isEdit) {
+			setUpdateNote({ data: editorRef?.current?.getMarkdown() })
+		} else {
+			setNewNote({ data: editorRef?.current?.getMarkdown() })
+		}
 	};
 
 	return (
