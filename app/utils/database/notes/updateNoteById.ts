@@ -1,23 +1,23 @@
 import { Note } from "@/app/types";
 import { prismaClient } from "../../PrismaClient";
 
-export const updateNoteById = async (id: string, note: Note) => {
+export const updateNoteById = async (id: string, updatedNote: Note) => {
     try {
 	await prismaClient.notes.update({
 	    where: {
 		id: id
 	    },
 	    data: {
-		updatedDate: note.updatedDate,
-		title: note.title,
-		data: note.data,
-		isPinned: note.isPinned,
-		group: note.group
+		updatedDate: updatedNote.updatedDate,
+		title: updatedNote.title,
+		data: updatedNote.data,
+		isPinned: updatedNote.isPinned,
+		group: updatedNote.group
 	    }
 	})
 	return true;
     } catch (error) {
-	console.error(error)
+	console.error("ERROR:", error?.meta?.cause)
 	return false;
     }
 }

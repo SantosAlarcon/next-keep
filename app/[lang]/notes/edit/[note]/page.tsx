@@ -17,8 +17,8 @@ const EditNotePage = async ({ params: { note, lang } }: { params: { note: string
 	return (
 		<main className={styles.note__page__container}>
 			<Suspense fallback={<Spinner width="128px" height="128px" />}>
-				<LocalizedTitleInput placeholder={t("title")} title={foundNote?.title} />
-				<EditorComp editorRef={editorRef} markdown={foundNote?.data} />
+				<LocalizedTitleInput placeholder={t("title")} title={foundNote ? foundNote.title : ""} />
+				<EditorComp editorRef={editorRef} markdown={foundNote ? foundNote?.data : ""} />
 				<UpdateNoteButton label={t("update-note")} />
 			</Suspense>
 		</main>

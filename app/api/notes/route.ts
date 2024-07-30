@@ -65,10 +65,8 @@ export async function PUT(req: NextRequest) {
         return Response.json({message: "You need to provide the note ID"}, {status: 401})
     }
 
-    const foundNote = await getNoteById(id);
-
     const updatedNote = {
-        ...foundNote,
+        ...body,
         title: body.title,
         data: body.data,
         updatedDate: new Date().toISOString(),

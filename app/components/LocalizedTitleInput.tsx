@@ -10,8 +10,6 @@ const LocalizedTitleInput = ({ placeholder, title }: { placeholder: string, titl
 	// Get the URL
 	const url = getURL();
 
-	console.log(title)
-
 	// This variable checks if the URL has the edit route in the URL
 	const isEdit = url.includes("edit");
 
@@ -22,8 +20,10 @@ const LocalizedTitleInput = ({ placeholder, title }: { placeholder: string, titl
 
 	useEffect(() => {
 		if (isEdit) {
+			//@ts-ignore
 			inputRef.current.value = title
 		} else {
+			//@ts-ignore
 			inputRef.current.value = newNoteTitle
 
 		}
@@ -31,8 +31,10 @@ const LocalizedTitleInput = ({ placeholder, title }: { placeholder: string, titl
 
 	const onChangeHandler = () => {
 		if (isEdit) {
+			//@ts-ignore
 			setUpdateNote({ title: inputRef?.current.value });
 		} else {
+			//@ts-ignore
 			setNewNote({ title: inputRef?.current.value });
 		}
 	};
@@ -42,6 +44,7 @@ const LocalizedTitleInput = ({ placeholder, title }: { placeholder: string, titl
 			onChange={onChangeHandler}
 			className={NewNotePageStyles.new__note__page__title}
 			type="text"
+			//@ts-ignore
 			ref={inputRef}
 			placeholder={placeholder}
 		/>
