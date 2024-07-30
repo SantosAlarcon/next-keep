@@ -4,7 +4,8 @@ import type { ReactNode } from "react"
 
 export async function generateMetadata({ params: { note } }: { params: { note: string } }): Promise<Metadata> {
 	const foundNote = await getNoteById(note)
-	return {
+	
+    return {
 		title: `${foundNote?.title}`
 	}
 }

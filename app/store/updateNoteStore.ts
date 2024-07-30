@@ -1,39 +1,21 @@
-
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
-
-type updateNoteFields = {
-	updateNote: {
-		id: string,
-		title: string,
-		group: string | null,
-		data: string,
-		isPinned: boolean,
-		publishedDate: string,
-		updatedDate: string,
-	}
-}
+import { persist, createJSONStorage } from "zustand/middleware";
+import { getNoteById } from "../utils/database/notes/getNoteById";
 
 type updateNoteMethods = {
 	setUpdateNote: (field: any) => void,
+	changeUpdateNote: (noteId: string) => void,
 	reset: () => void
 }
 
 // @ts-ignore
-const updateNoteStore = (set) => ({
-	updateNote: {
-		id: crypto.randomUUID(),
-		group: null,
-		title: "",
-		isPinned: false,
-		data: "",
-		publishedDate: new Date().toISOString(),
-		updatedDate: new Date().toISOString(),
-	},
+export const useUpdateNoteStore = create(persist((set) => ({
+	updateNote: {},
 	// @ts-ignore
-	setUpdateNote: (field) => set((state: updateNoteFields) => ({ updateNote: { ...state.updateNote, ...field } })),
-	reset: () => set({ updateNote: { id: crypto.randomUUID(), group: null, title: "", isPinned: false, data: "", publishedDate: new Date(), updatedDate: new Date() } }),
-})
-
-// @ts-ignore
-export const useUpdateNoteStore = create<updateNoteFields & updateNoteMethods>(devtools(updateNoteStore, {name: "Update Note Store", enabled: process.env.NODE_ENV === "development"}))
+	setUpdateNote: (field) => set((state) => ({ updateNote: { ...state.updateNote, ...field } })),
+    changeUpdateNote: async (noteId: string) => {
+        const response = await getNoteById(noteId);
+        set({updateNote: response})
+    },
+	reset: () => set({ updateNote: {} }),
+}), {name: "update-note", storage: createJSONStorage(() => localStorage)}))

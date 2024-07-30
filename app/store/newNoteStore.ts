@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
 
 type newNoteFields = {
 	newNote: {
@@ -35,4 +34,5 @@ const newNoteStore = (set) => ({
 })
 
 // @ts-ignore
-export const useNewNoteStore = create<newNoteFields & newNoteMethods>(devtools(newNoteStore, {name: "New Note Store", enabled: process.env.NODE_ENV === "development"}))
+export const useNewNoteStore = create<newNoteFields & newNoteMethods>(newNoteStore)
+//export const useNewNoteStore = create<newNoteFields & newNoteMethods>(devtools(newNoteStore, {name: "New Note Store", enabled: process.env.NODE_ENV === "development"}))
