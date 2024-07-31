@@ -15,9 +15,9 @@ const EditNotePage = async ({ params: { note, lang } }: { params: { note: string
 	const foundNote = await getNoteById(note);
 	const { t } = await initTranslations(lang, ["common"]);
     const updateNote = useUpdateNoteStore.getState().updateNote
-    const changeUpdateNote = useUpdateNoteStore.getState().changeUpdateNote
-    changeUpdateNote(note)
+    useUpdateNoteStore.setState({updateNote: foundNote})
 
+    //console.log("UPDATE NOTE IN THE STORE:")
     console.log(updateNote)
 
 	return (

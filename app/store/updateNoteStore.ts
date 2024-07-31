@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { devtools } from "zustand/middleware";
 import { getNoteById } from "../utils/database/notes/getNoteById";
 
 type updateNoteMethods = {
@@ -9,13 +9,13 @@ type updateNoteMethods = {
 }
 
 // @ts-ignore
-export const useUpdateNoteStore = create(persist((set) => ({
+export const useUpdateNoteStore = create(devtools((set) => ({
 	updateNote: {},
 	// @ts-ignore
 	setUpdateNote: (field) => set((state) => ({ updateNote: { ...state.updateNote, ...field } })),
     changeUpdateNote: async (noteId: string) => {
         const response = await getNoteById(noteId);
-        set({updateNote: response})
+        set(() => ({updateNote: response}))
     },
 	reset: () => set({ updateNote: {} }),
-}), {name: "update-note", storage: createJSONStorage(() => localStorage)}))
+}), {name: "update-note"}))
