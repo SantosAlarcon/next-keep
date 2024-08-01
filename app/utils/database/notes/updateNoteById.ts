@@ -17,6 +17,7 @@ export const updateNoteById = async (id: string, updatedNote: Note) => {
 	})
 	return true;
     } catch (error) {
+	// @ts-ignore
 	console.error("ERROR:", error?.meta?.cause)
 	return false;
     }

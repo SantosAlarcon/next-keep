@@ -35,6 +35,7 @@ interface EditorProps {
 
 const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef, isEditing }) => {
 	const setNewNote = useNewNoteStore((state) => state.setNewNote)
+	// @ts-ignore
 	const {updatedNote, setUpdatedNote} = useContext(UpdateNoteContext)
 	
 	// When the Markdown changes, it updates the new note store

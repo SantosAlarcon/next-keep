@@ -10,6 +10,7 @@ const LocalizedTitleInput = ({ placeholder, title, isEditing }: { placeholder: s
 	const setNewNote = useNewNoteStore((state) => state.setNewNote);
 	const inputRef = useRef<string | null>(title);
 
+	// @ts-ignore
 	const {updatedNote, setUpdatedNote} = useContext(UpdateNoteContext)
 
 	useEffect(() => {

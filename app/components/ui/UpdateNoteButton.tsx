@@ -6,6 +6,7 @@ import { updateNote } from "@/app/utils/notes/updateNote";
 import { useContext } from "react";
 
 const UpdateNoteButton = ({ label }: { label: string }) => {
+    // @ts-ignore
     const {updatedNote} = useContext(UpdateNoteContext)
 
     return (
