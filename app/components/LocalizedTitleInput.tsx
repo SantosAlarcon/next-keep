@@ -1,38 +1,31 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import NewNotePageStyles from "@/app/styles/NewNotePage.module.css";
 import { useNewNoteStore } from "../store/newNoteStore";
-import { getURL } from "next/dist/shared/lib/utils";
-import { useUpdateNoteStore } from "../store/updateNoteStore";
+import UpdateNoteContext from "../context/UpdateNoteContext";
 
-const LocalizedTitleInput = ({ placeholder, title }: { placeholder: string, title: string }) => {
-	// Get the URL
-	const url = getURL();
-
-	// This variable checks if the URL has the edit route in the URL
-	const isEdit = url.includes("edit");
-
+const LocalizedTitleInput = ({ placeholder, title, isEditing }: { placeholder: string, title: string, isEditing: boolean }) => {
 	const newNoteTitle = useNewNoteStore((state) => state.newNote.title);
 	const setNewNote = useNewNoteStore((state) => state.setNewNote);
-	const setUpdateNote = useUpdateNoteStore((state) => state.setUpdateNote);
 	const inputRef = useRef<string | null>(title);
 
+	const {updateNote, setUpdateNote} = useContext(UpdateNoteContext)
+
 	useEffect(() => {
-		if (isEdit) {
+		if (isEditing) {
 			//@ts-ignore
-			inputRef.current.value = title
+			inputRef.current.value = updateNote.title
 		} else {
 			//@ts-ignore
 			inputRef.current.value = newNoteTitle
-
 		}
 	}, [])
 
 	const onChangeHandler = () => {
-		if (isEdit) {
+		if (isEditing) {
 			//@ts-ignore
-			setUpdateNote({ title: inputRef?.current.value });
+			setUpdateNote({title: inputRef?.current.value });
 		} else {
 			//@ts-ignore
 			setNewNote({ title: inputRef?.current.value });
