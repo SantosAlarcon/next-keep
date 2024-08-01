@@ -3,6 +3,7 @@ import noteHeaderStyles from '@/app/styles/NoteHeader.module.css'
 import initTranslations from '@/app/i18n'
 import TogglePinButton from './TogglePinButton'
 import EditButton from './EditButton'
+import DeleteButton from './DeleteButton'
 
 const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 	const {t} = await initTranslations(lang, ["common"])
@@ -13,6 +14,7 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
                 <div className={noteHeaderStyles.note__header__upper__right}>
                     <EditButton label={t("edit")} noteId={note.id} />
                     <TogglePinButton title={t("toggle-pin")} note={note} />
+                    <DeleteButton label={t("delete")} noteId={note.id} />
                 </div>
             </section>
 			<span className={noteHeaderStyles.note__header__date}>{t("last-update")}: {new Date(note.updatedDate).toLocaleString(lang, {

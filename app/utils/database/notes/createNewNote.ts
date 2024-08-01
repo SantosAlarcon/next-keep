@@ -10,8 +10,8 @@ export const createNewNote = async (note: Note) => {
                 data: note.data,
                 group: note.group,
                 isPinned: note.isPinned,
-                publishedDate: note.publishedDate,
-                updatedDate: note.updatedDate
+                publishedDate: new Date(note.publishedDate).toISOString(),
+                updatedDate: new Date(note.updatedDate).toISOString()
             }
         })
         return true;
