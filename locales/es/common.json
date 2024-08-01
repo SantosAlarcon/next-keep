@@ -12,5 +12,7 @@
     "toggle-pin": "Conmutar fijado",
     "edit": "Editar",
     "delete": "Borrar",
-    "update-note": "Actualizar nota"
+    "update-note": "Actualizar nota",
+    "title-missing": "Debes escribir un título",
+    "text-missing": "Debes escribir un texto en el editor"
 }

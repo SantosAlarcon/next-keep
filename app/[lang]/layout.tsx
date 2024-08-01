@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import type { ReactNode } from "react";
 import i18NextConfig from "@/i18n.config";
 import Sidebar from "../components/Sidebar";
+import { Toaster } from "sonner";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 	description: "Organize your thoughs in one place, everywhere",
 	icons: {
 		icon: "/NextKeep.svg",
-	}
+	},
 };
 
 export default function RootLayout({
@@ -30,11 +31,11 @@ export default function RootLayout({
 	params: {
 		lang: string;
 	};
-}>) {
-
+}>) { 
 	return (
 		<html lang={lang}>
 			<body className={font.className}>
+                <Toaster richColors position="bottom-center" theme="dark" />
 				<Sidebar params={{ lang: lang }} />
 				{children}
 			</body>

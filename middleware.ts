@@ -1,10 +1,15 @@
 import i18nConfig from "@/i18n.config";
 import { i18nRouter } from "next-i18n-router";
 import type { NextRequest } from "next/server";
+import { localeStore } from "./app/store/localeStore";
 
 export function middleware(request: NextRequest) {
 	// Register the URL param in the headers
 	request.headers.set("x-current-path", request.nextUrl.pathname);
+    const locale = request.headers.get("accept-language")?.split(",")[1].split(";")[0]
+
+    const setLocale = localeStore.getState().setLocale
+    setLocale(locale)
 
 	return i18nRouter(request, i18nConfig.i18n);
 }

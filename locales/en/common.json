@@ -12,5 +12,7 @@
     "toggle-pin": "Toggle pin",
     "edit": "Edit",
     "delete": "Delete",
-    "update-note": "Update note"
+    "update-note": "Update note",
+    "title-missing": "You must write a title",
+    "text-missing": "You must write a text in the editor"
 }
