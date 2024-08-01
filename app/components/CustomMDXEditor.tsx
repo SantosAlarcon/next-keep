@@ -21,35 +21,26 @@ import {
 	thematicBreakPlugin,
 	toolbarPlugin,
 } from "@mdxeditor/editor";
-import type { FC, MutableRefObject } from "react";
+import { useContext, type FC, type MutableRefObject } from "react";
 import "@mdxeditor/editor/style.css";
 import "@/app/styles/mdx-editor.css";
 import { useNewNoteStore } from "../store/newNoteStore";
-import { useUpdateNoteStore } from "../store/updateNoteStore";
-import { getURL } from "next/dist/shared/lib/utils";
+import UpdateNoteContext from "../context/UpdateNoteContext";
 
 interface EditorProps {
 	markdown: string;
 	editorRef?: MutableRefObject<MDXEditorMethods | null>;
+	isEditing: boolean;
 }
 
-const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef }) => {
+const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef, isEditing }) => {
 	const setNewNote = useNewNoteStore((state) => state.setNewNote)
-	const setUpdateNote = useUpdateNoteStore((state) => state.setUpdateNote)
-	let url: string = "";
-
-	try {
-		url = getURL();
-	} catch (error) {
-		console.error("Failed to get URL:", error);
-	}
-
-	const isEdit = url.includes("edit")
-
+	const {updatedNote, setUpdatedNote} = useContext(UpdateNoteContext)
+	
 	// When the Markdown changes, it updates the new note store
 	const changeHandler = () => {
-		if (isEdit) {
-			setUpdateNote({ data: editorRef?.current?.getMarkdown() })
+		if (isEditing) {
+			setUpdatedNote({ ...updatedNote, data: editorRef?.current?.getMarkdown() })
 		} else {
 			setNewNote({ data: editorRef?.current?.getMarkdown() })
 		}

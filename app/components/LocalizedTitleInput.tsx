@@ -10,12 +10,12 @@ const LocalizedTitleInput = ({ placeholder, title, isEditing }: { placeholder: s
 	const setNewNote = useNewNoteStore((state) => state.setNewNote);
 	const inputRef = useRef<string | null>(title);
 
-	const {updateNote, setUpdateNote} = useContext(UpdateNoteContext)
+	const {updatedNote, setUpdatedNote} = useContext(UpdateNoteContext)
 
 	useEffect(() => {
 		if (isEditing) {
 			//@ts-ignore
-			inputRef.current.value = updateNote.title
+			inputRef.current.value = updatedNote.title
 		} else {
 			//@ts-ignore
 			inputRef.current.value = newNoteTitle
@@ -25,7 +25,7 @@ const LocalizedTitleInput = ({ placeholder, title, isEditing }: { placeholder: s
 	const onChangeHandler = () => {
 		if (isEditing) {
 			//@ts-ignore
-			setUpdateNote({title: inputRef?.current.value });
+			setUpdatedNote({...updatedNote, title: inputRef?.current.value });
 		} else {
 			//@ts-ignore
 			setNewNote({ title: inputRef?.current.value });

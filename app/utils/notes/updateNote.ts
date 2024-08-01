@@ -1,7 +1,6 @@
-import { useUpdateNoteStore } from "@/app/store/updateNoteStore"
+import { Note } from "@/app/types"
 
-export const updateNote = () => {
-	const updatedNote = useUpdateNoteStore.getState().updateNote
+export const updateNote = (updatedNote: Note) => {
 	const updateNoteFunc = async () => {
 		await fetch(`/api/notes?id=${updatedNote.id}`, {
 			method: "PUT",

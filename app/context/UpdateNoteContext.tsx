@@ -1,12 +1,12 @@
 import { Note } from "../types"
 import { useContext, createContext } from "react"
 
-interface IUpdateNoteContext {
-	updateNote: Note | undefined
-	setUpdateNote: (note: Note) => void
+interface IUpdatedNoteContext {
+	updatedNote: Note | undefined
+	setUpdatedNote: (note: Note) => void
 }
 
-const UpdateNoteContext = createContext<IUpdateNoteContext | undefined>(undefined)
+const UpdateNoteContext = createContext<IUpdatedNoteContext | undefined>(undefined)
 
 export const useUpdateNoteContext = () => {
     const context = useContext(UpdateNoteContext);
