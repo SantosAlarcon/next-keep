@@ -1,0 +1,39 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Next Keep API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/groups": {
+      "get": {
+        "description": "Returns the list of groups",
+        "parameters": [
+          {
+            "id": "Id of the group"
+          },
+          {
+            "sort": "Sort the list of groups"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of groups"
+          }
+        }
+      }
+    },
+    "/api/locale": {
+      "get": {
+        "description": "Returns the current locale",
+        "responses": {
+          "200": {
+            "description": "Returns the current locale"
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "tags": []
+}
