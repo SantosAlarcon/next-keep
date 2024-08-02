@@ -1,10 +1,18 @@
-import { createSwaggerSpec } from 'next-swagger-doc';
-import swaggerJSON from "@/next-swagger-doc.json"
+import { createSwaggerSpec } from "next-swagger-doc";
 
-import 'server-only';
+import "server-only";
 
 export const getApiDocs = async () => {
-	const spec = createSwaggerSpec(swaggerJSON);
-	console.log(spec)
-	return spec;
+    const spec = createSwaggerSpec({
+        apiFolder: "app/api",
+        definition: {
+            openapi: "3.0.0",
+            info: {
+                title: "Next Keep API",
+                version: "1.0.0",
+            },
+        },
+    });
+    return spec;
 };
+
