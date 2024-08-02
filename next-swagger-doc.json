@@ -1,15 +1,26 @@
 {
-	"apiFolder": "app/api",
-	"schemaFolders": [
-		"locale",
-		"groups",
-		"notes"
-	],
-	"definition": {
-		"openapi": "3.0.0",
-		"info": {
-			"title": "Next Keep API",
-			"version": "1.0"
-		}
-	}
+    "apis": [
+        "./app/api/**/*.ts"
+    ],
+    "definition": {
+        "openapi": "3.0.0",
+        "info": {
+            "title": "Next Keep API",
+            "version": "1.0"
+        },
+        "tags": [
+            {
+                "name": "groups",
+                "description": "Routes for the groups"
+            },
+            {
+                "name": "locale",
+                "description": "Routes for the locale"
+            },
+            {
+                "name": "notes",
+                "description": "Routes for the notes"
+            }
+        ]
+    }
 }
