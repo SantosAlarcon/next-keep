@@ -3,21 +3,32 @@ import { getAllGroups } from "@/app/utils/database/groups/getAllGroups";
 import { createNewGroup } from "@/app/utils/database/groups/createNewGroup";
 import { updateGroupById } from "@/app/utils/database/groups/updateGroupById";
 import { deleteGroupById } from "@/app/utils/database/groups/deleteGroupById";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 
 /**
  * @swagger
  * /api/groups:
  *   get:
- *     description: Returns the list of groups
+ *     summary: Returns the list of all groups
+ *     tags:
+ *       - groups
  *     parameters:
- *       - id: Id of the group
- *       - sort: Sort the list of groups
+ *       - in: query
+ *         name: id
+ *         description: ID of the group to get
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: sort
+ *         description: Sorts the list of groups alphabetically
+ *         schema:
+ *           type: boolean
  *     responses:
  *       200:
  *         description: Returns the list of groups
- *
- */
+ *       400:
+ *         description: The ID provided doesn't exist in the database
+*/
 export async function GET(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id")
@@ -39,6 +50,26 @@ export async function GET(req: NextRequest) {
 	return Response.json(groups, { status: 200 });
 }
 
+/**
+ * @swagger
+ * /api/groups:
+ *   post:
+ *     tags:
+ *       - groups
+ *     summary: Creates a new group
+ *     parameters:
+ *       - in: header
+ *         name: title
+ *         description: The title of the group
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       201:
+ *         description: Creates the new group succesfully
+ *       400:
+ *         description: Title has not been provided
+*/
 export async function POST(req: NextRequest) {
 	const body = await req.json();
 
@@ -53,6 +84,26 @@ export async function POST(req: NextRequest) {
 
 }
 
+/**
+ * @swagger
+ * /api/groups:
+ *   delete:
+ *     tags:
+ *       - groups
+ *     summary: Updates the name of the group
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         description: ID of the group to update
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Successfully deletes the group
+ *       400:
+ *         description: ID has not been provided to delete the group
+*/
 export async function DELETE(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id")
@@ -72,7 +123,33 @@ export async function DELETE(req: NextRequest) {
 	return Response.json({ message: `The item with ID ${id} has been removed from the DB` }, { status: 200 })
 }
 
-export async function PATCH(req: NextRequest) {
+/**
+ * @swagger
+ * /api/groups:
+ *   put:
+ *     tags:
+ *       - groups
+ *     summary: Updates the name of the group
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         description: ID of the group to update
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: header
+ *         name: title
+ *         description: The new title of the group
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       201:
+ *         description: Updates the note group succesfully
+ *       400:
+ *         description: Title or id have not been provided
+*/
+export async function PUT(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id")
 	const body = await req.json()
