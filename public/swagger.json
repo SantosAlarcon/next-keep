@@ -4,36 +4,177 @@
     "title": "Next Keep API",
     "version": "1.0"
   },
+  "tags": [
+    {
+      "name": "groups",
+      "description": "Routes for the groups"
+    },
+    {
+      "name": "locale",
+      "description": "Routes for the locale"
+    },
+    {
+      "name": "notes",
+      "description": "Routes for the notes"
+    }
+  ],
   "paths": {
     "/api/groups": {
       "get": {
-        "description": "Returns the list of groups",
+        "summary": "Returns the list of all groups",
+        "tags": [
+          "groups"
+        ],
         "parameters": [
           {
-            "id": "Id of the group"
+            "in": "query",
+            "name": "id",
+            "description": "ID of the group to get",
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "sort": "Sort the list of groups"
+            "in": "query",
+            "name": "sort",
+            "description": "Sorts the list of groups alphabetically",
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Returns the list of groups"
+          },
+          "400": {
+            "description": "The ID provided doesn't exist in the database"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Creates a new group",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "title",
+            "description": "The title of the group",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Creates the new group succesfully"
+          },
+          "400": {
+            "description": "Title has not been provided"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Updates the name of the group",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "ID of the group to update",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deletes the group"
+          },
+          "400": {
+            "description": "ID has not been provided to delete the group"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Updates the name of the group",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "ID of the group to update",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "title",
+            "description": "The new title of the group",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Updates the note group succesfully"
+          },
+          "400": {
+            "description": "Title or id have not been provided"
           }
         }
       }
     },
     "/api/locale": {
       "get": {
-        "description": "Returns the current locale",
+        "tags": [
+          "locale"
+        ],
+        "summary": "Returns the current locale",
+        "description": "Returns the current locale from the 'NEXT_LOCALE' cookie.",
         "responses": {
           "200": {
             "description": "Returns the current locale"
           }
         }
       }
+    },
+    "/api/notes": {
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Returns all the notes",
+        "description": "Returns all the notes from the database.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID for the note to get",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all the notes"
+          }
+        }
+      }
     }
   },
-  "components": {},
-  "tags": []
+  "components": {}
 }
