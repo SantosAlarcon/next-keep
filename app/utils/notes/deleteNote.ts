@@ -1,18 +1,24 @@
-import { redirect } from "next/navigation"
+import initTranslations from "@/app/i18n";
+import { getCurrentLocale } from "../getCurrentLocale";
+import { toast } from "sonner";
 
-export const deleteNote = (noteId: string) => {
-    const deleteNoteFunc = async () => {
-        if (noteId !== "") {
-            try {
-                await fetch(`/api/notes?id=${noteId}`, {
-                    method: "DELETE"
-                })
-                return redirect("/notes/all") 
-            } catch (error) {
-                console.error(error)
-            }
-        }
-    }
+export const deleteNote = async (noteId: string) => {
+	const locale = await getCurrentLocale();
+	const { t } = await initTranslations(locale, ["common"]);
 
-    deleteNoteFunc()
+	const deleteNoteFunc = async () => {
+		if (noteId !== "") {
+			const response = await fetch(`/api/notes?id=${noteId}`, {
+				method: "DELETE"
+			})
+
+			if (response.status === 200) {
+				toast.success(t("note-delete-success"))
+			} else {
+				toast.error(t("note-delete-error"))
+			}
+		}
+	}
+
+	deleteNoteFunc()
 }
