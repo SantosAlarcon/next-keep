@@ -60,6 +60,8 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id")
+	// @ts-ignore
+	const foundNote = await getNoteById(req.nextUrl.searchParams.get("id"))
 	const body = await req.json()
 	let pinStatusChanged: boolean = false
 
@@ -69,15 +71,17 @@ export async function PUT(req: NextRequest) {
 	}
 
 	// It checks if the pin status has changed. It is useful to not update the updated date if the pin status hasn't changed.
-	if (body.hasOwnProperty("isPinned")) {
+	if (foundNote?.isPinned !== body.isPinned) {
 		pinStatusChanged = true
 	}
+
+	console.log("Pin status changed:", pinStatusChanged)
 
 	const updatedNote = {
 		...body,
 		title: body.title,
 		data: body.data,
-		updatedDate: pinStatusChanged ? body.updatedDate : new Date().toISOString(),
+		updatedDate: pinStatusChanged ? foundNote?.updatedDate : new Date().toISOString(),
 		group: body.group,
 		isPinned: body.isPinned
 	}
