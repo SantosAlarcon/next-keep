@@ -18,5 +18,6 @@
 	"note-update-success": "La nota se ha actualizado correctamente",
 	"note-update-error": "Ha habido un fallo al actualizar la nota",
 	"note-delete-success": "La nota se ha borrado correctamente",
-	"note-delete-error": "Ha habido un fallo al borrar la nota"
+	"note-delete-error": "Ha habido un fallo al borrar la nota",
+	"note-delete-confirm": "Estás a punto de borrar esta nota. ¿Estás segur@?"
 }

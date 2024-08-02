@@ -4,9 +4,9 @@ import deleteButtonStyles from "@/styles/DeleteButton.module.css";
 import DeleteIcon from "../icons/DeleteIcon";
 import { deleteNote } from "@/app/utils/notes/deleteNote";
 
-function DeleteButton({ label, noteId }: { label: string; noteId: string }) {
+function DeleteButton({ label, noteId, confirmString }: { label: string; noteId: string, confirmString: string }) {
 	const handleClick = () => {
-        const answer = confirm("You are going to remove the note. Are you sure?");
+        const answer = confirm(confirmString);
 
         if (answer) {
             deleteNote(noteId)

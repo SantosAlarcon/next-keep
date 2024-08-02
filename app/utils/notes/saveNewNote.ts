@@ -16,13 +16,14 @@ export const saveNewNote = async () => {
 		} else if (newNote.data === "") {
 			toast.error(t("text-missing"));
 		} else {
-			try {
-				await fetch("/api/notes", {
-					method: "POST",
-					body: JSON.stringify(newNote),
-				})
+			const response = await fetch("/api/notes", {
+				method: "POST",
+				body: JSON.stringify(newNote),
+			})
+
+			if (response.status === 201) {
 				toast.success(t("note-saved"));
-			} catch (error) {
+			} else {
 				toast.error(t("error-saving-note"))
 			}
 		}

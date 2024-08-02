@@ -18,5 +18,6 @@
 	"note-update-success": "Note has been updated",
 	"note-update-error": "Failed to update note",
 	"note-delete-success": "Note has been deleted",
-	"note-delete-error": "Failed to delete note"
+	"note-delete-error": "Failed to delete note",
+	"note-delete-confirm": "You are about to delete this note. Are you sure?"
 }

@@ -5,7 +5,6 @@ import initTranslations from "../i18n";
 import sidebarStyles from "../styles/sidebar.module.css";
 import { getAllNotes } from "../utils/database/notes/getAllNotes";
 import { getAllPinnedNotes } from "../utils/database/notes/getAllPinnedNotes";
-import { getNotesByGroup } from "../utils/database/notes/getNotesByGroup";
 import { getAllGroups } from "../utils/database/groups/getAllGroups";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";

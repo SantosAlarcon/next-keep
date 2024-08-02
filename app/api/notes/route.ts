@@ -43,8 +43,6 @@ export async function POST(req: NextRequest) {
 	newNote.publishedDate = new Date().toISOString()
 	newNote.updatedDate = new Date().toISOString()
 
-	console.log(newNote)
-
 	// Call the createNewNote function
 	const creationSuccess = await createNewNote(newNote);
 
@@ -63,17 +61,23 @@ export async function PUT(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id")
 	const body = await req.json()
+	let pinStatusChanged: boolean = false
 
 	// If ID is not provided in the search params, it returns an error
 	if (!id) {
 		return Response.json({ message: "You need to provide the note ID" }, { status: 401 })
 	}
 
+	// It checks if the pin status has changed. It is useful to not update the updated date if the pin status hasn't changed.
+	if (body.hasOwnProperty("isPinned")) {
+		pinStatusChanged = true
+	}
+
 	const updatedNote = {
 		...body,
 		title: body.title,
 		data: body.data,
-		updatedDate: new Date().toISOString(),
+		updatedDate: pinStatusChanged ? body.updatedDate : new Date().toISOString(),
 		group: body.group,
 		isPinned: body.isPinned
 	}

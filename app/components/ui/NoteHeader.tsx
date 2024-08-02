@@ -14,7 +14,7 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
                 <div className={noteHeaderStyles.note__header__upper__right}>
                     <EditButton label={t("edit")} noteId={note.id} />
                     <TogglePinButton title={t("toggle-pin")} note={note} />
-                    <DeleteButton label={t("delete")} noteId={note.id} />
+                    <DeleteButton label={t("delete")} noteId={note.id} confirmString={t("note-delete-confirm")} />
                 </div>
             </section>
 			<span className={noteHeaderStyles.note__header__date}>{t("last-update")}: {new Date(note.updatedDate).toLocaleString(lang, {
