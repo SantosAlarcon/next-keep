@@ -8,6 +8,24 @@ import type { NextURL } from "next/dist/server/web/next-url";
 import type { NextRequest } from "next/server";
 import { updateNoteById } from "@/app/utils/database/notes/updateNoteById";
 
+/**
+ * @swagger
+ * /api/notes:
+ *  get:
+ *      tags:
+ *          - notes
+ *      summary: Returns all the notes
+ *      description: Returns all the notes from the database.
+ *      parameters:
+ *        - name: id
+ *          in: query
+ *          description: ID for the note to get
+ *          schema:
+ *              type: string
+ *      responses:
+ *          200:
+ *              description: Returns all the notes
+*/
 export async function GET(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id")
