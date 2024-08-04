@@ -1,0 +1,27 @@
+---
+Pollas en vinagre
+---
+/api/notes:
+put:
+  tags:
+    - notes
+  summary: Updates a existing note
+  description: Updates a note on the database with new title or data
+  parameters:
+    - name: id
+      in: query
+      description: ID of the note to update
+      schema:
+        type: string
+      required: true
+    - name: body
+      in: header
+      description: Body that contains the new title and/or data of the note
+      schema:
+        type: object
+      required: true
+  responses:
+    201:
+      description: Note is updated successfully on the DB
+    400:
+      description: ID and body object must have a title and the data, or ID doesn't exists in the DB.

@@ -18,6 +18,47 @@
       "description": "Routes for the notes"
     }
   ],
+  "components": {
+    "schemas": {
+      "Group": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "Note": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "required": "true"
+          },
+          "data": {
+            "type": "string",
+            "required": "true"
+          },
+          "isPinned": {
+            "type": "boolean"
+          },
+          "publishedDate": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
   "paths": {
     "/api/groups": {
       "get": {
@@ -173,8 +214,94 @@
             "description": "Returns all the notes"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Creates a new note",
+        "description": "Creates a new note on the database",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "header",
+            "description": "Body that contains the title and data of the note",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Note is created successfully and inserted to the DB"
+          },
+          "400": {
+            "description": "Body object must have a title and the data"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Updates a existing note",
+        "description": "Updates a note on the database with new title or data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID of the note to update",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "header",
+            "description": "Body that contains the new title and/or data of the note",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ]
+      },
+      "responses": {
+        "201": {
+          "description": "Note is updated successfully on the DB"
+        },
+        "400": {
+          "description": "ID and body object must have a title and the data, or ID doesn't exists in the DB."
+        }
+      },
+      "delete": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Deletes an existing note",
+        "description": "Deletes an existing note on the database",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID of the note to delete",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Note is deleted successfully on the DB"
+          },
+          "400": {
+            "description": "The ID provided doesn't exist in the DB or no ID provided in the query."
+          }
+        }
       }
     }
-  },
-  "components": {}
+  }
 }
