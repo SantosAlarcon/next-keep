@@ -96,6 +96,9 @@ button {
     outline: none;
     border: none;
     font-family: inherit;
+    border-radius: .45rem;
+    padding: var(--button-padding);
+    cursor: pointer;
 }
 
 @media (prefers-color-scheme: dark) {

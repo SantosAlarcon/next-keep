@@ -9,6 +9,8 @@ import { getAllGroups } from "../utils/database/groups/getAllGroups";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import NewNoteButton from "./ui/NewNoteButton";
+import { sidebarStore } from "../store/sidebarStore";
+import SidebarExpandButton from "./SidebarExpandButton";
 
 type Group = {
 	id: string;
@@ -43,6 +45,7 @@ const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 					<GroupItem key={group.id} id={group.id} title={group.title} />
 				))}
 			</ul>
+            <SidebarExpandButton />
 		</aside>
 	);
 };
