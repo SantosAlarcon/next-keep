@@ -94,13 +94,12 @@ export async function GET(req: NextRequest) {
 *      - notes
 *    summary: Creates a new note
 *    description: Creates a new note on the database
-*    parameters:
-*      - name: body
-*        in: header
-*        description: Body that contains the title and data of the note
-*        schema:
-*          type: object
-*        required: true
+*    requestBody:
+*      required: true
+*      content:
+*        application/json:
+*          schema:
+*            $ref: '#/components/schemas/Note'
 *    responses:
 *      201:
 *        description: Note is created successfully and inserted to the DB

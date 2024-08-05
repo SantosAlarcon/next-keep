@@ -81,17 +81,16 @@
           "groups"
         ],
         "summary": "Creates a new group",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "title",
-            "description": "The title of the group",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Group"
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "201": {
             "description": "Creates the new group succesfully"
@@ -253,17 +252,16 @@
         ],
         "summary": "Creates a new note",
         "description": "Creates a new note on the database",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "header",
-            "description": "Body that contains the title and data of the note",
-            "schema": {
-              "type": "object"
-            },
-            "required": true
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Note"
+              }
+            }
           }
-        ],
+        },
         "responses": {
           "201": {
             "description": "Note is created successfully and inserted to the DB"

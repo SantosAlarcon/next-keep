@@ -79,13 +79,13 @@ export async function GET(req: NextRequest) {
  *     tags:
  *       - groups
  *     summary: Creates a new group
- *     parameters:
- *       - in: header
- *         name: title
- *         description: The title of the group
- *         schema:
- *           type: string
- *         required: true
+ *
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Group'
  *     responses:
  *       201:
  *         description: Creates the new group succesfully
