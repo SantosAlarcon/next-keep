@@ -10,6 +10,17 @@ import type { NextRequest } from "next/server";
  * /api/groups:
  *   get:
  *     summary: Returns the list of all groups
+ *     description: Returns the list of all groups from the database
+ *     tags:
+ *       - groups
+ *     responses:
+ *       200:
+ *         description: Returns the list of groups
+ *       400:
+ *         description: Failed to connect to the database
+ * /api/groups?id={id}:
+ *   get:
+ *     summary: Return a group using the ID
  *     tags:
  *       - groups
  *     parameters:
@@ -18,6 +29,17 @@ import type { NextRequest } from "next/server";
  *         description: ID of the group to get
  *         schema:
  *           type: string
+ *     responses:
+ *       200:
+ *         description: Returns the group object with that ID
+ *       400:
+ *         description: The ID provided doesn't exist in the database
+ * /api/groups?sort={sort}:
+ *   get:
+ *     summary: Returns the list of all groups sorted alphabetically
+ *     tags:
+ *       - groups
+ *     parameters:
  *       - in: query
  *         name: sort
  *         description: Sorts the list of groups alphabetically
@@ -25,9 +47,9 @@ import type { NextRequest } from "next/server";
  *           type: boolean
  *     responses:
  *       200:
- *         description: Returns the list of groups
+ *         description: Returns the list of groups alphabetically
  *       400:
- *         description: The ID provided doesn't exist in the database
+ *         description: Failed to connect to the database
 */
 export async function GET(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
@@ -86,11 +108,12 @@ export async function POST(req: NextRequest) {
 
 /**
  * @swagger
- * /api/groups:
+ * /api/groups?id={id}:
  *   delete:
  *     tags:
  *       - groups
- *     summary: Updates the name of the group
+ *     summary: Deletes a group
+ *     description: Deletes a group from the database
  *     parameters:
  *       - in: query
  *         name: id
@@ -102,7 +125,7 @@ export async function POST(req: NextRequest) {
  *       200:
  *         description: Successfully deletes the group
  *       400:
- *         description: ID has not been provided to delete the group
+ *         description: ID has not been provided to delete the group or the ID provided doesn't exist in the database.
 */
 export async function DELETE(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
@@ -125,7 +148,7 @@ export async function DELETE(req: NextRequest) {
 
 /**
  * @swagger
- * /api/groups:
+ * /api/groups?id={id}:
  *   put:
  *     tags:
  *       - groups
@@ -147,7 +170,7 @@ export async function DELETE(req: NextRequest) {
  *       201:
  *         description: Updates the note group succesfully
  *       400:
- *         description: Title or id have not been provided
+ *         description: Title or id have not been provided, or the ID provided doesn't exist in the database.
 */
 export async function PUT(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;

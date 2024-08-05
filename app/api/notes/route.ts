@@ -3,6 +3,7 @@ import type { Note } from "@/app/types";
 import { createNewNote } from "@/app/utils/database/notes/createNewNote";
 import { deleteNoteById } from "@/app/utils/database/notes/deleteNoteById";
 import { getAllNotes } from "@/app/utils/database/notes/getAllNotes";
+import { getAllPinnedNotes } from "@/app/utils/database/notes/getAllPinnedNotes";
 import { getNoteById } from "@/app/utils/database/notes/getNoteById";
 import { updateNoteById } from "@/app/utils/database/notes/updateNoteById";
 import type { NextURL } from "next/dist/server/web/next-url";
@@ -16,6 +17,17 @@ import type { NextRequest } from "next/server";
  *          - notes
  *      summary: Returns all the notes
  *      description: Returns all the notes from the database.
+ *      responses:
+ *        200:
+ *          description: Returns all the notes
+ *        400:
+ *          description: Failed to connect to the database
+ * /api/notes?id={id}:
+ *  get:
+ *      tags:
+ *          - notes
+ *      summary: Returns the note with that ID
+ *      description: Returns the note with that ID from the database.
  *      parameters:
  *        - name: id
  *          in: query
@@ -24,16 +36,46 @@ import type { NextRequest } from "next/server";
  *              type: string
  *      responses:
  *          200:
- *              description: Returns all the notes
+ *            description: Returns the note with that ID
+ *          400:
+ *            description: The ID provided doesn't exist in the DB
+ * /api/notes?pinned={pinned}:
+ *  get:
+ *      tags:
+ *          - notes
+ *      summary: Returns all the pinned notes
+ *      description: Returns all the pinned notes from the database.
+ *      parameters:
+ *        - name: pinned
+ *          in: query
+ *          description: Tells the API to retrieve only the pinned notes
+ *          schema:
+ *              type: boolean
+ *      responses:
+ *          200:
+ *            description: Returns all the pinned notes
+ *          400:
+ *            description: Failed to connect to the database
  */
 export async function GET(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id");
+	const pinned = searchParams.get("pinned")
 
 	// If ID is provided in the search params, it returns the note with that ID
 	if (id) {
 		const foundNote = await getNoteById(id);
+
+		if (!foundNote) {
+			return Response.json({ message: "The ID provided doesn't exist in the DB" }, { status: 400 });
+		}
+
 		return Response.json(foundNote, { status: 200 });
+	}
+
+	if (pinned) {
+		const pinnedNotes = await getAllPinnedNotes()
+		return Response.json(pinnedNotes, {status: 200})
 	}
 
 	// If ID is not provided in the search params, it returns all the notes sorted by the updated date.
