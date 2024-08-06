@@ -1,5 +1,5 @@
-import notes from "@/data/notes.json"
-
-export const getAllNotes = () => {
-    return notes
+export const getAllNotes = async () => {
+    const response = await fetch("/api/notes")
+    const allNotes = await response.json()
+    return allNotes
 }

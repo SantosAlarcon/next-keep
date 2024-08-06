@@ -1,17 +1,16 @@
-import { createInstance, type i18n } from 'i18next';
-import { initReactI18next } from 'react-i18next/initReactI18next';
+import type {i18n } from 'i18next';
+import { createInstance } from "i18next"
 import resourcesToBackend from 'i18next-resources-to-backend';
 import i18nConfig from '@/i18n.config';
 
-export default async function initClientTranslations(
+export default function initClientTranslations(
     locale: string,
     namespaces: string[],
     i18nInstance?: i18n,
     resources?: any,
 ) {
-    i18nInstance = i18nInstance || createInstance();
 
-    i18nInstance.use(initReactI18next);
+    i18nInstance = i18nInstance || createInstance()
 
     if (!resources) {
         i18nInstance.use(
@@ -21,7 +20,7 @@ export default async function initClientTranslations(
         );
     }
 
-    await i18nInstance.init({
+    i18nInstance.init({
         debug: false,
         lng: locale,
         resources,

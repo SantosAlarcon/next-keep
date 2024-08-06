@@ -3,8 +3,8 @@ import { Lato } from "next/font/google";
 import "../styles/globals.css";
 import type { ReactNode } from "react";
 import i18NextConfig from "@/i18n.config";
-import Sidebar from "../components/Sidebar";
 import { Toaster } from "sonner";
+import SidebarClient from "../components/SidebarClient";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -36,7 +36,7 @@ export default function RootLayout({
 		<html lang={lang}>
 			<body className={font.className}>
                 <Toaster richColors position="bottom-center" theme="dark" />
-				<Sidebar params={{ lang: lang }} />
+				<SidebarClient params={{ lang: lang }} />
 				{children}
 			</body>
 		</html>

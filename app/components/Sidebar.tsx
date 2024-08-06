@@ -19,6 +19,7 @@ type Group = {
 
 const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 	const { t } = await initTranslations(lang, ["common"])
+    const {expanded} = sidebarStore.getState()
 
 	const [notes, pinnedNotes, groups] = await Promise.all([
 		getAllNotes(),
@@ -46,6 +47,7 @@ const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 				))}
 			</ul>
             <SidebarExpandButton />
+            {expanded ? "Expanded" : "Not expanded"}
 		</aside>
 	);
 };

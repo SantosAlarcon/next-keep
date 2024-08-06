@@ -7,3 +7,8 @@ export type Note = {
     isPinned: boolean;
     data: string;
 }
+
+export type Group = {
+    id: string;
+    title: string;
+}
