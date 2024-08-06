@@ -7,8 +7,10 @@ interface sidebarStoreProps {
 }
 
 // @ts-ignore
-export const sidebarStore = create<sidebarStoreProps>(devtools((set) => ({
+export const sidebarStore = create<sidebarStoreProps>(devtools((set, get) => ({
     expanded: true,
     // @ts-ignore
-    toggleExpanded: () => set((state) => !state.expanded)
+    toggleExpanded: () => {
+		set({expanded: !get().expanded})
+    }
 }), {name: "Sidebar Store"}))
