@@ -2,7 +2,7 @@ import SidebarItemStyles from "@/app/styles/SidebarItem.module.css";
 import Image from "next/image";
 import ActiveLink from "./ui/ActiveLink";
 
-const SidebarItem = ({ icon, title, href, amount }: { icon: string, title: string; href: string; amount: number }) => {
+const SidebarItem = ({ icon, title, href, amount }: { icon: string, title: string, href: string, amount: number }) => {
 
 	return (
 		<li className={SidebarItemStyles.sidebar__item__container}>

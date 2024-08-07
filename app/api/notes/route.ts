@@ -4,7 +4,9 @@ import { createNewNote } from "@/app/utils/database/notes/createNewNote";
 import { deleteNoteById } from "@/app/utils/database/notes/deleteNoteById";
 import { getAllNotes } from "@/app/utils/database/notes/getAllNotes";
 import { getAllPinnedNotes } from "@/app/utils/database/notes/getAllPinnedNotes";
+import { getNoteAmountsByGroups } from "@/app/utils/database/notes/getNoteAmountByGroups";
 import { getNoteById } from "@/app/utils/database/notes/getNoteById";
+import { getNotesByGroup } from "@/app/utils/database/notes/getNotesByGroup";
 import { updateNoteById } from "@/app/utils/database/notes/updateNoteById";
 import type { NextURL } from "next/dist/server/web/next-url";
 import type { NextRequest } from "next/server";
@@ -22,6 +24,40 @@ import type { NextRequest } from "next/server";
  *          description: Returns all the notes
  *        400:
  *          description: Failed to connect to the database
+ * /api/notes?amount:
+ *  get:
+ *      tags:
+ *          - notes
+ *      summary: Returns the amount of notes of every group
+ *      description: Returns the amount of notes of every group from the database.
+ *      parameters:
+ *        - name: amount
+ *          in: query
+ *          description: Flag that tells the API to return the amount of notes of every group
+ *          schema:
+ *              type: boolean
+ *      responses:
+ *          200:
+ *            description: Returns the amount of notes of every group
+ *          400:
+ *            description: Failed to connect to the database
+ * /api/notes?group={groupId}:
+ *  get:
+ *      tags:
+ *          - notes
+ *      summary: Returns the notes of the group with that ID
+ *      description: Returns the notes of the group with that ID from the database.
+ *      parameters:
+ *        - name: groupId
+ *          in: query
+ *          description: ID for the note to get
+ *          schema:
+ *              type: string
+ *      responses:
+ *          200:
+ *            description: Returns the note list of the group with that ID
+ *          400:
+ *            description: The ID provided doesn't exist in the DB
  * /api/notes?id={id}:
  *  get:
  *      tags:
@@ -61,6 +97,14 @@ export async function GET(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id");
 	const pinned = searchParams.get("pinned")
+	const group = searchParams.get("group")
+	const amount = searchParams.get("amount")
+
+	if (amount) {
+		const noteAmounts = await getNoteAmountsByGroups()
+
+		return Response.json(noteAmounts, { status: 200 })
+	}
 
 	// If ID is provided in the search params, it returns the note with that ID
 	if (id) {
@@ -75,7 +119,17 @@ export async function GET(req: NextRequest) {
 
 	if (pinned) {
 		const pinnedNotes = await getAllPinnedNotes()
-		return Response.json(pinnedNotes, {status: 200})
+		return Response.json(pinnedNotes, { status: 200 })
+	}
+
+	if (group) {
+		const groupNoteList = await getNotesByGroup(group)
+
+		if (!groupNoteList) {
+			return Response.json({ message: "The group with the ID provided doesn't exist in the DB" }, { status: 400 })
+		}
+
+		return Response.json(groupNoteList, { status: 200 })
 	}
 
 	// If ID is not provided in the search params, it returns all the notes sorted by the updated date.

@@ -333,6 +333,33 @@
         }
       }
     },
+    "/api/notes?group={groupId}": {
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Returns the notes of the group with that ID",
+        "description": "Returns the notes of the group with that ID from the database.",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "query",
+            "description": "ID for the note to get",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the note list of the group with that ID"
+          },
+          "400": {
+            "description": "The ID provided doesn't exist in the DB"
+          }
+        }
+      }
+    },
     "/api/notes?id={id}": {
       "get": {
         "tags": [

@@ -10,23 +10,21 @@ import NewNoteButton from "./ui/NewNoteButton";
 import { useState } from "react";
 import useFetchAll from "../utils/hooks/useFetchAll";
 import initClientTranslations from "../i18n-client";
-
-type Group = {
-	id: string;
-	title: string;
-}
+import type { Group } from "../types";
 
 const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
-    const {allNotes, allPinnedNotes, allGroups} = useFetchAll()
-    console.log(allNotes)
+	const [expanded, setExpanded] = useState<boolean>(false);
 	const { t } = initClientTranslations(lang, ["common"])
 
-    const [expanded, setExpanded] = useState<boolean>(false);
+	const { allNotes, allPinnedNotes, allGroups, allNoteAmounts } = useFetchAll()
 
-    const handleClick = () => {
-        setExpanded(!expanded)
-    }
+	const handleClick = () => {
+		setExpanded(!expanded)
+	}
 
+	if (!(allNotes && allPinnedNotes && allGroups && allNoteAmounts)) {
+		return null;
+	}
 
 	return (
 		<aside className={sidebarStyles.sidebar__container}>
@@ -44,10 +42,10 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 			<h3>{t("groups")}</h3>
 			<ul className={sidebarStyles.sidebar__grouplist}>
 				{allGroups?.sort((a, b) => a.title.localeCompare(b.title)).map((group: Group) => (
-					<GroupItem key={group.id} id={group.id} title={group.title} />
+					<GroupItem key={group.id} id={group.id} title={group.title} amount={0} />
 				))}
 			</ul>
-                <button type="button" onClick={() => handleClick()}>{expanded ? ">" : "<"}</button>
+			<button type="button" onClick={() => handleClick()}>{expanded ? ">" : "<"}</button>
 		</aside>
 	);
 };
