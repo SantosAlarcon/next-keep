@@ -6,12 +6,15 @@ import i18NextConfig from "@/i18n.config";
 import { Toaster } from "sonner";
 import SidebarClient from "../components/SidebarClient";
 import { getAllData } from "../utils/getAllData";
+import dynamic from "next/dynamic";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
 export async function generateStaticParams() {
 	return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
 }
+
+const SidebarClientNoSSR = dynamic(() => import('@/components/SidebarClient'), {ssr: false})
 
 export const metadata: Metadata = {
 	title: {
@@ -38,7 +41,7 @@ export default async function RootLayout({
 		<html lang={lang}>
 			<body className={font.className}>
 				<Toaster richColors position="bottom-center" theme="dark" />
-				<SidebarClient params={{ lang: lang }} data={{ allNotes, allPinnedNotes, allGroups, allNoteAmounts }} />
+				<SidebarClientNoSSR params={{ lang: lang }} data={{ allNotes, allPinnedNotes, allGroups, allNoteAmounts }} />
 				{children}
 			</body>
 		</html>

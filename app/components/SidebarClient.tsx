@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -11,38 +11,67 @@ import { useState } from "react";
 import type { Note, Group } from "../types";
 import i18nClient from "../i18n-client";
 
-const SidebarClient = ({ params: { lang },
-	data: { allNotes, allPinnedNotes, allGroups, allNoteAmounts
-	} }: { params: { lang: string }, data: { allNotes: Note[], allPinnedNotes: Note[], allGroups: Group[], allNoteAmounts: object } }) => {
-	const [expanded, setExpanded] = useState<boolean>(false);
+const SidebarClient = ({
+	params: { lang },
+	data: { allNotes, allPinnedNotes, allGroups, allNoteAmounts },
+}: { params: { lang: string }; data: { allNotes: Note[]; allPinnedNotes: Note[]; allGroups: Group[]; allNoteAmounts: object } }) => {
+	const [expanded, setExpanded] = useState<boolean>(true);
 	const t = i18nClient.getFixedT(lang, "common");
 
 	const handleClick = () => {
-		setExpanded(!expanded)
-	}
+		setExpanded(!expanded);
+	};
 
-	if (!i18nClient) return null
+	if (!i18nClient) return null;
 
 	return (
-		<aside className={sidebarStyles.sidebar__container}>
+		<aside
+			style={{
+				width: expanded ? "23rem" : "fit-content",
+			}}
+			className={sidebarStyles.sidebar__container}
+		>
 			<Link href="/notes/all" prefetch>
-				<Image src="/NextKeep.svg" alt="Next Keep logo" width="250" height="150" priority />
+				<Image
+					className={sidebarStyles.sidebar__logo}
+					src="/NextKeep.svg"
+					alt="Next Keep logo"
+					width={expanded ? "100" : "50"}
+					height={expanded ? "100" : "50"}
+					priority
+				/>
 			</Link>
-			<NewNoteButton title={t("create-note")} />
+			<NewNoteButton title={t("create-note")} expanded={expanded} />
 			<ul className={sidebarStyles.sidebar__grouplist}>
 				{mainSidebarLinks.map((link) => (
 					// @ts-ignore
-					<SidebarItem icon={link.icon} key={link.name} title={t(link.name)} href={link.path} amount={link.name === "pinned" ? allPinnedNotes?.length : allNotes?.length} />
+					<SidebarItem
+						icon={link.icon}
+						key={link.name}
+						title={t(link.name)}
+						href={link.path}
+						amount={link.name === "pinned" ? allPinnedNotes?.length : allNotes?.length}
+						expanded={expanded}
+					/>
 				))}
 			</ul>
 			<hr className={sidebarStyles.sidebar__separator} />
-			<h3>{t("groups")}</h3>
+			<h3>{expanded ? t("groups") : null}</h3>
 			<ul className={sidebarStyles.sidebar__grouplist}>
 				{allGroups?.map((group: Group) => (
-					<GroupItem key={group.id} id={group.id} title={group.title} amount={allNoteAmounts[group.id] ? allNoteAmounts[group.id] : 0} />
+					<GroupItem
+						key={group.id}
+						id={group.id}
+						title={group.title}
+						// @ts-ignore
+						amount={allNoteAmounts[group.id] ? allNoteAmounts[group.id] : 0}
+						expanded={expanded}
+					/>
 				))}
 			</ul>
-			<button type="button" onClick={handleClick}>{expanded ? ">" : "<"}</button>
+			<button type="button" onClick={handleClick}>
+				{expanded ? "<" : ">"}
+			</button>
 		</aside>
 	);
 };

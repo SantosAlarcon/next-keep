@@ -43,7 +43,7 @@ const Sidebar = async ({ params: { lang } }: { params: { lang: string } }) => {
 			<h3>{t("groups")}</h3>
 			<ul className={sidebarStyles.sidebar__grouplist}>
 				{groups?.sort((a, b) => a.title.localeCompare(b.title)).map((group: Group) => (
-					<GroupItem key={group.id} id={group.id} title={group.title} />
+					<GroupItem key={group.id} id={group.id} title={group.title} amount={0} />
 				))}
 			</ul>
             <SidebarExpandButton />

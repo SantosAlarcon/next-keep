@@ -5,9 +5,9 @@ import sidebarStyles from "@/app/styles/sidebar.module.css";
 import NewNoteIcon from "../icons/NewNoteIcon";
 import { useNewNoteStore } from "@/app/store/newNoteStore";
 
-const NewNoteButton = ({ title }: { title: string }) => {
-    const reset = useNewNoteStore.getState().reset;
-    reset()
+const NewNoteButton = ({ title, expanded }: { title: string; expanded: boolean }) => {
+	const reset = useNewNoteStore.getState().reset;
+	reset();
 
 	const router = useRouter();
 	const createNewNote = () => {
@@ -15,9 +15,9 @@ const NewNoteButton = ({ title }: { title: string }) => {
 	};
 
 	return (
-		<button className={sidebarStyles.sidebar__button} onClick={createNewNote} type="button">
+		<button title={title} className={sidebarStyles.sidebar__button} onClick={createNewNote} type="button">
 			<NewNoteIcon />
-			{title}
+			{expanded ? title : null}
 		</button>
 	);
 };
