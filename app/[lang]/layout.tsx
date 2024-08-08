@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import i18NextConfig from "@/i18n.config";
 import { Toaster } from "sonner";
 import SidebarClient from "../components/SidebarClient";
+import { getAllData } from "../utils/getAllData";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 	params: { lang },
 }: Readonly<{
@@ -31,12 +32,13 @@ export default function RootLayout({
 	params: {
 		lang: string;
 	};
-}>) { 
+}>) {
+	const { allNotes, allPinnedNotes, allGroups, allNoteAmounts } = await getAllData();
 	return (
 		<html lang={lang}>
 			<body className={font.className}>
-                <Toaster richColors position="bottom-center" theme="dark" />
-				<SidebarClient params={{ lang: lang }} />
+				<Toaster richColors position="bottom-center" theme="dark" />
+				<SidebarClient params={{ lang: lang }} data={{ allNotes, allPinnedNotes, allGroups, allNoteAmounts }} />
 				{children}
 			</body>
 		</html>

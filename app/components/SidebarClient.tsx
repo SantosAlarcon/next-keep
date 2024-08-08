@@ -8,22 +8,18 @@ import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import NewNoteButton from "./ui/NewNoteButton";
 import { useState } from "react";
-import useFetchAll from "../utils/hooks/useFetchAll";
 import initClientTranslations from "../i18n-client";
-import type { Group } from "../types";
+import type { Note, Group } from "../types";
 
-const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
+const SidebarClient = ({ params: { lang },
+	data: { allNotes, allPinnedNotes, allGroups, allNoteAmounts
+	} }: { params: { lang: string }, data: { allNotes: Note[], allPinnedNotes: Note[], allGroups: Group[], allNoteAmounts: object } }) => {
 	const [expanded, setExpanded] = useState<boolean>(false);
 	const { t } = initClientTranslations(lang, ["common"])
 
-	const { allNotes, allPinnedNotes, allGroups, allNoteAmounts } = useFetchAll()
 
 	const handleClick = () => {
 		setExpanded(!expanded)
-	}
-
-	if (!(allNotes && allPinnedNotes && allGroups && allNoteAmounts)) {
-		return null;
 	}
 
 	return (
@@ -42,7 +38,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 			<h3>{t("groups")}</h3>
 			<ul className={sidebarStyles.sidebar__grouplist}>
 				{allGroups?.sort((a, b) => a.title.localeCompare(b.title)).map((group: Group) => (
-					<GroupItem key={group.id} id={group.id} title={group.title} amount={0} />
+					<GroupItem key={group.id} id={group.id} title={group.title} amount={allNoteAmounts[group.id]} />
 				))}
 			</ul>
 			<button type="button" onClick={() => handleClick()}>{expanded ? ">" : "<"}</button>
