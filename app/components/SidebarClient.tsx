@@ -17,7 +17,6 @@ const SidebarClient = ({ params: { lang },
 	const [expanded, setExpanded] = useState<boolean>(false);
 	const { t } = initClientTranslations(lang, ["common"])
 
-
 	const handleClick = () => {
 		setExpanded(!expanded)
 	}
@@ -37,11 +36,11 @@ const SidebarClient = ({ params: { lang },
 			<hr className={sidebarStyles.sidebar__separator} />
 			<h3>{t("groups")}</h3>
 			<ul className={sidebarStyles.sidebar__grouplist}>
-				{allGroups?.sort((a, b) => a.title.localeCompare(b.title)).map((group: Group) => (
-					<GroupItem key={group.id} id={group.id} title={group.title} amount={allNoteAmounts[group.id]} />
+				{allGroups?.map((group: Group) => (
+					<GroupItem key={group.id} id={group.id} title={group.title} amount={allNoteAmounts[group.id] ? allNoteAmounts[group.id] : 0} />
 				))}
 			</ul>
-			<button type="button" onClick={() => handleClick()}>{expanded ? ">" : "<"}</button>
+			<button type="button" onClick={handleClick}>{expanded ? ">" : "<"}</button>
 		</aside>
 	);
 };

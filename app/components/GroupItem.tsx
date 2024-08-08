@@ -1,7 +1,7 @@
 import GroupItemStyles from "@/app/styles/GroupItem.module.css";
 import ActiveLink from "./ui/ActiveLink"
 
-const GroupItem = async ({ id, title, amount }: { id: string, title: string, amount: number }) => {
+const GroupItem = ({ id, title, amount }: { id: string, title: string, amount: number }) => {
 	return (
 		<li className={GroupItemStyles.group__item__container}>
 			<ActiveLink href={`/groups/${id}`}>
