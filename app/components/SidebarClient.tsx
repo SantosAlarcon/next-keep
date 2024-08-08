@@ -8,18 +8,20 @@ import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import NewNoteButton from "./ui/NewNoteButton";
 import { useState } from "react";
-import initClientTranslations from "../i18n-client";
 import type { Note, Group } from "../types";
+import i18nClient from "../i18n-client";
 
 const SidebarClient = ({ params: { lang },
 	data: { allNotes, allPinnedNotes, allGroups, allNoteAmounts
 	} }: { params: { lang: string }, data: { allNotes: Note[], allPinnedNotes: Note[], allGroups: Group[], allNoteAmounts: object } }) => {
 	const [expanded, setExpanded] = useState<boolean>(false);
-	const { t } = initClientTranslations(lang, ["common"])
+	const t = i18nClient.getFixedT(lang, "common");
 
 	const handleClick = () => {
 		setExpanded(!expanded)
 	}
+
+	if (!i18nClient) return null
 
 	return (
 		<aside className={sidebarStyles.sidebar__container}>
