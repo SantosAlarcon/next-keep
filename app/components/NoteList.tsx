@@ -13,18 +13,21 @@ const NoteList = async ({ group, selected }: { group: string, selected: string }
 	let path: string = "";
 
 	switch (group) {
-		case "all":
+		case "all": {
 			notes = await getAllNotes();
 			path = "/notes/all";
 			break;
-		case "pinned":
+		}
+		case "pinned": {
 			notes = await getAllPinnedNotes();
 			path = "/notes/pinned";
 			break;
-		default:
+		}
+		default: {
 			notes = await getNotesByGroup(group);
 			path = `/groups/${group}`
 			break;
+		}
 	}
 
 	notes?.sort((a, b) => b.updatedDate.localeCompare(a.updatedDate))
@@ -36,7 +39,7 @@ const NoteList = async ({ group, selected }: { group: string, selected: string }
 			{
 				notes.map((note) => (
 					<li key={note.id} data-title={note.title} className={`${NoteListStyles.note__item__container} ${selected === note.id ? NoteListStyles.note__item__selected : ""}`}>
-						<ActiveNoteLink selected={selected === note.id} href={`${path}/${note.id}`} key={note.id} title={note.title}>
+						<ActiveNoteLink selected={selected === note.id} href={`${path}/${note.id}`} key={note.id}>
 							<span className={NoteListStyles.note__item__title}>{note.title}</span>
 							<span className={NoteListStyles.note__item__pinned}>{note.isPinned ? <FixedIcon width="20px" height="20px" /> : <UnfixedIcon width="20px" height="20px" />}</span>
 						</ActiveNoteLink>

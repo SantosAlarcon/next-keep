@@ -15,7 +15,7 @@ const NewNoteButton = ({ title, expanded }: { title: string; expanded: boolean }
 	};
 
 	return (
-		<button data-title={title} className={expanded ? sidebarStyles.sidebar__button : sidebarStyles.sidebar__new__note__button__collapsed} onClick={createNewNote} type="button">
+		<button data-title={title} data-tooltip-align={expanded ? null : "right"} className={expanded ? sidebarStyles.sidebar__button : sidebarStyles.sidebar__new__note__button__collapsed} onClick={createNewNote} type="button">
 			<NewNoteIcon />
 			{expanded ? <span>{title}</span> : null}
 		</button>

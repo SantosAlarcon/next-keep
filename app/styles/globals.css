@@ -103,7 +103,7 @@ a {
 	content: attr(data-title);
 	background-color: #335;
 	color: #eee;
-	font-size: 75%;
+	font-size: .75rem;
 	font-weight: bold;
 	position: absolute;
 	padding: .5rem 1rem;
@@ -117,10 +117,20 @@ a {
 	transition: all .2s ease-in-out;
 	left: 50%;
 	transform: translateX(-50%);
+
 }
 
-[data-title] {
+[data-title], [data-tooltip-align="right"] {
 	position: relative;
+}
+
+[data-tooltip-align='right']:hover:after {
+    left: 275%;
+}
+
+[data-tooltip-align='right']:after {
+    left: 100%;
+    bottom: 0 !important;
 }
 
 button {
