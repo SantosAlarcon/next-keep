@@ -10,16 +10,30 @@ import NewNoteButton from "./ui/NewNoteButton";
 import { useState } from "react";
 import type { Note, Group } from "../types";
 import i18nClient from "../i18n-client";
+import getCookie from "../utils/getCookie";
 
 const SidebarClient = ({
 	params: { lang },
 	data: { allNotes, allPinnedNotes, allGroups, allNoteAmounts },
 }: { params: { lang: string }; data: { allNotes: Note[]; allPinnedNotes: Note[]; allGroups: Group[]; allNoteAmounts: object } }) => {
-	const [expanded, setExpanded] = useState<boolean>(true);
+	const [expanded, setExpanded] = useState<boolean>(() => {
+		// @ts-ignore
+		if (!getCookie("sidebar_expanded")) {
+			document.cookie = "sidebar_expanded = true";
+		}
+
+		// @ts-ignore
+		if (getCookie("sidebar_expanded") === "true") {
+			return true;
+		} else {
+			return false;
+		}
+	});
 	const t = i18nClient.getFixedT(lang, "common");
 
 	const handleClick = () => {
 		setExpanded(!expanded);
+		document.cookie = `sidebar_expanded = ${!expanded}`;
 	};
 
 	if (!i18nClient) return null;
@@ -69,7 +83,7 @@ const SidebarClient = ({
 					/>
 				))}
 			</ul>
-			<button type="button" onClick={handleClick}>
+			<button className={!expanded ? sidebarStyles.sidebar__expand__button__collapsed : sidebarStyles.sidebar__expand__button} type="button" onClick={handleClick}>
 				{expanded ? "<" : ">"}
 			</button>
 		</aside>

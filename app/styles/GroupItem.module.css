@@ -17,6 +17,13 @@
     gap: .5rem;
 }
 
+.group__item__group__collapsed {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: .5rem;
+}
+
 .group__item__left {
     display: flex;
     align-items: center;

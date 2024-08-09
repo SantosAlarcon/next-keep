@@ -7,7 +7,7 @@ const SidebarItem = ({ icon, title, href, amount, expanded }: { icon: string, ti
 	return (
 		<li title={title} className={SidebarItemStyles.sidebar__item__container}>
 			<ActiveLink href={href}>
-				<div className={`${SidebarItemStyles.sidebar__item__group} ${!expanded && "collapsed"}`}>
+				<div className={`${!expanded ? SidebarItemStyles.sidebar__item__group__collapsed : SidebarItemStyles.sidebar__item__group}`}>
 					<div className={SidebarItemStyles.sidebar__item__left}>
 						{/* @ts-ignore */}
 						<Image alt={title} className={SidebarItemStyles.sidebar__item__icon} src={icon} width="24" height="24" priority />

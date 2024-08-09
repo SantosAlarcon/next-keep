@@ -6,7 +6,7 @@ const GroupItem = ({ id, title, amount, expanded }: { id: string; title: string;
 	return (
 		<li title={title} className={GroupItemStyles.group__item__container}>
 			<ActiveLink href={`/groups/${id}`}>
-				<div className={GroupItemStyles.group__item__group}>
+				<div className={!expanded ? GroupItemStyles.group__item__group__collapsed : GroupItemStyles.group__item__group}>
 					<div className={GroupItemStyles.group__item__left}>
 						<Image className={GroupItemStyles.group__item__icon} src="/group.svg" width="20" height="20" alt="Group icon" />
 						{expanded ? <span className={GroupItemStyles.group__item__title}>{title}</span> : null}
