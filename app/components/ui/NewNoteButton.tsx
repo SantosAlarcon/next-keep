@@ -15,7 +15,7 @@ const NewNoteButton = ({ title, expanded }: { title: string; expanded: boolean }
 	};
 
 	return (
-		<button title={title} className={sidebarStyles.sidebar__button} onClick={createNewNote} type="button">
+		<button data-title={title} className={sidebarStyles.sidebar__button} onClick={createNewNote} type="button">
 			<NewNoteIcon />
 			{expanded ? title : null}
 		</button>

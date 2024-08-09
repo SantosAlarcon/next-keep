@@ -3,10 +3,10 @@
     align-items: center;
     gap: .5rem;
     color: white;
-    height: fit-content;
     padding: var(--button-padding);
-    border-radius: .5rem;
+    border-radius: .75rem 0 0 .75rem;
     background-color: #44f;
+    border-right: 1px #fff2 solid;
     transition: all .2s ease-in-out;
     cursor: pointer;
 

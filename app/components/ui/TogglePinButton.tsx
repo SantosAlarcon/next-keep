@@ -15,8 +15,8 @@ const TogglePinButton = ({title, note}: {title: string, note: Note}) => {
     }
 
   return (
-    <button onClick={handleClick} title={title} type="button" className={pinnedButtonStyles.pinned__button__container}>
-            {note.isPinned ? <FixedIcon width="24px" height="24px" /> : <UnfixedIcon width="24px" height="24px" />}
+    <button onClick={handleClick} data-title={title} type="button" className={pinnedButtonStyles.pinned__button__container}>
+            {note.isPinned ? <FixedIcon width="18px" height="18px" /> : <UnfixedIcon width="18px" height="18px" />}
     </button>
   )
 }

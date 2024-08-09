@@ -5,7 +5,7 @@ import ActiveLink from "./ui/ActiveLink";
 const SidebarItem = ({ icon, title, href, amount, expanded }: { icon: string, title: string, href: string, amount: number, expanded: boolean }) => {
 
 	return (
-		<li title={title} className={SidebarItemStyles.sidebar__item__container}>
+		<li data-title={title} className={SidebarItemStyles.sidebar__item__container}>
 			<ActiveLink href={href}>
 				<div className={`${!expanded ? SidebarItemStyles.sidebar__item__group__collapsed : SidebarItemStyles.sidebar__item__group}`}>
 					<div className={SidebarItemStyles.sidebar__item__left}>

@@ -1,22 +1,25 @@
 .note__header__container {
 	display: flex;
 	flex-direction: column;
-	gap: 1rem;
+	gap: .5rem;
 	width: 100%;
 	padding: 1.5rem;
 	border-bottom: 1px #fff6 solid;
 }
 
 .note__header__upper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .note__header__upper__right {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
+	display: flex;
+	align-items: center;
+
+	& button {
+		height: 2rem;
+	}
 }
 
 .note__header__title {
