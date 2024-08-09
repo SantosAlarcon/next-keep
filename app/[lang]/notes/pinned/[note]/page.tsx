@@ -14,6 +14,7 @@ const PinnedNoteIdPage = async ({params: {note, lang}}: {params: {note: string, 
 		<main className={allNotesPageStyles.all__notes__page__container}>
 			<NoteList group="pinned" selected={note} />
 			<div className={allNotesPageStyles.all__notes__page__right}>
+				{/** @ts-ignore */}
 			    <NoteHeader note={foundNote} lang={lang} />
 			    <Markdown className={styles.note__page__markdown} rehypePlugins={[rehypeHighlight]} remarkPlugins={[remarkGfm, remarkHtml]}>{foundNote?.data}</Markdown>			
 			</div>
