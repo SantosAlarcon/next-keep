@@ -1,0 +1,21 @@
+.p-dialog {
+	border: 1px #fff6 solid;
+}
+
+.p-dialog>* {
+	padding: .5rem 1rem;
+}
+
+.p-dialog-content {
+	gap: 1rem;
+}
+
+.p-dialog-footer {
+	display: flex;
+	justify-content: end;
+	gap: 1rem;
+
+	& button {
+		padding: .5rem 1rem;
+	}
+}

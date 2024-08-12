@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
-import "../styles/globals.css";
 import type { ReactNode } from "react";
 import i18NextConfig from "@/i18n.config";
 import { Toaster } from "sonner";
 import { getAllData } from "../utils/getAllData";
 import dynamic from "next/dynamic";
-import "primereact/resources/themes/saga-blue/theme.css";
+import "primereact/resources/themes/viva-dark/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import "../styles/globals.css";
+import "../styles/primereact.css";
+import { PrimeReactProvider } from "primereact/api";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -40,9 +44,11 @@ export default async function RootLayout({
 	return (
 		<html lang={lang}>
 			<body className={font.className}>
-					<Toaster richColors position="bottom-center" theme="dark" />
-					<SidebarClientNoSSR params={{ lang: lang }} data={{ allNotes, allPinnedNotes, allGroups, allNoteAmounts }} />
-					{children}
+			<PrimeReactProvider value={{ripple: true }}>
+			    <Toaster richColors position="bottom-center" theme="dark" />
+			    <SidebarClientNoSSR params={{ lang: lang }} data={{ allNotes, allPinnedNotes, allGroups, allNoteAmounts }} />
+			    {children}
+			</PrimeReactProvider>
 			</body>
 		</html>
 	);
