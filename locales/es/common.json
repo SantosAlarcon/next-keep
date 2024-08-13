@@ -22,5 +22,6 @@
 	"note-delete-confirm": "Estás a punto de borrar esta nota. ¿Estás segur@?",
 	"note-delete-confirm-header": "Confirmar borrado",
 	"yes": "Sí",
-	"no": "No"
+	"no": "No",
+    "change-group": "Cambiar de grupo"
 }

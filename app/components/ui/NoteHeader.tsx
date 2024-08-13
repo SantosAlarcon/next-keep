@@ -5,6 +5,7 @@ import TogglePinButton from './TogglePinButton'
 import EditButton from './EditButton'
 import DeleteButton from './DeleteButton'
 import { ButtonGroup } from 'primereact/buttongroup'
+import ChangeGroupButton from "./ChangeGroupButton"
 
 const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 	const { t } = await initTranslations(lang, ["common"])
@@ -16,6 +17,7 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 				<div className={noteHeaderStyles.note__header__upper__right}>
 					<ButtonGroup>
 					    <EditButton label={t("edit")} noteId={note.id} />
+                        <ChangeGroupButton label={t("change-group")} note={note} />
 					    <TogglePinButton title={t("toggle-pin")} note={note} />
 					    <DeleteButton label={t("delete")} noteId={note.id} localeStrings={{
 						    yes: t("yes"),

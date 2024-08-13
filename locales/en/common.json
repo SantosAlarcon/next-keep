@@ -22,5 +22,6 @@
 	"note-delete-confirm": "You are about to delete this note. Are you sure?",
 	"note-delete-confirm-header": "Confirm deletion",
 	"yes": "Yes",
-	"no": "No"
+	"no": "No",
+    "change-group": "Change group"
 }
