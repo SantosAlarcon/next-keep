@@ -31,11 +31,6 @@
 	background-color: var(--tooltip-bg);
 	color: var(--tooltip-fg);
 	border-radius: .75rem;
-	opacity: 0;
-
-	&:hover {
-		opacity: 1;
-	}
 }
 
 .p-tooltip-text {
