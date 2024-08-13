@@ -4,6 +4,7 @@ import deleteButtonStyles from "@/styles/DeleteButton.module.css";
 import DeleteIcon from "../icons/DeleteIcon";
 import { deleteNote } from "@/app/utils/notes/deleteNote";
 import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
+import { Button } from "primereact/button";
 
 function DeleteButton({ label, noteId, localeStrings: { yes, no, confirmMessage, confirmHeader } }: { label: string; noteId: string; localeStrings: { yes: string; no: string; confirmMessage: string; confirmHeader: string } }) {
 	const handleClick = () => {
@@ -20,9 +21,7 @@ function DeleteButton({ label, noteId, localeStrings: { yes, no, confirmMessage,
 	return (
 		<>
 			<ConfirmDialog />
-			<button onClick={handleClick} type="button" data-title={label} className={deleteButtonStyles.delete__button__container}>
-				<DeleteIcon width="18px" height="18px" />
-			</button>
+			<Button icon={<DeleteIcon width="20px" height="20px" />}  onClick={handleClick} type="button" tooltip={label} tooltipOptions={{ position: "bottom" }} />
 		</>
 	);
 }

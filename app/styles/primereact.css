@@ -1,5 +1,8 @@
+/* DIALOG */
+
 .p-dialog {
 	border: 1px #fff6 solid;
+	font-family: inherit;
 }
 
 .p-dialog>* {
@@ -18,4 +21,25 @@
 	& button {
 		padding: .5rem 1rem;
 	}
+}
+
+/* TOOLTIP */
+.p-tooltip {
+	font-family: inherit;
+	margin-top: 1rem;
+	transition: all .2s ease-in-out;
+	background-color: var(--tooltip-bg);
+	color: var(--tooltip-fg);
+	border-radius: .75rem;
+	opacity: 0;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.p-tooltip-text {
+	padding: .5rem 1rem;
+	font-size: .8rem;
+	font-weight: bold;
 }

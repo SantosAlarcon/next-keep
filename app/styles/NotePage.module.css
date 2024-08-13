@@ -7,9 +7,13 @@
 }
 
 .note__page__title {
-	border-bottom: 1px #fff6 solid;
+	border-bottom: 1px #0006 solid;
 	padding-bottom: 1rem;
 	width: 100%;
+
+	@media(prefers-color-scheme: dark) {
+		border-bottom: 1px #fff6 solid;
+	}
 }
 
 .note__page__markdown {
@@ -37,7 +41,7 @@
 	& h5,
 	& h6 {
 		padding: .5rem 0;
-		border-bottom: 1px #fff3 solid;
+		border-bottom: 1px var(--foreground) solid;
 		margin: 1rem 0;
 	}
 
@@ -51,19 +55,27 @@
 	}
 
 	& table {
-		border: 3px #fff6 solid;
+		border: 3px var(--foreground) solid;
 		border-collapse: collapse;
 		width: 100%;
 
 		& th,
 		& td {
-			border: 1px #fff6 solid;
+			border: 1px var(--foreground) solid;
 			padding: .5rem;
 		}
 
 		& th {
 			background-color: #aaf1;
 			font-weight: 700;
+		}
+	}
+
+	& input[type="checkbox"]:checked {
+		caret-color: #00f;
+
+		&:disabled {
+			caret-color: #00f6;
 		}
 	}
 

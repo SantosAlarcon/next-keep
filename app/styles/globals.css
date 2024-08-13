@@ -1,6 +1,5 @@
 :root {
-
-	color-scheme: light dark;
+	color-scheme: light;
 	--max-width: 1100px;
 	--border-radius: 12px;
 	--font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
@@ -36,6 +35,9 @@
 	--card-border-rgb: 131, 134, 135;
 
 	--button-padding: .5rem;
+	--foreground: #112;
+	--tooltip-bg: #335;
+	--tooltip-fg: #eef;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,6 +66,8 @@
 		--callout-border-rgb: 108, 108, 108;
 		--card-rgb: 100, 100, 100;
 		--card-border-rgb: 200, 200, 200;
+		color-scheme: dark;
+		--foreground: #eef;
 	}
 }
 
@@ -101,8 +105,8 @@ a {
 
 [data-title]:after {
 	content: attr(data-title);
-	background-color: #335;
-	color: #eee;
+	background-color: var(--tooltip-bg);
+	color: var(--tooltip-fg);
 	font-size: .75rem;
 	font-weight: bold;
 	position: absolute;
@@ -140,6 +144,7 @@ button {
 	border-radius: .45rem;
 	padding: var(--button-padding);
 	cursor: pointer;
+	color: white;
 
 	&:hover {
 		background: linear-gradient(inherit 0%, #fff6 100%);

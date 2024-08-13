@@ -11,6 +11,7 @@ import type { Note, Group } from "../types";
 import i18nClient from "../i18n-client";
 import getCookie from "../utils/getCookie";
 import { AnimatePresence, motion } from "framer-motion"
+import { Button } from "primereact/button";
 
 const SidebarClient = ({
 	params: { lang },
@@ -95,7 +96,7 @@ const SidebarClient = ({
 						))}
 					</ul>
 					<hr className={sidebarStyles.sidebar__separator} />
-					<h3>{expanded ? t("groups") : null}</h3>
+					{expanded ? <h3>{t("groups")}</h3> : null}
 					<ul className={sidebarStyles.sidebar__grouplist}>
 						{allGroups?.map((group: Group) => (
 							<GroupItem
@@ -112,9 +113,7 @@ const SidebarClient = ({
 				</section>
 
 				<section className={sidebarStyles.sidebar__bottom}>
-					<button className={!expanded ? sidebarStyles.sidebar__expand__button__collapsed : sidebarStyles.sidebar__expand__button} type="button" onClick={handleClick}>
-						{expanded ? "<" : ">"}
-					</button>
+					<Button severity="secondary" label={expanded ? "<" : ">"} className={!expanded ? sidebarStyles.sidebar__expand__button__collapsed : sidebarStyles.sidebar__expand__button} type="button" onClick={handleClick} />
 				</section>
 			</motion.aside>
 		</AnimatePresence>

@@ -3,7 +3,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	border-right: 1px #fff6 solid;
+	border-right: 1px #0006 solid;
 	max-width: 23rem;
 	height: 100dvh;
 	padding: 1rem;
@@ -12,6 +12,10 @@
 	& h3 {
 		font-weight: 800;
 		align-self: start;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		border-right: 1px #fff6 solid;
 	}
 }
 
@@ -33,7 +37,11 @@
 .sidebar__separator {
 	width: 90%;
 	margin: 0 auto;
-	border: 1px #fff6 solid;
+	border: 1px #0006 solid;
+
+	@media (prefers-color-scheme: dark) {
+		border-color: #fff6;
+	}
 }
 
 .sidebar__grouplist {

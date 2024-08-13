@@ -5,8 +5,12 @@
 	gap: .25rem;
 	font-size: .85rem;
 	width: 30%;
-	border-right: 1px #fff6 solid;
+	border-right: 1px #0006 solid;
 	height: 100vh;
+
+	@media(prefers-color-scheme: dark) {
+		border-right: 1px #fff6 solid;
+	}
 }
 
 .note__item__container {

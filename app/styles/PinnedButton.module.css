@@ -1,18 +1,6 @@
 .pinned__button__container {
     width: fit-content;
     padding: var(--button-padding);
-    background-color: #44f;
     transition: all .2s ease-in-out;
     cursor: pointer;
-    border-radius: inherit;
-    border-right: 1px #fff2 solid;
-
-    &:hover {
-        background-color: #66f;
-    }
-
-    & > * {
-        transform: rotate(45deg);
-	filter: invert(1);
-    }
 }

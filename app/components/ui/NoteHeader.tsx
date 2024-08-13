@@ -4,6 +4,7 @@ import initTranslations from '@/app/i18n'
 import TogglePinButton from './TogglePinButton'
 import EditButton from './EditButton'
 import DeleteButton from './DeleteButton'
+import { ButtonGroup } from 'primereact/buttongroup'
 
 const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 	const { t } = await initTranslations(lang, ["common"])
@@ -13,14 +14,16 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 			<section className={noteHeaderStyles.note__header__upper}>
 				<h1 className={noteHeaderStyles.note__header__title}>{note.title}</h1>
 				<div className={noteHeaderStyles.note__header__upper__right}>
-					<EditButton label={t("edit")} noteId={note.id} />
-					<TogglePinButton title={t("toggle-pin")} note={note} />
-					<DeleteButton label={t("delete")} noteId={note.id} localeStrings={{
-						yes: t("yes"),
-						no: t("no"),
-						confirmMessage: t("note-delete-confirm"),
-						confirmHeader: t("note-delete-confirm-header"),
-					}} />
+					<ButtonGroup>
+					    <EditButton label={t("edit")} noteId={note.id} />
+					    <TogglePinButton title={t("toggle-pin")} note={note} />
+					    <DeleteButton label={t("delete")} noteId={note.id} localeStrings={{
+						    yes: t("yes"),
+						    no: t("no"),
+						    confirmMessage: t("note-delete-confirm"),
+						    confirmHeader: t("note-delete-confirm-header"),
+					    }} />
+					</ButtonGroup>
 				</div>
 			</section>
 			<span className={noteHeaderStyles.note__header__date}>{t("last-update")}: {new Date(note.updatedDate).toLocaleString(lang, {

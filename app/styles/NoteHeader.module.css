@@ -4,7 +4,11 @@
 	gap: .5rem;
 	width: 100%;
 	padding: 1.5rem;
-	border-bottom: 1px #fff6 solid;
+	border-bottom: 1px #0006 solid;
+
+	@media(prefers-color-scheme: dark) {
+		border-bottom: 1px #fff6 solid;
+	}
 }
 
 .note__header__upper {
