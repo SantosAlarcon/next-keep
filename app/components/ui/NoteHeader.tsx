@@ -10,6 +10,7 @@ import { getGroupById } from '@/app/utils/database/groups/getGroupById'
 
 const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 	const { t } = await initTranslations(lang, ["common"])
+    // @ts-ignore
 	const noteGroupTitle = await getGroupById(note.group).then((data) => data?.title)
 
 	return (
@@ -19,7 +20,11 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 				<div className={noteHeaderStyles.note__header__upper__right}>
 					<ButtonGroup>
 						<EditButton label={t("edit")} noteId={note.id} />
-						<ChangeGroupButton label={t("change-group")} localeStrings={{changeString: t("change"), selectGroupHeader: t("select-group-header"), selectGroupMessage: t("select-group-message")}} note={note} groupTitle={noteGroupTitle} />
+						<ChangeGroupButton label={t("change-group")} 
+                        localeStrings={{changeString: t("change"), selectGroupHeader: t("select-group-header"), selectGroupMessage: t("select-group-message")}} 
+                        note={note} 
+                        // @ts-ignore
+                        groupTitle={noteGroupTitle} />
 						<TogglePinButton title={t("toggle-pin")} note={note} />
 						<DeleteButton label={t("delete")} noteId={note.id} localeStrings={{
 							yes: t("yes"),

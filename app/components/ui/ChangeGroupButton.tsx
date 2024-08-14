@@ -5,7 +5,7 @@ import { getAllGroupTitles } from "@/app/utils/groups/getAllGroupTitles";
 import useQuery from "@/app/utils/hooks/useQuery";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
+import { Dropdown, type DropdownChangeEvent } from "primereact/dropdown";
 import { useState } from "react";
 import { changeNoteGroup } from "@/app/utils/notes/changeNoteGroup";
 
@@ -34,7 +34,9 @@ const ChangeGroupButton = ({ label, note, groupTitle, localeStrings: { changeStr
 		<>
 			<Button onClick={handleDialog} icon="pi pi-folder" tooltip={label} tooltipOptions={{ position: "bottom" }} />
 			<Dialog header={selectGroupHeader}
-				draggable={false} message={selectGroupMessage}
+				draggable={false} 
+                // @ts-ignore
+                message={selectGroupMessage}
 				visible={visible}
 				footer={
 					<>

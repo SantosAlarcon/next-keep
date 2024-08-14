@@ -21,6 +21,7 @@ const NewNotePage = async ({ params: { lang } }: { params: { lang: string } }) =
 			<main className={NewNotePageStyles.new__note__page__container}>
 				<Suspense fallback={<Spinner width="128px" height="128px" />}>
 					<LocalizedTitleInput placeholder={t("title")} title={newNote.title} isEditing={false} />
+                    {/* @ts-ignore */}
 					<EditorComp editorRef={editorRef} markdown={newNote.data} isEditing={false} />
 					<SaveNoteButton title={t("save-note")} />
 				</Suspense>

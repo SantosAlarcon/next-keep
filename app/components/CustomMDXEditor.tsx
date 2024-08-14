@@ -23,7 +23,7 @@ const CustomMDXEditor: FC<EditorProps> = ({ text, editorRef, isEditing }) => {
 	const {updatedNote, setUpdatedNote} = useContext(UpdateNoteContext)
 	
 	// When the Markdown changes, it updates the new note store
-	const changeHandler = (value, viewUpdate) => {
+	const changeHandler = (value: string) => {
         console.log(value)
 		if (isEditing) {
 			setUpdatedNote({ ...updatedNote, data: value })

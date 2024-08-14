@@ -4,6 +4,7 @@ import { Button } from 'primereact/button'
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup'
 
 const TestButton = () => {
+    // @ts-ignore
 	const handlePopup = (event) => {
 		confirmPopup({
 			target: event.currentTarget,
