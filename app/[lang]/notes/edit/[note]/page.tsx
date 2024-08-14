@@ -9,7 +9,7 @@ import styles from "@/styles/NotePage.module.css";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
-const EditorComp = dynamic(() => import("@/app/components/CustomMDXEditor"), { ssr: false });
+const EditorComp = dynamic(() => import("@/app/components/CustomMDXEditor").then((mod) => mod.default), { ssr: false });
 
 const EditNotePage = async ({ params: { note, lang } }: { params: { note: string; lang: string } }) => {
 	const foundNote = await getNoteById(note);
@@ -21,7 +21,7 @@ const EditNotePage = async ({ params: { note, lang } }: { params: { note: string
 			<main className={styles.note__page__container}>
 				<Suspense fallback={<Spinner width="128px" height="128px" />}>
 					<LocalizedTitleInput placeholder={t("title")} title={foundNote ? foundNote.title : ""} isEditing={true} />
-					<EditorComp editorRef={editorRef} markdown={foundNote ? foundNote?.data : ""} isEditing={true} />
+					<EditorComp editorRef={editorRef} text={foundNote ? foundNote?.data : ""} isEditing={true} />
 					<UpdateNoteButton label={t("update-note")} />
 				</Suspense>
 			</main>

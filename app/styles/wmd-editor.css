@@ -1,20 +1,17 @@
-.w-md-editor {
+.md-editor {
     --md-editor-font-family: monospace !important;
 }
 
-.w-md-editor-text-pre, .w-md-editor-text-input, .w-md-editor-text > .w-md-editor-text-pre {
+.md-editor-text-pre, .md-editor-text-input, .md-editor-text > .md-editor-text-pre {
 	font-family: monospace !important;
 }
 
-.w-md-editor-toolbar {
+.md-editor-toolbar {
 	padding: .5rem !important;
+    display: flex;
+    gap: .5rem !important;
 
-	& ul {
-		display: flex;
-		gap: .2rem;
-	}
-
-	.w-md-editor-toolbar-divider {
+	.md-editor-toolbar-divider {
 		height: auto;
 	}
 
