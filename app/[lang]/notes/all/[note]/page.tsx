@@ -14,11 +14,12 @@ const AllNotesPageIdPage = async ({ params: { note, lang } }: { params: { note: 
 	return (
 		<main className={allNotesPageStyles.all__notes__page__container}>
 			<NoteList group="all" selected={note} />
-			<div className={allNotesPageStyles.all__notes__page__right}>
+			<section className={allNotesPageStyles.all__notes__page__right}>
 			    <NoteHeader note={foundNote} lang={lang} />
-                {/** @ts-ignore */}
-                <MarkPreview text={foundNote?.data} />
-			</div>
+                <div className={allNotesPageStyles.all__notes__page__bottom}>
+                    <MarkPreview text={foundNote?.data} />
+                </div>
+			</section>
 		</main>
 	)
 };

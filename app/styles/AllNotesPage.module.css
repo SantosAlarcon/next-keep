@@ -8,3 +8,8 @@
 	display: flex;
 	flex-direction: column;
 }
+
+.all__notes__page__bottom {
+    overflow: auto;
+    height: 84vh;
+}

@@ -12,12 +12,14 @@ const PinnedNoteIdPage = async ({params: {note, lang}}: {params: {note: string, 
 	return (
 		<main className={allNotesPageStyles.all__notes__page__container}>
 			<NoteList group="pinned" selected={note} />
-			<div className={allNotesPageStyles.all__notes__page__right}>
+			<section className={allNotesPageStyles.all__notes__page__right}>
 				{/** @ts-ignore */}
 			    <NoteHeader note={foundNote} lang={lang} />
-                {/** @ts-ignore */}
-                <MarkPreview text={foundNote?.data} />
-			</div>
+                <div className={allNotesPageStyles.all__notes__page__bottom}>
+                    {/** @ts-ignore */}
+                    <MarkPreview text={foundNote?.data} />
+                </div>
+			</section>
 		</main>
 
 	)
