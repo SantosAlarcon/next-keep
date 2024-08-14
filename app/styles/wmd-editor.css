@@ -1,0 +1,33 @@
+.w-md-editor {
+    --md-editor-font-family: monospace !important;
+}
+
+.w-md-editor-text-pre, .w-md-editor-text-input, .w-md-editor-text > .w-md-editor-text-pre {
+	font-family: monospace !important;
+}
+
+.w-md-editor-toolbar {
+	padding: .5rem !important;
+
+	& ul {
+		display: flex;
+		gap: .2rem;
+	}
+
+	.w-md-editor-toolbar-divider {
+		height: auto;
+	}
+
+	& button {
+		height: fit-content !important;
+	}
+
+	& button>svg {
+		width: 18px;
+		height: 18px;
+	}
+}
+
+.wmde-markdown {
+    font-family: inherit !important;
+}

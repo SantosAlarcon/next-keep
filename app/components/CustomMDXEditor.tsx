@@ -1,37 +1,19 @@
 "use client"
 
-import {
-	AdmonitionDirectiveDescriptor,
-	KitchenSinkToolbar,
-	MDXEditor,
-	type MDXEditorMethods,
-	codeBlockPlugin,
-	codeMirrorPlugin,
-	diffSourcePlugin,
-	directivesPlugin,
-	frontmatterPlugin,
-	headingsPlugin,
-	imagePlugin,
-	linkDialogPlugin,
-	linkPlugin,
-	listsPlugin,
-	markdownShortcutPlugin,
-	quotePlugin,
-	tablePlugin,
-	thematicBreakPlugin,
-	toolbarPlugin,
-} from "@mdxeditor/editor";
 import { useContext, type FC, type MutableRefObject } from "react";
-import "@mdxeditor/editor/style.css";
-import "@/app/styles/mdx-editor.css";
 import { useNewNoteStore } from "../store/newNoteStore";
 import UpdateNoteContext from "../context/UpdateNoteContext";
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
+import "@/app/styles/wmd-editor.css";
 
 interface EditorProps {
 	markdown: string;
-	editorRef?: MutableRefObject<MDXEditorMethods | null>;
+	editorRef?: MutableRefObject<any>;
 	isEditing: boolean;
 }
+
+import MEditor from "@uiw/react-md-editor"
 
 const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef, isEditing }) => {
 	const setNewNote = useNewNoteStore((state) => state.setNewNote)
@@ -48,38 +30,13 @@ const CustomMDXEditor: FC<EditorProps> = ({ markdown, editorRef, isEditing }) =>
 	};
 
 	return (
-		<MDXEditor
-			className="dark-theme dark-editor dark-editor-custom"
+		<MEditor
 			ref={editorRef}
-			markdown={markdown}
+			value={markdown}
 			onChange={changeHandler}
-			plugins={[
-				directivesPlugin({
-					directiveDescriptors: [AdmonitionDirectiveDescriptor],
-				}),
-				toolbarPlugin({
-					toolbarContents: () => (
-						<>
-							<KitchenSinkToolbar />
-						</>
-					),
-				}),
-				headingsPlugin(),
-				listsPlugin(),
-				quotePlugin(),
-				thematicBreakPlugin(),
-				markdownShortcutPlugin(),
-				linkPlugin(),
-				linkDialogPlugin(),
-				frontmatterPlugin(),
-				tablePlugin(),
-				imagePlugin(),
-				diffSourcePlugin(),
-				codeBlockPlugin({ defaultCodeBlockLanguage: "txt" }),
-				codeMirrorPlugin({
-					codeBlockLanguages: { jsx: "JavaScript", css: "CSS", txt: "Text", html: "HTML", tsx: "TypeScript", python: "Python" },
-				})
-			]}
+			height="75vh"
+			visibleDragbar={false}
+			highlightEnable={true}
 		// @ts-ignore
 		//translation={(key, defaultValue, interpolations) => {return t(key, defaultValue, interpolations)}}
 		/>
