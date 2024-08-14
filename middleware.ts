@@ -1,12 +1,8 @@
 import i18nConfig from "@/i18n.config";
 import { i18nRouter } from "next-i18n-router";
 import type { NextRequest } from "next/server";
-import { groupStore } from "./app/store/groupStore";
 
 export async function middleware(request: NextRequest) {
-
-    const {fetchTitles} = groupStore.getState()
-    await fetchTitles()
 
 	// Register the URL param in the headers
 	request.headers.set("x-current-path", request.nextUrl.pathname);

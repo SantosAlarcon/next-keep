@@ -213,6 +213,32 @@
         }
       }
     },
+    "/api/groups?title={title}": {
+      "get": {
+        "summary": "Returns the group that uses that title",
+        "tags": [
+          "groups"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "title",
+            "description": "Returns the group that uses that title",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the group that contains the title"
+          },
+          "400": {
+            "description": "No group found with that title"
+          }
+        }
+      }
+    },
     "/api/locale": {
       "get": {
         "tags": [
@@ -329,6 +355,33 @@
           },
           "400": {
             "description": "The ID provided doesn't exist in the DB or no ID provided in the query."
+          }
+        }
+      }
+    },
+    "/api/notes?amount": {
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Returns the amount of notes of every group",
+        "description": "Returns the amount of notes of every group from the database.",
+        "parameters": [
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "Flag that tells the API to return the amount of notes of every group",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the amount of notes of every group"
+          },
+          "400": {
+            "description": "Failed to connect to the database"
           }
         }
       }

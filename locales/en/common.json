@@ -23,5 +23,8 @@
 	"note-delete-confirm-header": "Confirm deletion",
 	"yes": "Yes",
 	"no": "No",
-    "change-group": "Change group"
+	"change-group": "Change group",
+	"select-group-header": "Change group",
+	"select-group-message": "Select a group from the dropdown:",
+	"change": "Change"
 }

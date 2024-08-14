@@ -1,8 +1,14 @@
-/* DIALOG */
+/* Remove font family from components */
 
+.p-component, .p-inputtext {
+	font-family: inherit;
+}
+
+/* DIALOG */
 .p-dialog {
 	border: 1px #fff6 solid;
 	font-family: inherit;
+	min-width: 30%;
 }
 
 .p-dialog>* {
@@ -53,4 +59,20 @@
     & .p-button {
         border-radius: 0;
     }
+}
+
+/* DROPDDOWN */
+.p-dropdown {
+    margin: 1rem 0;
+    padding: .5rem !important;
+    width: 100%;
+}
+
+.p-dropdown-item > * {
+    font-family: inherit !important;
+    padding: .5rem 0;
+}
+
+.p-dropdown-items-wrapper {
+    padding: 1rem;
 }

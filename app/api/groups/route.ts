@@ -4,6 +4,7 @@ import { createNewGroup } from "@/app/utils/database/groups/createNewGroup";
 import { updateGroupById } from "@/app/utils/database/groups/updateGroupById";
 import { deleteGroupById } from "@/app/utils/database/groups/deleteGroupById";
 import type { NextRequest } from "next/server";
+import { getGroupByTitle } from "@/app/utils/database/groups/getGroupByTitle";
 
 /**
  * @swagger
@@ -50,11 +51,28 @@ import type { NextRequest } from "next/server";
  *         description: Returns the list of groups alphabetically
  *       400:
  *         description: Failed to connect to the database
+ * /api/groups?title={title}:
+ *   get:
+ *     summary: Returns the group that uses that title
+ *     tags:
+ *       - groups
+ *     parameters:
+ *       - in: query
+ *         name: title
+ *         description: Returns the group that uses that title
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returns the group that contains the title
+ *       400:
+ *         description: No group found with that title
 */
 export async function GET(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id")
 	const hasSort = searchParams.has("sort")
+	const title = searchParams.get("title")
 
 	// If id is present in the query params, executes the getGroupById function and returns the group object
 	if (id) {
@@ -66,6 +84,17 @@ export async function GET(req: NextRequest) {
 	if (hasSort) {
 		const groups = await getAllGroups();
 		return Response.json(groups?.sort((a, b) => a.title.localeCompare(b.title)), { status: 200 });
+	}
+
+	// If title is present in the query params, it returns the group object that uses that title
+	if (title) {
+		const group = await getGroupByTitle(title);
+
+		if (!group) {
+			return Response.json({ message: "No group found with that title" }, { status: 400 })
+		}
+
+		return Response.json(group, { status: 200 });
 	}
 
 	const groups = await getAllGroups();
