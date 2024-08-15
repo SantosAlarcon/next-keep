@@ -18,7 +18,11 @@ const UpdateNoteButton = ({ label }: { label: string }) => {
 		updateNote(updatedNote)
 			.then(() => {
 				router.back();
-				router.refresh();
+
+                setTimeout(() => {
+                    router.refresh();
+                }, 200)
+
 			})
 			.finally(() => setPending(false));
 	};

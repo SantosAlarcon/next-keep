@@ -1,5 +1,5 @@
 import LocalizedTitleInput from "@/app/components/LocalizedTitleInput";
-import Spinner from "@/app/components/ui/Spinner";
+import BarLoader from "@/app/components/ui/BarLoader";
 import UpdateNoteButton from "@/app/components/ui/UpdateNoteButton";
 import UpdateNoteProvider from "@/app/components/UpdateNoteProvider";
 import initTranslations from "@/app/i18n";
@@ -19,7 +19,7 @@ const EditNotePage = async ({ params: { note, lang } }: { params: { note: string
 		// @ts-ignore
 		<UpdateNoteProvider value={foundNote}>
 			<main className={styles.note__page__container}>
-				<Suspense fallback={<Spinner width="128px" height="128px" />}>
+				<Suspense fallback={<BarLoader width="128px" height="128px" color="#eee" />}>
 					<LocalizedTitleInput placeholder={t("title")} title={foundNote ? foundNote.title : ""} isEditing={true} />
                     {/* @ts-ignore */}
 					<EditorComp editorRef={editorRef} text={foundNote ? foundNote?.data : ""} isEditing={true} />
