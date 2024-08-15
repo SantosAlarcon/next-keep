@@ -1,6 +1,6 @@
 .spinner__container {
     border-radius: 100%;
-    border: .75rem #66f solid;
+    /*border: .75rem #66f solid;*/
     border-left-style: inset;
     animation: spin 2s linear infinite;
 }

@@ -11,6 +11,7 @@ import type { DataStoreProps } from "@/app/store/dataStore";
 
 const ChangeGroupButton = ({ label, note, groupTitle, localeStrings: { changeString, selectGroupHeader, selectGroupMessage } }: { label: string; note: Note, groupTitle: string, localeStrings: { changeString: string; selectGroupHeader: string; selectGroupMessage: string } }) => {
     const [visible, setVisible] = useState<boolean>(false);
+    // @ts-ignore
     const allGroupTitles = dataStore((state: DataStoreProps) => state.allGroupTitles)
 	const [selectedGroup, setSelectedGroup] = useState<string>(groupTitle);
 	const handleDialog = () => {

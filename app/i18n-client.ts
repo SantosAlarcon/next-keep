@@ -15,7 +15,7 @@ i18nClient
 	)
 	.use(initReactI18next)
 	.init({
-		debug: true,
+		debug: process.env.NODE_ENV === "development",
 		fallbackLng: i18nConfig.i18n.defaultLocale,
 		supportedLngs: i18nConfig.i18n.locales,
 		defaultNS: "common",

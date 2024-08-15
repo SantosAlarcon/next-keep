@@ -12,3 +12,7 @@ export type Group = {
     id: string;
     title: string;
 }
+
+export enum AsyncFunctionState {
+    Pending = "Pending", OK = "OK", Error = "Error"
+}
