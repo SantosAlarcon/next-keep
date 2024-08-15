@@ -1,22 +1,22 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { Button } from "primereact/button";
+import { useState } from "react";
 import { mainSidebarLinks } from "../constants";
+import i18nClient from "../i18n-client";
+import { dataStore } from "../store/dataStore";
 import sidebarStyles from "../styles/sidebar.module.css";
+import type { Group } from "../types";
+import getCookie from "../utils/getCookie";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import NewNoteButton from "./ui/NewNoteButton";
-import { useState } from "react";
-import type { Note, Group } from "../types";
-import i18nClient from "../i18n-client";
-import getCookie from "../utils/getCookie";
-import { AnimatePresence, motion } from "framer-motion"
-import { Button } from "primereact/button";
 
-const SidebarClient = ({
-	params: { lang },
-	data: { allNotes, allPinnedNotes, allGroups, allNoteAmounts },
-}: { params: { lang: string }; data: { allNotes: Note[]; allPinnedNotes: Note[]; allGroups: Group[]; allNoteAmounts: object } }) => {
+const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
+	// @ts-ignore
+	const { allNotes, allGroups, allNoteAmounts, allPinnedNotes } = dataStore.getState();
 	const [expanded, setExpanded] = useState<boolean>(() => {
 		// @ts-ignore
 		if (!getCookie("sidebar_expanded")) {
@@ -44,19 +44,18 @@ const SidebarClient = ({
 		collapsed: {
 			width: "5rem",
 		},
-	}
+	};
 
 	const logoVariants = {
 		expanded: {
 			width: "100px",
-			height: "100px"
+			height: "100px",
 		},
 		collapsed: {
 			width: "50px",
-			height: "50px"
+			height: "50px",
 		},
-	}
-
+	};
 
 	if (!i18nClient) return null;
 
@@ -109,11 +108,16 @@ const SidebarClient = ({
 							/>
 						))}
 					</ul>
-
 				</section>
 
 				<section className={sidebarStyles.sidebar__bottom}>
-					<Button severity="secondary" label={expanded ? "<" : ">"} className={!expanded ? sidebarStyles.sidebar__expand__button__collapsed : sidebarStyles.sidebar__expand__button} type="button" onClick={handleClick} />
+					<Button
+						severity="secondary"
+						label={expanded ? "<" : ">"}
+						className={expanded ? sidebarStyles.sidebar__expand__button : sidebarStyles.sidebar__expand__button__collapsed}
+						type="button"
+						onClick={handleClick}
+					/>
 				</section>
 			</motion.aside>
 		</AnimatePresence>

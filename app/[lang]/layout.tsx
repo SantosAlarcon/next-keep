@@ -41,7 +41,6 @@ export default async function RootLayout({
 		lang: string;
 	};
 }>) {
-	const { allNotes, allPinnedNotes, allGroups, allNoteAmounts, allGroupTitles } = await getAllData();
     const state = await getAllData();
     
 	return (
@@ -50,7 +49,7 @@ export default async function RootLayout({
                 <DataSync state={state} />
 				<PrimeReactProvider value={{ ripple: true }}>
 					<Toaster richColors position="bottom-center" theme="dark" />
-					<SidebarClientNoSSR params={{ lang: lang }} data={{ allNotes, allPinnedNotes, allGroups, allNoteAmounts }} />
+					<SidebarClientNoSSR params={{ lang: lang }} />
 					{children}
 				</PrimeReactProvider>
 			</body>
