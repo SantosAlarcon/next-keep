@@ -1,17 +1,17 @@
 "use client";
 
 import type { Note } from "@/app/types";
-import { getAllGroupTitles } from "@/app/utils/groups/getAllGroupTitles";
-import useQuery from "@/app/utils/hooks/useQuery";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { Dropdown, type DropdownChangeEvent } from "primereact/dropdown";
 import { useState } from "react";
 import { changeNoteGroup } from "@/app/utils/notes/changeNoteGroup";
+import { dataStore } from "@/app/store/dataStore";
+import type { DataStoreProps } from "@/app/store/dataStore";
 
 const ChangeGroupButton = ({ label, note, groupTitle, localeStrings: { changeString, selectGroupHeader, selectGroupMessage } }: { label: string; note: Note, groupTitle: string, localeStrings: { changeString: string; selectGroupHeader: string; selectGroupMessage: string } }) => {
-	const [visible, setVisible] = useState<boolean>(false);
-	const { data } = useQuery(getAllGroupTitles)
+    const [visible, setVisible] = useState<boolean>(false);
+    const allGroupTitles = dataStore((state: DataStoreProps) => state.allGroupTitles)
 	const [selectedGroup, setSelectedGroup] = useState<string>(groupTitle);
 	const handleDialog = () => {
 		setVisible(true);
@@ -26,7 +26,7 @@ const ChangeGroupButton = ({ label, note, groupTitle, localeStrings: { changeStr
 		setVisible(false);
 	}
 
-	if (!data) {
+	if (!allGroupTitles) {
 		return null;
 	}
 
@@ -49,7 +49,7 @@ const ChangeGroupButton = ({ label, note, groupTitle, localeStrings: { changeStr
 				}}>
 				<p>{selectGroupMessage}</p>
 				{/* @ts-ignore */}
-				<Dropdown value={selectedGroup} onChange={(e) => handleChange(e)} options={data} />
+				<Dropdown value={selectedGroup} onChange={(e) => handleChange(e)} options={allGroupTitles} />
 			</Dialog>
 		</>
 	);

@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react"
 import UpdateNoteContext from '../context/UpdateNoteContext'
-import { Note } from '../types'
+import type { Note } from '../types'
 
 const UpdateNoteProvider = ({ children, value }: { children: ReactNode, value: Note  }) => {
 	const [updatedNote, setUpdatedNote] = useState<Note | undefined>(value)

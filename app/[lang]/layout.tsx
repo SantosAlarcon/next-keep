@@ -11,7 +11,7 @@ import "primeicons/primeicons.css";
 import "../styles/globals.css";
 import "../styles/primereact.css";
 import { PrimeReactProvider } from "primereact/api";
-import { groupStore } from "../store/groupStore";
+import { DataSync } from "../components/DataSync";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -41,11 +41,13 @@ export default async function RootLayout({
 		lang: string;
 	};
 }>) {
-	const { allNotes, allPinnedNotes, allGroups, allNoteAmounts } = await getAllData();
-
+	const { allNotes, allPinnedNotes, allGroups, allNoteAmounts, allGroupTitles } = await getAllData();
+    const state = await getAllData();
+    
 	return (
 		<html lang={lang}>
 			<body className={font.className}>
+                <DataSync state={state} />
 				<PrimeReactProvider value={{ ripple: true }}>
 					<Toaster richColors position="bottom-center" theme="dark" />
 					<SidebarClientNoSSR params={{ lang: lang }} data={{ allNotes, allPinnedNotes, allGroups, allNoteAmounts }} />
