@@ -44,6 +44,13 @@
 	}
 }
 
+.sidebar__groups__header {
+    display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
 .sidebar__grouplist {
 	list-style: none;
 	display: flex;

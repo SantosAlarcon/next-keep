@@ -10,9 +10,9 @@ import { dataStore } from "@/app/store/dataStore";
 import type { DataStoreProps } from "@/app/store/dataStore";
 
 const ChangeGroupButton = ({ label, note, groupTitle, localeStrings: { changeString, selectGroupHeader, selectGroupMessage } }: { label: string; note: Note, groupTitle: string, localeStrings: { changeString: string; selectGroupHeader: string; selectGroupMessage: string } }) => {
-    const [visible, setVisible] = useState<boolean>(false);
-    // @ts-ignore
-    const allGroupTitles = dataStore((state: DataStoreProps) => state.allGroupTitles)
+	const [visible, setVisible] = useState<boolean>(false);
+	// @ts-ignore
+	const allGroupTitles = dataStore((state: DataStoreProps) => state.allGroupTitles)
 	const [selectedGroup, setSelectedGroup] = useState<string>(groupTitle);
 	const handleDialog = () => {
 		setVisible(true);
@@ -35,9 +35,9 @@ const ChangeGroupButton = ({ label, note, groupTitle, localeStrings: { changeStr
 		<>
 			<Button onClick={handleDialog} icon="pi pi-folder" tooltip={label} tooltipOptions={{ position: "bottom" }} />
 			<Dialog header={selectGroupHeader}
-				draggable={false} 
-                // @ts-ignore
-                message={selectGroupMessage}
+				draggable={false}
+				// @ts-ignore
+				message={selectGroupMessage}
 				visible={visible}
 				footer={
 					<>

@@ -13,6 +13,7 @@ import getCookie from "../utils/getCookie";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import NewNoteButton from "./ui/NewNoteButton";
+import CreateGroupButton from "./ui/CreateGroupButton";
 
 const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 	// @ts-ignore
@@ -95,7 +96,17 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 						))}
 					</ul>
 					<hr className={sidebarStyles.sidebar__separator} />
-					{expanded ? <h3>{t("groups")}</h3> : null}
+					<div className={sidebarStyles.sidebar__groups__header}>
+						{expanded ? <h3>{t("groups")}</h3> : null}
+						<CreateGroupButton lang={lang} title={t("group.create-group")} localeStrings={{
+							createGroupHeader: t("group.create-group-header"),
+							createGroupMessage: t("group.create-group-message"),
+							cancel: t("cancel"),
+							create: t("create"),
+							askForGroupName: t("group.ask-for-group-name"),
+						}
+						} />
+					</div>
 					<ul className={sidebarStyles.sidebar__grouplist}>
 						{allGroups?.map((group: Group) => (
 							<GroupItem

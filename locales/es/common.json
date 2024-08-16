@@ -26,5 +26,14 @@
 	"change-group": "Cambiar de grupo",
 	"select-group-header": "Cambiar de grupo",
 	"select-group-message": "Selecciona un grupo de la lista:",
-	"change": "Cambiar"
+	"change": "Cambiar",
+	"cancel": "Cancelar",
+	"create": "Crear",
+	"group": {
+		"create-group": "Crear nuevo grupo",
+		"create-group-header": "Crear nuevo grupo",
+		"create-group-message": "Introduce el nombre del nuevo grupo:",
+		"ask-for-group-name": "Por favor, introduce el nombre del nuevo grupo",
+		"create-group-success": "El grupo '{{name}}' se ha creado correctamente"
+	}
 }

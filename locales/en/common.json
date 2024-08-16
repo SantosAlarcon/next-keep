@@ -23,8 +23,26 @@
 	"note-delete-confirm-header": "Confirm deletion",
 	"yes": "Yes",
 	"no": "No",
+	"group": {
+		"create-group": "Create group",
+		"create-group-header": "Create group",
+		"create-group-message": "Enter a name for the new group:",
+		"ask-for-group-name": "Please enter a name for the group",
+		"create-group-success": "Group '{{name}}' has been created",
+		"edit-group": "Edit group",
+		"delete-group": "Delete group",
+		"group-delete-confirm": "You are about to delete this group. Are you sure?",
+		"group-delete-confirm-header": "Confirm deletion",
+		"group-delete-error": "Failed to delete group",
+		"group-delete-success": "Group has been deleted",
+		"group-saved": "Group has been saved",
+		"group-update-error": "Failed to update group",
+		"group-update-success": "Group has been updated"
+	},
 	"change-group": "Change group",
 	"select-group-header": "Change group",
 	"select-group-message": "Select a group from the dropdown:",
-	"change": "Change"
+	"change": "Change",
+	"cancel": "Cancel",
+	"create": "Create"
 }
