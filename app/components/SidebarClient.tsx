@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "primereact/button";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { mainSidebarLinks } from "../constants";
 import i18nClient from "../i18n-client";
 import { dataStore } from "../store/dataStore";
@@ -14,10 +14,18 @@ import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import NewNoteButton from "./ui/NewNoteButton";
 import CreateGroupButton from "./ui/CreateGroupButton";
+import { ContextMenu } from "primereact/contextmenu";
+import { deleteGroupById } from "../utils/groups/deleteGroupById";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { updateGroups } from "../utils/updateData";
 
 const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 	// @ts-ignore
 	const { allNotes, allGroups, allNoteAmounts, allPinnedNotes } = dataStore.getState();
+	const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
+	const cmRef = useRef(null)
+	const router = useRouter()
 	const [expanded, setExpanded] = useState<boolean>(() => {
 		// @ts-ignore
 		if (!getCookie("sidebar_expanded")) {
@@ -57,6 +65,37 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 			height: "50px",
 		},
 	};
+
+	const groupContextMenu = [
+		{
+			label: t("group.rename-group"),
+			icon: "pi pi-fw pi-pencil",
+			command: (group) => {
+				console.log("rename group");
+			},
+		},
+		{
+			label: t("group.delete-group"),
+			icon: "pi pi-fw pi-trash",
+			command: () => {
+				deleteGroupById(selectedGroup?.id).then(() => {
+					toast.success(t("group.group-delete-success", { name: selectedGroup?.title }));
+					updateGroups();
+					setTimeout(() => {
+						router.refresh();
+					}, 200)
+				})
+			},
+		}
+	]
+
+	const handleContext = (event: PointerEvent, group: Group) => {
+		if (cmRef.current) {
+			setSelectedGroup(group);
+			// @ts-ignore
+			cmRef.current.show(event)
+		}
+	}
 
 	if (!i18nClient) return null;
 
@@ -116,9 +155,12 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 								// @ts-ignore
 								amount={allNoteAmounts[group.id] ? allNoteAmounts[group.id] : 0}
 								expanded={expanded}
+								// @ts-ignore
+								onContextMenu={(event) => handleContext(event, group)}
 							/>
 						))}
 					</ul>
+					<ContextMenu ref={cmRef} model={groupContextMenu} onHide={() => setSelectedGroup(null)} />
 				</section>
 
 				<section className={sidebarStyles.sidebar__bottom}>

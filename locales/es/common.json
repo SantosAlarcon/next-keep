@@ -34,6 +34,9 @@
 		"create-group-header": "Crear nuevo grupo",
 		"create-group-message": "Introduce el nombre del nuevo grupo:",
 		"ask-for-group-name": "Por favor, introduce el nombre del nuevo grupo",
-		"create-group-success": "El grupo '{{name}}' se ha creado correctamente"
+		"create-group-success": "El grupo '{{name}}' se ha creado correctamente",
+		"rename-group": "Cambiar el nombre del grupo",
+		"delete-group": "Borrar grupo",
+		"group-delete-success": "Se ha borrado el grupo '{{name}}'"
 	}
 }

@@ -2,9 +2,9 @@ import GroupItemStyles from "@/app/styles/GroupItem.module.css";
 import ActiveLink from "./ui/ActiveLink";
 import Image from "next/image";
 
-const GroupItem = ({ id, title, amount, expanded }: { id: string; title: string; amount: number; expanded: boolean }) => {
+const GroupItem = ({ id, title, amount, expanded, onContextMenu }: { id: string; title: string; amount: number; expanded: boolean, onContextMenu: () => void }) => {
 	return (
-		<li data-title={title} data-tooltip-align={expanded ? null : "right"} className={GroupItemStyles.group__item__container}>
+		<li onContextMenu={onContextMenu} data-title={expanded ? null : title} data-tooltip-align={expanded ? null : "right"} className={GroupItemStyles.group__item__container}>
 			<ActiveLink href={`/groups/${id}`}>
 				<div className={expanded ? GroupItemStyles.group__item__group : GroupItemStyles.group__item__group__collapsed}>
 					<div className={GroupItemStyles.group__item__left}>

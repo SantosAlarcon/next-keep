@@ -30,11 +30,12 @@
 		"ask-for-group-name": "Please enter a name for the group",
 		"create-group-success": "Group '{{name}}' has been created",
 		"edit-group": "Edit group",
+		"rename-group": "Rename group",
 		"delete-group": "Delete group",
 		"group-delete-confirm": "You are about to delete this group. Are you sure?",
 		"group-delete-confirm-header": "Confirm deletion",
 		"group-delete-error": "Failed to delete group",
-		"group-delete-success": "Group has been deleted",
+		"group-delete-success": "Group '{{name}}' has been deleted",
 		"group-saved": "Group has been saved",
 		"group-update-error": "Failed to update group",
 		"group-update-success": "Group has been updated"
