@@ -37,6 +37,12 @@
 		"create-group-success": "El grupo '{{name}}' se ha creado correctamente",
 		"rename-group": "Cambiar el nombre del grupo",
 		"delete-group": "Borrar grupo",
-		"group-delete-success": "Se ha borrado el grupo '{{name}}'"
-	}
+		"group-delete-confirm-header": "Confirmar borrado",
+        "group-delete-confirm-message": "Estás a punto de borrar este grupo. ¿Estás segur@?",
+        "group-delete-success": "Se ha borrado el grupo '{{name}}'",
+        "group-rename-header": "Renombrar grupo",
+        "group-rename-message": "Introduce el nuevo nombre de este grupo:",
+		"group-rename-success": "El grupo se ha renombrado a '{{name}}'"
+	},
+    "rename": "Renombrar"
 }

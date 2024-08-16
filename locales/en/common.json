@@ -32,18 +32,21 @@
 		"edit-group": "Edit group",
 		"rename-group": "Rename group",
 		"delete-group": "Delete group",
-		"group-delete-confirm": "You are about to delete this group. Are you sure?",
+		"group-delete-confirm-message": "You are about to delete this group. Are you sure?",
 		"group-delete-confirm-header": "Confirm deletion",
 		"group-delete-error": "Failed to delete group",
 		"group-delete-success": "Group '{{name}}' has been deleted",
 		"group-saved": "Group has been saved",
-		"group-update-error": "Failed to update group",
-		"group-update-success": "Group has been updated"
+        "group-rename-header": "Rename group",
+        "group-rename-message": "Enter the new name of this group:",
+		"group-rename-success": "Group has been renamed to '{{name}}'",
+        "group-update-error": "Failed to update group"
 	},
 	"change-group": "Change group",
 	"select-group-header": "Change group",
 	"select-group-message": "Select a group from the dropdown:",
 	"change": "Change",
 	"cancel": "Cancel",
-	"create": "Create"
+	"create": "Create",
+    "rename": "Rename"
 }
