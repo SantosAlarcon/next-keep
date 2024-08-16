@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { toast } from 'sonner';
 import BarLoader from './BarLoader';
 import i18nClient from '@/app/i18n-client';
+import { updateGroups } from '@/app/utils/updateData';
 
 const CreateGroupButton = ({ lang, title, localeStrings: { createGroupHeader, createGroupMessage, create, cancel, askForGroupName, newGroupCreated } }: { lang: string, title: string, localeStrings: { createGroupHeader: string, createGroupMessage: string, create: string, cancel: string, askForGroupName: string, newGroupCreated: string } }) => {
 	const t = i18nClient.getFixedT(lang, "common");
@@ -27,6 +28,7 @@ const CreateGroupButton = ({ lang, title, localeStrings: { createGroupHeader, cr
 					toast.success(t("group.create-group-success", {name: newGroup}));
 					setPending(false);
 					setVisible(false);
+                    updateGroups();
 
 					setTimeout(() => {
 						router.refresh();
