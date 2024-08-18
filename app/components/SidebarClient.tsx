@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "primereact/button";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { mainSidebarLinks } from "../constants";
 import i18nClient from "../i18n-client";
 import { dataStore } from "../store/dataStore";
@@ -19,225 +19,186 @@ import { deleteGroupById } from "../utils/groups/deleteGroupById";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { updateGroups } from "../utils/updateData";
-import { Dialog } from "primereact/dialog";
 import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
-import { updateGroupById } from "../utils/groups/updateGroupById";
-import { InputText } from "primereact/inputtext";
+import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 
 const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
-    const t = i18nClient.getFixedT(lang, "common");
-    // @ts-ignore
-    const { allNotes, allGroups, allNoteAmounts, allPinnedNotes } = dataStore.getState();
-    const cmRef = useRef(null);
-    const router = useRouter();
+	const t = i18nClient.getFixedT(lang, "common");
+	// @ts-ignore
+	const { allNotes, allGroups, allNoteAmounts, allPinnedNotes } = dataStore.getState();
+	const cmRef = useRef(null);
+	const router = useRouter();
 
-    const [expanded, setExpanded] = useState<boolean>(() => {
-        // @ts-ignore
-        if (!getCookie("sidebar_expanded")) {
-            document.cookie = "sidebar_expanded = true";
-        }
+	const [expanded, setExpanded] = useState<boolean>(() => {
+		// @ts-ignore
+		if (!getCookie("sidebar_expanded")) {
+			document.cookie = "sidebar_expanded = true";
+		}
 
-        // @ts-ignore
-        if (getCookie("sidebar_expanded") === "true") {
-            return true;
-        }
+		// @ts-ignore
+		if (getCookie("sidebar_expanded") === "true") {
+			return true;
+		}
 
-        return false;
-    });
-    const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
-    const [pending, setPending] = useState<boolean>(false)
-    const [renameGroupVisibleModal, setRenameGroupVisibleModal] = useState<boolean>(false);
+		return false;
+	});
+	const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
+	const [pending, setPending] = useState<boolean>(false);
+	const [renameGroupVisibleModal, setRenameGroupVisibleModal] = useState<boolean>(false);
 
-    const titleRef = useRef(selectedGroup?.title)
 
-    const handleClick = () => {
-        setExpanded(!expanded);
-        document.cookie = `sidebar_expanded = ${!expanded}`;
-    };
+	const handleClick = () => {
+		setExpanded(!expanded);
+		document.cookie = `sidebar_expanded = ${!expanded}`;
+	};
 
-    const variants = {
-        expanded: {
-            width: "23rem",
-        },
-        collapsed: {
-            width: "5rem",
-        },
-    };
+	const variants = {
+		expanded: {
+			width: "23rem",
+		},
+		collapsed: {
+			width: "5rem",
+		},
+	};
 
-    const logoVariants = {
-        expanded: {
-            width: "100px",
-            height: "100px",
-        },
-        collapsed: {
-            width: "50px",
-            height: "50px",
-        },
-    };
+	const logoVariants = {
+		expanded: {
+			width: "100px",
+			height: "100px",
+		},
+		collapsed: {
+			width: "50px",
+			height: "50px",
+		},
+	};
 
-    const groupContextMenu = [
-        {
-            label: t("group.rename-group"),
-            icon: "pi pi-fw pi-pencil",
-            command: () => setRenameGroupVisibleModal(true),
-        },
-        {
-            label: t("group.delete-group"),
-            icon: "pi pi-fw pi-trash",
-            command: () => {
-                confirmDialog({
-                    header: t("group.group-delete-confirm-header"),
-                    message: t("group.group-delete-confirm-message"),
-                    icon: "pi pi-info-circle",
-                    acceptLabel: t("yes"),
-                    rejectLabel: t("no"),
-                    accept: () => {
-                        setPending(true)
-                        // @ts-ignore
-                        deleteGroupById(selectedGroup?.id)
-                            .then(() => {
-                                toast.success(t("group.group-delete-success", { name: selectedGroup?.title }));
-                                updateGroups();
-                                setTimeout(() => {
-                                    router.refresh();
-                                }, 200);
-                            })
-                            .finally(() => setPending(false))
-                    },
-                    reject: () => { }
-                })
-            }
-        },
-    ];
+	const groupContextMenu = [
+		{
+			label: t("group.rename-group"),
+			icon: "pi pi-fw pi-pencil",
+			command: () => setRenameGroupVisibleModal(true),
+		},
+		{
+			label: t("group.delete-group"),
+			icon: "pi pi-fw pi-trash",
+			command: () => {
+				confirmDialog({
+					header: t("group.group-delete-confirm-header"),
+					message: t("group.group-delete-confirm-message"),
+					icon: "pi pi-info-circle",
+					acceptLabel: t("yes"),
+					rejectLabel: t("no"),
+					accept: () => {
+						setPending(true);
+						// @ts-ignore
+						deleteGroupById(selectedGroup?.id)
+							.then(() => {
+								toast.success(t("group.group-delete-success", { name: selectedGroup?.title }));
+								updateGroups();
+								setTimeout(() => {
+									router.refresh();
+								}, 200);
+							})
+							.finally(() => setPending(false));
+					},
+					reject: () => {},
+				});
+			},
+		},
+	];
 
-    const handleContext = (event: PointerEvent, group: Group) => {
-        if (cmRef.current) {
-            setSelectedGroup(group);
-            // @ts-ignore
-            cmRef.current.show(event);
-        }
-    };
+	const handleContext = (event: PointerEvent, group: Group) => {
+		if (cmRef.current) {
+			setSelectedGroup(group);
+			// @ts-ignore
+			cmRef.current.show(event);
+		}
+	};
 
-    if (!i18nClient) return null;
+	if (!i18nClient) return null;
 
-    return (
-        <AnimatePresence initial={false}>
-            <motion.aside
-                initial={expanded ? "collapsed" : "expanded"}
-                animate={expanded ? "expanded" : "collapsed"}
-                exit={expanded ? "collapsed" : "expanded"}
-                variants={variants}
-                className={sidebarStyles.sidebar__container}
-            >
-                <section className={sidebarStyles.sidebar__top}>
-                    <Link href="/notes/all" prefetch>
-                        <motion.img
-                            className={sidebarStyles.sidebar__logo}
-                            src="/NextKeep.svg"
-                            alt="Next Keep logo"
-                            initial={expanded ? "collapsed" : "expanded"}
-                            animate={expanded ? "expanded" : "collapsed"}
-                            exit={expanded ? "collapsed" : "expanded"}
-                            variants={logoVariants}
-                        />
-                    </Link>
-                    <NewNoteButton title={t("create-note")} expanded={expanded} />
-                    <ul className={sidebarStyles.sidebar__grouplist}>
-                        {mainSidebarLinks.map((link) => (
-                            // @ts-ignore
-                            <SidebarItem
-                                icon={link.icon}
-                                key={link.name}
-                                title={t(link.name)}
-                                href={link.path}
-                                amount={link.name === "pinned" ? allPinnedNotes?.length : allNotes?.length}
-                                expanded={expanded}
-                            />
-                        ))}
-                    </ul>
-                    <hr className={sidebarStyles.sidebar__separator} />
-                    <div className={sidebarStyles.sidebar__groups__header}>
-                        {expanded ? <h3>{t("groups")}</h3> : null}
-                        <CreateGroupButton
-                            lang={lang}
-                            title={t("group.create-group")}
-                            localeStrings={{
-                                createGroupHeader: t("group.create-group-header"),
-                                createGroupMessage: t("group.create-group-message"),
-                                cancel: t("cancel"),
-                                create: t("create"),
-                                askForGroupName: t("group.ask-for-group-name"),
-                            }}
-                        />
-                    </div>
-                    <ul className={sidebarStyles.sidebar__grouplist}>
-                        {allGroups?.map((group: Group) => (
-                            <GroupItem
-                                key={group.id}
-                                id={group.id}
-                                title={group.title}
-                                // @ts-ignore
-                                amount={allNoteAmounts[group.id] ? allNoteAmounts[group.id] : 0}
-                                expanded={expanded}
-                                // @ts-ignore
-                                onContextMenu={(event) => handleContext(event, group)}
-                            />
-                        ))}
-                    </ul>
-                    <ContextMenu ref={cmRef} model={groupContextMenu} onHide={() => setSelectedGroup(null)} />
-                    <ConfirmDialog resizable={false} draggable={false} />
-                    <Dialog
-                        header={t("group.group-rename-header")}
-                        resizable={false}
-                        draggable={false}
-                        onHide={() => {
-                            setRenameGroupVisibleModal(false)
-                        }}
-                        visible={renameGroupVisibleModal}
-                        footer={
-                            <>
-                                <Button label={t("cancel")} onClick={() => setRenameGroupVisibleModal(false)} />
-                                <Button
-                                    label={t("rename")}
-                                    onClick={() => {
-                                        // @ts-ignore
-                                        if (titleRef?.current?.value === "") {
-                                            toast.error(t("group.ask-for-group-name"), { position: "top-center" })
-                                        } else {
-                                            // @ts-ignore
-                                            updateGroupById(selectedGroup?.id, newTitle).then(() => {
-                                                toast.success(t("group.group-rename-success", { name: selectedGroup?.title }));
-                                                updateGroups();
-                                                setTimeout(() => {
-                                                    router.refresh();
-                                                }, 200);
-                                            });
-                                        }
-                                    }}
-                                />
-                            </>
-                        }
-                    >
-                        <div className="p-dialog-content-input">
-                            <p>{t("group.group-rename-message")}</p>
-                            {/* @ts-ignore */}
-                            <InputText ref={titleRef} value={selectedGroup?.title} required />
-                        </div>
-                    </Dialog>
-                </section>
+	return (
+		<AnimatePresence initial={false}>
+			<motion.aside
+				initial={expanded ? "collapsed" : "expanded"}
+				animate={expanded ? "expanded" : "collapsed"}
+				exit={expanded ? "collapsed" : "expanded"}
+				variants={variants}
+				className={sidebarStyles.sidebar__container}
+			>
+				<section className={sidebarStyles.sidebar__top}>
+					<Link href="/notes/all" prefetch>
+						<motion.img
+							className={sidebarStyles.sidebar__logo}
+							src="/NextKeep.svg"
+							alt="Next Keep logo"
+							initial={expanded ? "collapsed" : "expanded"}
+							animate={expanded ? "expanded" : "collapsed"}
+							exit={expanded ? "collapsed" : "expanded"}
+							variants={logoVariants}
+						/>
+					</Link>
+					<NewNoteButton title={t("create-note")} expanded={expanded} />
+					<ul className={sidebarStyles.sidebar__grouplist}>
+						{mainSidebarLinks.map((link) => (
+							// @ts-ignore
+							<SidebarItem
+								icon={link.icon}
+								key={link.name}
+								title={t(link.name)}
+								href={link.path}
+								amount={link.name === "pinned" ? allPinnedNotes?.length : allNotes?.length}
+								expanded={expanded}
+							/>
+						))}
+					</ul>
+					<hr className={sidebarStyles.sidebar__separator} />
+					<div className={sidebarStyles.sidebar__groups__header}>
+						{expanded ? <h3>{t("groups")}</h3> : null}
+						<CreateGroupButton
+							lang={lang}
+							title={t("group.create-group")}
+							localeStrings={{
+								createGroupHeader: t("group.create-group-header"),
+								createGroupMessage: t("group.create-group-message"),
+								cancel: t("cancel"),
+								create: t("create"),
+								askForGroupName: t("group.ask-for-group-name"),
+							}}
+						/>
+					</div>
+					<ul className={sidebarStyles.sidebar__grouplist}>
+						{allGroups?.map((group: Group) => (
+							<GroupItem
+								key={group.id}
+								id={group.id}
+								title={group.title}
+								// @ts-ignore
+								amount={allNoteAmounts[group.id] ? allNoteAmounts[group.id] : 0}
+								expanded={expanded}
+								// @ts-ignore
+								onContextMenu={(event) => handleContext(event, group)}
+							/>
+						))}
+					</ul>
+					<ContextMenu ref={cmRef} model={groupContextMenu} />
+					<ConfirmDialog resizable={false} draggable={false} />
+                    {/* @ts-ignore */}
+                    <RenameGroupDialog lang={lang} visible={renameGroupVisibleModal} onHide={() => setRenameGroupVisibleModal(false)} group={selectedGroup} />
+			    </section>
 
-                <section className={sidebarStyles.sidebar__bottom}>
-                    <Button
-                        severity="secondary"
-                        label={expanded ? "<" : ">"}
-                        className={expanded ? sidebarStyles.sidebar__expand__button : sidebarStyles.sidebar__expand__button__collapsed}
-                        type="button"
-                        onClick={handleClick}
-                    />
-                </section>
-            </motion.aside>
-        </AnimatePresence>
-    );
+				<section className={sidebarStyles.sidebar__bottom}>
+					<Button
+						severity="secondary"
+						label={expanded ? "<" : ">"}
+						className={expanded ? sidebarStyles.sidebar__expand__button : sidebarStyles.sidebar__expand__button__collapsed}
+						type="button"
+						onClick={handleClick}
+					/>
+				</section>
+			</motion.aside>
+		</AnimatePresence>
+	);
 };
 
 export default SidebarClient;
