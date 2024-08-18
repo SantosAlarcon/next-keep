@@ -23,6 +23,12 @@
 	"note-delete-confirm-header": "Confirm deletion",
 	"yes": "Yes",
 	"no": "No",
+    "note": {
+        "change-group": "Change group",
+        "change-group-header": "Change group",
+        "change-group-message": "Select a group from the dropdown:",
+        "change-group-success": "The note has switched to the '{{group}}' group"
+    },
 	"group": {
 		"create-group": "Create group",
 		"create-group-header": "Create group",
@@ -42,9 +48,6 @@
 		"group-rename-success": "Group has been renamed to '{{name}}'",
         "group-update-error": "Failed to update group"
 	},
-	"change-group": "Change group",
-	"select-group-header": "Change group",
-	"select-group-message": "Select a group from the dropdown:",
 	"change": "Change",
 	"cancel": "Cancel",
 	"create": "Create",

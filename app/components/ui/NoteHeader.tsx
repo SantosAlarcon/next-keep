@@ -20,8 +20,7 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 				<div className={noteHeaderStyles.note__header__upper__right}>
 					<ButtonGroup>
 						<EditButton label={t("edit")} noteId={note.id} />
-						<ChangeGroupButton label={t("change-group")} 
-                        localeStrings={{changeString: t("change"), selectGroupHeader: t("select-group-header"), selectGroupMessage: t("select-group-message")}} 
+						<ChangeGroupButton lang={lang} label={t("change-group")} 
                         note={note} 
                         // @ts-ignore
                         groupTitle={noteGroupTitle} />

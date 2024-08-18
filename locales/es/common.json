@@ -23,12 +23,15 @@
 	"note-delete-confirm-header": "Confirmar borrado",
 	"yes": "Sí",
 	"no": "No",
-	"change-group": "Cambiar de grupo",
-	"select-group-header": "Cambiar de grupo",
-	"select-group-message": "Selecciona un grupo de la lista:",
 	"change": "Cambiar",
 	"cancel": "Cancelar",
 	"create": "Crear",
+    "note": {
+        "change-group": "Cambiar de grupo",
+        "change-group-header": "Cambiar de grupo",
+        "change-group-message": "Selecciona un grupo de la lista:",
+        "change-group-success": "La nota se ha cambiado al grupo {{group}}"
+    },
 	"group": {
 		"create-group": "Crear nuevo grupo",
 		"create-group-header": "Crear nuevo grupo",
