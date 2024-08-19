@@ -6,25 +6,26 @@ import type { Note } from '@/app/types';
 import { toast } from 'sonner';
 import BarLoader from '../BarLoader';
 import { useState } from 'react';
-import routerClient from '@/app/utils/routerClient';
 import { updateNotes } from '@/app/utils/updateData';
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
+import { useRouter } from 'next/navigation';
 
-const ChangeGroupDialog = ({ lang, visible, note, groupTitle, onHide, allGroupTitles }: { lang: string, visible: boolean, note: Note, groupTitle: string, allGroupTitles: string[],  onHide: () => void }) => {
+const ChangeGroupDialog = ({ lang, visible, note, groupTitle, onHide, groupTitles: groupTitles }: { lang: string, visible: boolean, note: Note, groupTitle: string, groupTitles: string[],  onHide: () => void }) => {
     const t = i18nClient.getFixedT(lang, "common")
     const [pending, setPending] = useState<boolean>(false);
-    const [selectedGroup, setSelectedGroup] = useState(groupTitle)
+    const [selectedGroup, setSelectedGroup] = useState<string>(groupTitle)
+    const router = useRouter()
 
     const confirmChange = () => {
         setPending(true)
-        changeNoteGroup(note, groupTitle)
+        changeNoteGroup(note, selectedGroup)
             .then(() => {
-                toast.success(t("note.change-group-success"))
+                toast.success(t("note.change-group-success", { group: selectedGroup }));
                 updateNotes()
                 onHide()
 
                 setTimeout(() => {
-                    routerClient().refresh()
+                    router.refresh()
                 }, 200)
 
             })
@@ -33,8 +34,8 @@ const ChangeGroupDialog = ({ lang, visible, note, groupTitle, onHide, allGroupTi
             })
     }
 
-    const handleChange = (event) => {
-        setSelectedGroup(event)
+    const handleChange = (event: DropdownChangeEvent) => {
+        setSelectedGroup(event.value)
     }
 
     return (
@@ -54,7 +55,7 @@ const ChangeGroupDialog = ({ lang, visible, note, groupTitle, onHide, allGroupTi
             }}>
             <div className='p-dialog-content-input'>
                 <p>{t("note.change-group-message")}</p>
-                <Dropdown value={selectedGroup} onChange={(e) => handleChange(e)} options={allGroupTitles} />
+                <Dropdown value={selectedGroup} onChange={(e) => handleChange(e)} options={groupTitles} />
             </div>
         </Dialog>
     )
