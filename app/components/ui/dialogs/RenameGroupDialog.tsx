@@ -14,7 +14,7 @@ import { toast } from "sonner";
 const RenameGroupDialog = ({ lang, visible, onHide, group }: { lang: string, visible: boolean, onHide: () => void, group: Group }) => {
     const [pending, setPending] = useState<boolean>(false);
     const t = i18nClient.getFixedT(lang, "common");
-    const [newTitle, setNewTitle] = useState<string>(group.title);
+    const [newTitle, setNewTitle] = useState<string>(group?.title);
     const titleRef = useRef(() => group.title);
 
     const router = useRouter();
@@ -68,7 +68,7 @@ const RenameGroupDialog = ({ lang, visible, onHide, group }: { lang: string, vis
             <div className="p-dialog-content-input">
                 <p>{t("group.group-rename-message")}</p>
                 {/* @ts-ignore */}
-                <InputText ref={titleRef} required defaultValue={group.title} onInput={(e) => setNewTitle(e.target.value)} />
+                <InputText ref={titleRef} required defaultValue={group?.title} onInput={(e) => setNewTitle(e.target.value)} />
             </div>
         </Dialog>
     );

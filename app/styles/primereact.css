@@ -103,10 +103,6 @@
 }
 
 /* MENU */
-.p-menuitem-content {
-    padding: .5rem;
-}
-
 .p-menuitem-link {
-	gap: .5rem;
+	padding: .5rem;
 }
