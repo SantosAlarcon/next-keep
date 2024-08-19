@@ -1,7 +1,5 @@
 "use client"
 
-import { createNewGroup } from '@/app/utils/groups/createNewGroup';
-import { useRouter } from 'next/navigation';
 import { Button } from 'primereact/button'
 import { useState } from 'react'
 import CreateGroupDialog from './dialogs/CreateGroupDialog';

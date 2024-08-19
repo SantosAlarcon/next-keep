@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "primereact/button";
 import { useRef, useState } from "react";
-import { mainSidebarLinks } from "../constants";
+import { logoVariants, mainSidebarLinks, variants } from "../constants";
 import i18nClient from "../i18n-client";
 import { dataStore } from "../store/dataStore";
 import sidebarStyles from "../styles/sidebar.module.css";
@@ -50,26 +50,6 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 	const handleClick = () => {
 		setExpanded(!expanded);
 		document.cookie = `sidebar_expanded = ${!expanded}`;
-	};
-
-	const variants = {
-		expanded: {
-			width: "23rem",
-		},
-		collapsed: {
-			width: "5rem",
-		},
-	};
-
-	const logoVariants = {
-		expanded: {
-			width: "100px",
-			height: "100px",
-		},
-		collapsed: {
-			width: "50px",
-			height: "50px",
-		},
 	};
 
 	const groupContextMenu = [
@@ -158,13 +138,6 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 						<CreateGroupButton
 							lang={lang}
 							title={t("group.create-group")}
-							localeStrings={{
-								createGroupHeader: t("group.create-group-header"),
-								createGroupMessage: t("group.create-group-message"),
-								cancel: t("cancel"),
-								create: t("create"),
-								askForGroupName: t("group.ask-for-group-name"),
-							}}
 						/>
 					</div>
 					<ul className={sidebarStyles.sidebar__grouplist}>
