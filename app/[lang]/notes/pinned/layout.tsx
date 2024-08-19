@@ -1,12 +1,12 @@
 import initTranslations from '@/app/i18n'
-import { Metadata } from 'next/types'
-import React from 'react'
+import type { Metadata } from 'next/types'
+import type { ReactNode } from 'react'
 
 export const metadata: Metadata = {
-		title: `Pinned - Next Keep`,
+		title: "Pinned",
 }
 
-const PinnedLayout = async ({ params: { lang }, children }: { params: { lang: string }, children: React.ReactNode }) => {
+const PinnedLayout = async ({ params: { lang }, children }: { params: { lang: string }, children: ReactNode }) => {
 	const { t } = await initTranslations(lang, ["common"])
 	metadata.title = `${t("pinned")}`
 	return (

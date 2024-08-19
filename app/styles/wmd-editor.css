@@ -27,4 +27,10 @@
 
 .wmde-markdown {
     font-family: inherit !important;
+
+    --color-fg-default: #111 !important;
+
+    @media (prefers-color-scheme: dark) {
+        --color-fg-default: #eee !important;
+    }
 }

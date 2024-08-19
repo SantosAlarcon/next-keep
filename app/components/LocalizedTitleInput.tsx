@@ -21,6 +21,12 @@ const LocalizedTitleInput = ({ placeholder, title, isEditing }: { placeholder: s
 			//@ts-ignore
 			inputRef.current.value = newNoteTitle
 		}
+
+        return () => {
+            if (!isEditing) {
+                setNewNote({title: ""})
+            }
+        }
 	}, [])
 
 	const onChangeHandler = () => {

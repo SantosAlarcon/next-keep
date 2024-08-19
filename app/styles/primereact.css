@@ -8,6 +8,7 @@
 /* CONTEXT MENU */
 .p-contextmenu {
 	width: auto;
+    font-size: .9rem;
 }
 
 .p-contextmenu-root-list {
@@ -105,4 +106,5 @@
 /* MENU */
 .p-menuitem-link {
 	padding: .5rem;
+    gap: .5rem;
 }

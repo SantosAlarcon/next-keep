@@ -1,11 +1,24 @@
 .wmde-markdown {
+    font-family: inherit !important;
+    --color-fg-default: #111 !important;
     padding: 1.5rem;
 
-    & pre > code {
-        font-family: monospace;
-    }
 
     @media (prefers-color-scheme: dark) {
         background-color: transparent !important;
+        --color-fg-default: #eee !important;
+    }
+
+    input {
+        accent-color: #66f !important;
+
+        &:disabled {
+            border: #fff !important;
+            accent-color: #44f !important;
+        }
+    }
+
+    & pre > code {
+        font-family: monospace;
     }
 }
