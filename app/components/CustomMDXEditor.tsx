@@ -1,8 +1,8 @@
 "use client"
 
-import { useContext, useState, type FC} from "react";
-import { useNewNoteStore } from "../store/newNoteStore";
+import { type FC, useContext, useState } from "react";
 import UpdateNoteContext from "../context/UpdateNoteContext";
+import { useNewNoteStore } from "../store/newNoteStore";
 import "@uiw/react-markdown-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 import "@/app/styles/wmd-editor.css";
@@ -24,7 +24,6 @@ const CustomMDXEditor: FC<EditorProps> = ({ text, editorRef, isEditing }) => {
 	
 	// When the Markdown changes, it updates the new note store
 	const changeHandler = (value: string) => {
-        console.log(value)
 		if (isEditing) {
 			setUpdatedNote({ ...updatedNote, data: value })
 		} else {

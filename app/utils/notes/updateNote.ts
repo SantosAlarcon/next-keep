@@ -1,4 +1,4 @@
-import { Note } from "@/app/types"
+import type { Note } from "@/app/types"
 import { getCurrentLocale } from "../getCurrentLocale";
 import initTranslations from "@/app/i18n";
 import { toast } from "sonner";

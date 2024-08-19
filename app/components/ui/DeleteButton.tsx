@@ -14,10 +14,12 @@ function DeleteButton({
 	localeStrings: { yes, no, confirmMessage, confirmHeader },
 }: { label: string; noteId: string; localeStrings: { yes: string; no: string; confirmMessage: string; confirmHeader: string } }) {
 	const [pending, setPending] = useState<boolean>(false);
+    const [visible, setVisible] = useState<boolean>(false);
 	const router = useRouter();
 
 	const handleClick = () => {
 		confirmDialog({
+            draggable: false,
 			acceptLabel: yes,
 			rejectLabel: no,
 			message: confirmMessage,
@@ -40,7 +42,6 @@ function DeleteButton({
 	};
 	return (
 		<>
-			<ConfirmDialog />
 			<Button
 				icon={pending ? <BarLoader width="20px" height="20px" color="#eee" /> : <DeleteIcon width="20px" height="20px" />}
 				onClick={handleClick}

@@ -1,6 +1,5 @@
 import NewNotePageStyles from "@/app/styles/NewNotePage.module.css";
 import { Suspense } from "react";
-import "@mdxeditor/editor/style.css";
 import LocalizedTitleInput from "@/app/components/LocalizedTitleInput";
 import initTranslations from "@/app/i18n";
 import { useNewNoteStore } from "@/app/store/newNoteStore";

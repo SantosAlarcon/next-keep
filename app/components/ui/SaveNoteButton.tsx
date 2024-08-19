@@ -5,6 +5,7 @@ import { saveNewNote } from "@/app/utils/notes/saveNewNote";
 import BarLoader from "./BarLoader";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { updateNotes } from "@/app/utils/updateData";
 
 const SaveNoteButton = ({ title }: { title: string }) => {
 	const [pending, setPending] = useState<boolean>(false);
@@ -15,6 +16,7 @@ const SaveNoteButton = ({ title }: { title: string }) => {
 		saveNewNote()
 			.then(() => {
 				router.back();
+                updateNotes();
 
 				setTimeout(() => {
 					router.refresh();

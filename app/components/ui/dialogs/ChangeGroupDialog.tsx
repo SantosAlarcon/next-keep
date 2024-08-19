@@ -7,10 +7,10 @@ import { toast } from 'sonner';
 import BarLoader from '../BarLoader';
 import { useState } from 'react';
 import { updateNotes } from '@/app/utils/updateData';
-import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
+import { Dropdown, type DropdownChangeEvent } from 'primereact/dropdown';
 import { useRouter } from 'next/navigation';
 
-const ChangeGroupDialog = ({ lang, visible, note, groupTitle, onHide, groupTitles: groupTitles }: { lang: string, visible: boolean, note: Note, groupTitle: string, groupTitles: string[],  onHide: () => void }) => {
+const ChangeGroupDialog = ({ lang, visible, note, groupTitle, onHide, groupTitles }: { lang: string, visible: boolean, note: Note, groupTitle: string, groupTitles: string[],  onHide: () => void }) => {
     const t = i18nClient.getFixedT(lang, "common")
     const [pending, setPending] = useState<boolean>(false);
     const [selectedGroup, setSelectedGroup] = useState<string>(groupTitle)
@@ -46,6 +46,7 @@ const ChangeGroupDialog = ({ lang, visible, note, groupTitle, onHide, groupTitle
             visible={visible}
             footer={
                 <>
+                    {/* @ts-ignore */}
                     <Button label={pending ? <BarLoader width='20px' height='20px' color='#eee' /> : t("change")} onClick={confirmChange} />
                 </>
             }

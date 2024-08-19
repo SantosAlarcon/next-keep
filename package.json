@@ -9,12 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mdx-js/loader": "^3.0.1",
-    "@mdx-js/react": "^3.0.1",
-    "@mdxeditor/editor": "^3.11.0",
-    "@next/mdx": "^14.2.5",
     "@prisma/client": "^5.18.0",
-    "@types/mdx": "^2.0.13",
     "@uiw/react-markdown-editor": "^6.1.2",
     "@uiw/react-markdown-preview": "^5.1.2",
     "framer-motion": "^11.3.28",
@@ -31,7 +26,6 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.0.1",
-    "react-markdown": "^9.0.1",
     "rehype-highlight": "^7.0.0",
     "remark": "^15.0.1",
     "remark-gfm": "^4.0.0",

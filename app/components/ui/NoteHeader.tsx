@@ -1,12 +1,12 @@
-import type { Note } from '@/app/types'
-import noteHeaderStyles from '@/app/styles/NoteHeader.module.css'
 import initTranslations from '@/app/i18n'
-import TogglePinButton from './TogglePinButton'
-import EditButton from './EditButton'
-import DeleteButton from './DeleteButton'
+import noteHeaderStyles from '@/app/styles/NoteHeader.module.css'
+import type { Note } from '@/app/types'
+import { getGroupById } from '@/app/utils/database/groups/getGroupById'
 import { ButtonGroup } from 'primereact/buttongroup'
 import ChangeGroupButton from "./ChangeGroupButton"
-import { getGroupById } from '@/app/utils/database/groups/getGroupById'
+import DeleteButton from './DeleteButton'
+import EditButton from './EditButton'
+import TogglePinButton from './TogglePinButton'
 
 const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 	const { t } = await initTranslations(lang, ["common"])
@@ -23,12 +23,12 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 						{/* @ts-ignore */}
 						<ChangeGroupButton lang={lang} label={t("note.change-group")} note={note} groupTitle={noteGroupTitle} /> 
 						<TogglePinButton title={t("toggle-pin")} note={note} />
-						<DeleteButton label={t("delete")} noteId={note.id} localeStrings={{
+                        {<DeleteButton label={t("delete")} noteId={note.id} localeStrings={{
 							yes: t("yes"),
 							no: t("no"),
 							confirmMessage: t("note-delete-confirm"),
 							confirmHeader: t("note-delete-confirm-header"),
-						}} />
+						}} />}
 					</ButtonGroup>
 				</div>
 			</section>

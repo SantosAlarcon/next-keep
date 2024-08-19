@@ -1,8 +1,8 @@
 "use client"
 
 import type { MutableRefObject } from "react";
-import type { MDXEditorMethods } from "@mdxeditor/editor";
+import type { MarkdownEditorRef } from "@uiw/react-markdown-editor";
 
-export const editorRef: MutableRefObject<MDXEditorMethods | null> = {
+export const editorRef: MutableRefObject<MarkdownEditorRef | null> = {
 	current: null
 }
