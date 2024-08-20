@@ -1,22 +1,10 @@
 import type { Note } from "@/app/types";
 
-export const toggleNotePin = (note: Note) => {
-    const togglePin = async () => {
-        try {
-            await fetch(`/api/notes?id=${note.id}`, {
-                method: "PUT",
-                body: JSON.stringify({
-                    isPinned: !note.isPinned
-                })
-            });
-            console.log("Se ha cambiado el fijado con éxito!")
-
-            return true;
-        } catch (error) {
-            console.error(error);
-            return false;
-        }
-    };
-
-    togglePin();
+export const toggleNotePin = async (note: Note) => {
+	return await fetch(`${process.env.NEXT_PUBLIC_URL}/api/notes?id=${note.id}`, {
+		method: "PUT",
+		body: JSON.stringify({
+			isPinned: !note.isPinned
+		})
+	});
 };

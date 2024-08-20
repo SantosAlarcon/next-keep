@@ -7,12 +7,17 @@ import pinnedButtonStyles from "@/app/styles/PinnedButton.module.css";
 import { toggleNotePin } from "@/app/utils/notes/toggleNotePin";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
+import { updateNotes } from "@/app/utils/updateData";
 
 const TogglePinButton = ({ title, note }: { title: string; note: Note }) => {
 	const router = useRouter();
 	const handleClick = () => {
 		toggleNotePin(note);
-		router.refresh();
+		updateNotes();
+
+		setTimeout(() => {
+			router.refresh();
+		}, 200)
 	};
 
 	return (
