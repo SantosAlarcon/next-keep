@@ -12,11 +12,12 @@ import i18nClient from "@/app/i18n-client";
 import { toast } from "sonner";
 
 const SaveNoteButton = ({ lang, title }: { lang: string, title: string }) => {
-	const [pending, setPending] = useState<boolean>(false);
-	const router = useRouter();
-	const newNote: Note = useNewNoteStore.getState().newNote;
-
 	const t = i18nClient.getFixedT(lang, ["common"])
+	const newNote: Note = useNewNoteStore((state) => state.newNote)
+	const router = useRouter();
+	
+	const [pending, setPending] = useState<boolean>(false);
+
 	const handleCreateNote = () => {
 		if (newNote.title === "") {
 			toast.error(t("title-missing"), { position: "top-center" });
@@ -27,8 +28,8 @@ const SaveNoteButton = ({ lang, title }: { lang: string, title: string }) => {
 			saveNewNote(newNote)
 				.then(() => {
 					toast.success(t("note-saved"));
-					router.back();
 					updateNotes();
+					router.back();
 
 					setTimeout(() => {
 						router.refresh();
@@ -40,7 +41,7 @@ const SaveNoteButton = ({ lang, title }: { lang: string, title: string }) => {
 	};
 
 	return (
-		<button onClick={handleCreateNote} type="button" className={saveButtonStyles.save__button__container}>
+		<button onClick={() => handleCreateNote()} type="button" className={saveButtonStyles.save__button__container}>
 			<span className={saveButtonStyles.save__button__title}>
 				{pending ? <BarLoader width="24px" height="24px" color="#eee" /> : title}
 			</span>
