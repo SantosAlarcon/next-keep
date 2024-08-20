@@ -81,7 +81,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 							})
 							.finally(() => setPending(false));
 					},
-					reject: () => {},
+					reject: () => { },
 				});
 			},
 		},
@@ -156,9 +156,9 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 					</ul>
 					<ContextMenu ref={cmRef} model={groupContextMenu} />
 					<ConfirmDialog resizable={false} draggable={false} />
-                    {/* @ts-ignore */}
-                    <RenameGroupDialog lang={lang} visible={renameGroupVisibleModal} onHide={() => setRenameGroupVisibleModal(false)} group={selectedGroup} />
-			    </section>
+					{/* @ts-ignore */}
+					<RenameGroupDialog lang={lang} visible={renameGroupVisibleModal} onHide={() => setRenameGroupVisibleModal(false)} group={selectedGroup} />
+				</section>
 
 				<section className={sidebarStyles.sidebar__bottom}>
 					<Button

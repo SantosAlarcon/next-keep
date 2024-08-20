@@ -2,7 +2,7 @@
 
 import DeleteIcon from "../icons/DeleteIcon";
 import { deleteNote } from "@/app/utils/notes/deleteNote";
-import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
+import { confirmDialog } from "primereact/confirmdialog";
 import { Button } from "primereact/button";
 import { useState } from "react";
 import BarLoader from "./BarLoader";

@@ -1,5 +1,3 @@
-import notes from "@/data/notes.json"
-
-export const getNoteById = (id: string) => {
-    return notes.find((note) => note.id === id)
+export const getNoteById = async (id: string) => {
+    return await fetch(`${process.env.URL}/api/notes?id=${id}`).then((response) => response.json())
 }
