@@ -10,6 +10,6 @@ export const getGroupById = async (id: string) => {
 
 		return group;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 };

@@ -17,11 +17,11 @@ import MEditor, { type MarkdownEditorRef } from "@uiw/react-markdown-editor"
 
 const CustomMDXEditor: FC<EditorProps> = ({ text, editorRef, isEditing }) => {
 	const setNewNote = useNewNoteStore((state) => state.setNewNote)
-    const [markdown, setMarkdown] = useState<string>(text)
+	const [markdown, setMarkdown] = useState<string>(text)
 
 	// @ts-ignore
-	const {updatedNote, setUpdatedNote} = useContext(UpdateNoteContext)
-	
+	const { updatedNote, setUpdatedNote } = useContext(UpdateNoteContext)
+
 	// When the Markdown changes, it updates the new note store
 	const changeHandler = (value: string) => {
 		if (isEditing) {
@@ -36,7 +36,7 @@ const CustomMDXEditor: FC<EditorProps> = ({ text, editorRef, isEditing }) => {
 			value={markdown}
 			onChange={changeHandler}
 			height="75vh"
-            visible={true}
+			visible={true}
 		/>
 	);
 };

@@ -16,7 +16,7 @@ export const createNewNote = async (note: Note) => {
         })
         return true;
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return false;
     }
 }

@@ -14,10 +14,7 @@ const TogglePinButton = ({ title, note }: { title: string; note: Note }) => {
 	const handleClick = () => {
 		toggleNotePin(note);
 		updateNotes();
-
-		setTimeout(() => {
-			router.refresh();
-		}, 200)
+		router.refresh();
 	};
 
 	return (

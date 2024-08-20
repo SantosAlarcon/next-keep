@@ -8,7 +8,5 @@ export function useFetchNotesByGroup(groupId: string) {
 		fetch(`/api/notes?group=${groupId}`).then((res) => res.json()).then((data) => setNotes(data));
 	}, [groupId])
 
-	console.log(notes)
-
 	return notes;
 }

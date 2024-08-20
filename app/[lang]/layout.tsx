@@ -41,12 +41,12 @@ export default async function RootLayout({
 		lang: string;
 	};
 }>) {
-    const state = await getAllData();
-    
+	const state = await getAllData();
+
 	return (
 		<html lang={lang}>
 			<body className={font.className}>
-                <DataSync state={state} />
+				<DataSync state={state} />
 				<PrimeReactProvider value={{ ripple: true }}>
 					<Toaster richColors position="bottom-center" theme="dark" />
 					<SidebarClientNoSSR params={{ lang: lang }} />

@@ -10,7 +10,7 @@ export const useAsyncFunction = (func: () => void) => {
         setAsyncFunctionState(AsyncFunctionState.OK)
     } catch (error) {
         setAsyncFunctionState(AsyncFunctionState.Error)
-        console.log(error);
+        console.error(error);
     }
 
     return {asyncFunctionState}

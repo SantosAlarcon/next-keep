@@ -235,8 +235,6 @@ export async function PUT(req: NextRequest) {
 		pinStatusChanged = true;
 	}
 
-	console.log("Pin status changed:", pinStatusChanged);
-
 	const updatedNote = {
 		...body,
 		title: body.title,
