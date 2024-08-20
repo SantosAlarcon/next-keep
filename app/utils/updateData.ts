@@ -6,6 +6,7 @@ import { getAllGroups } from "./groups/getAllGroups";
 import { getAllGroupTitles } from "./groups/getAllGroupTitles";
 import { getAllNotes } from "./notes/getAllNotes";
 import { getAllPinnedNotes } from "./notes/getAllPinnedNotes";
+import { getNoteAmountByGroups } from "./notes/getNoteAmountByGroups";
 
 export const updateGroups = () => {
 	// @ts-ignore
@@ -17,8 +18,9 @@ export const updateGroups = () => {
 
 export const updateNotes = () => {
 	// @ts-ignore
-	const { setAllNotes, setAllPinnedNotes } = dataStore.getState();
+	const { setAllNotes, setAllPinnedNotes, setAllNoteAmounts } = dataStore.getState();
 
 	getAllNotes().then((notes: Note[]) => setAllNotes(notes));
 	getAllPinnedNotes().then((pinnedNotes: Note[]) => setAllPinnedNotes(pinnedNotes));
+	getNoteAmountByGroups().then((noteAmounts: object) => setAllNoteAmounts(noteAmounts));
 };
