@@ -34,7 +34,17 @@
 	background: none;
 	border: none;
 	outline: none;
-	border-bottom: 1px #fff4 solid;
+	border-bottom: 1px #0004 solid;
 	padding-bottom: .5rem;
 	width: 100%;
+	color: #111;
+
+	&::placeholder {
+		color: #888;
+    }
+
+	@media (prefers-color-scheme: dark) {
+		color: #eee;
+		border-bottom: 1px #fff4 solid;
+	}
 }

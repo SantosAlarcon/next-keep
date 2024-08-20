@@ -7,6 +7,7 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import BarLoader from '../BarLoader';
 
 const CreateGroupDialog = ({ lang, visible, onHide }: { lang: string, visible: boolean, onHide: () => void }) => {
     const t = i18nClient.getFixedT(lang, "common")
