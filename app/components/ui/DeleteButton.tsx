@@ -7,6 +7,7 @@ import { Button } from "primereact/button";
 import { useState } from "react";
 import BarLoader from "./BarLoader";
 import { useRouter } from "next/navigation";
+import { updateNotes } from "@/app/utils/updateData";
 
 function DeleteButton({
 	label,
@@ -14,12 +15,11 @@ function DeleteButton({
 	localeStrings: { yes, no, confirmMessage, confirmHeader },
 }: { label: string; noteId: string; localeStrings: { yes: string; no: string; confirmMessage: string; confirmHeader: string } }) {
 	const [pending, setPending] = useState<boolean>(false);
-    const [visible, setVisible] = useState<boolean>(false);
 	const router = useRouter();
 
 	const handleClick = () => {
 		confirmDialog({
-            draggable: false,
+			draggable: false,
 			acceptLabel: yes,
 			rejectLabel: no,
 			message: confirmMessage,
@@ -29,6 +29,7 @@ function DeleteButton({
 				setPending(true);
 				deleteNote(noteId)
 					.then(() => {
+						updateNotes();
 						router.back();
 
 						setTimeout(() => {
@@ -37,7 +38,7 @@ function DeleteButton({
 					})
 					.finally(() => setPending(false));
 			},
-			reject: () => {},
+			reject: () => { },
 		});
 	};
 	return (
