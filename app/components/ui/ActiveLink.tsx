@@ -7,9 +7,11 @@ import sideBarStyles from "../../styles/sidebar.module.css";
 
 const ActiveLink = ({ href, children }: { href: string; children: ReactNode }) => {
     const pathName = usePathname();
+    const path = pathName.slice(3)
+    console.table([href, path])
 
     return (
-        <Link href={href} className={`${sideBarStyles.sidebar__item} ${pathName.includes(href) ? sideBarStyles.sidebar__active : ""}`}>
+        <Link href={href} className={`${sideBarStyles.sidebar__item} ${href === path ? sideBarStyles.sidebar__active : ""}`}>
             {children}
         </Link>
     );
