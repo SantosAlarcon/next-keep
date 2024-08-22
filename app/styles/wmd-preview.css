@@ -2,7 +2,7 @@
     font-family: inherit !important;
     --color-fg-default: #111 !important;
     padding: 1.5rem;
-
+    background-color: inherit !important;
 
     @media (prefers-color-scheme: dark) {
         background-color: transparent !important;
@@ -20,5 +20,9 @@
 
     & pre > code {
         font-family: monospace;
+    }
+
+    & h1, h2, h3, h4, h5, h6 {
+	border-bottom: 1px #0006 solid !important;
     }
 }

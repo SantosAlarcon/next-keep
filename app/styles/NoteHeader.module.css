@@ -15,6 +15,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: .5rem;
 }
 
 .note__header__upper__right {
