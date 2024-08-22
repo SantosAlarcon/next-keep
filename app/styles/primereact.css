@@ -85,17 +85,16 @@
 /* DROPDDOWN */
 .p-dropdown {
 	margin: .5rem 0;
-	padding: .25rem !important;
 	width: 100%;
 }
 
 .p-dropdown-item>* {
 	font-family: inherit !important;
-	padding: .5rem 0;
+	padding: .5rem;
 }
 
 .p-dropdown-items-wrapper {
-	padding: 1rem;
+	padding: .25rem;
 }
 
 /* Input */
