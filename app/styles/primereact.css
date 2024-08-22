@@ -1,5 +1,4 @@
 /* Remove font family from components */
-
 .p-component,
 .p-inputtext {
 	font-family: inherit;
@@ -8,7 +7,7 @@
 /* CONTEXT MENU */
 .p-contextmenu {
 	width: auto;
-    font-size: .9rem;
+	font-size: .9rem;
 }
 
 .p-contextmenu-root-list {
@@ -29,15 +28,15 @@
 
 .p-dialog-content {
 	display: flex;
-    align-items: center;
+	align-items: center;
 	gap: 1rem;
 }
 
 .p-dialog-content-input {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 1rem;
 }
 
 .p-dialog-footer {
@@ -54,7 +53,7 @@
 .p-tooltip {
 	font-family: inherit;
 	margin-top: 1rem;
-	transition: all .2s ease-in-out;
+	animation: fade .4s ease-in-out alternate;
 	background-color: var(--tooltip-bg);
 	color: var(--tooltip-fg);
 	border-radius: .75rem;
@@ -66,6 +65,8 @@
 	font-weight: bold;
 }
 
+
+/* BUTTON GROUP */
 .p-button-group {
 	font-family: inherit;
 
@@ -105,5 +106,17 @@
 /* MENU */
 .p-menuitem-link {
 	padding: .5rem;
-    gap: .5rem;
+	gap: .5rem;
+}
+
+
+/* ANIMATIONS */
+@keyframes fade {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
 }

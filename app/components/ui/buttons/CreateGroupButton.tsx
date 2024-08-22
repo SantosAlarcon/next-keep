@@ -10,7 +10,7 @@ const CreateGroupButton = ({ lang, title }: { lang: string, title: string }) => 
     return (
         <>
             <CreateGroupDialog lang={lang} visible={visible} onHide={() => setVisible(false)} />
-            <Button onClick={() => setVisible(true)} icon="pi pi-plus" tooltip={title} tooltipOptions={{ position: "bottom" }} />
+            <Button onClick={() => setVisible(true)} icon="pi pi-plus" tooltip={title} tooltipOptions={{ position: "right" }} />
         </>
     )
 }
