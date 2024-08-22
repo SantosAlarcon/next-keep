@@ -1,6 +1,6 @@
 import LocalizedTitleInput from "@/app/components/LocalizedTitleInput";
 import BarLoader from "@/app/components/ui/BarLoader";
-import UpdateNoteButton from "@/app/components/ui/UpdateNoteButton";
+import UpdateNoteButton from "@/app/components/ui/buttons/UpdateNoteButton";
 import UpdateNoteProvider from "@/app/components/UpdateNoteProvider";
 import initTranslations from "@/app/i18n";
 import { getNoteById } from "@/app/utils/database/notes/getNoteById";

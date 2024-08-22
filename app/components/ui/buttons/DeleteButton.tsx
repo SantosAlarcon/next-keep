@@ -1,11 +1,11 @@
 "use client";
 
-import DeleteIcon from "../icons/DeleteIcon";
+import DeleteIcon from "@/app/components/icons/DeleteIcon";
 import { deleteNote } from "@/app/utils/notes/deleteNote";
 import { confirmDialog } from "primereact/confirmdialog";
 import { Button } from "primereact/button";
 import { useState } from "react";
-import BarLoader from "./BarLoader";
+import BarLoader from "@/app/components/ui/BarLoader";
 import { useRouter } from "next/navigation";
 import { updateNotes } from "@/app/utils/updateData";
 

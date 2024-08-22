@@ -3,10 +3,10 @@ import noteHeaderStyles from '@/app/styles/NoteHeader.module.css'
 import type { Note } from '@/app/types'
 import { getGroupById } from '@/app/utils/database/groups/getGroupById'
 import { ButtonGroup } from 'primereact/buttongroup'
-import ChangeGroupButton from "./ChangeGroupButton"
-import DeleteButton from './DeleteButton'
-import EditButton from './EditButton'
-import TogglePinButton from './TogglePinButton'
+import ChangeGroupButton from "@/app/components/ui/buttons/ChangeGroupButton"
+import DeleteButton from '@/app/components/ui/buttons/DeleteButton'
+import EditButton from '@/app/components/ui/buttons/EditButton'
+import TogglePinButton from '@/app/components/ui/buttons/TogglePinButton'
 
 const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 	const { t } = await initTranslations(lang, ["common"])

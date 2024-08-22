@@ -1,8 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import EditIcon from "../icons/EditIcon";
-import editButtonStyles from "@/styles/EditButton.module.css";
+import EditIcon from "@/app/components/icons/EditIcon";
 import { Button } from "primereact/button";
 
 function EditButton({ label, noteId }: { label: string; noteId: string }) {

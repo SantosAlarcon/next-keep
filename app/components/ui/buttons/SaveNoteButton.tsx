@@ -2,7 +2,7 @@
 
 import saveButtonStyles from "@/app/styles/SaveButton.module.css";
 import { saveNewNote } from "@/app/utils/notes/saveNewNote";
-import BarLoader from "./BarLoader";
+import BarLoader from "@/app/components/ui/BarLoader";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { updateNotes } from "@/app/utils/updateData";

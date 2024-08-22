@@ -2,7 +2,7 @@
 
 import { Button } from 'primereact/button'
 import { useState } from 'react'
-import CreateGroupDialog from './dialogs/CreateGroupDialog';
+import CreateGroupDialog from '@/app/components/ui/dialogs/CreateGroupDialog';
 
 const CreateGroupButton = ({ lang, title }: { lang: string, title: string }) => {
     const [visible, setVisible] = useState<boolean>(false);

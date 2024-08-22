@@ -1,7 +1,7 @@
 "use client";
 
-import FixedIcon from "../icons/FixedIcon";
-import UnfixedIcon from "../icons/UnfixedIcon";
+import FixedIcon from "@/app/components/icons/FixedIcon";
+import UnfixedIcon from "@/app/components/icons/UnfixedIcon";
 import type { Note } from "@/app/types";
 import pinnedButtonStyles from "@/app/styles/PinnedButton.module.css";
 import { toggleNotePin } from "@/app/utils/notes/toggleNotePin";

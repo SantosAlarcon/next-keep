@@ -5,7 +5,7 @@ import initTranslations from "@/app/i18n";
 import { useNewNoteStore } from "@/app/store/newNoteStore";
 import { editorRef } from "@/app/utils/editorRef";
 import dynamic from "next/dynamic";
-import SaveNoteButton from "@/app/components/ui/SaveNoteButton";
+import SaveNoteButton from "@/app/components/ui/buttons/SaveNoteButton";
 import UpdateNoteProvider from "@/app/components/UpdateNoteProvider";
 import BarLoader from "@/app/components/ui/BarLoader";
 

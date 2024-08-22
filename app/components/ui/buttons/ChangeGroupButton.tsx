@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import { useState } from "react";
 import { dataStore } from "@/app/store/dataStore";
 import type { DataStoreProps } from "@/app/store/dataStore";
-import ChangeGroupDialog from "./dialogs/ChangeGroupDialog";
+import ChangeGroupDialog from "@/app/components/ui/dialogs/ChangeGroupDialog";
 
 const ChangeGroupButton = ({ lang, label, note, groupTitle }: { lang: string, label: string, note: Note, groupTitle: string }) => {
 	const [visible, setVisible] = useState<boolean>(false);

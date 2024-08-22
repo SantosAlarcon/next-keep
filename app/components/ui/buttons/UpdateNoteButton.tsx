@@ -5,7 +5,7 @@ import saveButtonStyles from "@/app/styles/SaveButton.module.css";
 import { updateNote } from "@/app/utils/notes/updateNote";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
-import BarLoader from "./BarLoader";
+import BarLoader from "@/app/components/ui/BarLoader";
 
 const UpdateNoteButton = ({ label }: { label: string }) => {
 	const router = useRouter();
