@@ -21,4 +21,30 @@
 	h6 {
 		border-bottom: 1px #0006 solid !important;
 	}
+
+	& table {
+		box-shadow: .1rem .1rem .5rem #ddf6;
+		& > thead > tr {
+			background-color: #ddf;
+		}
+
+		& > tbody > tr:nth-child(even) {
+			background-color: #eef2;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			box-shadow: .1rem .1rem .5rem #1116;
+			& > thead > tr {
+				background-color: #0016;
+			}
+
+			& > tbody > tr:nth-child(even) {
+				background-color: #0011;
+			}
+
+			& > tbody > tr:nth-child(odd) {
+				background-color: #0022;
+			}
+		}
+	}
 }
