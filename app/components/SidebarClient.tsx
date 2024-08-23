@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "primereact/button";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { logoVariants, mainSidebarLinks, variants } from "../constants";
 import i18nClient from "../i18n-client";
 import { dataStore } from "../store/dataStore";
@@ -30,13 +30,14 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 	const router = useRouter();
 
 	const [expanded, setExpanded] = useState<boolean>(() => {
-		// @ts-ignore
-		if (!getCookie("sidebar_expanded")) {
-			document.cookie = "sidebar_expanded = true";
+        // The default sidebar behaviour is opened. First checks if the sidebar_expanded
+        // is in the Local Storage. If not, it creates the key.
+		if (!window.localStorage.getItem("sidebar_expanded")) {
+            window.localStorage.setItem("sidebar_expanded", "true")
+            return true;
 		}
 
-		// @ts-ignore
-		if (getCookie("sidebar_expanded") === "true") {
+		if (window.localStorage.getItem("sidebar_expanded") === "true") {
 			return true;
 		}
 
@@ -46,11 +47,17 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 	const [pending, setPending] = useState<boolean>(false);
 	const [renameGroupVisibleModal, setRenameGroupVisibleModal] = useState<boolean>(false);
 
-
 	const handleClick = () => {
 		setExpanded(!expanded);
-		document.cookie = `sidebar_expanded = ${!expanded}`;
 	};
+
+    useEffect(() => {
+        if (expanded) {
+            window.localStorage.setItem("sidebar_expanded", "true")
+        } else {
+            window.localStorage.setItem("sidebar_expanded", "false")
+        }
+    }, [expanded])
 
 	const groupContextMenu = [
 		{
