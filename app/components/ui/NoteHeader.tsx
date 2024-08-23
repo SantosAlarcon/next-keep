@@ -7,6 +7,7 @@ import ChangeGroupButton from "@/app/components/ui/buttons/ChangeGroupButton"
 import DeleteButton from '@/app/components/ui/buttons/DeleteButton'
 import EditButton from '@/app/components/ui/buttons/EditButton'
 import TogglePinButton from '@/app/components/ui/buttons/TogglePinButton'
+import TestButton from './buttons/TestButton'
 
 const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 	const { t } = await initTranslations(lang, ["common"])
@@ -29,6 +30,7 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 							confirmMessage: t("note-delete-confirm"),
 							confirmHeader: t("note-delete-confirm-header"),
 						}} />}
+                        <TestButton />
 					</ButtonGroup>
 				</div>
 			</section>

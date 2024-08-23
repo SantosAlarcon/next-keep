@@ -47,5 +47,6 @@
         "group-rename-message": "Introduce el nuevo nombre de este grupo:",
 		"group-rename-success": "El grupo se ha renombrado a '{{name}}'"
 	},
-    "rename": "Renombrar"
+    "rename": "Renombrar",
+    "pending-operation": "Realizando operación..."
 }

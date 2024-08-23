@@ -9,7 +9,6 @@ import i18nClient from "../i18n-client";
 import { dataStore } from "../store/dataStore";
 import sidebarStyles from "../styles/sidebar.module.css";
 import type { Group } from "../types";
-import getCookie from "../utils/getCookie";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
@@ -44,7 +43,6 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 		return false;
 	});
 	const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
-	const [pending, setPending] = useState<boolean>(false);
 	const [renameGroupVisibleModal, setRenameGroupVisibleModal] = useState<boolean>(false);
 
 	const handleClick = () => {
@@ -76,17 +74,19 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 					acceptLabel: t("yes"),
 					rejectLabel: t("no"),
 					accept: () => {
-						setPending(true);
-						// @ts-ignore
-						deleteGroupById(selectedGroup?.id)
-							.then(() => {
-								toast.success(t("group.group-delete-success", { name: selectedGroup?.title }));
-								updateGroups();
-								setTimeout(() => {
-									router.refresh();
-								}, 200);
-							})
-							.finally(() => setPending(false));
+                        // @ts-ignore
+                        toast.promise(deleteGroupById(selectedGroup?.id).then(() => {
+                            updateGroups();
+                            setTimeout(() => {
+                                router.refresh()
+                            }, 200)
+                        }), {
+                            loading: t("pending-operation"),
+                            success: () => {
+                                return t("group.group-delete-success", {name: selectedGroup?.title})
+                            },
+                            error: () => t("group.group-delete-error"),
+                        })
 					},
 					reject: () => { },
 				});

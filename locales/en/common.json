@@ -51,5 +51,6 @@
 	"change": "Change",
 	"cancel": "Cancel",
 	"create": "Create",
-	"rename": "Rename"
+	"rename": "Rename",
+    "pending-operation": "Pending operation..."
 }
