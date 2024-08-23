@@ -1,28 +1,24 @@
 .wmde-markdown {
-    font-family: inherit !important;
-    --color-fg-default: #111 !important;
-    padding: 1.5rem;
-    background-color: inherit !important;
+	font-family: inherit !important;
+	--color-fg-default: #111 !important;
+	padding: 1.5rem;
+	background-color: inherit !important;
 
-    @media (prefers-color-scheme: dark) {
-        background-color: transparent !important;
-        --color-fg-default: #eee !important;
-    }
+	@media (prefers-color-scheme: dark) {
+		background-color: transparent !important;
+		--color-fg-default: #eee !important;
+	}
 
-    input {
-        accent-color: #66f !important;
+	& pre>code {
+		font-family: monospace;
+	}
 
-        &:disabled {
-            border: #fff !important;
-            accent-color: #44f !important;
-        }
-    }
-
-    & pre > code {
-        font-family: monospace;
-    }
-
-    & h1, h2, h3, h4, h5, h6 {
-	border-bottom: 1px #0006 solid !important;
-    }
+	& h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		border-bottom: 1px #0006 solid !important;
+	}
 }

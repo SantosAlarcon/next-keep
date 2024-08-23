@@ -1,15 +1,17 @@
 .md-editor {
-    --md-editor-font-family: monospace !important;
+	--md-editor-font-family: monospace !important;
 }
 
-.md-editor-text-pre, .md-editor-text-input, .md-editor-text > .md-editor-text-pre {
+.md-editor-text-pre,
+.md-editor-text-input,
+.md-editor-text>.md-editor-text-pre {
 	font-family: monospace !important;
 }
 
 .md-editor-toolbar {
 	padding: .5rem !important;
-    display: flex;
-    gap: .5rem !important;
+	display: flex;
+	gap: .5rem !important;
 
 	.md-editor-toolbar-divider {
 		height: auto;
@@ -26,11 +28,11 @@
 }
 
 .wmde-markdown {
-    font-family: inherit !important;
+	font-family: inherit !important;
 
-    --color-fg-default: #111 !important;
+	--color-fg-default: #111 !important;
 
-    @media (prefers-color-scheme: dark) {
-        --color-fg-default: #eee !important;
-    }
+	@media (prefers-color-scheme: dark) {
+		--color-fg-default: #eee !important;
+	}
 }
