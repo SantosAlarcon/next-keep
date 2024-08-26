@@ -37,6 +37,7 @@ const CustomMDXEditor: FC<EditorProps> = ({ text, editorRef, isEditing }) => {
 			onChange={changeHandler}
 			height="75vh"
 			visible={true}
+            enableScroll={false}
 		/>
 	);
 };

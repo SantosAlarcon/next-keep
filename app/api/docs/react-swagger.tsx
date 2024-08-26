@@ -1,11 +1,7 @@
 "use client";
-import dynamic from "next/dynamic";
 import "swagger-ui-react/swagger-ui.css";
-
-const DynamicSwaggerUI = dynamic(() => import("swagger-ui-react"), {
-	ssr: false,
-	loading: () => <p>Loading Component...</p>,
-});
+import SwaggerUIReact from "swagger-ui-react";
+import { Suspense } from "react";
 
 type Props = {
 	spec: Record<string, any>;
@@ -13,7 +9,11 @@ type Props = {
 
 function ReactSwagger({ spec }: Props) {
 	// @ts-ignore - SwaggerUI is not typed
-	return <DynamicSwaggerUI spec={spec} />;
+	return (
+		<Suspense fallback="Loading component...">
+			<SwaggerUIReact spec={spec} />
+		</Suspense>
+	);
 }
 
 export default ReactSwagger;
