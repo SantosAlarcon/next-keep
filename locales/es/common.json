@@ -48,5 +48,8 @@
 		"group-rename-success": "El grupo se ha renombrado a '{{name}}'"
 	},
     "rename": "Renombrar",
-    "pending-operation": "Realizando operación..."
+    "pending-operation": "Realizando operación...",
+    "expand": "Expandir",
+    "collapse": "Contraer"
+
 }

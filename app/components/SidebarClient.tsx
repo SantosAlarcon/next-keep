@@ -28,6 +28,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 	const cmRef = useRef(null);
 	const router = useRouter();
 
+    const [mounted, setMounted] = useState<boolean>(false);
 	const [expanded, setExpanded] = useState<boolean>(() => {
         // The default sidebar behaviour is opened. First checks if the sidebar_expanded
         // is in the Local Storage. If not, it creates the key.
@@ -42,6 +43,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 
 		return false;
 	});
+
 	const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
 	const [renameGroupVisibleModal, setRenameGroupVisibleModal] = useState<boolean>(false);
 
@@ -102,7 +104,11 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 		}
 	};
 
-	if (!i18nClient) return null;
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) return null;
 
 	return (
 		<AnimatePresence initial={false}>
@@ -169,6 +175,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 
 				<section className={sidebarStyles.sidebar__bottom}>
 					<Button
+                        tooltip={expanded ? t("collapse") : t("expand")}
 						severity="secondary"
 						label={expanded ? "<" : ">"}
 						className={expanded ? sidebarStyles.sidebar__expand__button : sidebarStyles.sidebar__expand__button__collapsed}
