@@ -1,5 +1,3 @@
-import groups from "@/data/groups.json"
-
-export const getGroupById = (id: string) => {
-    return groups.filter((group) => group.id === id)
+export const getGroupById = async (id: string) => {
+    await fetch(`${process.env.NEXT_PUBLIC_URL}/api/groups?id=${id}`).then((response) => response)
 }
