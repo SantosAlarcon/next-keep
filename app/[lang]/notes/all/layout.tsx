@@ -1,14 +1,14 @@
 import initTranslations from '@/app/i18n'
-import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
-export const metadata: Metadata = {
-	title: "All"
+export async function generateMetadata({ params: { lang } }: { params: { lang: string } }) {
+	const {t} = await initTranslations(lang, ["common"])
+	return {
+		title: t("all"),
+	}
 }
 
-const AllNotesLayout = async ({ params: { lang }, children }: { params: { lang: string }, children: ReactNode }) => {
-	const { t } = await initTranslations(lang, ["common"]);
-	metadata.title = t("all");
+const AllNotesLayout = ({ children }: { children: ReactNode }) => {
 
 	return (
 		<>{children}</>

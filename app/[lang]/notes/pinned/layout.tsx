@@ -1,14 +1,14 @@
 import initTranslations from '@/app/i18n'
-import type { Metadata } from 'next/types'
 import type { ReactNode } from 'react'
 
-export const metadata: Metadata = {
-		title: "Pinned",
+export async function generateMetadata({ params: { lang } }: { params: { lang: string } }) {
+	const {t} = await initTranslations(lang, ["common"])
+	return {
+		title: t("pinned"),
+	}
 }
 
-const PinnedLayout = async ({ params: { lang }, children }: { params: { lang: string }, children: ReactNode }) => {
-	const { t } = await initTranslations(lang, ["common"])
-	metadata.title = `${t("pinned")}`
+const PinnedLayout = ({ children }: { children: ReactNode }) => {
 	return (
 		<>{children}</>
 	)

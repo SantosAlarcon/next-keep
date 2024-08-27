@@ -7,11 +7,10 @@ import ChangeGroupButton from "@/app/components/ui/buttons/ChangeGroupButton"
 import DeleteButton from '@/app/components/ui/buttons/DeleteButton'
 import EditButton from '@/app/components/ui/buttons/EditButton'
 import TogglePinButton from '@/app/components/ui/buttons/TogglePinButton'
-import TestButton from './buttons/TestButton'
 
 const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 	const { t } = await initTranslations(lang, ["common"])
-    // @ts-ignore
+	// @ts-ignore
 	const noteGroupTitle = await getGroupById(note.group).then((data) => data?.title)
 
 	return (
@@ -22,15 +21,14 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 					<ButtonGroup>
 						<EditButton label={t("edit")} noteId={note.id} />
 						{/* @ts-ignore */}
-						<ChangeGroupButton lang={lang} label={t("note.change-group")} note={note} groupTitle={noteGroupTitle} /> 
+						<ChangeGroupButton lang={lang} label={t("note.change-group")} note={note} groupTitle={noteGroupTitle} />
 						<TogglePinButton title={t("toggle-pin")} note={note} />
-                        {<DeleteButton label={t("delete")} noteId={note.id} localeStrings={{
+						{<DeleteButton label={t("delete")} noteId={note.id} localeStrings={{
 							yes: t("yes"),
 							no: t("no"),
 							confirmMessage: t("note-delete-confirm"),
 							confirmHeader: t("note-delete-confirm-header"),
 						}} />}
-                        <TestButton />
 					</ButtonGroup>
 				</div>
 			</section>
