@@ -89,6 +89,7 @@ body {
 			transparent,
 			rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 	display: flex;
+    flex-direction: column;
 }
 
 a {
@@ -184,6 +185,10 @@ input[type=checkbox] {
 			box-shadow: .1rem .1rem .2rem #aaf6;
 		}	
 	}
+}
+
+.main__body {
+    display: flex;
 }
 
 @media (prefers-color-scheme: dark) {

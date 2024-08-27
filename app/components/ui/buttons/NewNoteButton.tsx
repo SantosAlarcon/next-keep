@@ -16,7 +16,13 @@ const NewNoteButton = ({ title, expanded }: { title: string; expanded: boolean }
 	};
 
 	return (
-		<Button tooltip={expanded ? undefined : title} tooltip-align={expanded ? null : "right"} className={expanded ? sidebarStyles.sidebar__button : sidebarStyles.sidebar__new__note__button__collapsed} onClick={createNewNote} type="button">
+		<Button
+			tooltip={expanded ? undefined : title}
+			tooltip-align={expanded ? null : "right"}
+			className={expanded ? sidebarStyles.sidebar__button : sidebarStyles.sidebar__new__note__button__collapsed}
+			onClick={createNewNote}
+			type="button"
+		>
 			<NewNoteIcon />
 			{expanded ? <span>{title}</span> : null}
 		</Button>
