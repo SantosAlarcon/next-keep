@@ -1,26 +1,26 @@
 "use client";
 
+import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
+import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
+import DrawerStyles from "@/styles/MobileHeader.module.css";
+import sidebarStyles from "@/styles/sidebar.module.css";
+import Image from "next/image";
 import Link from "next/link";
-import { SyntheticEvent, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { ContextMenu } from "primereact/contextmenu";
+import { Sidebar } from "primereact/sidebar";
+import { useRef, useState } from "react";
+import { toast } from "sonner";
 import { mainSidebarLinks } from "../constants";
 import i18nClient from "../i18n-client";
 import { dataStore } from "../store/dataStore";
-import sidebarStyles from "@/styles/sidebar.module.css";
-import DrawerStyles from "@/styles/MobileHeader.module.css";
 import type { Group } from "../types";
+import { deleteGroupById } from "../utils/groups/deleteGroupById";
+import { updateGroups } from "../utils/updateData";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
-import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
-import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
-import { ContextMenu } from "primereact/contextmenu";
-import { deleteGroupById } from "../utils/groups/deleteGroupById";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { updateGroups } from "../utils/updateData";
-import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
-import { Sidebar } from "primereact/sidebar";
-import Image from "next/image";
 
 const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { lang: string }; visible: boolean; onHide: () => void }) => {
 	const t = i18nClient.getFixedT(lang, "common");
@@ -49,8 +49,8 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 					acceptLabel: t("yes"),
 					rejectLabel: t("no"),
 					accept: () => {
-						// @ts-ignore
 						toast.promise(
+                            // @ts-ignore
 							deleteGroupById(selectedGroup?.id).then(() => {
 								updateGroups();
 								setTimeout(() => {
@@ -66,7 +66,7 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 							},
 						);
 					},
-					reject: () => { },
+					reject: () => {},
 				});
 			},
 		},
@@ -81,17 +81,14 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 	};
 
 	return (
-		<Sidebar
-			blockScroll={true}
-			visible={visible}
-			onHide={onHide}
-		>
+		<Sidebar blockScroll={true} visible={visible} onHide={onHide}>
 			<aside className={DrawerStyles.drawer__container}>
 				<Link href="/notes/all" prefetch onClick={onHide}>
 					<Image className={sidebarStyles.sidebar__logo} width="128" height="128" src="/NextKeep.svg" alt="Next Keep logo" />
 				</Link>
+				{/* @ts-ignore */}
 				<span onClick={onHide}>
-				    <NewNoteButton title={t("create-note")} expanded={true} />
+					<NewNoteButton title={t("create-note")} expanded={true} />
 				</span>
 				<ul className={sidebarStyles.sidebar__grouplist} onClick={onHide}>
 					{mainSidebarLinks.map((link) => (
@@ -127,11 +124,11 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 				</ul>
 				<ContextMenu ref={cmRef} model={groupContextMenu} />
 				<ConfirmDialog resizable={false} draggable={false} />
-				{/* @ts-ignore */}
 				<RenameGroupDialog
 					lang={lang}
 					visible={renameGroupVisibleModal}
 					onHide={() => setRenameGroupVisibleModal(false)}
+                    // @ts-ignore
 					group={selectedGroup}
 				/>
 			</aside>
