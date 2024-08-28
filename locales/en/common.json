@@ -54,5 +54,6 @@
     "rename": "Rename",
     "pending-operation": "Pending operation...",
     "expand": "Expand",
-    "collapse": "Collapse"
+    "collapse": "Collapse",
+    "back": "Back"
 }

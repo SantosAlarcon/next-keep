@@ -16,6 +16,12 @@
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: .5rem;
+
+    @media (width <= 1024px) {
+        flex-direction: column-reverse;
+        gap: 1rem;
+        align-items: flex-start;
+    }
 }
 
 .note__header__upper__right {
@@ -30,6 +36,10 @@
 .note__header__title {
 	font-size: 2rem;
 	font-weight: 800;
+
+    @media (width <= 1024px) {
+        padding: .75rem 0;
+    }
 }
 
 .note__header__date {

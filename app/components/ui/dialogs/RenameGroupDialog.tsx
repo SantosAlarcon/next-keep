@@ -27,6 +27,8 @@ const RenameGroupDialog = ({ lang, visible, onHide, group }: { lang: string, vis
     return (
         <Dialog
             header={t("group.group-rename-header")}
+            blockScroll={true}
+            breakpoints={{"640px":"85vw"}}
             resizable={false}
             draggable={false}
             onHide={() => {

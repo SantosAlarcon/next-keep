@@ -46,7 +46,10 @@ const CreateGroupDialog = ({ lang, visible, onHide }: { lang: string, visible: b
                 {/* @ts-ignore */}
                 <Button label={pending ? <BarLoader width="24px" height="24px" color="#eee" /> : t("create")} onClick={handleCreateGroup} />
             </>
-        } draggable={false} onHide={() => { onHide(); setNewGroup("") }} visible={visible}>
+        } draggable={false} 
+            blockScroll={true}
+            breakpoints={{"640px":"85vw"}}
+            onHide={() => { onHide(); setNewGroup("") }} visible={visible}>
             <div className="p-dialog-content-input">
                 <p>{t("group.create-group-message")}</p>
                 <InputText required value={newGroup} onChange={(e) => setNewGroup(e.target.value)} />

@@ -44,6 +44,7 @@ const ChangeGroupDialog = ({ lang, visible, note, groupTitle, onHide, groupTitle
             // @ts-ignore
             message={t("note.change-group-message")}
             visible={visible}
+            breakpoints={{"640px":"80vw"}}
             footer={
                 <>
                     {/* @ts-ignore */}

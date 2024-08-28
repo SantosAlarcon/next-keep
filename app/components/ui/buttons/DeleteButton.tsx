@@ -25,6 +25,8 @@ function DeleteButton({
 			message: confirmMessage,
 			header: confirmHeader,
 			icon: "pi pi-exclamation-triangle",
+            breakpoints: {"640px":"85vw"},
+            blockScroll: true,
 			accept: () => {
 				setPending(true);
 				deleteNote(noteId)
@@ -38,19 +40,17 @@ function DeleteButton({
 					})
 					.finally(() => setPending(false));
 			},
-			reject: () => { },
+			reject: () => {},
 		});
 	};
 	return (
-		<>
-			<Button
-				icon={pending ? <BarLoader width="20px" height="20px" color="#eee" /> : <DeleteIcon width="20px" height="20px" />}
-				onClick={handleClick}
-				type="button"
-				tooltip={label}
-				tooltipOptions={{ position: "bottom" }}
-			/>
-		</>
+		<Button
+			icon={pending ? <BarLoader width="20px" height="20px" color="#eee" /> : <DeleteIcon width="20px" height="20px" />}
+			onClick={handleClick}
+			type="button"
+			tooltip={label}
+			tooltipOptions={{ position: "bottom" }}
+		/>
 	);
 }
 
