@@ -1,6 +1,7 @@
 .mobile__header__container {
     display: none;
     padding: .5rem;
+    position: sticky;
 
     @media (width < 1024px) {
         display: block;

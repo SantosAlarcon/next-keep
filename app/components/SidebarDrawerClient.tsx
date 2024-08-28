@@ -21,7 +21,6 @@ import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 import { Sidebar } from "primereact/sidebar";
 import Image from "next/image";
-import { Button } from "primereact/button";
 
 const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { lang: string }; visible: boolean; onHide: () => void }) => {
 	const t = i18nClient.getFixedT(lang, "common");
@@ -67,7 +66,7 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 							},
 						);
 					},
-					reject: () => {},
+					reject: () => { },
 				});
 			},
 		},
@@ -86,57 +85,57 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 			blockScroll={true}
 			visible={visible}
 			onHide={onHide}
-			content={({ closeIconRef, hide }) => (
-				<section className={DrawerStyles.drawer__container}>
-					<Link href="/notes/all" prefetch>
-						<Image className={sidebarStyles.sidebar__logo} width="128" height="128" src="/NextKeep.svg" alt="Next Keep logo" />
-					</Link>
-					<NewNoteButton title={t("create-note")} expanded={true} onClick={(e) => hide(e)} />
-					<ul className={sidebarStyles.sidebar__grouplist}>
-						{mainSidebarLinks.map((link) => (
+		>
+			<aside className={DrawerStyles.drawer__container}>
+				<Link href="/notes/all" prefetch onClick={onHide}>
+					<Image className={sidebarStyles.sidebar__logo} width="128" height="128" src="/NextKeep.svg" alt="Next Keep logo" />
+				</Link>
+				<span onClick={onHide}>
+				    <NewNoteButton title={t("create-note")} expanded={true} />
+				</span>
+				<ul className={sidebarStyles.sidebar__grouplist} onClick={onHide}>
+					{mainSidebarLinks.map((link) => (
+						// @ts-ignore
+						<SidebarItem
+							icon={link.icon}
+							expanded={true}
+							key={link.name}
+							title={t(link.name)}
+							href={link.path}
+							amount={link.name === "pinned" ? allPinnedNotes?.length : allNotes?.length}
+						/>
+					))}
+				</ul>
+				<hr className={sidebarStyles.sidebar__separator} />
+				<div className={sidebarStyles.sidebar__groups__header}>
+					<h3>{t("groups")}</h3>
+					<CreateGroupButton lang={lang} title={t("group.create-group")} />
+				</div>
+				<ul className={sidebarStyles.sidebar__grouplist} onClick={onHide}>
+					{allGroups?.map((group: Group) => (
+						<GroupItem
+							key={group.id}
+							id={group.id}
+							title={group.title}
+							expanded={true}
 							// @ts-ignore
-							<SidebarItem
-								icon={link.icon}
-								expanded={true}
-								key={link.name}
-								title={t(link.name)}
-								href={link.path}
-								amount={link.name === "pinned" ? allPinnedNotes?.length : allNotes?.length}
-							/>
-						))}
-					</ul>
-					<hr className={sidebarStyles.sidebar__separator} />
-					<div className={sidebarStyles.sidebar__groups__header}>
-						<h3>{t("groups")}</h3>
-						<CreateGroupButton lang={lang} title={t("group.create-group")} />
-					</div>
-					<ul className={sidebarStyles.sidebar__grouplist}>
-						{allGroups?.map((group: Group) => (
-							<GroupItem
-								key={group.id}
-								id={group.id}
-								title={group.title}
-								expanded={true}
-								// @ts-ignore
-								amount={allNoteAmounts[group.id] ? allNoteAmounts[group.id] : 0}
-								// @ts-ignore
-								onContextMenu={(event) => handleContext(event, group)}
-							/>
-						))}
-					</ul>
-					<ContextMenu ref={cmRef} model={groupContextMenu} />
-					<ConfirmDialog resizable={false} draggable={false} />
-					{/* @ts-ignore */}
-					<RenameGroupDialog
-						lang={lang}
-						visible={renameGroupVisibleModal}
-						onHide={() => setRenameGroupVisibleModal(false)}
-						group={selectedGroup}
-					/>
-                    <Button onClick={(e: SyntheticEvent) => hide(e)} />
-				</section>
-			)}
-		/>
+							amount={allNoteAmounts[group.id] ? allNoteAmounts[group.id] : 0}
+							// @ts-ignore
+							onContextMenu={(event) => handleContext(event, group)}
+						/>
+					))}
+				</ul>
+				<ContextMenu ref={cmRef} model={groupContextMenu} />
+				<ConfirmDialog resizable={false} draggable={false} />
+				{/* @ts-ignore */}
+				<RenameGroupDialog
+					lang={lang}
+					visible={renameGroupVisibleModal}
+					onHide={() => setRenameGroupVisibleModal(false)}
+					group={selectedGroup}
+				/>
+			</aside>
+		</Sidebar>
 	);
 };
 
