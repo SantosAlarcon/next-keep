@@ -1,6 +1,5 @@
 import { getNoteById } from "@/app/utils/database/notes/getNoteById";
 import allNotesPageStyles from "@/app/styles/AllNotesPage.module.css";
-import NoteList from "@/app/components/NoteList";
 import NoteHeader from "@/app/components/ui/NoteHeader";
 import dynamic from "next/dynamic";
 
@@ -10,11 +9,9 @@ const GroupNotePage = async ({ params: { group, note, lang } }: { params: { grou
 
 	return (
 		<main className={allNotesPageStyles.all__notes__page__container}>
-			<NoteList group={group} selected={note} />
 			<section className={allNotesPageStyles.all__notes__page__right}>
 				{/** @ts-ignore */}
 				<NoteHeader note={foundNote} lang={lang} />
-
 				<div className={allNotesPageStyles.all__notes__page__bottom}>
 					{/** @ts-ignore */}
 					<MarkPreview text={foundNote?.data} />
