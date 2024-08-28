@@ -1,7 +1,12 @@
 .mobile__header__container {
     display: none;
     padding: .5rem;
-    position: sticky;
+    position: fixed;
+    width: 100%;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 .1rem .5rem #0006;
+    background-color: #1129;
+    z-index: 1;
 
     @media (width < 1024px) {
         display: block;
