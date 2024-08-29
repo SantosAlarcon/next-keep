@@ -43,6 +43,8 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 			icon: "pi pi-fw pi-trash",
 			command: () => {
 				confirmDialog({
+                    resizable: false,
+                    draggable: false,
 					header: t("group.group-delete-confirm-header"),
 					message: t("group.group-delete-confirm-message"),
 					icon: "pi pi-info-circle",
@@ -123,7 +125,6 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 					))}
 				</ul>
 				<ContextMenu ref={cmRef} model={groupContextMenu} />
-				<ConfirmDialog resizable={false} draggable={false} />
 				<RenameGroupDialog
 					lang={lang}
 					visible={renameGroupVisibleModal}
