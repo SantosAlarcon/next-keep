@@ -1,6 +1,6 @@
 import { getNoteById } from '@/app/utils/notes/getNoteById'
 
-export async function generateMetadata({ params, locale }: any) {
+export async function generateMetadata({ params }: any) {
 	const foundNote = await getNoteById(params.note)
 	return {
 		title: `${foundNote?.title} - Next Keep`,
