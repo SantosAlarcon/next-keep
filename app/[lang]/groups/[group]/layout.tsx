@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 
 export async function generateMetadata({ params: { group } }: { params: { group: string } }) {
     const foundGroup = await getGroupById(group)
-    console.log(foundGroup)
 
     return {
         title: `${foundGroup?.title}`,

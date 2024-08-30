@@ -3,7 +3,7 @@ import allNotesPageStyles from "@/app/styles/AllNotesPage.module.css";
 import NoteHeader from "@/app/components/ui/NoteHeader";
 import dynamic from "next/dynamic";
 
-const GroupNotePage = async ({ params: { group, note, lang } }: { params: { group: string; note: string; lang: string } }) => {
+const GroupNotePage = async ({ params: { note, lang } }: { params: { note: string; lang: string } }) => {
 	const foundNote = await getNoteById(note);
 	const MarkPreview = dynamic(() => import("@/components/MarkdownPreview").then((mod) => mod.default), { ssr: false })
 
