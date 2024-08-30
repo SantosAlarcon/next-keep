@@ -49,6 +49,10 @@
 	}
 }
 
+.p-dialog-mask {
+    backdrop-filter: blur(4px);
+}
+
 /* TOOLTIP */
 .p-tooltip {
 	font-family: inherit;
