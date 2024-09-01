@@ -3,6 +3,7 @@ import { devtools } from "zustand/middleware";
 import type { Group, Note } from "../types";
 
 export type DataStoreProps = {
+    filter: string,
     allGroupTitles: string[],
     allGroups: Group[],
     allNotes: Note[],
@@ -11,6 +12,8 @@ export type DataStoreProps = {
 }
 
 export const dataStore = create(devtools((set) => ({
+    filter: "",
+    setFilter: (filter: string) => set({filter: filter}),
     allGroupTitles: [],
     setAllGroupTitles: (titles: string[]) => set({allGroupTitles: titles}),
     allGroups: [],
