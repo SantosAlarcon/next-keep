@@ -6,7 +6,7 @@ import FixedIcon from './icons/FixedIcon';
 import UnfixedIcon from './icons/UnfixedIcon';
 import ActiveNoteLink from "./ui/ActiveNoteLink";
 
-const NoteList = async ({ group, selected }: { group: string, selected: string }) => {
+const NoteList = async ({ group, selected, filter }: { group: string, selected: string, filter: string }) => {
 	// biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
 	let notes;
 

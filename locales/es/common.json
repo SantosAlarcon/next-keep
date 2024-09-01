@@ -51,5 +51,6 @@
     "pending-operation": "Realizando operación...",
     "expand": "Expandir",
     "collapse": "Contraer",
-    "back": "Atrás"
+    "back": "Atrás",
+    "filter": "Filtrar"
 }
