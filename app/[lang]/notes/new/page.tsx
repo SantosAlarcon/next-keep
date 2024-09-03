@@ -21,7 +21,7 @@ const NewNotePage = async ({ params: { lang } }: { params: { lang: string } }) =
 				<Suspense fallback={<BarLoader width="128px" height="128px" color="#eee" />}>
 					<LocalizedTitleInput placeholder={t("title")} title={newNote.title} isEditing={false} />
 					{/* @ts-ignore */}
-					<EditorComp editorRef={editorRef} markdown={newNote.data} isEditing={false} />
+					<EditorComp editorRef={editorRef} text={newNote.data} isEditing={false} />
 					<SaveNoteButton lang={lang} title={t("save-note")} />
 				</Suspense>
 			</main>

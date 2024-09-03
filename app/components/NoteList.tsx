@@ -13,10 +13,9 @@ import { dataStore } from "../store/dataStore";
 
 const NoteList = ({ group, selected }: { group: string; selected: string; }) => {
 	const [notes, setNotes] = useState<Note[]>([]);
+	const [path, setPath] = useState<string>("");
 	const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
 	const filter: string = dataStore((state) => state.filter);
-
-	let path: string = "";
 
 	useEffect(() => {
 		switch (group) {
@@ -24,24 +23,24 @@ const NoteList = ({ group, selected }: { group: string; selected: string; }) => 
 				getAllNotes().then((data) => {
 					setNotes(data);
 					setFilteredNotes(data);
+					setPath("/notes/all");
 				});
-				path = "/notes/all";
 				break;
 			}
 			case "pinned": {
 				getAllPinnedNotes().then((data) => {
 					setNotes(data);
 					setFilteredNotes(data);
+					setPath("/notes/pinned");
 				});
-				path = "/notes/pinned";
 				break;
 			}
 			default: {
 				getNotesByGroup(group).then((data: Note[]) => {
 					setNotes(data);
 					setFilteredNotes(data);
+					setPath(`/groups/${group}`);
 				});
-				path = `/groups/${group}`;
 				break;
 			}
 		}
@@ -49,7 +48,7 @@ const NoteList = ({ group, selected }: { group: string; selected: string; }) => 
 
 	useEffect(() => {
 		if (filter.length > 0) {
-			setFilteredNotes([...notes].filter((note) => note.title.includes(filter)))
+			setFilteredNotes([...notes].filter((note) => note.title.toLowerCase().includes(filter)))
 		} else {
 			setFilteredNotes(notes)
 		}
