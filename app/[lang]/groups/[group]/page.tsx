@@ -1,8 +1,10 @@
+import FilterComponent from "@/app/components/FilterComponent";
 import NoteList from "@/app/components/NoteList";
 
-const GroupPage = ({ params: { group } }: { params: { group: string } }) => {
+const GroupPage = ({ params: { lang, group } }: { params: { lang: string; group: string } }) => {
 	return (
 		<main>
+			<FilterComponent lang={lang} />
 			<NoteList selected={"group"} group={group} />
 		</main>
 	);

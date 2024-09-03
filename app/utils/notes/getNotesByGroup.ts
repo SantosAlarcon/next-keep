@@ -1,5 +1,5 @@
-import notes from "@/data/notes.json"
-
-export const getNotesByGroup = (groupId: string) => {
-    return notes.filter((note) => note.group === groupId)
+export const getNotesByGroup = async (groupId: string) => {
+	const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/notes?group=${groupId}`)
+	const notes = await response.json()
+	return notes
 }

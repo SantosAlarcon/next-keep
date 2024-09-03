@@ -9,43 +9,53 @@ import UnfixedIcon from "./icons/UnfixedIcon";
 import ActiveNoteLink from "./ui/ActiveNoteLink";
 import { useEffect, useState } from "react";
 import type { Note } from "../types";
+import { dataStore } from "../store/dataStore";
 
-const NoteList = ({ group, selected, filter }: { group: string; selected: string; filter: string }) => {
+const NoteList = ({ group, selected }: { group: string; selected: string; }) => {
 	const [notes, setNotes] = useState<Note[]>([]);
-    const [filteredNotes, setFilteredNotes] = useState<Note[]>(notes);
+	const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
+	const filter: string = dataStore((state) => state.filter);
 
 	let path: string = "";
 
 	useEffect(() => {
 		switch (group) {
 			case "all": {
-				getAllNotes().then((data) => setNotes(data));
+				getAllNotes().then((data) => {
+					setNotes(data);
+					setFilteredNotes(data);
+				});
 				path = "/notes/all";
 				break;
 			}
 			case "pinned": {
-				getAllPinnedNotes().then((data) => setNotes(data));
+				getAllPinnedNotes().then((data) => {
+					setNotes(data);
+					setFilteredNotes(data);
+				});
 				path = "/notes/pinned";
 				break;
 			}
 			default: {
-				getNotesByGroup(group).then((data) => setNotes(data));
+				getNotesByGroup(group).then((data: Note[]) => {
+					setNotes(data);
+					setFilteredNotes(data);
+				});
 				path = `/groups/${group}`;
 				break;
 			}
 		}
 	}, []);
 
-    useEffect(() => {
-        console.log(filter)
-        if (filter !== "") {
-            setFilteredNotes([...notes].filter((note) => note.title.includes(filter)))
-        }
-    }, [filter])
+	useEffect(() => {
+		if (filter.length > 0) {
+			setFilteredNotes([...notes].filter((note) => note.title.includes(filter)))
+		} else {
+			setFilteredNotes(notes)
+		}
+	}, [filter])
 
 	filteredNotes?.sort((a, b) => b.updatedDate.localeCompare(a.updatedDate));
-
-	if (!filteredNotes) return null;
 
 	return (
 		<ul className={NoteListStyles.note__list__container}>
