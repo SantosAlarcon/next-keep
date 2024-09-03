@@ -47,6 +47,7 @@ export default async function RootLayout({
 	return (
 		<html lang={lang}>
 			<body className={font.className}>
+                {/* @ts-ignore */}
 				<DataSync state={state} />
 				<PrimeReactProvider value={{ ripple: true }}>
 					<Toaster richColors position="bottom-center" theme="dark" />

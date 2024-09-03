@@ -36,3 +36,7 @@
 		--color-fg-default: #eee !important;
 	}
 }
+
+.w-md-editor-show-preview {
+        font-family: inherit !important;
+}

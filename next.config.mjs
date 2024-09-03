@@ -4,7 +4,7 @@ const nextConfig = {
 	transpilePackages: ["swagger-ui-react", "i18next", "react-i18next"],
 	optimizeFonts: true,
 	experimental: {
-		optimizePackageImports: ["primereact", "@uiw/react-markdown-editor", "@uiw/react-markdown-preview"],
+		optimizePackageImports: ["primereact", "@uiw/react-md-editor", "@uiw/react-markdown-preview"],
 	},
 };
 

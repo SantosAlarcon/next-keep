@@ -15,6 +15,7 @@ const NoteList = ({ group, selected }: { group: string; selected: string; }) => 
 	const [notes, setNotes] = useState<Note[]>([]);
 	const [path, setPath] = useState<string>("");
 	const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
+    // @ts-ignore
 	const filter: string = dataStore((state) => state.filter);
 
 	useEffect(() => {
