@@ -1,0 +1,12 @@
+{
+	"title": "Login",
+	"email": "Email",
+	"password": "Password",
+	"remember": "Remember me",
+	"login-email": "Login with email",
+	"login-google": "Login with Google",
+	"login-facebook": "Login with Facebook",
+	"login-github": "Login with Github",
+	"login": "Login",
+	"login-error": "Login failed"
+}

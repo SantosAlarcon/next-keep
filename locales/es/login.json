@@ -1,0 +1,12 @@
+{
+	"title": "Iniciar sesión",
+	"email": "Correo electrónico",
+	"password": "Contraseña",
+	"remember": "Recordar",
+	"login-email": "Iniciar sesión con correo electrónico",
+	"login-google": "Iniciar sesión con Google",
+	"login-facebook": "Iniciar sesión con Facebook",
+	"login-github": "Iniciar sesión con Github",
+	"login": "Iniciar sesión",
+	"login-error": "Se ha producido un error al iniciar sesión"
+}
