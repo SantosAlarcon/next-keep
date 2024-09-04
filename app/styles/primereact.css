@@ -107,6 +107,14 @@
 	padding: .4rem;
 }
 
+.p-password-input {
+    width: 100%;
+}
+
+.p-icon-field.p-icon-field-right {
+    width: inherit;
+}
+
 /* MENU */
 .p-menuitem-link {
 	padding: .5rem;
@@ -130,6 +138,10 @@
 	&.p-highlight > * {
 		font-weight: bold;
 	}
+}
+
+.p-icon-field > .p-input-icon {
+    top: 28%;
 }
 
 /* ANIMATIONS */

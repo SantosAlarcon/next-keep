@@ -6,6 +6,9 @@ import "@/styles/globals.css"
 import "@/styles/primereact.css"
 import i18NextConfig from "@/i18n.config"
 import initTranslations from "@/app/i18n";
+import { Lato } from "next/font/google";
+
+const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
 export function generateStaticParams() {
 	return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
@@ -31,7 +34,7 @@ export default function LoginLayout({
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/NextKeep.svg" />
 			</head>
-			<body>
+			<body className={font.className}>
 				{children}
 			</body>
 		</html>
