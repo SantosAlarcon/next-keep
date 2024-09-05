@@ -1,17 +1,19 @@
 import { redirect } from "next/navigation";
 import styles from "../styles/page.module.css";
 
-async function Page({params: {lang}}: {params: {
-    lang: string
-}}) {
+async function Page({ params: { lang } }: {
+	params: {
+		lang: string
+	}
+}) {
 
-    redirect("/notes/all")
+	redirect("/notes/all")
 
-  return (
-    <main className={styles.main}>
+	return (
+		<main className={styles.main}>
 
-    </main>
-  );
+		</main>
+	);
 }
 
 export default Page

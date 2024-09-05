@@ -28,13 +28,13 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 	const cmRef = useRef(null);
 	const router = useRouter();
 
-    const [mounted, setMounted] = useState<boolean>(false);
+	const [mounted, setMounted] = useState<boolean>(false);
 	const [expanded, setExpanded] = useState<boolean>(() => {
-        // The default sidebar behaviour is opened. First checks if the sidebar_expanded
-        // is in the Local Storage. If not, it creates the key.
+		// The default sidebar behaviour is opened. First checks if the sidebar_expanded
+		// is in the Local Storage. If not, it creates the key.
 		if (!window.localStorage.getItem("sidebar_expanded")) {
-            window.localStorage.setItem("sidebar_expanded", "true")
-            return true;
+			window.localStorage.setItem("sidebar_expanded", "true")
+			return true;
 		}
 
 		if (window.localStorage.getItem("sidebar_expanded") === "true") {
@@ -51,13 +51,13 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 		setExpanded(!expanded);
 	};
 
-    useEffect(() => {
-        if (expanded) {
-            window.localStorage.setItem("sidebar_expanded", "true")
-        } else {
-            window.localStorage.setItem("sidebar_expanded", "false")
-        }
-    }, [expanded])
+	useEffect(() => {
+		if (expanded) {
+			window.localStorage.setItem("sidebar_expanded", "true")
+		} else {
+			window.localStorage.setItem("sidebar_expanded", "false")
+		}
+	}, [expanded])
 
 	const groupContextMenu = [
 		{
@@ -76,19 +76,19 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 					acceptLabel: t("yes"),
 					rejectLabel: t("no"),
 					accept: () => {
-                        // @ts-ignore
-                        toast.promise(deleteGroupById(selectedGroup?.id).then(() => {
-                            updateGroups();
-                            setTimeout(() => {
-                                router.refresh()
-                            }, 200)
-                        }), {
-                            loading: t("pending-operation"),
-                            success: () => {
-                                return t("group.group-delete-success", {name: selectedGroup?.title})
-                            },
-                            error: () => t("group.group-delete-error"),
-                        })
+						// @ts-ignore
+						toast.promise(deleteGroupById(selectedGroup?.id).then(() => {
+							updateGroups();
+							setTimeout(() => {
+								router.refresh()
+							}, 200)
+						}), {
+							loading: t("pending-operation"),
+							success: () => {
+								return t("group.group-delete-success", { name: selectedGroup?.title })
+							},
+							error: () => t("group.group-delete-error"),
+						})
 					},
 					reject: () => { },
 				});
@@ -104,11 +104,11 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 		}
 	};
 
-    useEffect(() => {
-        setMounted(true)
-    }, [])
+	useEffect(() => {
+		setMounted(true)
+	}, [])
 
-    if (!mounted) return null;
+	if (!mounted) return null;
 
 	return (
 		<AnimatePresence initial={false}>
@@ -175,7 +175,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 
 				<section className={sidebarStyles.sidebar__bottom}>
 					<Button
-                        tooltip={expanded ? t("collapse") : t("expand")}
+						tooltip={expanded ? t("collapse") : t("expand")}
 						severity="secondary"
 						label={expanded ? "<" : ">"}
 						className={expanded ? sidebarStyles.sidebar__expand__button : sidebarStyles.sidebar__expand__button__collapsed}

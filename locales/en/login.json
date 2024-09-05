@@ -1,5 +1,5 @@
 {
-	"title": "Login",
+	"login-title": "Login",
 	"email": "Email",
 	"password": "Password",
 	"remember": "Remember me",
@@ -8,5 +8,6 @@
 	"login-facebook": "Login with Facebook",
 	"login-github": "Login with Github",
 	"login": "Login",
-	"login-error": "Login failed"
+	"login-error": "Login failed",
+	"login-success": "Login successful"
 }

@@ -1,5 +1,5 @@
 {
-	"title": "Iniciar sesión",
+	"login-title": "Iniciar sesión",
 	"email": "Correo electrónico",
 	"password": "Contraseña",
 	"remember": "Recordar",
@@ -8,5 +8,6 @@
 	"login-facebook": "Iniciar sesión con Facebook",
 	"login-github": "Iniciar sesión con Github",
 	"login": "Iniciar sesión",
-	"login-error": "Se ha producido un error al iniciar sesión"
+	"login-error": "Se ha producido un error al iniciar sesión",
+	"login-success": "Se ha iniciado sesión correctamente"
 }

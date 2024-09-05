@@ -7,6 +7,8 @@ import "@/styles/primereact.css"
 import i18NextConfig from "@/i18n.config"
 import initTranslations from "@/app/i18n";
 import { Lato } from "next/font/google";
+import { PrimeReactProvider } from "primereact/api";
+import { Toaster } from "sonner";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -15,18 +17,18 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: string } }) {
-	const { t } = await initTranslations(lang, [ "login" ])
+	const { t } = await initTranslations(lang, ["login"])
 	return {
-		title: `${t("title")} - Next Keep`
+		title: `${t("login-title")} - Next Keep`
 	}
 }
 
-export default function LoginLayout({ 
-    children,
-    params: { lang }
-}: { 
-    children: ReactNode,
-    params: { lang: string } 
+export default function LoginLayout({
+	children,
+	params: { lang }
+}: {
+	children: ReactNode,
+	params: { lang: string }
 }) {
 	return (
 		<html lang={lang}>
@@ -35,7 +37,10 @@ export default function LoginLayout({
 				<link rel="icon" href="/NextKeep.svg" />
 			</head>
 			<body className={font.className}>
-				{children}
+				<PrimeReactProvider value={{ ripple: true }}>
+					<Toaster richColors position="top-center" />
+					{children}
+				</PrimeReactProvider>
 			</body>
 		</html>
 	)

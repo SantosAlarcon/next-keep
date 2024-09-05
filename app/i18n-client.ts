@@ -1,7 +1,7 @@
-import i18nClient from 'i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import i18nConfig from '@/i18n.config';
 import { initReactI18next } from 'react-i18next';
+import i18nClient from 'i18next';
 
 i18nClient
 	.use(
@@ -20,5 +20,6 @@ i18nClient
 		ns: i18nConfig.ns,
 		preload: i18nConfig.i18n.locales
 	})
+
 
 export default i18nClient
