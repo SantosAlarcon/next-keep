@@ -58,5 +58,6 @@
     "back": "Back",
     "filter": "Filter",
     "no-results-found": "No results found.",
-    "note-list-empty": "Note list is empty. Create one by pressing the 'Create note' button on the left."
+    "note-list-empty": "Note list is empty. Create one by pressing the 'Create note' button on the left.",
+    "empty-note-list-group": "There are no notes in this group. Change one to this group."
 }
