@@ -56,5 +56,6 @@
     "expand": "Expand",
     "collapse": "Collapse",
     "back": "Back",
-    "filter": "Filter"
+    "filter": "Filter",
+    "no-results-found": "No results found."
 }

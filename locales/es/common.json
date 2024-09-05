@@ -52,5 +52,6 @@
     "expand": "Expandir",
     "collapse": "Contraer",
     "back": "Atrás",
-    "filter": "Filtrar"
+    "filter": "Filtrar",
+    "no-results-found": "No se han encontrado resultados."
 }

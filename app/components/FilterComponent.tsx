@@ -4,11 +4,11 @@ import { InputText } from "primereact/inputtext";
 import FilterComponentStyles from "@/styles/FilterComponent.module.css";
 import { useEffect, useState } from "react";
 import useDebounce from "@/utils/hooks/useDebounce";
-import i18nClient from "../i18n-client";
 import { dataStore } from "../store/dataStore";
+import { useTranslation } from "react-i18next";
 
 const FilterComponent = ({ lang }: { lang: string }) => {
-	const t = i18nClient.getFixedT(lang, "common");
+    const {t} = useTranslation("common", {lng: lang})
 	// @ts-ignore
 	const setFilter = dataStore((state) => state.setFilter)
 	const [input, setInput] = useState<string>("");

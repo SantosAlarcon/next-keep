@@ -10,6 +10,7 @@ export async function emailLogin(data: FormData) {
 		// @ts-ignore
 		appwriteAccount.createEmailPasswordSession(email, password)
 			.then((response) => {
+                console.log(response)
 			})
 			.catch((error) => toast.error(error.message))
 	}

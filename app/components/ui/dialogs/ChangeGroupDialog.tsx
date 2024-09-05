@@ -1,4 +1,3 @@
-import i18nClient from '@/app/i18n-client';
 import { changeNoteGroup } from '@/app/utils/notes/changeNoteGroup';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
@@ -9,9 +8,10 @@ import { useState } from 'react';
 import { updateNotes } from '@/app/utils/updateData';
 import { Dropdown, type DropdownChangeEvent } from 'primereact/dropdown';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 const ChangeGroupDialog = ({ lang, visible, note, groupTitle, onHide, groupTitles }: { lang: string, visible: boolean, note: Note, groupTitle: string, groupTitles: string[],  onHide: () => void }) => {
-    const t = i18nClient.getFixedT(lang, "common")
+    const {t} = useTranslation("common", {lng: lang})
     const [pending, setPending] = useState<boolean>(false);
     const [selectedGroup, setSelectedGroup] = useState<string>(groupTitle)
     const router = useRouter()

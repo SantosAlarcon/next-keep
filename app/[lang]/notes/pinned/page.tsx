@@ -6,7 +6,7 @@ const AllNotesPage = ({params: {lang}}: {params: {lang: string}}) => {
 	return (
 		<main className={allNotesPageStyles.all__notes__page__container}>
 			<FilterComponent lang={lang} />
-			<NoteList selected="pinned" group="pinned" />
+			<NoteList selected="pinned" group="pinned" lang={lang} />
 		</main>
 	);
 };

@@ -1,6 +1,5 @@
 "use client"
 
-import i18nClient from "@/app/i18n-client";
 import type { Group } from "@/app/types";
 import { updateGroupById } from "@/app/utils/groups/updateGroupById";
 import { updateGroups } from "@/app/utils/updateData";
@@ -9,11 +8,12 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 const RenameGroupDialog = ({ lang, visible, onHide, group }: { lang: string, visible: boolean, onHide: () => void, group: Group }) => {
     const [pending, setPending] = useState<boolean>(false);
-    const t = i18nClient.getFixedT(lang, "common");
+    const {t} = useTranslation("common", {lng: lang})
     const [newTitle, setNewTitle] = useState<string>(group?.title);
     const titleRef = useRef(() => group.title);
 

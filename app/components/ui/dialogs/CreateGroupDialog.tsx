@@ -1,4 +1,3 @@
-import i18nClient from '@/app/i18n-client';
 import { createNewGroup } from '@/app/utils/groups/createNewGroup';
 import { updateGroups } from '@/app/utils/updateData';
 import { useRouter } from 'next/navigation';
@@ -8,9 +7,10 @@ import { InputText } from 'primereact/inputtext';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import BarLoader from '../BarLoader';
+import { useTranslation } from 'react-i18next';
 
 const CreateGroupDialog = ({ lang, visible, onHide }: { lang: string, visible: boolean, onHide: () => void }) => {
-    const t = i18nClient.getFixedT(lang, "common")
+    const {t} = useTranslation("common", {lng: lang})
     const [newGroup, setNewGroup] = useState<string>("");
     const [pending, setPending] = useState<boolean>(false);
     const router = useRouter();

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Button } from "primereact/button";
 import { useEffect, useRef, useState } from "react";
 import { logoVariants, mainSidebarLinks, variants } from "../constants";
-import i18nClient from "../i18n-client";
 import { dataStore } from "../store/dataStore";
 import sidebarStyles from "../styles/sidebar.module.css";
 import type { Group } from "../types";
@@ -20,9 +19,10 @@ import { useRouter } from "next/navigation";
 import { updateGroups } from "../utils/updateData";
 import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
+import { useTranslation } from "react-i18next";
 
 const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
-	const t = i18nClient.getFixedT(lang, "common");
+    const {t} = useTranslation("common", {lng: lang})
 	// @ts-ignore
 	const { allNotes, allGroups, allNoteAmounts, allPinnedNotes } = dataStore.getState();
 	const cmRef = useRef(null);

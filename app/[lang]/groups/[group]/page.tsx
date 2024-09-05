@@ -5,7 +5,7 @@ const GroupPage = ({ params: { lang, group } }: { params: { lang: string; group:
 	return (
 		<main>
 			<FilterComponent lang={lang} />
-			<NoteList selected={"group"} group={group} />
+			<NoteList selected={"group"} group={group} lang={lang} />
 		</main>
 	);
 };

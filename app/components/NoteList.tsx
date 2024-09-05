@@ -10,11 +10,13 @@ import ActiveNoteLink from "./ui/ActiveNoteLink";
 import { useEffect, useState } from "react";
 import type { Note } from "../types";
 import { dataStore } from "../store/dataStore";
+import { useTranslation } from "react-i18next";
 
-const NoteList = ({ group, selected }: { group: string; selected: string; }) => {
+const NoteList = ({ group, selected, lang}: { group: string; selected: string; lang: string}) => {
 	const [notes, setNotes] = useState<Note[]>([]);
 	const [path, setPath] = useState<string>("");
 	const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
+    const {t} = useTranslation("common", {lng: lang})
     // @ts-ignore
 	const filter: string = dataStore((state) => state.filter);
 
@@ -59,7 +61,7 @@ const NoteList = ({ group, selected }: { group: string; selected: string; }) => 
 
 	return (
 		<ul className={NoteListStyles.note__list__container}>
-			{filteredNotes.map((note) => (
+			{filteredNotes.length > 0 ? filteredNotes.map((note) => (
 				<li
 					key={note.id}
 					className={`${NoteListStyles.note__item__container} ${selected === note.id ? NoteListStyles.note__item__selected : ""}`}
@@ -71,7 +73,7 @@ const NoteList = ({ group, selected }: { group: string; selected: string; }) => 
 						</span>
 					</ActiveNoteLink>
 				</li>
-			))}
+			)) : <h3>{t("no-results-found")}</h3>}
 		</ul>
 	);
 };
