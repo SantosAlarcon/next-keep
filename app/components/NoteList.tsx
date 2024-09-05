@@ -73,7 +73,7 @@ const NoteList = ({ group, selected, lang}: { group: string; selected: string; l
 						</span>
 					</ActiveNoteLink>
 				</li>
-			)) : <h3>{t("no-results-found")}</h3>}
+			)) : <h3>{notes.length > 0 ? t("no-results-found") : t("note-list-empty")}</h3>}
 		</ul>
 	);
 };

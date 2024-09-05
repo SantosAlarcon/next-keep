@@ -53,5 +53,6 @@
     "collapse": "Contraer",
     "back": "Atrás",
     "filter": "Filtrar",
-    "no-results-found": "No se han encontrado resultados."
+    "no-results-found": "No se han encontrado resultados.",
+    "note-list-empty": "La lista de notas está vacía. Crea una pulsando el botón de 'Crear nota' de la izquierda'."
 }

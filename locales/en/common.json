@@ -57,5 +57,6 @@
     "collapse": "Collapse",
     "back": "Back",
     "filter": "Filter",
-    "no-results-found": "No results found."
+    "no-results-found": "No results found.",
+    "note-list-empty": "Note list is empty. Create one by pressing the 'Create note' button on the left."
 }
