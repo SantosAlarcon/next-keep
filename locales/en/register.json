@@ -1,0 +1,13 @@
+{
+    "register-title": "Register",
+    "register-email": "Email",
+    "register-password": "Password",
+    "register-confirm-password": "Confirm password",
+    "register-success": "The account has been succesfully created. Now you need to verify your email email to activate it.",
+    "register-passwords-dont-match": "Passwords doesn't match. Please write them again.",
+    "register-minimum-length": "Password must have 8 characters mininum",
+    "write-password": "Write a password",
+    "weak-password": "Weak password",
+    "medium-password": "Average complexity",
+    "strong-password": "Strong password"
+}

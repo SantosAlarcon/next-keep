@@ -1,0 +1,13 @@
+{
+    "register-title": "Registrarse",
+    "register-email": "Correo electrónico",
+    "register-password": "Contraseña",
+    "register-confirm-password": "Confirmar contraseña",
+    "register-success": "La cuenta se ha creado con éxito. Ahora debes verificar tu email para activarla.",
+    "register-passwords-dont-match": "Las contraseñas no coinciden. Intenta escribirlas otra vez.",
+    "register-minimum-length": "La contraseña debe tener 8 carácteres como mínimo.",
+    "write-password": "Escribe una contraseña",
+    "weak-password": "Contraseña débil",
+    "medium-password": "Complejidad media",
+    "strong-password": "Contraseña fuerte"
+}

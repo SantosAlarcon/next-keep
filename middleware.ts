@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
 	// Register the URL param in the headers
 	request.headers.set("x-current-path", request.nextUrl.pathname);
 
-	if (request.nextUrl.pathname.startsWith("/api/") || request.nextUrl.pathname.startsWith("/login/")) {
+	if (request.nextUrl.pathname.startsWith("/api/") || request.nextUrl.pathname.startsWith("/login/") || request.nextUrl.pathname.startsWith("/register/")) {
 		return NextResponse.next();
 	}
 
@@ -15,5 +15,5 @@ export async function middleware(request: NextRequest) {
 
 // applies this middleware only to files in the app directory
 export const config = {
-	matcher: ["/((?!api|static|.*\\..*|_next).*)", "/login"]
+	matcher: ["/((?!api|static|.*\\..*|_next).*)", "/login", "/register"]
 };
