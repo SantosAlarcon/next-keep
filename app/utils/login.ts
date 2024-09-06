@@ -1,6 +1,5 @@
 import { toast } from "sonner"
 import { appwriteAccount } from "../appwrite"
-import initTranslations from "../i18n"
 import { OAuthProvider } from "appwrite"
 
 export async function emailLogin(data: FormData) {
@@ -11,14 +10,26 @@ export async function emailLogin(data: FormData) {
 		// @ts-ignore
 		appwriteAccount.createEmailPasswordSession(email, password)
 			.then((response) => {
-                console.log(response)
+				console.log(response)
 			})
 			.catch((error) => toast.error(error.message))
 	}
 }
 
 export async function loginToFacebook() {
-    appwriteAccount.createOAuth2Session(
-        OAuthProvider.Facebook, "https://cloud.appwrite.io/v1/account/sessions/oauth2/callback/facebook/66a36b260022203773a5"
-    )
+	appwriteAccount.createOAuth2Session(
+		OAuthProvider.Facebook, "http://localhost:3000/notes/all"
+	)
+}
+
+export async function loginToGoogle() {
+	appwriteAccount.createOAuth2Session(
+		OAuthProvider.Google, "http://localhost:3000/notes/all"
+	)
+}
+
+export async function loginToGithub() {
+	appwriteAccount.createOAuth2Session(
+		OAuthProvider.Github, "http://localhost:3000/notes/all"
+	)
 }

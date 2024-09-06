@@ -4,7 +4,7 @@ import { FloatLabel } from 'primereact/floatlabel'
 import { InputText } from 'primereact/inputtext'
 import { Password } from 'primereact/password'
 import LoginStyles from '@/app/styles/Login.module.css'
-import { emailLogin, loginToFacebook } from '@/app/utils/login'
+import { emailLogin, loginToFacebook, loginToGithub, loginToGoogle } from '@/app/utils/login'
 import { useTranslation } from 'react-i18next'
 
 const Login = ({ lang }: { lang: string }) => {
@@ -16,8 +16,8 @@ const Login = ({ lang }: { lang: string }) => {
 		<>
 			<Image src="/NextKeep.svg" alt="Next Keep Logo" width={150} height={150} priority />
 			<h1>{t("login-title")}</h1>
-			<Button label={t("login-google")} icon="pi pi-google" className="p-button-rounded" />
-			<Button label={t("login-github")} icon="pi pi-github" className="p-button-rounded" />
+			<Button onClick={loginToGoogle} label={t("login-google")} icon="pi pi-google" className="p-button-rounded" />
+			<Button onClick={loginToGithub} label={t("login-github")} icon="pi pi-github" className="p-button-rounded" />
 			<Button onClick={loginToFacebook} label={t("login-facebook")} icon="pi pi-facebook" className="p-button-rounded" />
 			<hr />
 			<form id="emailLoginForm" action={emailLogin} className={LoginStyles.login__page__form}>
