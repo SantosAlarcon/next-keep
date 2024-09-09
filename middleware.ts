@@ -6,7 +6,10 @@ export async function middleware(request: NextRequest) {
 	// Register the URL param in the headers
 	request.headers.set("x-current-path", request.nextUrl.pathname);
 
-	if (request.nextUrl.pathname.startsWith("/api/") || request.nextUrl.pathname.startsWith("/login/") || request.nextUrl.pathname.startsWith("/register/")) {
+	if (request.nextUrl.pathname.startsWith("/api/") || 
+        request.nextUrl.pathname.startsWith("/login/") || 
+        request.nextUrl.pathname.startsWith("/register/") || 
+        request.nextUrl.pathname.startsWith("/reset-password/")) {
 		return NextResponse.next();
 	}
 
@@ -15,5 +18,5 @@ export async function middleware(request: NextRequest) {
 
 // applies this middleware only to files in the app directory
 export const config = {
-	matcher: ["/((?!api|static|.*\\..*|_next).*)", "/login", "/register"]
+	matcher: ["/((?!api|static|.*\\..*|_next).*)", "/login", "/register", "/reset-password"]
 };
