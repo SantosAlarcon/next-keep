@@ -30,10 +30,10 @@ const Register = ({ lang }: { lang: string }) => {
 						required
 						feedback={false}
 						toggleMask
-                        promptLabel={t("write-password")}
-                        strongLabel={t("strong-password")}
-                        weakLabel={t("weak-password")}
-                        mediumLabel={t("medium-password")}
+						promptLabel={t("write-password")}
+						strongLabel={t("strong-password")}
+						weakLabel={t("weak-password")}
+						mediumLabel={t("medium-password")}
 					/>
 					<label className={LoginStyles.login__page__form__label} htmlFor="password">{t("register-password")}</label>
 				</FloatLabel>

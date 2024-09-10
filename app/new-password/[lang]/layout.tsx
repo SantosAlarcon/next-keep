@@ -18,13 +18,13 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: string } }) {
-	const { t } = await initTranslations(lang, ["register"])
+	const { t } = await initTranslations(lang, ["new-password"])
 	return {
-		title: `${t("register-title")} - Next Keep`
+		title: `${t("new-password-title")} - Next Keep`
 	}
 }
 
-export default function RegisterLayout({
+export default function NewPasswordLayout({
 	children,
 	params: { lang }
 }: {

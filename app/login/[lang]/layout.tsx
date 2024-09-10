@@ -9,6 +9,7 @@ import initTranslations from "@/app/i18n";
 import { Lato } from "next/font/google";
 import { PrimeReactProvider } from "primereact/api";
 import { Toaster } from "sonner";
+import { LocaleSync } from "@/app/components/LocaleSync";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -38,6 +39,7 @@ export default function LoginLayout({
 			</head>
 			<body className={font.className}>
 				<PrimeReactProvider value={{ ripple: true }}>
+					<LocaleSync state={{ locale: lang }} />
 					<Toaster richColors position="top-center" />
 					{children}
 				</PrimeReactProvider>

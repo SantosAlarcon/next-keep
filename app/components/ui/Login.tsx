@@ -6,6 +6,7 @@ import { Password } from 'primereact/password'
 import LoginStyles from '@/app/styles/Login.module.css'
 import { emailLogin, loginToFacebook, loginToGithub, loginToGoogle } from '@/app/utils/login'
 import { useTranslation } from 'react-i18next'
+import Link from 'next/link'
 
 const Login = ({ lang }: { lang: string }) => {
 	const { t } = useTranslation("login", {
@@ -19,6 +20,9 @@ const Login = ({ lang }: { lang: string }) => {
 			<Button onClick={loginToGoogle} label={t("login-google")} icon="pi pi-google" className="p-button-rounded" />
 			<Button onClick={loginToGithub} label={t("login-github")} icon="pi pi-github" className="p-button-rounded" />
 			<Button onClick={loginToFacebook} label={t("login-facebook")} icon="pi pi-facebook" className="p-button-rounded" />
+			<Link href={`/reset-password/${lang}`}>
+			{t("forgot-password")}
+			</Link>
 			<hr />
 			<form id="emailLoginForm" action={emailLogin} className={LoginStyles.login__page__form}>
 				<FloatLabel>

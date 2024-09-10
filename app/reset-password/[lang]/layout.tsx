@@ -39,7 +39,7 @@ export default function ResetPasswordLayout({
 			</head>
 			<body className={font.className}>
 				<PrimeReactProvider value={{ ripple: true }}>
-                    <LocaleSync state={{locale: lang}} />
+					<LocaleSync state={{ locale: lang }} />
 					<Toaster richColors position="top-center" />
 					{children}
 				</PrimeReactProvider>

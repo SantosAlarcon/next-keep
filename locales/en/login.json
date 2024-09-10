@@ -8,6 +8,7 @@
 	"login-facebook": "Login with Facebook",
 	"login-github": "Login with Github",
 	"login": "Login",
-	"login-error": "Login failed",
-	"login-success": "Login successful"
+	"login-error": "Login failed. Check your credentials.",
+	"login-success": "Login successful",
+	"forgot-password": "Forgot password?"
 }

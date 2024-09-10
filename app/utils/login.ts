@@ -1,18 +1,23 @@
 import { toast } from "sonner"
 import { appwriteAccount } from "../appwrite"
 import { OAuthProvider } from "appwrite"
+import { localeStore } from "../store/localeStore"
+import initTranslations from "../i18n"
+import { redirect } from "next/navigation"
 
 export async function emailLogin(data: FormData) {
 	const email = data.get("email")
 	const password = data.get("password")
+	// @ts-ignore
+	const {t} = await initTranslations(localeStore.getState().locale, ["login"])
 
 	if (email && password) {
 		// @ts-ignore
 		appwriteAccount.createEmailPasswordSession(email, password)
-			.then((response) => {
-				console.log(response)
+			.then(() => {
+				redirect("/notes/all")
 			})
-			.catch((error) => toast.error(error.message))
+			.catch(() => toast.error(t("login-error")))
 	}
 }
 
