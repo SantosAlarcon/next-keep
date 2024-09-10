@@ -4,8 +4,10 @@ export const appwriteClient = new Client();
 
 appwriteClient
     .setLocale("es")
-    .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject('66a36b260022203773a5');
+    // @ts-ignore
+    .setEndpoint(process.env.API_ENDPOINT)
+    // @ts-ignore
+    .setProject(process.env.APPWRITE_PROJECT_ID);
 
 export const appwriteAccount = new Account(appwriteClient);
 
