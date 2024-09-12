@@ -10,5 +10,6 @@
 	"login": "Iniciar sesión",
 	"login-error": "Se ha producido un error al iniciar sesión. Comprueba tus credenciales.",
 	"login-success": "Se ha iniciado sesión correctamente",
-	"forgot-password": "¿Has olvidado tu contraseña?"
+	"forgot-password": "¿Has olvidado tu contraseña?",
+	"register": "Registrarse"
 }

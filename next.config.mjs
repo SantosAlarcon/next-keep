@@ -6,6 +6,14 @@ const nextConfig = {
 	experimental: {
 		optimizePackageImports: ["primereact", "@uiw/react-md-editor", "@uiw/react-markdown-preview"],
 	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "cloud.appwrite.io"
+			}
+		]
+	}
 };
 
 export default nextConfig;

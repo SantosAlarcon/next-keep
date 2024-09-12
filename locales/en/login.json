@@ -10,5 +10,6 @@
 	"login": "Login",
 	"login-error": "Login failed. Check your credentials.",
 	"login-success": "Login successful",
-	"forgot-password": "Forgot password?"
+	"forgot-password": "Forgot password?",
+	"register": "Register"
 }

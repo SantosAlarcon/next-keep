@@ -13,6 +13,7 @@ import "../styles/primereact.css";
 import { PrimeReactProvider } from "primereact/api";
 import { DataSync } from "../components/DataSync";
 import MobileHeader from "../components/ui/MobileHeader";
+import { LocaleSync } from "../components/LocaleSync";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -49,6 +50,7 @@ export default async function RootLayout({
 			<body className={font.className}>
 				{/* @ts-ignore */}
 				<DataSync state={state} />
+				<LocaleSync state={{locale: lang}} />
 				<PrimeReactProvider value={{ ripple: true }}>
 					<Toaster richColors position="bottom-center" theme="dark" />
 					<MobileHeader lang={lang} />

@@ -20,6 +20,7 @@ import { updateGroups } from "../utils/updateData";
 import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 import { useTranslation } from "react-i18next";
+import User from "./ui/User";
 
 const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
     const {t} = useTranslation("common", {lng: lang})
@@ -174,6 +175,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 				</section>
 
 				<section className={sidebarStyles.sidebar__bottom}>
+					<User />
 					<Button
 						tooltip={expanded ? t("collapse") : t("expand")}
 						severity="secondary"

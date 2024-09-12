@@ -21,8 +21,12 @@ const Login = ({ lang }: { lang: string }) => {
 			<Button onClick={loginToGithub} label={t("login-github")} icon="pi pi-github" className="p-button-rounded" />
 			<Button onClick={loginToFacebook} label={t("login-facebook")} icon="pi pi-facebook" className="p-button-rounded" />
 			<Link href={`/reset-password/${lang}`}>
-			{t("forgot-password")}
+				{t("forgot-password")}
 			</Link>
+			<Link href={`/register/${lang}`}>
+				{t("register")}
+			</Link>
+
 			<hr />
 			<form id="emailLoginForm" action={emailLogin} className={LoginStyles.login__page__form}>
 				<FloatLabel>
