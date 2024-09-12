@@ -1,9 +1,9 @@
+import { OAuthProvider } from "appwrite"
+import { redirect } from "next/navigation"
 import { toast } from "sonner"
 import { appwriteAccount } from "../appwrite"
-import { OAuthProvider } from "appwrite"
-import { localeStore } from "../store/localeStore"
 import initTranslations from "../i18n"
-import { redirect } from "next/navigation"
+import { localeStore } from "../store/localeStore"
 
 export async function emailLogin(data: FormData) {
 	const email = data.get("email")
@@ -17,7 +17,10 @@ export async function emailLogin(data: FormData) {
 			.then(() => {
 				redirect("/notes/all")
 			})
-			.catch(() => toast.error(t("login-error")))
+			.catch((error) => {
+                console.log(error)
+                toast.error(t("login-error"))
+            })
 	}
 }
 

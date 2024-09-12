@@ -1,10 +1,10 @@
-import { getGroupById } from "@/app/utils/database-appwrite/groups/getGroupById";
-import { getAllGroups } from "@/app/utils/database-appwrite/groups/getAllGroups";
 import { createNewGroup } from "@/app/utils/database-appwrite/groups/createNewGroup";
-import { updateGroupById } from "@/app/utils/database-appwrite/groups/updateGroupById";
 import { deleteGroupById } from "@/app/utils/database-appwrite/groups/deleteGroupById";
-import type { NextRequest } from "next/server";
+import { getAllGroups } from "@/app/utils/database-appwrite/groups/getAllGroups";
+import { getGroupById } from "@/app/utils/database-appwrite/groups/getGroupById";
 import { getGroupByTitle } from "@/app/utils/database-appwrite/groups/getGroupByTitle";
+import { updateGroupById } from "@/app/utils/database-appwrite/groups/updateGroupById";
+import type { NextRequest } from "next/server";
 
 /**
  * @swagger
@@ -114,7 +114,6 @@ export async function POST(req: NextRequest) {
 	await createNewGroup(body.title)
 
 	return Response.json({ message: `New group ${body.title} is added to the DB` }, { status: 201 })
-
 }
 
 /**
