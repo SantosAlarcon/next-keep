@@ -1,21 +1,11 @@
-import { Client, Account, Databases, Avatars } from "appwrite";
+import { Client, Account, Databases, Avatars } from "node-appwrite";
 import { authStore } from "./store/authStore";
 
-export const appwriteClient = new Client();
-
-appwriteClient
+export const appwriteClient = new Client()
     .setLocale("es")
     .setEndpoint(process.env.NEXT_PUBLIC_API_ENDPOINT!)
-    .setSession("current")
     .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
 
-//export const createAppwriteClient = () =>
-//	new Client()
-//		.setLocale("es")
-//		.setEndpoint(process.env.API_ENDPOINT!)
-//		.setProject(process.env.APPWRITE_PROJECT_ID!);
-//
-//export const appwriteClientAccount = new Account(createAppwriteClient());
 export const appwriteAccount = new Account(appwriteClient);
 
 export const appwriteDatabase = new Databases(appwriteClient);
@@ -50,11 +40,3 @@ export async function getLoggedInUser() {
 		return null;
 	}
 }
-
-// Register User
-/*appwriteAccount.create(ID.unique(), "santosalarcon86@gmail.com", "Pepe12345", "Santos Alarcón Asensio")
-    .then(function (response) {
-        console.log(response);
-    }, function (error) {
-        console.log(error);
-    });*/

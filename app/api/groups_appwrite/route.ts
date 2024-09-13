@@ -1,24 +1,13 @@
 import { createNewGroup } from "@/app/utils/database-appwrite/groups/createNewGroup";
 import { deleteGroupById } from "@/app/utils/database-appwrite/groups/deleteGroupById";
-import { getAllGroups } from "@/app/utils/database-appwrite/groups/getAllGroups";
 import { getGroupById } from "@/app/utils/database-appwrite/groups/getGroupById";
 import { getGroupByTitle } from "@/app/utils/database-appwrite/groups/getGroupByTitle";
+import getGroupsByUser from "@/app/utils/database-appwrite/groups/getGroupsByUser";
 import { updateGroupById } from "@/app/utils/database-appwrite/groups/updateGroupById";
 import type { NextRequest } from "next/server";
 
 /**
  * @swagger
- * /api/groups:
- *   get:
- *     summary: Returns the list of all groups
- *     description: Returns the list of all groups from the database
- *     tags:
- *       - groups
- *     responses:
- *       200:
- *         description: Returns the list of groups
- *       400:
- *         description: Failed to connect to the database
  * /api/groups?id={id}:
  *   get:
  *     summary: Return a group using the ID
@@ -51,11 +40,26 @@ import type { NextRequest } from "next/server";
  *         description: Returns the group that contains the title
  *       400:
  *         description: No group found with that title
+ * /api/groups?userId={userId}:
+ *   get:
+ *     summary: Returns the group that uses that title
+ *     tags:
+ *       - groups
+ *     parameters:
+ *       - in: query
+ *         name: userId
+ *         description: Returns the groups that belongs to the user with that ID
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Returns the groups that belong to the user with that ID
 */
 export async function GET(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id")
 	const title = searchParams.get("title")
+    const userId = searchParams.get("userId")
 
 	// If id is present in the query params, executes the getGroupById function and returns the group object
 	if (id) {
@@ -79,8 +83,10 @@ export async function GET(req: NextRequest) {
 		return Response.json(group, { status: 200 });
 	}
 
-	const groups = await getAllGroups();
-	return Response.json(groups, { status: 200 });
+    if (userId) {
+        const userGroups = await getGroupsByUser(userId);
+        return Response.json(userGroups, {status: 200})
+    }
 }
 
 /**
