@@ -1,5 +1,6 @@
 "use client"
 import { appwriteAccount, getInitials } from '@/app/appwrite'
+import { authStore } from '@/app/store/authStore'
 import { localeStore } from '@/app/store/localeStore'
 import UserStyles from '@/app/styles/User.module.css'
 import { Models } from 'appwrite'
@@ -13,7 +14,10 @@ const User = () => {
 	useEffect(() => {
 		const pepe = getInitials();
 		setInitials(new URL(pepe));
-		appwriteAccount.get().then((account) => setSession(account)).catch((error) => toast.error(error.message))
+		// @ts-ignore
+		const session = authStore.getState().session
+		setSession(session)
+		//appwriteAccount.get().then((account) => setSession(account)).catch((error) => toast.error(error.message))
 	}, [])
 
 	const logout = () => {

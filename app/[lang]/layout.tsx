@@ -14,6 +14,8 @@ import { PrimeReactProvider } from "primereact/api";
 import { DataSync } from "../components/DataSync";
 import MobileHeader from "../components/ui/MobileHeader";
 import { LocaleSync } from "../components/LocaleSync";
+import { AuthSync } from "../components/AuthSync";
+import { getAuthData } from "../utils/getAuthData";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -44,6 +46,7 @@ export default async function RootLayout({
 	};
 }>) {
 	const state = await getAllData();
+	const authState = await getAuthData();
 
 	return (
 		<html lang={lang}>
@@ -51,6 +54,7 @@ export default async function RootLayout({
 				{/* @ts-ignore */}
 				<DataSync state={state} />
 				<LocaleSync state={{locale: lang}} />
+				<AuthSync state={authState} />
 				<PrimeReactProvider value={{ ripple: true }}>
 					<Toaster richColors position="bottom-center" theme="dark" />
 					<MobileHeader lang={lang} />
