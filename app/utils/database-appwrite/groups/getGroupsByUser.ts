@@ -1,8 +1,9 @@
 import { appwriteDatabase } from "@/app/appwrite";
+import { databaseID, groupsCollectionID } from "@/app/constants";
 import { Query } from "appwrite";
 
 const getGroupsByUser = async (userId: string) => {
-    const groups = await appwriteDatabase.listDocuments(process.env.NEXT_PUBLIC_DATABASE_ID!, process.env.NEXT_PUBLIC_GROUPS_COLLECTION_ID!, [
+    const groups = await appwriteDatabase.listDocuments(databaseID, groupsCollectionID, [
         Query.equal("userId", userId),
         Query.orderAsc("title"),
         Query.select([ "$id", "title", "userId" ])

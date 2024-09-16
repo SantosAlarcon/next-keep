@@ -1,4 +1,5 @@
-import { Client, Account, Databases, Avatars } from "node-appwrite";
+import { Client, Account, Databases, Avatars } from "appwrite";
+import { Client as SVClient, Account as SVAccount, Databases as SVDatabases, Avatars as SVAvatars } from "node-appwrite";
 import { authStore } from "./store/authStore";
 
 export const appwriteClient = new Client()
@@ -9,6 +10,17 @@ export const appwriteClient = new Client()
 export const appwriteAccount = new Account(appwriteClient);
 
 export const appwriteDatabase = new Databases(appwriteClient);
+
+export const appwriteServerClient = new SVClient()
+    .setLocale("es")
+    .setEndpoint(process.env.NEXT_PUBLIC_API_ENDPOINT!)
+    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!)
+    .setKey(process.env.NEXT_PUBLIC_APPWRITE_API_KEY!)
+
+export const appwriteServerAccount = new SVAccount(appwriteServerClient);
+
+export const appwritesServerDatabase = new SVDatabases(appwriteServerClient);
+
 
 // @ts-ignore
 const {setSession, setUser} = authStore.getState();

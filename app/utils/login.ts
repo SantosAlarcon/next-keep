@@ -1,3 +1,5 @@
+"use server"
+
 import { OAuthProvider } from "appwrite"
 import { redirect } from "next/navigation"
 import { toast } from "sonner"
@@ -14,7 +16,7 @@ export async function emailLogin(data: FormData) {
 	if (email && password) {
 		// @ts-ignore
 		appwriteAccount.createEmailPasswordSession(email, password)
-			.then(() => {
+			.then((response) => {
 				redirect("/notes/all")
 			})
 			.catch((error) => {

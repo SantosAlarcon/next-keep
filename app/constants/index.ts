@@ -34,6 +34,9 @@ export const logoVariants = {
     },
 };
 
+export const databaseID = process.env.NEXT_PUBLIC_DATABASE_ID!
+export const notesCollectionID = process.env.NEXT_PUBLIC_NOTES_ID!
+export const groupsCollectionID = process.env.NEXT_PUBLIC_GROUPS_ID!
 export const notesEndpoint = `${process.env.API_ENDPOINT}/databases/${process.env.DATABASE_ID}/collections/${process.env.NOTES_COLLECTION_ID}/documents`;
 export const groupsEndpoint = `${process.env.API_ENDPOINT}/databases/${process.env.DATABASE_ID}/collections/${process.env.GROUPS_COLLECTION_ID}/documents`;
 export const clientNotesEndpoint = `${process.env.API_NEXT_PUBLIC_ENDPOINT}/databases/${process.env.NEXT_PUBLIC_DATABASE_ID}/collections/${process.env.NEXT_PUBLIC_NOTES_COLLECTION_ID}/records`;
