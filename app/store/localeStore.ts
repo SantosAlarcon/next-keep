@@ -8,4 +8,4 @@ export type LocaleStoreProps = {
 export const localeStore = create(devtools(((set) => ({
     locale: "en",
     setLocale: (locale: string) => set({locale: locale})
-})), {name: "Locale Store", enabled: process.env.NODE_ENV !== "production"}))
+})), {name: "Locale Store", enabled: false}))

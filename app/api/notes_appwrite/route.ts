@@ -3,7 +3,6 @@ import type { Note } from "@/app/types";
 import getNotesByUser from "@/app/utils/database-appwrite/notes/getNotesByUser";
 import { createNewNote } from "@/app/utils/database/notes/createNewNote";
 import { deleteNoteById } from "@/app/utils/database/notes/deleteNoteById";
-import { getAllNotes } from "@/app/utils/database/notes/getAllNotes";
 import { getAllPinnedNotes } from "@/app/utils/database/notes/getAllPinnedNotes";
 import { getNoteAmountsByGroups } from "@/app/utils/database/notes/getNoteAmountByGroups";
 import { getNoteById } from "@/app/utils/database/notes/getNoteById";
@@ -142,7 +141,6 @@ export async function GET(req: NextRequest) {
         const groups = await getNotesByUser(userId);
         return Response.json(groups)
     }
-
 }
 
 /**

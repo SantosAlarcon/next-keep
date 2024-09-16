@@ -1,20 +1,21 @@
+import i18NextConfig from "@/i18n.config";
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Lato } from "next/font/google";
 import type { ReactNode } from "react";
-import i18NextConfig from "@/i18n.config";
 import { Toaster } from "sonner";
 import { getAllData } from "../utils/getAllData";
-import dynamic from "next/dynamic";
 import "primereact/resources/themes/viva-dark/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "../styles/globals.css";
 import "../styles/primereact.css";
 import { PrimeReactProvider } from "primereact/api";
+import { appwriteAccount, appwriteServerAccount } from "../appwrite";
 import { DataSync } from "../components/DataSync";
-import MobileHeader from "../components/ui/MobileHeader";
 import { LocaleSync } from "../components/LocaleSync";
-import { appwriteServerAccount } from "../appwrite";
+import MobileHeader from "../components/ui/MobileHeader";
+import { AuthSync } from "../components/AuthSync";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -44,14 +45,17 @@ export default async function RootLayout({
 		lang: string;
 	};
 }>) {
-    const session = await appwriteServerAccount.get()
-    console.log(session)
-	const state = await getAllData(session.$id);
+    const session = await appwriteAccount.getSession("current")
+    console.log(">> SESSION: ", session)
+    const serverSession = await appwriteServerAccount.getSession("current")
+    console.log(">> SERVER SESSION: ", serverSession)
+	const state = await getAllData(session.userId);
 
 	return (
 		<html lang={lang}>
 			<body className={font.className}>
 				{/* @ts-ignore */}
+                <AuthSync state={{session: session}} />
 				<DataSync state={state} />
 				<LocaleSync state={{locale: lang}} />
 				<PrimeReactProvider value={{ ripple: true }}>

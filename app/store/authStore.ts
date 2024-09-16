@@ -1,10 +1,12 @@
-import { Models } from "appwrite";
+import type { Models } from "appwrite";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 export type AuthStoreProps = {
 	user: Models.User<Models.Preferences> | null
 	session: Models.Session | null
+    setUser: () => void
+    setSession: () => void
 }
 
 export const authStore = create(devtools((set) => ({

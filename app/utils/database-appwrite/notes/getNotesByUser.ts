@@ -1,8 +1,9 @@
 import { appwriteDatabase } from "@/app/appwrite";
+import { databaseID, notesCollectionID } from "@/app/constants";
 import { Query } from "appwrite";
 
 const getNotesByUser = async (userId: string) => {
-    const notes = await appwriteDatabase.listDocuments(process.env.NEXT_PUBLIC_DATABASE_ID!, process.env.NEXT_PUBLIC_NOTES_COLLECTION_ID!, [
+    const notes = await appwriteDatabase.listDocuments(databaseID, notesCollectionID, [
         Query.equal("userId", userId),
         Query.orderDesc("$updatedAt"),
         Query.select(["title", "isPinned", "data", "group", "userId", "$createdAt", "$updatedAt"])
