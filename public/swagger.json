@@ -60,6 +60,182 @@
     }
   },
   "paths": {
+    "/api/groups_appwrite?id={id}": {
+      "get": {
+        "summary": "Return a group using the ID",
+        "tags": [
+          "groups"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "ID of the group to get",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the group object with that ID"
+          },
+          "400": {
+            "description": "The ID provided doesn't exist in the database"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Deletes a group",
+        "description": "Deletes a group from the database",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "ID of the group to update",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deletes the group"
+          },
+          "400": {
+            "description": "ID has not been provided to delete the group or the ID provided doesn't exist in the database."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Updates the name of the group",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "ID of the group to update",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "title",
+            "description": "The new title of the group",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Updates the note group succesfully"
+          },
+          "400": {
+            "description": "Title or id have not been provided, or the ID provided doesn't exist in the database."
+          }
+        }
+      }
+    },
+    "/api/groups_appwrite?title={title}": {
+      "get": {
+        "summary": "Returns the group that uses that title",
+        "tags": [
+          "groups"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "title",
+            "description": "Returns the group that uses that title",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the group that contains the title"
+          },
+          "400": {
+            "description": "No group found with that title"
+          }
+        }
+      }
+    },
+    "/api/groups_appwrite?userId={userId}": {
+      "get": {
+        "summary": "Returns the group that uses that title",
+        "tags": [
+          "groups"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "userId",
+            "description": "Returns the groups that belongs to the user with that ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the groups that belong to the user with that ID"
+          }
+        }
+      }
+    },
+    "/api/groups": {
+      "post": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Creates a new group",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Group"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Creates the new group succesfully"
+          },
+          "400": {
+            "description": "Title has not been provided"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns the list of all groups",
+        "description": "Returns the list of all groups from the database",
+        "tags": [
+          "groups"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of groups"
+          },
+          "400": {
+            "description": "Failed to connect to the database"
+          }
+        }
+      }
+    },
     "/api/groups?id={id}": {
       "get": {
         "summary": "Return a group using the ID",
@@ -146,96 +322,6 @@
         }
       }
     },
-    "/api/groups?title={title}": {
-      "get": {
-        "summary": "Returns the group that uses that title",
-        "tags": [
-          "groups"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "title",
-            "description": "Returns the group that uses that title",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the group that contains the title"
-          },
-          "400": {
-            "description": "No group found with that title"
-          }
-        }
-      }
-    },
-    "/api/groups?userId={userId}": {
-      "get": {
-        "summary": "Returns the group that uses that title",
-        "tags": [
-          "groups"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "userId",
-            "description": "Returns the groups that belongs to the user with that ID",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the groups that belong to the user with that ID"
-          }
-        }
-      }
-    },
-    "/api/groups": {
-      "post": {
-        "tags": [
-          "groups"
-        ],
-        "summary": "Creates a new group",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Group"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Creates the new group succesfully"
-          },
-          "400": {
-            "description": "Title has not been provided"
-          }
-        }
-      },
-      "get": {
-        "summary": "Returns the list of all groups",
-        "description": "Returns the list of all groups from the database",
-        "tags": [
-          "groups"
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the list of groups"
-          },
-          "400": {
-            "description": "Failed to connect to the database"
-          }
-        }
-      }
-    },
     "/api/groups?sort={sort}": {
       "get": {
         "summary": "Returns the list of all groups sorted alphabetically",
@@ -258,6 +344,32 @@
           },
           "400": {
             "description": "Failed to connect to the database"
+          }
+        }
+      }
+    },
+    "/api/groups?title={title}": {
+      "get": {
+        "summary": "Returns the group that uses that title",
+        "tags": [
+          "groups"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "title",
+            "description": "Returns the group that uses that title",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the group that contains the title"
+          },
+          "400": {
+            "description": "No group found with that title"
           }
         }
       }

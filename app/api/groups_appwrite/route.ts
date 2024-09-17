@@ -2,13 +2,13 @@ import { createNewGroup } from "@/app/utils/database-appwrite/groups/createNewGr
 import { deleteGroupById } from "@/app/utils/database-appwrite/groups/deleteGroupById";
 import { getGroupById } from "@/app/utils/database-appwrite/groups/getGroupById";
 import { getGroupByTitle } from "@/app/utils/database-appwrite/groups/getGroupByTitle";
-import getGroupsByUser from "@/app/utils/database-appwrite/groups/getGroupsByUser";
+import { getGroupsByUser } from "@/app/utils/database-appwrite/groups/getGroupsByUser";
 import { updateGroupById } from "@/app/utils/database-appwrite/groups/updateGroupById";
 import { NextResponse, type NextRequest } from "next/server";
 
 /**
  * @swagger
- * /api/groups?id={id}:
+ * /api/groups_appwrite?id={id}:
  *   get:
  *     summary: Return a group using the ID
  *     tags:
@@ -24,7 +24,7 @@ import { NextResponse, type NextRequest } from "next/server";
  *         description: Returns the group object with that ID
  *       400:
  *         description: The ID provided doesn't exist in the database
- * /api/groups?title={title}:
+ * /api/groups_appwrite?title={title}:
  *   get:
  *     summary: Returns the group that uses that title
  *     tags:
@@ -40,15 +40,15 @@ import { NextResponse, type NextRequest } from "next/server";
  *         description: Returns the group that contains the title
  *       400:
  *         description: No group found with that title
- * /api/groups?userId={userId}:
+ * /api/groups_appwrite?userId={userId}:
  *   get:
- *     summary: Returns the group that uses that title
+ *     summary: Returns the group that uses that user ID
  *     tags:
  *       - groups
  *     parameters:
  *       - in: query
  *         name: userId
- *         description: Returns the groups that belongs to the user with that ID
+ *         description: ID of the user
  *         schema:
  *           type: string
  *     responses:
@@ -127,7 +127,7 @@ export async function POST(req: NextRequest) {
 
 /**
  * @swagger
- * /api/groups?id={id}:
+ * /api/groups_appwrite?id={id}:
  *   delete:
  *     tags:
  *       - groups
@@ -167,7 +167,7 @@ export async function DELETE(req: NextRequest) {
 
 /**
  * @swagger
- * /api/groups?id={id}:
+ * /api/groups_appwrite?id={id}:
  *   put:
  *     tags:
  *       - groups
