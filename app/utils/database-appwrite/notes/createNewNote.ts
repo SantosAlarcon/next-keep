@@ -15,7 +15,8 @@ export const createNewNote = async (note: Note) => {
 			isPinned: note.isPinned,
 			publishedDate: note.publishedDate,
 			updatedDate: note.updatedDate,
-			userId: session.userId
+            // @ts-ignore
+			userId: session.userI!
 		})
 		return true;
 	} catch (error) {

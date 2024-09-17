@@ -19,6 +19,7 @@ export async function loginToFacebook() {
 }
 
 export async function loginToGoogle() {
+    // @ts-ignore
 	appwriteAccount.createOAuth2Session(OAuthProvider.Google, "http://localhost:3000/notes/all").then((response) => {
 		cookies().set("appwrite_session", JSON.stringify(response));
 	});

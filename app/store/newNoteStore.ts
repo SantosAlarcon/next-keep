@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 type newNoteFields = {
 	newNote: {
-		id: string,
+		$id: string,
 		title: string,
 		group: string | null,
 		data: string,
@@ -20,7 +20,7 @@ type newNoteMethods = {
 // @ts-ignore
 const newNoteStore = (set) => ({
 	newNote: {
-		id: crypto.randomUUID(),
+		$id: crypto.randomUUID(),
 		group: null,
 		title: "",
 		isPinned: false,

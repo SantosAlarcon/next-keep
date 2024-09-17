@@ -1,17 +1,16 @@
-import { getNoteById } from '@/app/utils/database/notes/getNoteById'
-import React, { ReactNode } from 'react'
+import { getNoteById } from "@/app/utils/database-appwrite/notes/getNoteById";
+import type { ReactNode } from "react";
 
 export const generateMetadata = async ({ params: { note } }: { params: { note: string } }) => {
 	const foundNote = await getNoteById(note)
-	return {
+
+    return {
 		title: `${foundNote?.title} - Next Keep`,
-	}
-}
+	};
+};
 
 const AllNoteIdLayout = ({ children }: { children: ReactNode }) => {
-	return (
-		<>{children}</>
-	)
-}
+	return <>{children}</>;
+};
 
-export default AllNoteIdLayout
+export default AllNoteIdLayout;

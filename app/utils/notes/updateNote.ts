@@ -9,7 +9,7 @@ export const updateNote = async (updatedNote: Note) => {
 	const { t } = await initTranslations(locale, ["common"])
 
 	const updateNoteFunc = async () => {
-		const response = await fetch(`/api/notes?id=${updatedNote.id}`, {
+		const response = await fetch(`/api/notes_appwrite?id=${updatedNote.$id}`, {
 			method: "PUT",
 			body: JSON.stringify(updatedNote)
 		})

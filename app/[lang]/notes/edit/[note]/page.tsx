@@ -1,9 +1,9 @@
 import LocalizedTitleInput from "@/app/components/LocalizedTitleInput";
+import UpdateNoteProvider from "@/app/components/UpdateNoteProvider";
 import BarLoader from "@/app/components/ui/BarLoader";
 import UpdateNoteButton from "@/app/components/ui/buttons/UpdateNoteButton";
-import UpdateNoteProvider from "@/app/components/UpdateNoteProvider";
 import initTranslations from "@/app/i18n";
-import { getNoteById } from "@/app/utils/database/notes/getNoteById";
+import { getNoteById } from "@/app/utils/database-appwrite/notes/getNoteById";
 import { editorRef } from "@/app/utils/editorRef";
 import styles from "@/styles/NotePage.module.css";
 import dynamic from "next/dynamic";
@@ -21,7 +21,7 @@ const EditNotePage = async ({ params: { note, lang } }: { params: { note: string
 			<main className={styles.note__page__container}>
 				<Suspense fallback={<BarLoader width="128px" height="128px" color="#eee" />}>
 					<LocalizedTitleInput placeholder={t("title")} title={foundNote ? foundNote.title : ""} isEditing={true} />
-                    {/* @ts-ignore */}
+					{/* @ts-ignore */}
 					<EditorComp editorRef={editorRef} text={foundNote ? foundNote?.data : ""} isEditing={true} />
 					<UpdateNoteButton label={t("update-note")} />
 				</Suspense>

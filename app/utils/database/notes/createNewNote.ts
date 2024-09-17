@@ -5,6 +5,7 @@ export const createNewNote = async (note: Note) => {
     try {
         await prismaClient.notes.create({
             data: {
+                // @ts-ignore
                 id: note.id,
                 title: note.title,
                 data: note.data,

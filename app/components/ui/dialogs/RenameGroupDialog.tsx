@@ -48,7 +48,7 @@ const RenameGroupDialog = ({ lang, visible, onHide, group }: { lang: string, vis
                             } else {
                                 // @ts-ignore
                                 setPending(true);
-                                updateGroupById(group?.id, newTitle)
+                                updateGroupById(group?.$id, newTitle)
                                     .then(() => {
                                         // @ts-ignore
                                         toast.success(t("group.group-rename-success", { name: titleRef?.current?.value }));

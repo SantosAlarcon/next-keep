@@ -1,19 +1,18 @@
 import { useNewNoteStore } from "@/app/store/newNoteStore";
-import type { Note } from "@/app/types";
 import getNotesByUser from "@/app/utils/database-appwrite/notes/getNotesByUser";
-import { createNewNote } from "@/app/utils/database/notes/createNewNote";
-import { deleteNoteById } from "@/app/utils/database/notes/deleteNoteById";
-import { getAllPinnedNotes } from "@/app/utils/database/notes/getAllPinnedNotes";
-import { getNoteAmountsByGroups } from "@/app/utils/database/notes/getNoteAmountByGroups";
-import { getNoteById } from "@/app/utils/database/notes/getNoteById";
-import { getNotesByGroup } from "@/app/utils/database/notes/getNotesByGroup";
-import { updateNoteById } from "@/app/utils/database/notes/updateNoteById";
+import { createNewNote } from "@/app/utils/database-appwrite/notes/createNewNote";
+import { deleteNoteById } from "@/app/utils/database-appwrite/notes/deleteNoteById";
+import { getAllPinnedNotes } from "@/app/utils/database-appwrite/notes/getAllPinnedNotes";
+import { getNoteAmountsByGroups } from "@/app/utils/database-appwrite/notes/getNoteAmountByGroups";
+import { getNoteById } from "@/app/utils/database-appwrite/notes/getNoteById";
+import { getNotesByGroup } from "@/app/utils/database-appwrite/notes/getNotesByGroup";
+import { updateNoteById } from "@/app/utils/database-appwrite/notes/updateNoteById";
 import type { NextURL } from "next/dist/server/web/next-url";
 import type { NextRequest } from "next/server";
 
 /**
  * @swagger
- * /api/notes?userId={userId}:
+ * /api/notes_appwrite?userId={userId}:
  *  get:
  *      tags:
  *          - notes
@@ -28,7 +27,7 @@ import type { NextRequest } from "next/server";
  *      responses:
  *        200:
  *          description: Returns all the notes of the user with that ID
- * /api/notes?amount:
+ * /api/notes_appwrite?amount:
  *  get:
  *      tags:
  *          - notes
@@ -45,7 +44,7 @@ import type { NextRequest } from "next/server";
  *            description: Returns the amount of notes of every group
  *          400:
  *            description: Failed to connect to the database
- * /api/notes?group={groupId}:
+ * /api/notes_appwrite?group={groupId}:
  *  get:
  *      tags:
  *          - notes
@@ -62,7 +61,7 @@ import type { NextRequest } from "next/server";
  *            description: Returns the note list of the group with that ID
  *          400:
  *            description: The ID provided doesn't exist in the DB
- * /api/notes?id={id}:
+ * /api/notes_appwrite?id={id}:
  *  get:
  *      tags:
  *          - notes
@@ -79,7 +78,7 @@ import type { NextRequest } from "next/server";
  *            description: Returns the note with that ID
  *          400:
  *            description: The ID provided doesn't exist in the DB
- * /api/notes?pinned={pinned}:
+ * /api/notes_appwrite?pinned={pinned}:
  *  get:
  *      tags:
  *          - notes
@@ -100,15 +99,15 @@ import type { NextRequest } from "next/server";
 export async function GET(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id");
-	const pinned = searchParams.get("pinned")
-	const group = searchParams.get("group")
-	const amount = searchParams.get("amount")
-    const userId = searchParams.get("userId")
+	const pinned = searchParams.get("pinned");
+	const group = searchParams.get("group");
+	const amount = searchParams.get("amount");
+	const userId = searchParams.get("userId");
 
 	if (amount) {
-		const noteAmounts = await getNoteAmountsByGroups()
+		const noteAmounts = await getNoteAmountsByGroups();
 
-		return Response.json(noteAmounts, { status: 200 })
+		return Response.json(noteAmounts, { status: 200 });
 	}
 
 	// If ID is provided in the search params, it returns the note with that ID
@@ -123,46 +122,46 @@ export async function GET(req: NextRequest) {
 	}
 
 	if (pinned) {
-		const pinnedNotes = await getAllPinnedNotes()
-		return Response.json(pinnedNotes, { status: 200 })
+		const pinnedNotes = await getAllPinnedNotes();
+		return Response.json(pinnedNotes, { status: 200 });
 	}
 
 	if (group) {
-		const groupNoteList = await getNotesByGroup(group)
+		const groupNoteList = await getNotesByGroup(group);
 
 		if (!groupNoteList) {
-			return Response.json({ message: "The group with the ID provided doesn't exist in the DB" }, { status: 400 })
+			return Response.json({ message: "The group with the ID provided doesn't exist in the DB" }, { status: 400 });
 		}
 
-		return Response.json(groupNoteList, { status: 200 })
+		return Response.json(groupNoteList, { status: 200 });
 	}
 
-    if (userId) {
-        const groups = await getNotesByUser(userId);
-        return Response.json(groups)
-    }
+	if (userId) {
+		const notes = await getNotesByUser(userId);
+		return Response.json(notes, {status: 200});
+	}
 }
 
 /**
-* @swagger
-* /api/notes:
-*  post:
-*    tags:
-*      - notes
-*    summary: Creates a new note
-*    description: Creates a new note on the database
-*    requestBody:
-*      required: true
-*      content:
-*        application/json:
-*          schema:
-*            $ref: '#/components/schemas/Note'
-*    responses:
-*      201:
-*        description: Note is created successfully and inserted to the DB
-*      400:
-*        description: Body object must have a title and the data
-*/
+ * @swagger
+ * /api/notes_appwrite:
+ *  post:
+ *    tags:
+ *      - notes
+ *    summary: Creates a new note
+ *    description: Creates a new note on the database
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Note'
+ *    responses:
+ *      201:
+ *        description: Note is created successfully and inserted to the DB
+ *      400:
+ *        description: Body object must have a title and the data
+ */
 export async function POST(req: NextRequest) {
 	const res = await req.json();
 
@@ -194,32 +193,32 @@ export async function POST(req: NextRequest) {
 }
 
 /**
-* @swagger
-* /api/notes:
-*  put:
-*    tags:
-*      - notes
-*    summary: Updates a existing note
-*    description: Updates a note on the database with new title or data
-*    parameters:
-*      - name: id
-*        in: query
-*        description: ID of the note to update
-*        schema:
-*          type: string
-*        required: true
-*      - name: body
-*        in: header
-*        description: Body that contains the new title and/or data of the note
-*        schema:
-*          type: object
-*        required: true
-*  responses:
-*    201:
-*      description: Note is updated successfully on the DB
-*    400:
-*      description: ID and body object must have a title and the data, or ID doesn't exists in the DB.
-*/
+ * @swagger
+ * /api/notes_appwrite:
+ *  put:
+ *    tags:
+ *      - notes
+ *    summary: Updates a existing note
+ *    description: Updates a note on the database with new title or data
+ *    parameters:
+ *      - name: id
+ *        in: query
+ *        description: ID of the note to update
+ *        schema:
+ *          type: string
+ *        required: true
+ *      - name: body
+ *        in: header
+ *        description: Body that contains the new title and/or data of the note
+ *        schema:
+ *          type: object
+ *        required: true
+ *  responses:
+ *    201:
+ *      description: Note is updated successfully on the DB
+ *    400:
+ *      description: ID and body object must have a title and the data, or ID doesn't exists in the DB.
+ */
 export async function PUT(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id");
@@ -258,26 +257,26 @@ export async function PUT(req: NextRequest) {
 }
 
 /**
-* @swagger
-* /api/notes:
-*  delete:
-*    tags:
-*      - notes
-*    summary: Deletes an existing note
-*    description: Deletes an existing note on the database
-*    parameters:
-*      - name: id
-*        in: query
-*        description: ID of the note to delete
-*        schema:
-*          type: string
-*        required: true
-*    responses:
-*      200:
-*        description: Note is deleted successfully on the DB
-*      400:
-*        description: The ID provided doesn't exist in the DB or no ID provided in the query.
-*/
+ * @swagger
+ * /api/notes_appwrite:
+ *  delete:
+ *    tags:
+ *      - notes
+ *    summary: Deletes an existing note
+ *    description: Deletes an existing note on the database
+ *    parameters:
+ *      - name: id
+ *        in: query
+ *        description: ID of the note to delete
+ *        schema:
+ *          type: string
+ *        required: true
+ *    responses:
+ *      200:
+ *        description: Note is deleted successfully on the DB
+ *      400:
+ *        description: The ID provided doesn't exist in the DB or no ID provided in the query.
+ */
 export async function DELETE(req: NextRequest) {
 	const searchParams: NextURL = req.nextUrl;
 	const id = searchParams.searchParams.get("id");

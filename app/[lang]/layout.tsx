@@ -15,7 +15,7 @@ import { DataSync } from "../components/DataSync";
 import { LocaleSync } from "../components/LocaleSync";
 import MobileHeader from "../components/ui/MobileHeader";
 import { AuthSync } from "../components/AuthSync";
-import { cookies } from "next/headers";
+import { getSession } from "../utils/getSession";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -45,9 +45,7 @@ export default async function RootLayout({
 		lang: string;
 	};
 }>) {
-	const cookie = cookies().get("appwrite_session")
-	// @ts-ignore
-	const session = JSON.parse(cookie?.value)
+	const session = await getSession();
 	const state = await getAllData(session.userId);
 
 	return (
@@ -55,6 +53,7 @@ export default async function RootLayout({
 			<body className={font.className}>
 				{/* @ts-ignore */}
 				<AuthSync state={{ session: session }} />
+                {/* @ts-ignore */}
 				<DataSync state={state} />
 				<LocaleSync state={{ locale: lang }} />
 				<PrimeReactProvider value={{ ripple: true }}>

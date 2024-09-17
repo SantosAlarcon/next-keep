@@ -1,0 +1,46 @@
+import type { Metadata } from "next";
+import styles from "@/app/styles/NotePage.module.css";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { dataStore } from "@/app/store/dataStore";
+import type { Note } from "@/app/types";
+
+export async function generateStaticParams() {
+	// @ts-ignore
+	const { allNotes } = dataStore.getState();
+	console.log(allNotes);
+	return allNotes.map((note: Note) => {
+		note.$id;
+	});
+}
+
+export async function generateMetadata({ params: { note } }: { params: { note: string } }): Promise<Metadata> {
+	// @ts-ignore
+	const { allNotes } = dataStore.getState();
+
+	// @ts-ignore
+	const foundNote = allNotes.filter((currentNote) => currentNote.$id === note);
+
+	return {
+		title: `${foundNote?.title} - Next Keep`,
+	};
+}
+
+const NotePage = async ({ params: { note } }: { params: { note: string } }) => {
+	// @ts-ignore
+	const { allNotes } = dataStore.getState();
+
+	// @ts-ignore
+	const foundNote = allNotes.filter((currentNote) => currentNote.$id === note);
+
+	return (
+		<main className={styles.note__page__container}>
+			<h1 className={styles.note__page__title}>{foundNote?.title}</h1>
+			<Markdown className={styles.note__page__markdown} remarkPlugins={[remarkGfm]}>
+				{foundNote?.data}
+			</Markdown>
+		</main>
+	);
+};
+
+export default NotePage;

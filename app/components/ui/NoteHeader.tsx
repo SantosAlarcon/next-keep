@@ -21,11 +21,11 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 				<div className={noteHeaderStyles.note__header__upper__right}>
 					<ButtonGroup>
 						<BackButton lang={lang} />
-						<EditButton label={t("edit")} noteId={note.id} />
+						<EditButton label={t("edit")} noteId={note.$id} />
 						{/* @ts-ignore */}
 						<ChangeGroupButton lang={lang} label={t("note.change-group")} note={note} groupTitle={noteGroupTitle} />
 						<TogglePinButton title={t("toggle-pin")} note={note} />
-						{<DeleteButton label={t("delete")} noteId={note.id} localeStrings={{
+						{<DeleteButton label={t("delete")} noteId={note.$id} localeStrings={{
 							yes: t("yes"),
 							no: t("no"),
 							confirmMessage: t("note-delete-confirm"),

@@ -41,6 +41,7 @@ export default function LoginLayout({
 			<body className={font.className}>
 				<PrimeReactProvider value={{ ripple: true }}>
 					<AuthSync
+                        // @ts-ignore
 						state={{
 							session: null,
 							user: null,

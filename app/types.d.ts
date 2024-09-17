@@ -1,5 +1,5 @@
 export type Note = {
-    id: string;
+    $id: string;
     title: string;
     publishedDate: string;
     updatedDate: string;

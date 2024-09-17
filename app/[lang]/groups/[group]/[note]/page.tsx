@@ -1,11 +1,11 @@
-import { getNoteById } from "@/app/utils/database/notes/getNoteById";
 import allNotesPageStyles from "@/app/styles/AllNotesPage.module.css";
 import NoteHeader from "@/app/components/ui/NoteHeader";
 import dynamic from "next/dynamic";
+import { getNoteById } from "@/app/utils/database-appwrite/notes/getNoteById";
 
 const GroupNotePage = async ({ params: { note, lang } }: { params: { note: string; lang: string } }) => {
 	const foundNote = await getNoteById(note);
-	const MarkPreview = dynamic(() => import("@/components/MarkdownPreview").then((mod) => mod.default), { ssr: false })
+	const MarkPreview = dynamic(() => import("@/components/MarkdownPreview").then((mod) => mod.default), { ssr: false });
 
 	return (
 		<main className={allNotesPageStyles.all__notes__page__container}>
