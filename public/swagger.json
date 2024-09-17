@@ -60,47 +60,6 @@
     }
   },
   "paths": {
-    "/api/groups": {
-      "get": {
-        "summary": "Returns the list of all groups",
-        "description": "Returns the list of all groups from the database",
-        "tags": [
-          "groups"
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the list of groups"
-          },
-          "400": {
-            "description": "Failed to connect to the database"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "groups"
-        ],
-        "summary": "Creates a new group",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Group"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Creates the new group succesfully"
-          },
-          "400": {
-            "description": "Title has not been provided"
-          }
-        }
-      }
-    },
     "/api/groups?id={id}": {
       "get": {
         "summary": "Return a group using the ID",
@@ -187,32 +146,6 @@
         }
       }
     },
-    "/api/groups?sort={sort}": {
-      "get": {
-        "summary": "Returns the list of all groups sorted alphabetically",
-        "tags": [
-          "groups"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "sort",
-            "description": "Sorts the list of groups alphabetically",
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the list of groups alphabetically"
-          },
-          "400": {
-            "description": "Failed to connect to the database"
-          }
-        }
-      }
-    },
     "/api/groups?title={title}": {
       "get": {
         "summary": "Returns the group that uses that title",
@@ -239,6 +172,96 @@
         }
       }
     },
+    "/api/groups?userId={userId}": {
+      "get": {
+        "summary": "Returns the group that uses that title",
+        "tags": [
+          "groups"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "userId",
+            "description": "Returns the groups that belongs to the user with that ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the groups that belong to the user with that ID"
+          }
+        }
+      }
+    },
+    "/api/groups": {
+      "post": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Creates a new group",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Group"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Creates the new group succesfully"
+          },
+          "400": {
+            "description": "Title has not been provided"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns the list of all groups",
+        "description": "Returns the list of all groups from the database",
+        "tags": [
+          "groups"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of groups"
+          },
+          "400": {
+            "description": "Failed to connect to the database"
+          }
+        }
+      }
+    },
+    "/api/groups?sort={sort}": {
+      "get": {
+        "summary": "Returns the list of all groups sorted alphabetically",
+        "tags": [
+          "groups"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "Sorts the list of groups alphabetically",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of groups alphabetically"
+          },
+          "400": {
+            "description": "Failed to connect to the database"
+          }
+        }
+      }
+    },
     "/api/locale": {
       "get": {
         "tags": [
@@ -256,105 +279,26 @@
         }
       }
     },
-    "/api/notes": {
+    "/api/notes?userId={userId}": {
       "get": {
         "tags": [
           "notes"
         ],
         "summary": "Returns all the notes",
-        "description": "Returns all the notes from the database.",
-        "responses": {
-          "200": {
-            "description": "Returns all the notes"
-          },
-          "400": {
-            "description": "Failed to connect to the database"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "notes"
-        ],
-        "summary": "Creates a new note",
-        "description": "Creates a new note on the database",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Note"
-              }
+        "description": "Returns all the notes of the user with that ID",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "ID of the user",
+            "schema": {
+              "type": "string"
             }
           }
-        },
-        "responses": {
-          "201": {
-            "description": "Note is created successfully and inserted to the DB"
-          },
-          "400": {
-            "description": "Body object must have a title and the data"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "notes"
-        ],
-        "summary": "Updates a existing note",
-        "description": "Updates a note on the database with new title or data",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "description": "ID of the note to update",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          },
-          {
-            "name": "body",
-            "in": "header",
-            "description": "Body that contains the new title and/or data of the note",
-            "schema": {
-              "type": "object"
-            },
-            "required": true
-          }
-        ]
-      },
-      "responses": {
-        "201": {
-          "description": "Note is updated successfully on the DB"
-        },
-        "400": {
-          "description": "ID and body object must have a title and the data, or ID doesn't exists in the DB."
-        }
-      },
-      "delete": {
-        "tags": [
-          "notes"
-        ],
-        "summary": "Deletes an existing note",
-        "description": "Deletes an existing note on the database",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "description": "ID of the note to delete",
-            "schema": {
-              "type": "string"
-            },
-            "required": true
-          }
         ],
         "responses": {
           "200": {
-            "description": "Note is deleted successfully on the DB"
-          },
-          "400": {
-            "description": "The ID provided doesn't exist in the DB or no ID provided in the query."
+            "description": "Returns all the notes of the user with that ID"
           }
         }
       }
@@ -460,6 +404,109 @@
         "responses": {
           "200": {
             "description": "Returns all the pinned notes"
+          },
+          "400": {
+            "description": "Failed to connect to the database"
+          }
+        }
+      }
+    },
+    "/api/notes": {
+      "post": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Creates a new note",
+        "description": "Creates a new note on the database",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Note"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Note is created successfully and inserted to the DB"
+          },
+          "400": {
+            "description": "Body object must have a title and the data"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Updates a existing note",
+        "description": "Updates a note on the database with new title or data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID of the note to update",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "header",
+            "description": "Body that contains the new title and/or data of the note",
+            "schema": {
+              "type": "object"
+            },
+            "required": true
+          }
+        ]
+      },
+      "responses": {
+        "201": {
+          "description": "Note is updated successfully on the DB"
+        },
+        "400": {
+          "description": "ID and body object must have a title and the data, or ID doesn't exists in the DB."
+        }
+      },
+      "delete": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Deletes an existing note",
+        "description": "Deletes an existing note on the database",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID of the note to delete",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Note is deleted successfully on the DB"
+          },
+          "400": {
+            "description": "The ID provided doesn't exist in the DB or no ID provided in the query."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Returns all the notes",
+        "description": "Returns all the notes from the database.",
+        "responses": {
+          "200": {
+            "description": "Returns all the notes"
           },
           "400": {
             "description": "Failed to connect to the database"

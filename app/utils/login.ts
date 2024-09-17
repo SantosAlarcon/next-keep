@@ -1,31 +1,16 @@
 "use server";
 
 import { OAuthProvider } from "appwrite";
-import { redirect } from "next/navigation";
-import { toast } from "sonner";
-import { appwriteAccount, appwriteServerAccount } from "../appwrite";
-import initTranslations from "../i18n";
-import { localeStore } from "../store/localeStore";
+import { appwriteAccount } from "../appwrite";
 import { cookies } from "next/headers";
 
 export async function emailLogin(data: FormData) {
-	const email = data.get("email");
-	const password = data.get("password");
-	// @ts-ignore
-	const { t } = await initTranslations(localeStore.getState().locale, ["login"]);
+	const email = data.get("email")?.toString();
+	const password = data.get("password")?.toString();
 
 	if (email && password) {
-		// @ts-ignore
-		appwriteAccount
+		return await appwriteAccount
 			.createEmailPasswordSession(email, password)
-			.then((response) => {
-				cookies().set("appwrite_session", JSON.stringify(response));
-				redirect("/notes/all");
-			})
-			.catch((error) => {
-				console.log(error);
-				toast.error(t("login-error"));
-			});
 	}
 }
 
@@ -35,8 +20,8 @@ export async function loginToFacebook() {
 
 export async function loginToGoogle() {
 	appwriteAccount.createOAuth2Session(OAuthProvider.Google, "http://localhost:3000/notes/all").then((response) => {
-        cookies().set("appwrite_session", JSON.stringify(response));
-    });
+		cookies().set("appwrite_session", JSON.stringify(response));
+	});
 }
 
 export async function loginToGithub() {

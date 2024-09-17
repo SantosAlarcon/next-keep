@@ -11,11 +11,11 @@ import "primeicons/primeicons.css";
 import "../styles/globals.css";
 import "../styles/primereact.css";
 import { PrimeReactProvider } from "primereact/api";
-import { appwriteAccount, appwriteServerAccount } from "../appwrite";
 import { DataSync } from "../components/DataSync";
 import { LocaleSync } from "../components/LocaleSync";
 import MobileHeader from "../components/ui/MobileHeader";
 import { AuthSync } from "../components/AuthSync";
+import { cookies } from "next/headers";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -45,19 +45,18 @@ export default async function RootLayout({
 		lang: string;
 	};
 }>) {
-    const session = await appwriteAccount.getSession("current")
-    console.log(">> SESSION: ", session)
-    const serverSession = await appwriteServerAccount.getSession("current")
-    console.log(">> SERVER SESSION: ", serverSession)
+	const cookie = cookies().get("appwrite_session")
+	// @ts-ignore
+	const session = JSON.parse(cookie?.value)
 	const state = await getAllData(session.userId);
 
 	return (
 		<html lang={lang}>
 			<body className={font.className}>
 				{/* @ts-ignore */}
-                <AuthSync state={{session: session}} />
+				<AuthSync state={{ session: session }} />
 				<DataSync state={state} />
-				<LocaleSync state={{locale: lang}} />
+				<LocaleSync state={{ locale: lang }} />
 				<PrimeReactProvider value={{ ripple: true }}>
 					<Toaster richColors position="bottom-center" theme="dark" />
 					<MobileHeader lang={lang} />

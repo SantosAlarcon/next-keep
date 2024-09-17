@@ -10,52 +10,52 @@ import BarLoader from '../BarLoader';
 import { useTranslation } from 'react-i18next';
 
 const CreateGroupDialog = ({ lang, visible, onHide }: { lang: string, visible: boolean, onHide: () => void }) => {
-    const {t} = useTranslation("common", {lng: lang})
-    const [newGroup, setNewGroup] = useState<string>("");
-    const [pending, setPending] = useState<boolean>(false);
-    const router = useRouter();
+	const { t } = useTranslation("common", { lng: lang })
+	const [newGroupTitle, setNewGroupTitle] = useState<string>("");
+	const [pending, setPending] = useState<boolean>(false);
+	const router = useRouter();
 
-    const handleCreateGroup = () => {
-        if (newGroup === "") {
-            toast.error(t("group.ask-for-group-name"), { position: "top-center" });
-        } else {
-            setPending(true);
-            createNewGroup(newGroup)
-                .then(() => {
-                    toast.success(t("group.create-group-success", { name: newGroup }));
-                    setPending(false);
-                    onHide()
-                    updateGroups();
+	const handleCreateGroup = () => {
+		if (newGroupTitle === "") {
+			toast.error(t("group.ask-for-group-name"), { position: "top-center" });
+		} else {
+			setPending(true);
+			createNewGroup(newGroupTitle)
+				.then(() => {
+					toast.success(t("group.create-group-success", { name: newGroupTitle }));
+					setPending(false);
+					onHide()
+					updateGroups();
 
-                    setTimeout(() => {
-                        router.refresh();
-                    }, 200)
+					setTimeout(() => {
+						router.refresh();
+					}, 200)
 
-                    setNewGroup("");
-                })
-                .finally(() => {
-                    setPending(false);
-                });
-        }
-    }
+					setNewGroupTitle("");
+				})
+				.finally(() => {
+					setPending(false);
+				});
+		}
+	}
 
-    return (
-        <Dialog header={t("group.create-group-header")} footer={
-            <>
-                <Button label={t("cancel")} onClick={() => { onHide(); setNewGroup("") }} />
-                {/* @ts-ignore */}
-                <Button label={pending ? <BarLoader width="24px" height="24px" color="#eee" /> : t("create")} onClick={handleCreateGroup} />
-            </>
-        } draggable={false} 
-            blockScroll={true}
-            breakpoints={{"640px":"85vw"}}
-            onHide={() => { onHide(); setNewGroup("") }} visible={visible}>
-            <div className="p-dialog-content-input">
-                <p>{t("group.create-group-message")}</p>
-                <InputText required value={newGroup} onChange={(e) => setNewGroup(e.target.value)} />
-            </div>
-        </Dialog>
-    )
+	return (
+		<Dialog header={t("group.create-group-header")} footer={
+			<>
+				<Button label={t("cancel")} onClick={() => { onHide(); setNewGroupTitle("") }} />
+				{/* @ts-ignore */}
+				<Button label={pending ? <span className="pi pi-spinner pi-spin"></span> : t("create")} onClick={handleCreateGroup} />
+			</>
+		} draggable={false}
+			blockScroll={true}
+			breakpoints={{ "640px": "85vw" }}
+			onHide={() => { onHide(); setNewGroupTitle("") }} visible={visible}>
+			<div className="p-dialog-content-input">
+				<p>{t("group.create-group-message")}</p>
+				<InputText required value={newGroupTitle} onChange={(e) => setNewGroupTitle(e.target.value)} />
+			</div>
+		</Dialog>
+	)
 }
 
 export default CreateGroupDialog

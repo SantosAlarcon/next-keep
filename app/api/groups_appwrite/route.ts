@@ -4,7 +4,7 @@ import { getGroupById } from "@/app/utils/database-appwrite/groups/getGroupById"
 import { getGroupByTitle } from "@/app/utils/database-appwrite/groups/getGroupByTitle";
 import getGroupsByUser from "@/app/utils/database-appwrite/groups/getGroupsByUser";
 import { updateGroupById } from "@/app/utils/database-appwrite/groups/updateGroupById";
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
 /**
  * @swagger
@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id")
 	const title = searchParams.get("title")
-    const userId = searchParams.get("userId")
+	const userId = searchParams.get("userId")
 
 	// If id is present in the query params, executes the getGroupById function and returns the group object
 	if (id) {
@@ -83,10 +83,10 @@ export async function GET(req: NextRequest) {
 		return Response.json(group, { status: 200 });
 	}
 
-    if (userId) {
-        const userGroups = await getGroupsByUser(userId);
-        return Response.json(userGroups, {status: 200})
-    }
+	if (userId) {
+		const userGroups = await getGroupsByUser(userId);
+		return Response.json(userGroups, { status: 200 })
+	}
 }
 
 /**
@@ -112,14 +112,17 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
 	const body = await req.json();
 
-	if (!(body.hasOwnProperty("title"))) {
+	if (!body.hasOwnProperty("title") || !body) {
 		return Response.json({ message: "You need to provide the title" }, { status: 400 })
 	}
 
 	// Call the createNewGroup function to add it to the DB
-	await createNewGroup(body.title)
+	await createNewGroup(body.title).then(() => {
+		return NextResponse.json({ message: `New group ${body.title} is added to the DB` }, { status: 201 })
+	}).catch((error) => {
+		console.log(error.message)
+	})
 
-	return Response.json({ message: `New group ${body.title} is added to the DB` }, { status: 201 })
 }
 
 /**

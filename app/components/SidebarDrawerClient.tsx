@@ -7,7 +7,7 @@ import sidebarStyles from "@/styles/sidebar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { confirmDialog } from "primereact/confirmdialog";
 import { ContextMenu } from "primereact/contextmenu";
 import { Sidebar } from "primereact/sidebar";
 import { useRef, useState } from "react";
@@ -113,12 +113,12 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 				<ul className={sidebarStyles.sidebar__grouplist} onClick={onHide}>
 					{allGroups?.map((group: Group) => (
 						<GroupItem
-							key={group.id}
-							id={group.id}
+							key={group.$id}
+							id={group.$id}
 							title={group.title}
 							expanded={true}
 							// @ts-ignore
-							amount={allNoteAmounts[group.id] ? allNoteAmounts[group.id] : 0}
+							amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
 							// @ts-ignore
 							onContextMenu={(event) => handleContext(event, group)}
 						/>

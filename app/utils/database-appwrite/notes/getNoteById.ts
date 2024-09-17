@@ -1,12 +1,10 @@
-import { prismaClient } from "../../PrismaClient";
+import { appwriteDatabase } from "@/app/appwrite";
+import { databaseID, notesCollectionID } from "@/app/constants";
 
 export const getNoteById = async (noteId: string) => {
+
 	try {
-		const note = await prismaClient.notes.findUnique({
-			where: {
-				id: noteId
-			}
-		})
+		const note = await appwriteDatabase.getDocument(databaseID, notesCollectionID, noteId)
 		return note;
 	} catch (error) {
 		console.error(error)

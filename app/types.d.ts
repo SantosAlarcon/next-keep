@@ -9,7 +9,7 @@ export type Note = {
 }
 
 export type Group = {
-    id: string;
+    $id: string;
     title: string;
 }
 

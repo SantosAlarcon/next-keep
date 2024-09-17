@@ -7,11 +7,28 @@ import LoginStyles from '@/app/styles/Login.module.css'
 import { emailLogin, loginToFacebook, loginToGithub, loginToGoogle } from '@/app/utils/login'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
+import { useState } from 'react'
+import { toast } from 'sonner'
+import { redirect } from 'next/navigation'
 
 const Login = ({ lang }: { lang: string }) => {
 	const { t } = useTranslation("login", {
 		lng: lang,
 	})
+
+	const [pending, setPending] = useState<boolean>(false);
+
+	const submitEmailLogin = (data: FormData) => {
+		setPending(true);
+		// @ts-ignore
+		emailLogin(data)
+			.then((response) => {
+				document.cookie = `appwrite_session=${JSON.stringify(response)}; path=/;`;
+				redirect("/notes/all");
+			})
+			.catch(() => toast.error(t("login-error")))
+			.finally(() => setPending(false));
+	}
 
 	return (
 		<>
@@ -28,7 +45,7 @@ const Login = ({ lang }: { lang: string }) => {
 			</Link>
 
 			<hr />
-			<form id="emailLoginForm" action={emailLogin} className={LoginStyles.login__page__form}>
+			<form id="emailLoginForm" action={submitEmailLogin} className={LoginStyles.login__page__form}>
 				<FloatLabel>
 					<InputText type="email" className={LoginStyles.login__page__form__input} id="email" name="email" required />
 					<label className={LoginStyles.login__page__form__label} htmlFor="email">{t("email")}</label>
@@ -44,7 +61,7 @@ const Login = ({ lang }: { lang: string }) => {
 					/>
 					<label className={LoginStyles.login__page__form__label} htmlFor="password">{t("password")}</label>
 				</FloatLabel>
-				<Button type="submit" label={t("login")} className="p-button-rounded" />
+				<Button type="submit" label={pending ? "pi pi-spin pi-spinner" : t("login")} className="p-button-rounded" />
 			</form>
 		</>
 	)

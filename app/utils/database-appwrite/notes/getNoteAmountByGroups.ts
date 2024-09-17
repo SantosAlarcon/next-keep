@@ -1,12 +1,13 @@
-import { prismaClient } from "../../PrismaClient";
+import { appwriteDatabase } from "@/app/appwrite";
+import { getSession } from "../../getSession";
+import { Query } from "appwrite";
+import { databaseID, notesCollectionID } from "@/app/constants";
 
 export async function getNoteAmountsByGroups() {
-	const response = await prismaClient.notes.groupBy({
-		by: ["group"],
-		_count: {
-			_all: true
-		}
-	})
+	const session = getSession();
+	const response = await appwriteDatabase.listDocuments(databaseID, notesCollectionID, [
+		Query.equal("userId", session.userId),
+	])
 
 	const amountMap = new Map<string, number>();
 	for (const note of response) {

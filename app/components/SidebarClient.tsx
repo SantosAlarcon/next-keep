@@ -157,11 +157,11 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 					<ul className={sidebarStyles.sidebar__grouplist}>
 						{allGroups?.map((group: Group) => (
 							<GroupItem
-								key={group.id}
-								id={group.id}
+								key={group.$id}
+								id={group.$id}
 								title={group.title}
 								// @ts-ignore
-								amount={allNoteAmounts[group.id] ? allNoteAmounts[group.id] : 0}
+								amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
 								expanded={expanded}
 								// @ts-ignore
 								onContextMenu={(event) => handleContext(event, group)}
