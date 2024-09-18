@@ -1,8 +1,5 @@
-"use server";
-
 import { OAuthProvider } from "appwrite";
 import { appwriteAccount } from "../appwrite";
-import { cookies } from "next/headers";
 
 export async function emailLogin(data: FormData) {
 	const email = data.get("email")?.toString();
@@ -19,10 +16,7 @@ export async function loginToFacebook() {
 }
 
 export async function loginToGoogle() {
-    // @ts-ignore
-	appwriteAccount.createOAuth2Session(OAuthProvider.Google, "http://localhost:3000/notes/all").then((response) => {
-		cookies().set("appwrite_session", JSON.stringify(response));
-	});
+	appwriteAccount.createOAuth2Session(OAuthProvider.Google, "http://localhost:3000/notes/all");
 }
 
 export async function loginToGithub() {

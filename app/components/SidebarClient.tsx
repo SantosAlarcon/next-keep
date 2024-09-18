@@ -23,7 +23,7 @@ import { useTranslation } from "react-i18next";
 import User from "./ui/User";
 
 const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
-    const {t} = useTranslation("common", {lng: lang})
+	const { t } = useTranslation("common", { lng: lang })
 	// @ts-ignore
 	const { allNotes, allGroups, allNoteAmounts, allPinnedNotes } = dataStore.getState();
 	const cmRef = useRef(null);
