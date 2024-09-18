@@ -6,7 +6,7 @@ import { getSession } from "../../getSession"
 export const createNewGroup = async (title: string) => {
 	// @ts-ignore
 	const session = getSession();
-	await appwriteDatabase.createDocument(databaseID, groupsCollectionID, ID.unique(), {
+	return await appwriteDatabase.createDocument(databaseID, groupsCollectionID, ID.unique(), {
 		title: title,
         // @ts-ignore
 		userId: session.userId,

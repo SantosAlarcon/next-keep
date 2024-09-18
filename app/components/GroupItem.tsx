@@ -3,6 +3,7 @@ import ActiveLink from "./ui/ActiveLink";
 import Image from "next/image";
 
 const GroupItem = ({ id, title, amount, expanded, onContextMenu }: { id: string; title: string; amount: number; expanded: boolean, onContextMenu: () => void }) => {
+    console.log(">> GROUP ID: ", id)
 	return (
 		<li onContextMenu={onContextMenu} data-title={expanded ? null : title} data-tooltip-align={expanded ? null : "right"} className={GroupItemStyles.group__item__container}>
 			<ActiveLink href={`/groups/${id}`}>

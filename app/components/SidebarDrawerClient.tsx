@@ -25,7 +25,7 @@ import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { lang: string }; visible: boolean; onHide: () => void }) => {
 	const t = i18nClient.getFixedT(lang, "common");
 	// @ts-ignore
-	const { allNotes, allGroups, allNoteAmounts, allPinnedNotes } = dataStore.getState();
+	const { allNotes, allGroups, allPinnedNotes } = dataStore.getState();
 	const cmRef = useRef(null);
 	const router = useRouter();
 
@@ -117,8 +117,8 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 							id={group.$id}
 							title={group.title}
 							expanded={true}
-							// @ts-ignore
-							amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
+							//amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
+                            amount={0}
 							// @ts-ignore
 							onContextMenu={(event) => handleContext(event, group)}
 						/>

@@ -25,7 +25,7 @@ import User from "./ui/User";
 const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 	const { t } = useTranslation("common", { lng: lang })
 	// @ts-ignore
-	const { allNotes, allGroups, allNoteAmounts, allPinnedNotes } = dataStore.getState();
+	const { allNotes, allGroups, allPinnedNotes } = dataStore.getState();
 	const cmRef = useRef(null);
 	const router = useRouter();
 
@@ -161,7 +161,8 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 								id={group.$id}
 								title={group.title}
 								// @ts-ignore
-								amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
+								//amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
+                                amount={0}
 								expanded={expanded}
 								// @ts-ignore
 								onContextMenu={(event) => handleContext(event, group)}
