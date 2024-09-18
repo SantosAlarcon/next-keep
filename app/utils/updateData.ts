@@ -8,7 +8,7 @@ import { getAllNotes } from "./notes/getAllNotes";
 import { getAllPinnedNotes } from "./notes/getAllPinnedNotes";
 import { getNoteAmountByGroups } from "./notes/getNoteAmountByGroups";
 
-export const updateGroups = () => {
+export const updateGroups = async () => {
 	// @ts-ignore
 	const { setAllGroups, setAllGroupTitles } = dataStore.getState();
 

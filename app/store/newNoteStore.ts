@@ -1,3 +1,4 @@
+import { ID } from "appwrite";
 import { create } from "zustand";
 
 type newNoteFields = {
@@ -7,8 +8,9 @@ type newNoteFields = {
 		group: string | null,
 		data: string,
 		isPinned: boolean,
-		publishedDate: string,
-		updatedDate: string,
+		userId: string,
+		$createdAt: string,
+		$updatedAt: string
 	}
 }
 
@@ -20,17 +22,18 @@ type newNoteMethods = {
 // @ts-ignore
 const newNoteStore = (set) => ({
 	newNote: {
-		$id: crypto.randomUUID(),
+		$id: ID.unique(),
 		group: null,
 		title: "",
 		isPinned: false,
 		data: "",
-		publishedDate: "",
-		updatedDate: "",
+		userId: "",
+		$createdAt: "",
+		$updatedAt: ""
 	},
 	// @ts-ignore
 	setNewNote: (field) => set((state) => ({ newNote: { ...state.newNote, ...field } })),
-	reset: () => set({ newNote: { id: crypto.randomUUID(), group: null, title: "", isPinned: false, data: "", publishedDate: "", updatedDate: "" } }),
+	reset: () => set({ newNote: { group: null, title: "", isPinned: false, data: "", userId: "", $createdAt: "", $updatedAt: "", $id: ID.unique() } }),
 })
 
 // @ts-ignore

@@ -1,16 +1,18 @@
 export type Note = {
     $id: string;
     title: string;
-    publishedDate: string;
-    updatedDate: string;
+    data: string;
     group: string | null;
     isPinned: boolean;
-    data: string;
+    $createdAt: string;
+    $updatedAt: string;
+    userId: string;
 }
 
 export type Group = {
     $id: string;
     title: string;
+    userId: string;
 }
 
 export enum AsyncFunctionState {

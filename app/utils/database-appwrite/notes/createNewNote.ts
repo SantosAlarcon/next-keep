@@ -13,9 +13,9 @@ export const createNewNote = async (note: Note) => {
 			data: note.data,
 			group: note.group,
 			isPinned: note.isPinned,
-			publishedDate: note.publishedDate,
-			updatedDate: note.updatedDate,
-            // @ts-ignore
+			publishedDate: note.$createdAt,
+			updatedDate: note.$updatedAt,
+			// @ts-ignore
 			userId: session.userI!
 		})
 		return true;

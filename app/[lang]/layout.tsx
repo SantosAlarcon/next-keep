@@ -53,7 +53,7 @@ export default async function RootLayout({
 			<body className={font.className}>
 				{/* @ts-ignore */}
 				<AuthSync state={{ session: session }} />
-                {/* @ts-ignore */}
+				{/* @ts-ignore */}
 				<DataSync state={state} />
 				<LocaleSync state={{ locale: lang }} />
 				<PrimeReactProvider value={{ ripple: true }}>

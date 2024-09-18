@@ -34,6 +34,7 @@ export const logoVariants = {
     },
 };
 
+export const apiEndpoint = process.env.API_ENDPOINT!
 export const databaseID = process.env.NEXT_PUBLIC_DATABASE_ID!
 export const notesCollectionID = process.env.NEXT_PUBLIC_NOTES_COLLECTION_ID!
 export const groupsCollectionID = process.env.NEXT_PUBLIC_GROUPS_COLLECTION_ID!

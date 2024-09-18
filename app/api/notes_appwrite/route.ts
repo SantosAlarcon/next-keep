@@ -176,8 +176,8 @@ export async function POST(req: NextRequest) {
 	newNote.data = res.data;
 	newNote.group = res.group;
 	newNote.isPinned = res.isPinned;
-	newNote.publishedDate = new Date().toISOString();
-	newNote.updatedDate = new Date().toISOString();
+	newNote.$createdAt = new Date().toISOString();
+	newNote.$updatedAt = new Date().toISOString();
 
 	// Call the createNewNote function
 	const creationSuccess = await createNewNote(newNote);

@@ -34,11 +34,11 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 					</ButtonGroup>
 				</div>
 			</section>
-			<span className={noteHeaderStyles.note__header__date}><b>{t("last-update")}:</b> {new Date(note.updatedDate).toLocaleString(lang, {
+			<span className={noteHeaderStyles.note__header__date}><b>{t("last-update")}:</b> {new Date(note.$updatedAt).toLocaleString(lang, {
 				dateStyle: "full",
 				timeStyle: "short",
 			})}</span>
-			<span className={noteHeaderStyles.note__header__date}><b>{t("publish-date")}:</b> {new Date(note.publishedDate).toLocaleString(lang, {
+			<span className={noteHeaderStyles.note__header__date}><b>{t("publish-date")}:</b> {new Date(note.$createdAt).toLocaleString(lang, {
 				dateStyle: "full",
 				timeStyle: "short",
 			})}</span>

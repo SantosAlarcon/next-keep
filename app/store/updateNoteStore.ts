@@ -13,9 +13,9 @@ export const useUpdateNoteStore = create(devtools((set) => ({
 	updateNote: {},
 	// @ts-ignore
 	setUpdateNote: (field) => set((state) => ({ updateNote: { ...state.updateNote, ...field } })),
-    changeUpdateNote: async (noteId: string) => {
-        const response = await getNoteById(noteId);
-        set(() => ({updateNote: response}))
-    },
+	changeUpdateNote: async (noteId: string) => {
+		const response = await getNoteById(noteId);
+		set(() => ({ updateNote: response }))
+	},
 	reset: () => set({ updateNote: {} }),
-}), {name: "update-note"}))
+}), { name: "update-note" }))
