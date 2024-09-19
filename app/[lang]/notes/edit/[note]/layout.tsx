@@ -1,4 +1,4 @@
-import { getNoteById } from "@/app/utils/database-appwrite/notes/getNoteById"
+import { getNoteById } from "@/app/utils/notes/getNoteById"
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
 

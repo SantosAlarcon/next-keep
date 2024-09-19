@@ -8,14 +8,10 @@ import { useEffect, useState } from "react";
 import type { Note } from "../types";
 import { dataStore } from "../store/dataStore";
 import { useTranslation } from "react-i18next";
-import { appwriteAccount } from "../appwrite";
 
 const NoteList = ({ group, selected, lang }: { group: string; selected: string; lang: string }) => {
 	// @ts-ignore
 	const { allNotes } = dataStore.getState();
-	const [user, setUser] = useState(() => {
-		appwriteAccount.get().then((user) => setUser(user));
-	})
 	const [path, setPath] = useState<string>("");
 	const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
 	const { t } = useTranslation("common", { lng: lang });

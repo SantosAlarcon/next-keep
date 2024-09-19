@@ -8,7 +8,7 @@
 	"login-facebook": "Iniciar sesión con Facebook",
 	"login-github": "Iniciar sesión con Github",
 	"login": "Iniciar sesión",
-	"login-error": "Se ha producido un error al iniciar sesión. Comprueba tus credenciales.",
+	"login-error": "Se ha producido un error al iniciar sesión. Comprueba tu correo electrónico y contraseña.",
 	"login-success": "Se ha iniciado sesión correctamente",
 	"forgot-password": "¿Has olvidado tu contraseña?",
 	"register": "Registrarse"

@@ -1,6 +1,7 @@
-export const getAllPinnedNotes = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/notes_appwrite?pinned=true`);
-    const pinnedNotes = await response.json()
+import { getAllNotes } from "./getAllNotes";
+import type { Note } from "@/app/types";
 
-    return pinnedNotes
+export const getAllPinnedNotes = async () => {
+    const pinnedNotes = await getAllNotes()
+    return pinnedNotes.filter((note: Note) => note.isPinned === true)
 }

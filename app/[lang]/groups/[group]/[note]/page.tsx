@@ -1,7 +1,7 @@
 import allNotesPageStyles from "@/app/styles/AllNotesPage.module.css";
 import NoteHeader from "@/app/components/ui/NoteHeader";
 import dynamic from "next/dynamic";
-import { getNoteById } from "@/app/utils/database-appwrite/notes/getNoteById";
+import { getNoteById } from "@/app/utils/notes/getNoteById";
 
 const GroupNotePage = async ({ params: { note, lang } }: { params: { note: string; lang: string } }) => {
 	const foundNote = await getNoteById(note);

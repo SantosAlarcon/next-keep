@@ -1,13 +1,14 @@
-import { getAllPinnedNotes } from "./notes/getAllPinnedNotes";
-import { getAllGroups } from "./groups/getAllGroups";
+import { getGroupsByUser } from "./database-appwrite/groups/getGroupsByUser";
+import { getAllPinnedNotes } from "./database-appwrite/notes/getAllPinnedNotes";
+import getNotesByUser from "./database-appwrite/notes/getNotesByUser";
 import { getAllGroupTitles } from "./groups/getAllGroupTitles";
-import { getAllNotes } from "./notes/getAllNotes";
 
 export async function getAllData(userId: string) {
 	const [allNotes, allGroups, allPinnedNotes, allGroupTitles] = await Promise.all([
-		getAllNotes(),
-		getAllGroups(),
+		getNotesByUser(userId),
+		getGroupsByUser(userId),
 		getAllPinnedNotes(),
+		//getNoteAmountByGroups(),
 		getAllGroupTitles(),
 	]);
 	
