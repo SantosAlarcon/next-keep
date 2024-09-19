@@ -1,24 +1,26 @@
-import { Client, Account, Databases, Avatars } from "appwrite";
+import { Client, Account } from "appwrite";
 import { Client as SVClient, Account as SVAccount, Databases as SVDatabases, Avatars as SVAvatars } from "node-appwrite";
+import { apiEndpoint, appwriteAPIKey, appwriteProjectId } from "./constants";
 
-export const appwriteClient = new Client()
+export const appwriteClient = new SVClient()
     .setLocale("es")
-    .setEndpoint(process.env.NEXT_PUBLIC_API_ENDPOINT!)
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
+    .setEndpoint(apiEndpoint)
+    .setProject(appwriteProjectId)
+    .setKey(appwriteAPIKey)
 
-export const appwriteAccount = new Account(appwriteClient);
+export const appwriteAccount = new SVAccount(appwriteClient);
 
-export const appwriteDatabase = new Databases(appwriteClient);
+export const appwriteDatabase = new SVDatabases(appwriteClient);
 
-export const appwriteServerClient = new SVClient()
-    .setLocale("es")
-    .setEndpoint(process.env.NEXT_PUBLIC_API_ENDPOINT!)
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!)
-    .setKey(process.env.NEXT_PUBLIC_APPWRITE_API_KEY!)
-
-export const appwriteServerAccount = new SVAccount(appwriteServerClient);
-
-export const appwritesServerDatabase = new SVDatabases(appwriteServerClient);
+// export const appwriteServerClient = new SVClient()
+//     .setLocale("es")
+//     .setEndpoint(process.env.NEXT_PUBLIC_API_ENDPOINT!)
+//     .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!)
+//     .setKey(process.env.NEXT_PUBLIC_APPWRITE_API_KEY!)
+//
+// export const appwriteServerAccount = new SVAccount(appwriteServerClient);
+//
+// export const appwritesServerDatabase = new SVDatabases(appwriteServerClient);
 
 
 // @ts-ignore
@@ -27,7 +29,7 @@ export const appwritesServerDatabase = new SVDatabases(appwriteServerClient);
 // appwriteAccount.getSession("current").then((session) => setSession(session)).catch((error) => console.log(error))
 
 export const getInitials = () => {
-	const result = new Avatars(appwriteClient).getInitials();
+	const result = new SVAvatars(appwriteClient).getInitials();
 	return result;
 };
 

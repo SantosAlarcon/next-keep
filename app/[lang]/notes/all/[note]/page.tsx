@@ -2,11 +2,11 @@ import allNotesPageStyles from "@/app/styles/AllNotesPage.module.css"
 import NoteHeader from "@/app/components/ui/NoteHeader";
 import type { Note } from "@/app/types";
 import dynamic from "next/dynamic";
-import { getNoteById } from "@/app/utils/database-appwrite/notes/getNoteById";
+import { getNoteById } from "@/app/utils/notes/getNoteById";
 
 const AllNotesPageIdPage = async ({ params: { note, lang } }: { params: { note: string, lang: string } }) => {
-    // @ts-ignore
-    const foundNote: Note = await getNoteById(note);
+	// @ts-ignore
+	const foundNote: Note = await getNoteById(note);
 
 	const MarkPreview = dynamic(() => import("@/components/MarkdownPreview").then((mod) => mod.default), { ssr: false })
 

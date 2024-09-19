@@ -8,51 +8,42 @@ import { useEffect, useState } from "react";
 import type { Note } from "../types";
 import { dataStore } from "../store/dataStore";
 import { useTranslation } from "react-i18next";
+import { appwriteAccount } from "../appwrite";
 
 const NoteList = ({ group, selected, lang }: { group: string; selected: string; lang: string }) => {
 	// @ts-ignore
 	const { allNotes } = dataStore.getState();
+	const [user, setUser] = useState(() => {
+		appwriteAccount.get().then((user) => setUser(user));
+	})
 	const [path, setPath] = useState<string>("");
 	const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
 	const { t } = useTranslation("common", { lng: lang });
 	// @ts-ignore
 	const filter: string = dataStore((state) => state.filter);
 
+
 	useEffect(() => {
 		switch (group) {
 			case "all": {
-				/*getAllNotes().then((data) => {
-					setNotes(data);
-					setFilteredNotes(data);
-					setPath("/notes/all");
-				});*/
 				setFilteredNotes(allNotes);
 				setPath("/notes/all");
 				break;
 			}
 			case "pinned": {
-				/*getAllPinnedNotes().then((data) => {
-					setNotes(data);
-					setFilteredNotes(data);
-					setPath("/notes/pinned");
-				});*/
 				const pinnedNotes = allNotes.filter((note: Note) => note.isPinned === true);
 				setFilteredNotes(pinnedNotes);
 				setPath("/notes/pinned");
 				break;
 			}
 			default: {
-				/*getNotesByGroup(group).then((data: Note[]) => {
-					setNotes(data);
-					setFilteredNotes(data);
-					setPath(`/groups/${group}`);
-				});*/
 				const groupNotes = allNotes.filter((note: Note) => note.group === group);
 				setFilteredNotes(groupNotes);
 				setPath(`/groups/${group}`);
 				break;
 			}
 		}
+
 	}, []);
 
 	useEffect(() => {
