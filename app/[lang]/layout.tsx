@@ -17,6 +17,7 @@ import MobileHeader from "../components/ui/MobileHeader";
 import { AuthSync } from "../components/AuthSync";
 import { getSession } from "../utils/getSession";
 import { appwriteAccount } from "../appwrite";
+import { apiEndpoint, appwriteAPIKey } from "../constants";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -47,8 +48,9 @@ export default async function RootLayout({
 	};
 }>) {
 	const session = await getSession();
-	//const user = await appwriteAccount.get();
 	const state = await getAllData(session.userId);
+
+	console.log("API KEY: ", appwriteAPIKey)
 
 	return (
 		<html lang={lang}>
