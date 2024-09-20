@@ -1,5 +1,13 @@
+import { appwriteAPIKey, appwriteProjectId, groupsEndpoint } from "@/app/constants"
+
 export const deleteGroupById = async (id: string) => {
-	return await fetch(`${process.env.NEXT_PUBLIC_URL}/api/groups?id=${id}`, {
+	return await fetch(`${groupsEndpoint}/${id}`, {
 		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+			"X-Appwrite-Project": appwriteProjectId,
+			"X-Appwrite-Key": appwriteAPIKey
+		},
+
 	})
 }

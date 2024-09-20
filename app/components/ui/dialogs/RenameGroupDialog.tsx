@@ -40,7 +40,8 @@ const RenameGroupDialog = ({ lang, visible, onHide, group }: { lang: string, vis
                 <>
                     <Button label={t("cancel")} onClick={() => { onHide(); setNewTitle("") }} />
                     <Button
-                        label={t("rename")}
+			// @ts-ignore
+                        label={pending ? <span className="pi pi-spinner pi-spin"></span> : t("rename")}
                         onClick={() => {
                             // @ts-ignore
                             if (newTitle === "" || !titleRef.current) {

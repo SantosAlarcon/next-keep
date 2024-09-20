@@ -78,7 +78,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 					rejectLabel: t("no"),
 					accept: () => {
 						// @ts-ignore
-						toast.promise(deleteGroupById(selectedGroup?.id).then(() => {
+						toast.promise(deleteGroupById(selectedGroup?.$id).then(() => {
 							updateGroups();
 							setTimeout(() => {
 								router.refresh()
@@ -162,7 +162,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 								title={group.title}
 								// @ts-ignore
 								//amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
-                                amount={0}
+								amount={0}
 								expanded={expanded}
 								// @ts-ignore
 								onContextMenu={(event) => handleContext(event, group)}

@@ -46,6 +46,7 @@ const CreateGroupDialog = ({ lang, visible, onHide }: { lang: string, visible: b
 				<Button label={pending ? <span className="pi pi-spinner pi-spin"></span> : t("create")} onClick={handleCreateGroup} />
 			</>
 		} draggable={false}
+			resizable={false}
 			blockScroll={true}
 			breakpoints={{ "640px": "85vw" }}
 			onHide={() => { onHide(); setNewGroupTitle("") }} visible={visible}>

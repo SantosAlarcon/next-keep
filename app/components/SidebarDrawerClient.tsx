@@ -43,8 +43,8 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 			icon: "pi pi-fw pi-trash",
 			command: () => {
 				confirmDialog({
-                    resizable: false,
-                    draggable: false,
+					resizable: false,
+					draggable: false,
 					header: t("group.group-delete-confirm-header"),
 					message: t("group.group-delete-confirm-message"),
 					icon: "pi pi-info-circle",
@@ -52,8 +52,8 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 					rejectLabel: t("no"),
 					accept: () => {
 						toast.promise(
-                            // @ts-ignore
-							deleteGroupById(selectedGroup?.id).then(() => {
+							// @ts-ignore
+							deleteGroupById(selectedGroup?.$id).then(() => {
 								updateGroups();
 								setTimeout(() => {
 									router.refresh();
@@ -68,7 +68,7 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 							},
 						);
 					},
-					reject: () => {},
+					reject: () => { },
 				});
 			},
 		},
@@ -118,7 +118,7 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 							title={group.title}
 							expanded={true}
 							//amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
-                            amount={0}
+							amount={0}
 							// @ts-ignore
 							onContextMenu={(event) => handleContext(event, group)}
 						/>
@@ -129,7 +129,7 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 					lang={lang}
 					visible={renameGroupVisibleModal}
 					onHide={() => setRenameGroupVisibleModal(false)}
-                    // @ts-ignore
+					// @ts-ignore
 					group={selectedGroup}
 				/>
 			</aside>
