@@ -68,7 +68,7 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 							},
 						);
 					},
-					reject: () => { },
+					reject: () => {},
 				});
 			},
 		},

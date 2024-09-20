@@ -28,7 +28,7 @@ const CreateGroupDialog = ({ lang, visible, onHide }: { lang: string, visible: b
 
 					setTimeout(() => {
 						router.refresh();
-					}, 200)
+					}, 50)
 
 					setNewGroupTitle("");
 				})
@@ -43,7 +43,7 @@ const CreateGroupDialog = ({ lang, visible, onHide }: { lang: string, visible: b
 			<>
 				<Button label={t("cancel")} onClick={() => { onHide(); setNewGroupTitle("") }} />
 				{/* @ts-ignore */}
-				<Button label={pending ? <span className="pi pi-spinner pi-spin"></span> : t("create")} onClick={handleCreateGroup} />
+				<Button label={pending ? <span className="pi pi-spinner pi-spin" /> : t("create")} onClick={handleCreateGroup} />
 			</>
 		} draggable={false}
 			resizable={false}

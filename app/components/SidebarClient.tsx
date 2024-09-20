@@ -82,7 +82,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 							updateGroups();
 							setTimeout(() => {
 								router.refresh()
-							}, 200)
+							}, 100)
 						}), {
 							loading: t("pending-operation"),
 							success: () => {

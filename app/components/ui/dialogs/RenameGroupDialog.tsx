@@ -59,7 +59,7 @@ const RenameGroupDialog = ({ lang, visible, onHide, group }: { lang: string, vis
                                         setNewTitle("");
                                         setTimeout(() => {
                                             router.refresh();
-                                        }, 200);
+                                        }, 50);
                                     })
                                     .finally(() => setPending(false))
                             }

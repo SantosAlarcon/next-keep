@@ -9,7 +9,6 @@ import BarLoader from "@/app/components/ui/BarLoader";
 import { useRouter } from "next/navigation";
 import { updateNotes } from "@/app/utils/updateData";
 import { localeStore } from "@/app/store/localeStore";
-import i18nClient from "@/app/i18n-client";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 
@@ -20,9 +19,9 @@ function DeleteButton({
 }: { label: string; noteId: string; localeStrings: { yes: string; no: string; confirmMessage: string; confirmHeader: string } }) {
 	const [pending, setPending] = useState<boolean>(false);
 	const router = useRouter();
-    // @ts-ignore
-    const {locale} = localeStore.getState()
-    const {t} = useTranslation("common", {lng: locale})
+	// @ts-ignore
+	const { locale } = localeStore.getState();
+	const { t } = useTranslation("common", { lng: locale });
 
 	const handleClick = () => {
 		confirmDialog({
@@ -36,25 +35,29 @@ function DeleteButton({
 			blockScroll: true,
 			accept: () => {
 				setPending(true);
-				deleteNote(noteId)
-					.then(() => {
-                        toast.success(t("note-delete-success"))
+				toast.promise(
+					deleteNote(noteId).then(() => {
 						updateNotes();
 						router.back();
 
 						setTimeout(() => {
 							router.refresh();
-						}, 200);
-					})
-                    .catch(() => toast.error(t("note-delete-error")))
-					.finally(() => setPending(false));
+						}, 50);
+					}),
+					{
+						loading: t("pending-operation"),
+						success: () => t("note-delete-success"),
+						error: () => t("note-delete-error"),
+						finally: () => setPending(false),
+					},
+				);
 			},
 			reject: () => {},
 		});
 	};
 	return (
 		<Button
-			icon={pending ? <BarLoader width="20px" height="20px" color="#eee" /> : <DeleteIcon width="20px" height="20px" />}
+			icon={pending ? <span className="pi pi-spin pi-spinner" /> : <DeleteIcon width="20px" height="20px" />}
 			onClick={handleClick}
 			type="button"
 			tooltip={label}
