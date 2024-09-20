@@ -2,6 +2,7 @@ import type { Note } from "@/app/types"
 import { getCurrentLocale } from "../getCurrentLocale";
 import initTranslations from "@/app/i18n";
 import { toast } from "sonner";
+import { appwriteAPIKey, appwriteProjectId, notesEndpoint } from "@/app/constants";
 
 export const updateNote = async (updatedNote: Note) => {
 	const locale = await getCurrentLocale();
@@ -9,9 +10,16 @@ export const updateNote = async (updatedNote: Note) => {
 	const { t } = await initTranslations(locale, ["common"])
 
 	const updateNoteFunc = async () => {
-		const response = await fetch(`/api/notes_appwrite?id=${updatedNote.$id}`, {
-			method: "PUT",
-			body: JSON.stringify(updatedNote)
+		const response = await fetch(`${notesEndpoint}/${updatedNote.$id}`, {
+			method: "PATCH",
+			headers: {
+				"Content-Type": "application/json",
+				"X-Appwrite-Project": appwriteProjectId,
+				"X-Appwrite-Key": appwriteAPIKey
+			},
+			body: JSON.stringify({
+				data: updatedNote
+			})
 		})
 
 		if (response.status !== 200) {

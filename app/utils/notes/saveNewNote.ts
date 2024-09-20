@@ -1,8 +1,21 @@
+import { appwriteAPIKey, appwriteProjectId, notesEndpoint } from "@/app/constants";
 import type { Note } from "@/app/types";
+import { ID } from "appwrite";
+import { getSession } from "../getSession";
 
 export const saveNewNote = async (newNote: Note) => {
-	return await fetch(`${process.env.NEXT_PUBLIC_URL}/api/notes`, {
+	const session = await getSession();
+	newNote.userId = session.userId
+	return await fetch(notesEndpoint, {
 		method: "POST",
-		body: JSON.stringify(newNote),
+		headers: {
+			"Content-Type": "application/json",
+			"X-Appwrite-Project": appwriteProjectId,
+			"X-Appwrite-Key": appwriteAPIKey
+		},
+		body: JSON.stringify({
+			documentId: ID.unique(),
+			data: newNote
+		})
 	})
 };
