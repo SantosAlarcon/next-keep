@@ -1,15 +1,14 @@
 import { appwriteProjectId, notesEndpoint } from "@/app/constants";
 import { getSession } from "../getSession"
-import type { Note } from "@/app/types";
 
 export const getAllNotes = async () => {
     const session = await getSession();
-    const response = await fetch(notesEndpoint, {
+    const response = await fetch(`${notesEndpoint}?queries[0]={"method":"equal","attribute":"userId","values":["${session.userId}"]}&queries[1]={"method":"orderDesc", "attribute":"$updatedAt"}`, {
         headers: {
             "X-Appwrite-Project": appwriteProjectId
         }
     })
 
     const allNotes = await response.json()
-    return allNotes.documents.filter((note: Note) => note.userId === session.userId)
+    return allNotes.documents
 }

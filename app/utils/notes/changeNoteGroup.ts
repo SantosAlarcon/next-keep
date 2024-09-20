@@ -1,17 +1,20 @@
+import { appwriteAPIKey, appwriteProjectId, notesEndpoint } from "@/app/constants";
 import type { Note } from "@/app/types";
+import { getGroupByTitle } from "../groups/getGroupByTitle";
 
 export const changeNoteGroup = async (note: Note, groupTitle: string) => {
-	const group = await fetch(`/api/groups?title=${groupTitle}`).then((response) => response.json());
-
-	try {
-		await fetch(`/api/notes_appwrite?id=${note.$id}`, {
-			method: "PUT",
-			body: JSON.stringify({
-				title: note.title,
-				group: group.id,
-			}),
-		});
-	} catch (error) {
-		console.error(error);
-	}
+	const group = await getGroupByTitle(groupTitle);
+	await fetch(`${notesEndpoint}/${note.$id}`, {
+		method: "PATCH",
+		headers: {
+			"Content-Type": "application/json",
+			"X-Appwrite-Project": appwriteProjectId,
+			"X-Appwrite-Key": appwriteAPIKey,
+		},
+		body: JSON.stringify({
+			data: {
+				group: group[0]?.$id,
+			},
+		}),
+	});
 };

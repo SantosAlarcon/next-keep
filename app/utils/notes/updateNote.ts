@@ -18,7 +18,10 @@ export const updateNote = async (updatedNote: Note) => {
 				"X-Appwrite-Key": appwriteAPIKey
 			},
 			body: JSON.stringify({
-				data: updatedNote
+				data: {
+                    data: updatedNote.data,
+                    group: updatedNote.title
+                }
 			})
 		})
 

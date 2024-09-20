@@ -9,14 +9,14 @@ export const createNewGroup = async (newGroup: string) => {
 		headers: {
 			"Content-Type": "application/json",
 			"X-Appwrite-Project": appwriteProjectId,
-			"X-Appwrite-Key": appwriteAPIKey
+			"X-Appwrite-Key": appwriteAPIKey,
 		},
 		body: JSON.stringify({
-			documentId: ID.unique(), 
+			documentId: ID.unique(),
 			data: {
 				title: newGroup,
-				userId: session.userId
-			}
+				userId: session.userId,
+			},
 		}),
 	});
 };

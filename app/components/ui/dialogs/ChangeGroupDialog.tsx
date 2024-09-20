@@ -26,7 +26,7 @@ const ChangeGroupDialog = ({ lang, visible, note, groupTitle, onHide, groupTitle
 
                 setTimeout(() => {
                     router.refresh()
-                }, 200)
+                }, 100)
 
             })
             .finally(() => {
@@ -41,6 +41,7 @@ const ChangeGroupDialog = ({ lang, visible, note, groupTitle, onHide, groupTitle
     return (
         <Dialog header={t("note.change-group-header")}
             draggable={false}
+            resizable={false}
             // @ts-ignore
             message={t("note.change-group-message")}
             visible={visible}

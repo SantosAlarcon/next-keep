@@ -1,10 +1,9 @@
 import { appwriteProjectId, groupsEndpoint } from "@/app/constants";
 import { getSession } from "../getSession";
-import type { Group } from "@/app/types";
 
 export const getAllGroups = async () => {
     const session = await getSession();
-    const response = await fetch(groupsEndpoint, {
+    const response = await fetch(`${groupsEndpoint}?queries[0]={"method":"equal","attribute":"userId","values":["${session.userId}"]}&queries[1]={"method":"orderAsc", "attribute":"title"}`, {
         headers: {
             "X-Appwrite-Project": appwriteProjectId,
         },
@@ -12,6 +11,4 @@ export const getAllGroups = async () => {
 
     const allGroups = await response.json();
     return allGroups.documents
-        .filter((group: Group) => group.userId === session.userId)
-        .sort((a: Group, b: Group) => a.title.localeCompare(b.title));
 };
