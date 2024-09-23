@@ -8,7 +8,8 @@ export const getAllGroups = async () => {
 
 	try {
 		const query = appwriteDatabase.listDocuments(
-			databaseID, groupsCollectionID, [Query.equal("userId", session.userId), Query.orderAsc("title")],
+            // @ts-ignore
+			databaseID, groupsCollectionID, [Query.equal("userId", session?.userId), Query.orderAsc("title")],
 		)
 		return query
 	} catch (error) {

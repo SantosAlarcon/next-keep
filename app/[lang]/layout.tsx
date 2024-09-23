@@ -8,7 +8,6 @@ import "primeicons/primeicons.css";
 import "../styles/globals.css";
 import "../styles/primereact.css";
 import { getAllData } from "../utils/getAllData";
-import { getSession } from "../utils/getSession";
 import { LocaleSync } from "../components/LocaleSync";
 import { PrimeReactProvider } from "primereact/api";
 import { Toaster } from "sonner";
@@ -16,6 +15,7 @@ import MobileHeader from "../components/ui/MobileHeader";
 import dynamic from "next/dynamic";
 import { AuthSync } from "../components/AuthSync";
 import { DataSync } from "../components/DataSync";
+import { getSession } from "../utils/getSession";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -44,8 +44,11 @@ export default async function RootLayout({
 		lang: string;
 	};
 }>) {
-	const session = await fetch("/api/session", { cache: "no-store" }).then((response) => response.json());
-	const state = await getAllData(session.userId);
+    const session = await getSession();
+
+    // @ts-ignore
+    const state = await getAllData(session?.userId);
+
 	return (
 		<html lang={lang}>
 			<body className={font.className}>

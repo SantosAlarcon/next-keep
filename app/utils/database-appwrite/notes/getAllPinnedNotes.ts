@@ -9,7 +9,8 @@ export const getAllPinnedNotes = async () => {
 		const pinnedNotes = await appwriteDatabase.listDocuments(databaseID, notesCollectionID, [
 			Query.equal("isPinned", true),
 			Query.orderDesc("$updatedAt"),
-			Query.equal("userId", session.userId),
+            // @ts-ignore
+			Query.equal("userId", session?.userId),
 		]);
 
 		return pinnedNotes.documents;

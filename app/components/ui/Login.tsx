@@ -24,7 +24,7 @@ const Login = ({ lang }: { lang: string }) => {
 		// @ts-ignore
 		emailLogin(data)
 			.then((response) => {
-				document.cookie = `appwrite_session=${JSON.stringify(response)}; path=/; sameSite=none; httpOnly; secure`;
+				document.cookie = `appwrite_session=${JSON.stringify(response)}; path=/;`;
 				router.push("/notes/all");
 			})
 			.catch(() => toast.error(t("login-error")))

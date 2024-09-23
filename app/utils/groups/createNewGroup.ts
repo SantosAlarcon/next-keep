@@ -15,7 +15,7 @@ export const createNewGroup = async (newGroup: string) => {
 			documentId: ID.unique(),
 			data: {
 				title: newGroup,
-				userId: session.userId,
+				userId: session?.userId,
 			},
 		}),
 	});
