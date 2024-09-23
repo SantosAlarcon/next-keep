@@ -1,7 +1,11 @@
-import { cookies } from "next/headers";
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
+
+//export const dynamic = "force-static";
 
 export async function GET(req: NextRequest) {
-    const session = cookies().get("appwrite_session")?.value
-    return Response.json(JSON.parse(session!))
+    const cookie = req.cookies.get("appwrite_session")?.value
+
+    const session = JSON.parse(cookie)
+
+    return NextResponse.json(session, {status: 200})
 }

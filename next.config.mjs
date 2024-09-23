@@ -3,15 +3,23 @@ const nextConfig = {
 	async headers() {
 		return [
 			{
-				source: '/',
+				source: "/api/(.*)",
 				headers: [
 					{
-						key: 'Referer-Policy',
-						value: 'strict-origin-when-cross-origin'
-					}
-				]
-			}
-		]
+						key: "Access-Control-Allow-Origin",
+						value: "*",
+					},
+					{
+						key: "Access-Control-Allow-Methods",
+						value: "GET, POST, PUT, DELETE, OPTIONS",
+					},
+					{
+						key: "Access-Control-Allow-Headers",
+						value: "Content-Type, Authorization",
+					},
+				],
+			},
+		];
 	},
 	pageExtensions: ["js", "jsx", "ts", "tsx", "mdx"],
 	transpilePackages: ["swagger-ui-react", "i18next", "react-i18next"],
@@ -23,10 +31,10 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "cloud.appwrite.io"
-			}
-		]
-	}
+				hostname: "cloud.appwrite.io",
+			},
+		],
+	},
 };
 
 export default nextConfig;
