@@ -1,29 +1,27 @@
 import i18NextConfig from "@/i18n.config";
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { Lato } from "next/font/google";
 import type { ReactNode } from "react";
-import { Toaster } from "sonner";
-import { getAllData } from "../utils/getAllData";
 import "primereact/resources/themes/viva-dark/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "../styles/globals.css";
 import "../styles/primereact.css";
-import { PrimeReactProvider } from "primereact/api";
-import { DataSync } from "../components/DataSync";
-import { LocaleSync } from "../components/LocaleSync";
-import MobileHeader from "../components/ui/MobileHeader";
-import { AuthSync } from "../components/AuthSync";
+import { getAllData } from "../utils/getAllData";
 import { getSession } from "../utils/getSession";
+import { LocaleSync } from "../components/LocaleSync";
+import { PrimeReactProvider } from "primereact/api";
+import { Toaster } from "sonner";
+import MobileHeader from "../components/ui/MobileHeader";
+import dynamic from "next/dynamic";
+import { AuthSync } from "../components/AuthSync";
+import { DataSync } from "../components/DataSync";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
 export async function generateStaticParams() {
 	return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
 }
-
-const SidebarClientNoSSR = dynamic(() => import("@/components/SidebarClient"), { ssr: false });
 
 export const metadata: Metadata = {
 	title: {
@@ -35,6 +33,7 @@ export const metadata: Metadata = {
 		icon: "/NextKeep.svg",
 	},
 };
+const SidebarClientNoSSR = dynamic(() => import("@/components/SidebarClient"), { ssr: false });
 
 export default async function RootLayout({
 	children,
@@ -47,7 +46,6 @@ export default async function RootLayout({
 }>) {
 	const session = await getSession();
 	const state = await getAllData(session.userId);
-
 	return (
 		<html lang={lang}>
 			<body className={font.className}>

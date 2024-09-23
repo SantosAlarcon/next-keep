@@ -1,13 +1,17 @@
 import { redirect } from "next/navigation";
 import styles from "../styles/page.module.css";
+import { getSession } from "../utils/getSession";
 
 async function Page({ params: { lang } }: {
 	params: {
 		lang: string
 	}
 }) {
+	const session = await getSession();
 
-	redirect("/notes/all")
+	if (session) {
+		return redirect(`/notes/all`);
+	}
 
 	return (
 		<main className={styles.main}>

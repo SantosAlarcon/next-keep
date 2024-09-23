@@ -61,7 +61,8 @@ const Login = ({ lang }: { lang: string }) => {
 					/>
 					<label className={LoginStyles.login__page__form__label} htmlFor="password">{t("password")}</label>
 				</FloatLabel>
-				<Button type="submit" label={pending ? "pi pi-spin pi-spinner" : t("login")} className="p-button-rounded" />
+				{ /* @ts-ignore */}
+				<Button type="submit" label={pending ? <span className="pi pi-spin pi-spinner" /> : t("login")} className="p-button-rounded" />
 			</form>
 		</>
 	)
