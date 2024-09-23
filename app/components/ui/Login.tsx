@@ -9,13 +9,14 @@ import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const Login = ({ lang }: { lang: string }) => {
 	const { t } = useTranslation("login", {
 		lng: lang,
 	})
 
+	const router = useRouter();
 	const [pending, setPending] = useState<boolean>(false);
 
 	const submitEmailLogin = (data: FormData) => {
@@ -24,7 +25,7 @@ const Login = ({ lang }: { lang: string }) => {
 		emailLogin(data)
 			.then((response) => {
 				document.cookie = `appwrite_session=${JSON.stringify(response)}; path=/;`;
-				redirect("/notes/all");
+				router.push("/notes/all");
 			})
 			.catch(() => toast.error(t("login-error")))
 			.finally(() => setPending(false));
