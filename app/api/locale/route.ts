@@ -15,11 +15,11 @@ import type { NextRequest } from "next/server";
  *         description: The cookie **NEXT_LOCALE** does not exist
  */
 export async function GET(req: NextRequest) {
-    const locale = req.cookies.get("NEXT_LOCALE")
+	const locale = req.cookies.get("NEXT_LOCALE")
 
 	if (!locale) {
-		return Response.json("The cookie NEXT_LOCALE does not exist", {status: 400})
+		return Response.json("The cookie NEXT_LOCALE does not exist", { status: 400 })
 	}
 
-    return Response.json(locale?.value, {status: 200})
+	return Response.json(locale?.value, { status: 200 })
 }

@@ -138,7 +138,7 @@ export async function GET(req: NextRequest) {
 
 	if (userId) {
 		const notes = await getNotesByUser(userId);
-		return Response.json(notes, {status: 200});
+		return Response.json(notes, { status: 200 });
 	}
 }
 
@@ -180,6 +180,7 @@ export async function POST(req: NextRequest) {
 	newNote.$updatedAt = new Date().toISOString();
 
 	// Call the createNewNote function
+	// @ts-ignore
 	const creationSuccess = await createNewNote(newNote);
 
 	if (!creationSuccess) {

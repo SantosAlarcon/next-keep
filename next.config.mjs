@@ -1,5 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	async headers() {
+		return [
+			{
+				source: '/',
+				headers: [
+					{
+						key: 'Referer-Policy',
+						value: 'strict-origin-when-cross-origin'
+					}
+				]
+			}
+		]
+	},
 	pageExtensions: ["js", "jsx", "ts", "tsx", "mdx"],
 	transpilePackages: ["swagger-ui-react", "i18next", "react-i18next"],
 	optimizeFonts: true,

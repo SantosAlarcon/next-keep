@@ -16,6 +16,7 @@ const NewNotePage = async ({ params: { lang } }: { params: { lang: string } }) =
 	const newNote = useNewNoteStore.getState().newNote;
 
 	return (
+		// @ts-ignore
 		<UpdateNoteProvider value={newNote}>
 			<main className={NewNotePageStyles.new__note__page__container}>
 				<Suspense fallback={<BarLoader width="128px" height="128px" color="#eee" />}>

@@ -9,7 +9,6 @@ export async function middleware(request: NextRequest) {
 	// @ts-ignore
 	const lang = request.headers.get("accept-language").split(",")[0].split("-")[0];
 
-
 	if (request.nextUrl.pathname.startsWith("/api/") ||
 		request.nextUrl.pathname.startsWith("/login/") ||
 		request.nextUrl.pathname.startsWith("/register/") ||

@@ -44,7 +44,7 @@ export default async function RootLayout({
 		lang: string;
 	};
 }>) {
-	const session = await getSession();
+	const session = await fetch("/api/session", { cache: "no-store" }).then((response) => response.json());
 	const state = await getAllData(session.userId);
 	return (
 		<html lang={lang}>
