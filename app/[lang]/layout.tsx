@@ -12,9 +12,8 @@ import { LocaleSync } from "../components/LocaleSync";
 import { PrimeReactProvider } from "primereact/api";
 import { Toaster } from "sonner";
 import MobileHeader from "../components/ui/MobileHeader";
-import dynamic from "next/dynamic";
-import { AuthSync } from "../components/AuthSync";
 import { DataSync } from "../components/DataSync";
+import dynamic from "next/dynamic";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -32,6 +31,7 @@ export const metadata: Metadata = {
 		icon: "/NextKeep.svg",
 	},
 };
+
 const SidebarClientNoSSR = dynamic(() => import("@/components/SidebarClient"), { ssr: false });
 
 export default async function RootLayout({
