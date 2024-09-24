@@ -1,13 +1,11 @@
 import i18nConfig from "@/i18n.config";
 import { i18nRouter } from "next-i18n-router";
 import { NextResponse, type NextRequest } from "next/server";
-import { getSession } from "./app/utils/getSession";
 
 export async function middleware(request: NextRequest) {
-	// Register the URL param in the headers
-	request.headers.set("x-current-path", request.nextUrl.pathname);
+	// Get the language used in the browser
 	// @ts-ignore
-	const lang = request.headers.get("accept-language").split(",")[0].split("-")[0];
+	const lang = request.headers.get("Accept-Language").split(",")[0].split("-")[0];
 
 	if (request.nextUrl.pathname.startsWith("/api/") ||
 		request.nextUrl.pathname.startsWith("/login/") ||
@@ -17,7 +15,9 @@ export async function middleware(request: NextRequest) {
 		return NextResponse.next();
 	}
 
-	const session = await getSession();
+	const session = request.cookies.get("appwrite_session")?.value;
+	
+	// If there is no session, redirect to the login page
 	if (!session) {
 		return NextResponse.redirect(new URL(`/login/${lang}`, request.nextUrl));
 	}

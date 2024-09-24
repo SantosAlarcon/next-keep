@@ -3,7 +3,7 @@ import { getAllGroups } from "./groups/getAllGroups";
 import { getAllGroupTitles } from "./groups/getAllGroupTitles";
 import { getAllNotes } from "./notes/getAllNotes";
 
-export async function getAllData(userId: string) {
+export async function getAllData() {
 	const [allNotes, allGroups, allPinnedNotes, allGroupTitles] = await Promise.all([
 		getAllNotes(),
 		getAllGroups(),

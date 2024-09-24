@@ -1,17 +1,12 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 
 export const getSession = async () => {
-	//let session: Models.Session | undefined;
 	try {
-		const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/account`);
-		const session = await response.json();
-
+		// @ts-ignore
+		const session = JSON.parse(headers().get("cookie")?.split(";")[0].replace("appwrite_session=", ""));
 		if (session) return session;
-
-		/*const session = JSON.parse(cookies().get("appwrite_session")!.value);
-        if (session) return session;*/
 	} catch (error) {
 		return null;
 	}

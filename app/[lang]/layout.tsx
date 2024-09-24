@@ -15,7 +15,6 @@ import MobileHeader from "../components/ui/MobileHeader";
 import dynamic from "next/dynamic";
 import { AuthSync } from "../components/AuthSync";
 import { DataSync } from "../components/DataSync";
-import { getSession } from "../utils/getSession";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -44,16 +43,11 @@ export default async function RootLayout({
 		lang: string;
 	};
 }>) {
-    const session = await getSession();
-
-    // @ts-ignore
-    const state = await getAllData(session?.userId);
+	const state = await getAllData();
 
 	return (
 		<html lang={lang}>
 			<body className={font.className}>
-				{/* @ts-ignore */}
-				<AuthSync state={{ session: session }} />
 				{/* @ts-ignore */}
 				<DataSync state={state} />
 				<LocaleSync state={{ locale: lang }} />
