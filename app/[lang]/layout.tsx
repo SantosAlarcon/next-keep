@@ -7,12 +7,12 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "../styles/globals.css";
 import "../styles/primereact.css";
-import { getAllData } from "../utils/getAllData";
-import { LocaleSync } from "../components/LocaleSync";
 import { PrimeReactProvider } from "primereact/api";
 import { Toaster } from "sonner";
-import MobileHeader from "../components/ui/MobileHeader";
 import { DataSync } from "../components/DataSync";
+import { LocaleSync } from "../components/LocaleSync";
+import MobileHeader from "../components/ui/MobileHeader";
+import { getAllData } from "../utils/getAllData";
 import dynamic from "next/dynamic";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
