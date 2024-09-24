@@ -24,8 +24,8 @@ const UpdateNoteButton = ({ label }: { label: string }) => {
 		updateNote(updatedNote)
 			.then(() => {
 				toast.success(t("note-update-success"));
+                router.back();
                 updateNotes();
-				router.back();
 
 				setTimeout(() => {
 					router.refresh();

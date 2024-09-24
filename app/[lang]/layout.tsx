@@ -13,7 +13,7 @@ import { DataSync } from "../components/DataSync";
 import { LocaleSync } from "../components/LocaleSync";
 import MobileHeader from "../components/ui/MobileHeader";
 import { getAllData } from "../utils/getAllData";
-import dynamic from "next/dynamic";
+import dynamic2 from "next/dynamic";
 
 const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
@@ -32,7 +32,9 @@ export const metadata: Metadata = {
 	},
 };
 
-const SidebarClientNoSSR = dynamic(() => import("@/components/SidebarClient"), { ssr: false });
+export const dynamic = "force-dynamic"
+
+const SidebarClientNoSSR = dynamic2(() => import("@/components/SidebarClient"), { ssr: false });
 
 export default async function RootLayout({
 	children,
@@ -43,7 +45,7 @@ export default async function RootLayout({
 		lang: string;
 	};
 }>) {
-	const state = await getAllData();
+    const state = await getAllData();
 
 	return (
 		<html lang={lang}>

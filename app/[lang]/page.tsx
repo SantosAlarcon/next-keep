@@ -7,6 +7,7 @@ async function Page({ params: { lang } }: {
 		lang: string
 	}
 }) {
+    console.log("Rendering Root Page...")
 	const session = await getSession();
 
 	if (session) {

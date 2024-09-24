@@ -22,7 +22,6 @@ const CreateGroupDialog = ({ lang, visible, onHide }: { lang: string, visible: b
 			createNewGroup(newGroupTitle)
 				.then(() => {
 					toast.success(t("group.create-group-success", { name: newGroupTitle }));
-					setPending(false);
 					onHide()
 					updateGroups();
 

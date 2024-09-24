@@ -5,7 +5,6 @@ import { deleteNote } from "@/app/utils/notes/deleteNote";
 import { confirmDialog } from "primereact/confirmdialog";
 import { Button } from "primereact/button";
 import { useState } from "react";
-import BarLoader from "@/app/components/ui/BarLoader";
 import { useRouter } from "next/navigation";
 import { updateNotes } from "@/app/utils/updateData";
 import { localeStore } from "@/app/store/localeStore";
@@ -37,12 +36,12 @@ function DeleteButton({
 				setPending(true);
 				toast.promise(
 					deleteNote(noteId).then(() => {
-						updateNotes();
 						router.back();
+                        updateNotes();
 
 						setTimeout(() => {
 							router.refresh();
-						}, 50);
+						}, 150);
 					}),
 					{
 						loading: t("pending-operation"),

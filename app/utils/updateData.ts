@@ -1,5 +1,3 @@
-"use client";
-
 import { dataStore } from "../store/dataStore";
 import type { Group, Note } from "../types";
 import { getAllGroups } from "./groups/getAllGroups";

@@ -179,6 +179,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 					<User />
 					<Button
 						tooltip={expanded ? t("collapse") : t("expand")}
+                        tooltipOptions={{position:"top"}}
 						severity="secondary"
 						label={expanded ? "<" : ">"}
 						className={expanded ? sidebarStyles.sidebar__expand__button : sidebarStyles.sidebar__expand__button__collapsed}

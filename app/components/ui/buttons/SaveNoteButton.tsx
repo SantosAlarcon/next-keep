@@ -27,8 +27,8 @@ const SaveNoteButton = ({ lang, title }: { lang: string, title: string }) => {
 			saveNewNote(newNote)
 				.then(() => {
 					toast.success(t("note-saved"));
+                    router.back();
 					updateNotes();
-					router.back();
 
 					setTimeout(() => {
 						router.refresh();
