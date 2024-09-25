@@ -1,6 +1,6 @@
 import i18NextConfig from "@/i18n.config";
 import type { Metadata } from "next";
-import { Lato } from "next/font/google";
+import { Figtree } from "next/font/google";
 import type { ReactNode } from "react";
 import "primereact/resources/themes/viva-dark/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -15,7 +15,7 @@ import MobileHeader from "../components/ui/MobileHeader";
 import { getAllData } from "../utils/getAllData";
 import dynamic2 from "next/dynamic";
 
-const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
+const font = Figtree({ subsets: ["latin"], weight: ["400", "700", "800"] });
 
 export async function generateStaticParams() {
 	return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));

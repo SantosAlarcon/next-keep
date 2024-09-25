@@ -5,7 +5,8 @@ export const getGroupByTitle = async (groupTitle: string) => {
         headers: {
             "Content-Type": "application/json",
             "X-Appwrite-Project": appwriteProjectId,
-        }
+        },
+	cache: "no-cache"
     })
     const group = await response.json()
     return group.documents

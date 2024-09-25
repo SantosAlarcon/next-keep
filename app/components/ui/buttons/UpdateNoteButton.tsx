@@ -29,7 +29,7 @@ const UpdateNoteButton = ({ label }: { label: string }) => {
 
 				setTimeout(() => {
 				    router.refresh();
-				}, 100);
+				}, 50);
 			})
 			.catch(() => toast.error(t("note-update-error")))
 			.finally(() => setPending(false));

@@ -6,13 +6,13 @@ import "@/styles/globals.css";
 import "@/styles/primereact.css";
 import i18NextConfig from "@/i18n.config";
 import initTranslations from "@/app/i18n";
-import { Lato } from "next/font/google";
+import { Figtree } from "next/font/google";
 import { PrimeReactProvider } from "primereact/api";
 import { Toaster } from "sonner";
 import { LocaleSync } from "@/app/components/LocaleSync";
 import { AuthSync } from "@/app/components/AuthSync";
 
-const font = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
+const font = Figtree({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
 export function generateStaticParams() {
 	return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
