@@ -37,11 +37,11 @@ function DeleteButton({
 				toast.promise(
 					deleteNote(noteId).then(() => {
 						router.back();
-                        updateNotes();
+						updateNotes();
 
 						setTimeout(() => {
 							router.refresh();
-						}, 150);
+						}, 50);
 					}),
 					{
 						loading: t("pending-operation"),
@@ -51,7 +51,7 @@ function DeleteButton({
 					},
 				);
 			},
-			reject: () => {},
+			reject: () => { },
 		});
 	};
 	return (

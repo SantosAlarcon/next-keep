@@ -24,12 +24,12 @@ const UpdateNoteButton = ({ label }: { label: string }) => {
 		updateNote(updatedNote)
 			.then(() => {
 				toast.success(t("note-update-success"));
-                router.back();
-                updateNotes();
+				router.back();
+				updateNotes();
 
 				setTimeout(() => {
-					router.refresh();
-				}, 150);
+				    router.refresh();
+				}, 100);
 			})
 			.catch(() => toast.error(t("note-update-error")))
 			.finally(() => setPending(false));

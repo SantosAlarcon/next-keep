@@ -13,7 +13,7 @@ const SaveNoteButton = ({ lang, title }: { lang: string, title: string }) => {
 	const t = i18nClient.getFixedT(lang, ["common"])
 	const newNote = useNewNoteStore((state) => state.newNote)
 	const router = useRouter();
-	
+
 	const [pending, setPending] = useState<boolean>(false);
 
 	const handleCreateNote = () => {
@@ -27,8 +27,8 @@ const SaveNoteButton = ({ lang, title }: { lang: string, title: string }) => {
 			saveNewNote(newNote)
 				.then(() => {
 					toast.success(t("note-saved"));
-                    router.back();
 					updateNotes();
+					router.back();
 
 					setTimeout(() => {
 						router.refresh();

@@ -5,7 +5,7 @@ import { getSession } from "../getSession";
 
 export const saveNewNote = async (newNote: Note) => {
 	const session = await getSession();
-    // @ts-ignore
+	// @ts-ignore
 	newNote.userId = session?.userId
 	return await fetch(notesEndpoint, {
 		method: "POST",

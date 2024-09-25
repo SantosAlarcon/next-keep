@@ -2,8 +2,8 @@ import { appwriteAPIKey, appwriteProjectId, notesEndpoint } from "@/app/constant
 import type { Note } from "@/app/types";
 
 export const toggleNotePin = async (note: Note) => {
-    const newPinnedState = !note.isPinned;
-    console.log(newPinnedState)
+	const newPinnedState = (note.isPinned) ? false : true;
+	console.log(newPinnedState)
 	await fetch(`${notesEndpoint}/${note.$id}`, {
 		method: "PATCH",
 		headers: {
@@ -13,8 +13,8 @@ export const toggleNotePin = async (note: Note) => {
 		},
 		body: JSON.stringify({
 			data: {
-				isPinned: newPinnedState,
-			},
+				isPinned: newPinnedState
+			}
 		}),
 	});
 };

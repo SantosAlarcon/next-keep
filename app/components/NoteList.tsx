@@ -40,7 +40,7 @@ const NoteList = ({ group, selected, lang }: { group: string; selected: string; 
 			}
 		}
 
-	}, []);
+	}, [allNotes]);
 
 	useEffect(() => {
 		if (filter.length > 0) {

@@ -24,4 +24,4 @@ export const dataStore = create(devtools((set) => ({
     setAllNoteAmounts: (noteAmounts: Note[]) => set({allNoteAmounts: noteAmounts}),
     allPinnedNotes: [],
     setAllPinnedNotes: (pinnedNotes: Note[]) => set({allPinnedNotes: pinnedNotes}),
-}), {name: "Data Store", enabled: process.env.NODE_ENV !== "production"}))
+}), {name: "Data Store"}))
