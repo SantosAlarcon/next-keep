@@ -6,7 +6,7 @@
 
 	&:hover,
 	.active {
-		background-color: #fff6;
+		background-color: var(--focus-bg);
 	}
 }
 

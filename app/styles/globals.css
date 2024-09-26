@@ -8,7 +8,10 @@
 
 	--foreground-rgb: 17, 17, 34;
 	--background-start-rgb: 214, 219, 220;
+	--background-input-rgb: 200, 200, 220;
+	--background-inputgroup-rgb: 180, 180, 200;
 	--background-end-rgb: 255, 255, 255;
+	--focus-bg: rgba(0, 0, 255, .1);
 
 	--primary-glow: conic-gradient(from 180deg at 50% 50%,
 			#16abff33 0deg,
@@ -45,6 +48,9 @@
 		--foreground-rgb: 221, 221, 221;
 		--background-start-rgb: 24, 24, 48;
 		--background-end-rgb: 12, 12, 24;
+		--background-input-rgb: 10, 10, 20;
+		--background-inputgroup-rgb: 5, 5, 15;
+		--focus-bg: rgba(120, 120, 255, .3);
 
 		--primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
 		--secondary-glow: linear-gradient(to bottom right,
@@ -89,7 +95,7 @@ body {
 			transparent,
 			rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 	display: flex;
-    flex-direction: column;
+	flex-direction: column;
 }
 
 a {
@@ -183,16 +189,16 @@ input[type=checkbox] {
 		&:checked {
 			background-color: #aaf;
 			box-shadow: .1rem .1rem .2rem #aaf6;
-		}	
+		}
 	}
 }
 
 .main__body {
-    display: flex;
+	display: flex;
 
-    @media (width <= 1024px) {
-        padding-top: 3.25rem;
-    }
+	@media (width <=1024px) {
+		padding-top: 3.25rem;
+	}
 }
 
 @media (prefers-color-scheme: dark) {

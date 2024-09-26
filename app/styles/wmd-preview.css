@@ -1,7 +1,7 @@
 .wmde-markdown {
 	font-family: inherit !important;
 	--color-fg-default: #111 !important;
-	padding: 1.5rem;
+	padding: 0.7rem;
 	background-color: inherit !important;
 
 	@media (prefers-color-scheme: dark) {
