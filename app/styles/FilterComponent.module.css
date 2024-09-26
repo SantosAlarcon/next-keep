@@ -2,3 +2,7 @@
     padding: 1rem;
     display: flex;
 }
+
+.filter__component__input {
+    border-radius: 0 .5rem .5rem 0;
+}

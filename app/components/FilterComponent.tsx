@@ -22,7 +22,7 @@ const FilterComponent = ({ lang }: { lang: string }) => {
 				<i className={pending ? "pi pi-spin pi-spinner-dotted" : "pi pi-filter"} />
 			</span>
 			{/* @ts-ignore */}
-			<InputText placeholder={t("filter")} onInput={(e) => setInput(e.target.value)} />
+			<InputText className={FilterComponentStyles.filter__component__input} placeholder={t("filter")} onInput={(e) => setInput(e.target.value)} />
 		</section>
 	);
 };

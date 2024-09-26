@@ -80,6 +80,7 @@
 	display: flex;
 	align-items: center;
 	gap: .5rem;
+    color: #eee;
 
 	&:hover {
 		background-color: #66f;

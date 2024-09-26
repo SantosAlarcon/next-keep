@@ -198,7 +198,7 @@
 		background-color: rgba(var(--background-input-rgb), .5);
 
 		&.p-highlight {
-			background-color: rgb(var(--background-input-rgb));
+			background-color: var(--focus-bg);
 			box-shadow: 0 .1rem .4rem rgb(var(--background-input-rgb));
 		}
 

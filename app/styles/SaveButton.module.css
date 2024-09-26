@@ -1,5 +1,6 @@
 .save__button__container {
     padding: .5rem 1rem;
+    color: #eee;
     display: flex;
     gap: 1rem;
     border-radius: .5rem;

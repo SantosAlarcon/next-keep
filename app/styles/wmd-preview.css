@@ -1,7 +1,14 @@
+.w-md-editor-preview {
+    & > .wmde-markdown {
+        padding: 0;
+    }
+}
+
+
 .wmde-markdown {
 	font-family: inherit !important;
 	--color-fg-default: #111 !important;
-	padding: 0.7rem;
+	padding: 1.5rem;
 	background-color: inherit !important;
 
 	@media (prefers-color-scheme: dark) {
