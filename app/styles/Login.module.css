@@ -11,6 +11,11 @@
 		padding: 2rem;
 		width: 80%;
 	}
+
+	&>* {
+		color: var(--foreground);
+	}
+
 }
 
 .login__page__box {
@@ -19,7 +24,7 @@
 	align-items: center;
 	width: 100%;
 	gap: 1rem;
-	border: 1px #fff5 solid;
+	border: .1rem var(--border) solid;
 	border-radius: 3rem;
 	padding: 3rem;
 	background: linear-gradient(#aaf3 0%, #66a 100%);
@@ -39,6 +44,7 @@
 
 	& hr {
 		width: 100%;
+		border-color: var(--foreground);
 	}
 
 	& button {
@@ -68,11 +74,15 @@
 
 .login__page__form__label {
 	line-height: 0;
+	color: var(--foreground);
 }
 
 .login__page__form__input {
 	width: 100%;
 	box-shadow: 0 .5rem 1rem #1133;
+
+	color: var(--foreground);
+	background-color: rgb(var(--background-input-rgb));
 
 	& .p-inputtext {
 		width: 100%;

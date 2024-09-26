@@ -2,6 +2,7 @@
 .p-component,
 .p-inputtext {
 	font-family: inherit;
+	border-radius: .6rem;
 }
 
 .p-focus {
@@ -14,7 +15,8 @@
 	border-width: 1px;
 }
 
-.p-inputtext {
+.p-inputtext,
+.p-password {
 	color: var(--foreground);
 	background-color: rgb(var(--background-input-rgb));
 	border-width: 1px;
@@ -123,6 +125,14 @@
 /* Input */
 .p-inputtext {
 	padding: .4rem;
+
+	&::placeholder {
+		color: rgba(var(--foreground-rgb), .5);
+	}
+}
+
+.p-input-icon {
+	color: var(--foreground);
 }
 
 .p-password-input {
@@ -158,6 +168,7 @@
 /* BUTTON */
 .p-button {
 	padding: .5rem 1rem;
+	color: var(--foreground);
 }
 
 /* BUTTON GROUP */
@@ -195,6 +206,10 @@
 			font-weight: bold;
 		}
 	}
+}
+
+.p-float-label {
+	color: var(--foreground);
 }
 
 

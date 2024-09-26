@@ -39,6 +39,7 @@
 
 	--button-padding: .5rem;
 	--foreground: #112;
+	--border: #1126;
 	--tooltip-bg: #335;
 	--tooltip-fg: #eef;
 }
@@ -74,6 +75,7 @@
 		--card-border-rgb: 200, 200, 200;
 		color-scheme: dark;
 		--foreground: #eef;
+		--border: #eef6;
 	}
 }
 
