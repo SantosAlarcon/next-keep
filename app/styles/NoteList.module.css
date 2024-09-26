@@ -2,8 +2,8 @@
 	padding: 1rem;
 	display: flex;
 	flex-direction: column;
-	gap: .25rem;
-	font-size: 1rem;
+	gap: .2rem;
+	font-size: 0.9rem;
 	height: 100vh;
 	border-right: none;
 	width: 100%;
@@ -17,11 +17,18 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: .15rem;
+	padding: .15rem .15rem .15rem .25rem;
 	border-radius: .5rem;
 	width: 100%;
 
-	& a:hover {
+	&:hover {
 		background-color: var(--focus-bg);
 	}
+}
+
+.note__item__link {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
