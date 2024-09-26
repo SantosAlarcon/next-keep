@@ -1,5 +1,5 @@
 import { getNoteById } from '@/app/utils/notes/getNoteById'
-import React, { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 export const generateMetadata = async ({ params: { note } }: { params: { note: string } }) => {
 	const foundNote = await getNoteById(note)

@@ -1,6 +1,6 @@
 import NoteHeader from '@/app/components/ui/NoteHeader';
 import allNotesPageStyles from '@/app/styles/AllNotesPage.module.css';
-import { getNoteById } from '@/app/utils/database/notes/getNoteById';
+import { getNoteById } from '@/app/utils/notes/getNoteById';
 import dynamic from 'next/dynamic';
 
 const PinnedNoteIdPage = async ({params: {note, lang}}: {params: {note: string, lang: string}}) => {
