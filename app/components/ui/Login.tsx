@@ -4,13 +4,14 @@ import { FloatLabel } from 'primereact/floatlabel'
 import { InputText } from 'primereact/inputtext'
 import { Password } from 'primereact/password'
 import LoginStyles from '@/app/styles/Login.module.css'
-import { emailLogin, loginToFacebook, loginToGithub } from '@/app/utils/login'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
-import { loginToGoogle } from '@/app/utils/loginToGoogle'
+import { emailLogin } from '@/app/utils/login'
+import { loginToOAuth } from '@/app/utils/loginToOAuth'
+import { OAuthProvider } from 'node-appwrite'
 
 const Login = ({ lang }: { lang: string }) => {
 	const { t } = useTranslation("login", {
@@ -37,11 +38,15 @@ const Login = ({ lang }: { lang: string }) => {
 			<Image src="/NextKeep.svg" alt="Next Keep Logo" width={150} height={150} priority />
 			<h1>{t("login-title")}</h1>
 			<div className={LoginStyles.login__page__buttons}>
-				<form action={loginToGoogle} className={LoginStyles.login__page__buttons__form}>
+				<form action={() => loginToOAuth(OAuthProvider.Google)} className={LoginStyles.login__page__buttons__form}>
 				    <Button type="submit" label={t("login-google")} icon="pi pi-google" className="p-button-rounded" />
 				</form>
-				<Button onClick={loginToGithub} label={t("login-github")} icon="pi pi-github" className="p-button-rounded" />
-				<Button onClick={loginToFacebook} label={t("login-facebook")} icon="pi pi-facebook" className="p-button-rounded" />
+				<form action={() => loginToOAuth(OAuthProvider.Github)} className={LoginStyles.login__page__buttons__form}>
+                    <Button type="submit" label={t("login-github")} icon="pi pi-github" className="p-button-rounded" />
+				</form>
+				<form action={() => loginToOAuth(OAuthProvider.Facebook)} className={LoginStyles.login__page__buttons__form}>
+                    <Button type="submit" label={t("login-facebook")} icon="pi pi-facebook" className="p-button-rounded" />
+				</form>
 			</div>
 			<Link href={`/reset-password/${lang}`}>
 				{t("forgot-password")}
