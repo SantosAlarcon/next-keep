@@ -6,8 +6,8 @@ export const getSession = async () => {
 
 	try {
 		// @ts-ignore
-		const session = JSON.parse(headerList.get("cookie")?.split(";")[0].replace("appwrite_session=", ""));
-		if (session) return session;
+		const session = decodeURIComponent(headerList.get("cookie")?.split(";")[0].replace("appwrite_session=", ""));
+		if (session) return JSON.parse(session);
 	} catch (error) {
 		return null;
 	}

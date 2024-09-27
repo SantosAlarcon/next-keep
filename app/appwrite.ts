@@ -33,6 +33,10 @@ export const getInitials = () => {
 	return result;
 };
 
+export const getAccount = () => {
+    return appwriteAccount;
+}
+
 export async function createSessionClient() {
 	const client = new Client()
 		.setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)

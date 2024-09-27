@@ -45,7 +45,7 @@ export default async function RootLayout({
 		lang: string;
 	};
 }>) {
-    const state = await getAllData();
+	const state = await getAllData();
 
 	return (
 		<html lang={lang}>

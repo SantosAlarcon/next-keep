@@ -1,5 +1,6 @@
 import { OAuthProvider } from "appwrite";
 import { appwriteAccount } from "../appwrite";
+import { redirect } from "next/navigation";
 
 export async function emailLogin(data: FormData) {
 	const email = data.get("email")?.toString();
@@ -11,13 +12,15 @@ export async function emailLogin(data: FormData) {
 }
 
 export async function loginToFacebook() {
-	appwriteAccount.createOAuth2Token(OAuthProvider.Facebook, "http://localhost:3000/notes/all");
+	await appwriteAccount.createOAuth2Token(OAuthProvider.Facebook, `${process.env.NEXT_URL}/notes/all`);
 }
 
-export async function loginToGoogle() {
-	appwriteAccount.createOAuth2Token(OAuthProvider.Google, "http://localhost:3000/notes/all");
-}
+/*export async function loginToGoogle() {
+	const redirectUrl = await appwriteAccount.createOAuth2Token(OAuthProvider.Google, `${process.env.NEXT_URL}/api/oauth`);
+
+	return redirect(redirectUrl);
+}*/
 
 export async function loginToGithub() {
-	appwriteAccount.createOAuth2Token(OAuthProvider.Github, "http://localhost:3000/notes/all");
+	await appwriteAccount.createOAuth2Token(OAuthProvider.Github, `${process.env.NEXT_PUBLIC_URL}/notes/all`);
 }
