@@ -8,7 +8,7 @@ const i18NextConfig = {
     defaultNS: "common",
     ns: ["common", "login", "register", "reset-password", "new-password"],
     load: "all",
-    preload: ["en", "es"]
+    preload: ["en", "es"],
 }
 
 export const getOptions = (lang: string, ns: string | string[]) => {

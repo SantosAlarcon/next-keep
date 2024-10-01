@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
 	}
 
 	const session = request.cookies.get("appwrite_session")?.value;
-	
+
 	// If there is no session, redirect to the login page
 	if (!session) {
 		return NextResponse.redirect(new URL(`/login/${lang}`, request.nextUrl));
