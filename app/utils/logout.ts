@@ -4,6 +4,8 @@ import { cookies } from "next/headers";
 import { appwriteAPIKey, appwriteProjectId } from "../constants";
 import { getSession } from "./getSession"
 
+// This action removes the session cookie and deletes the user sessions from the Appwrite project
+// using the Appwrite API.
 export const logout = async () => {
 	const cookieList = cookies()
 	try {

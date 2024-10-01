@@ -14,16 +14,16 @@
 		align-self: start;
 	}
 
-    @media (width <= 1024px) {
-        display: none;
-    }
+	@media (width <=1024px) {
+		display: none;
+	}
 
 	@media (prefers-color-scheme: dark) {
 		border-right: 1px #fff6 solid;
 	}
 }
 
-.sidebar__top, .sidebar__bottom {
+.sidebar__top {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -35,7 +35,15 @@
 }
 
 .sidebar__bottom {
-	align-items: end;
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	gap: .5rem;
+
+	&:has(.sidebar__expand__button__collapsed) {
+		flex-direction: column;
+	}
 }
 
 .sidebar__separator {
@@ -49,14 +57,14 @@
 }
 
 .sidebar__groups__header {
-    display: flex;
+	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
 
-    & > * {
-        align-self: center !important;
-    }
+	&>* {
+		align-self: center !important;
+	}
 }
 
 .sidebar__grouplist {
@@ -66,7 +74,8 @@
 	width: 100%;
 }
 
-.sidebar__button, .sidebar__new__note__button__collapsed {
+.sidebar__button,
+.sidebar__new__note__button__collapsed {
 	border-radius: .5rem;
 	background-color: #44f;
 	padding: 0.75rem 1rem;
@@ -80,7 +89,7 @@
 	display: flex;
 	align-items: center;
 	gap: .5rem;
-    color: #eee;
+	color: #eee;
 
 	&:hover {
 		background-color: #66f;
@@ -89,7 +98,7 @@
 }
 
 .sidebar__new__note__button__collapsed {
-    width: 100%;
+	width: 100%;
 }
 
 .sidebar__expand__button {

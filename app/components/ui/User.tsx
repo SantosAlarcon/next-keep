@@ -2,10 +2,14 @@
 import { localeStore } from '@/app/store/localeStore'
 import UserStyles from '@/app/styles/User.module.css'
 import { logout } from '@/app/utils/logout'
+import Image from 'next/image'
+import { Button } from 'primereact/button'
+import { useTranslation } from 'react-i18next'
 
 const User = () => {
 	// @ts-ignore
 	const { locale } = localeStore.getState();
+	const {t} = useTranslation("common", { lng: locale })
 
 	const handleLogout = () => {
 		// @ts-ignore
@@ -16,9 +20,7 @@ const User = () => {
 
 
 	return (
-		<section onClick={handleLogout} className={UserStyles.user__container}>
-			{/* <img className={UserStyles.user__avatar} title={session?.name} src={initials.href} width={50} height={50} /> */}
-		</section>
+		<Button title={t("logout")} icon="pi pi-sign-out" className={UserStyles.user__container} onClick={handleLogout} />
 	)
 }
 
