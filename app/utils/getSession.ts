@@ -9,10 +9,6 @@ export const getSession = async () => {
 		const cookieList = headerList.get("cookie")?.split("; ")
 		let sessionCookie = cookieList?.find((cookie) => cookie.startsWith("appwrite_session"));
 
-		/*if (!sessionCookie) {
-			sessionCookie = cookieList?.find((cookie) => cookie.startsWith(" appwrite_session="));
-		};
-		console.log(sessionCookie)*/
 		// @ts-ignore
 		const session = decodeURIComponent(sessionCookie?.replace(`appwrite_session=`, ""));
 		if (session) return JSON.parse(session);
