@@ -20,7 +20,7 @@ const User = () => {
 
 
 	return (
-		<Button title={t("logout")} icon="pi pi-sign-out" className={UserStyles.user__container} onClick={handleLogout} />
+		<Button tooltip={t("logout")} tooltipOptions={{ position: "top" }} icon="pi pi-sign-out" className={UserStyles.user__container} onClick={handleLogout} />
 	)
 }
 
