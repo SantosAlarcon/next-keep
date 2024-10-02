@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import styles from "../styles/page.module.css";
 import { getSession } from "../utils/getSession";
 
 async function Page({ params: { lang } }: {
@@ -11,13 +10,9 @@ async function Page({ params: { lang } }: {
 
 	if (session) {
 		return redirect("/notes/all");
-	}
-
-	return (
-		<main className={styles.main}>
-
-		</main>
-	);
+	} else {
+        return redirect(`/login/${lang}`)
+    }
 }
 
 export default Page

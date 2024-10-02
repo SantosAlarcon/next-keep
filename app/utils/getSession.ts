@@ -6,11 +6,11 @@ export const getSession = async () => {
 
 	try {
 		// @ts-ignore
-		const cookieList = headerList.get("cookie")?.split("; ")
-		let sessionCookie = cookieList?.find((cookie) => cookie.startsWith("appwrite_session"));
+		const cookieList = headerList.get("cookie")?.split("; ");
+		const sessionCookie = cookieList?.find((cookie) => cookie.startsWith("appwrite_session"));
 
 		// @ts-ignore
-		const session = decodeURIComponent(sessionCookie?.replace(`appwrite_session=`, ""));
+		const session = decodeURIComponent(sessionCookie?.replace("appwrite_session=", ""));
 		if (session) return JSON.parse(session);
 	} catch (error) {
 		return null;
