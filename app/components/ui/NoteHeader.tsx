@@ -26,9 +26,7 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 						<ChangeGroupButton lang={lang} label={t("note.change-group")} note={note} groupTitle={noteGroupTitle} />
 						<TogglePinButton title={t("toggle-pin")} note={note} />
 						{<DeleteButton label={t("delete")} noteId={note.$id} localeStrings={{
-							yes: t("yes"),
-							no: t("no"),
-							confirmMessage: t("note-delete-confirm"),
+							confirmMessage: t("note-delete-confirm-1") + '\\n' + t("note-delete-confirm-2"),
 							confirmHeader: t("note-delete-confirm-header"),
 						}} />}
 					</ButtonGroup>

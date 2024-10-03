@@ -8,19 +8,27 @@ import "@uiw/react-markdown-preview/markdown.css";
 import "@/app/styles/wmd-editor.css";
 
 interface EditorProps {
+    lang: string;
 	text: string;
 	isEditing: boolean;
+}
+
+enum EditorMode {
+    Editor = "Editor",
+    Preview = "Preview"
 }
 
 import MDEditor from "@uiw/react-md-editor";
 import { SelectButton } from "primereact/selectbutton";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
+import { useTranslation } from "react-i18next";
 
-const CustomMDXEditor: FC<EditorProps> = ({ text, isEditing }) => {
+const CustomMDXEditor: FC<EditorProps> = ({ lang, text, isEditing }) => {
 	const setNewNote = useNewNoteStore((state) => state.setNewNote)
 	const [markdown, setMarkdown] = useState<string>(text)
-	const [view, setView] = useState<"Editor" | "Preview">("Editor")
+	const [editorMode, setEditorMode] = useState<EditorMode>(EditorMode.Editor)
+    const {t} = useTranslation("common", {lng: lang})
 
 	// @ts-ignore
 	const { updatedNote, setUpdatedNote } = useContext(UpdateNoteContext)
@@ -37,7 +45,7 @@ const CustomMDXEditor: FC<EditorProps> = ({ text, isEditing }) => {
 
 	return (
 		<>
-			<SelectButton options={["Editor", "Preview"]} value={view} onChange={(e) => setView(e.value)} />
+			<SelectButton options={[t("editor"), t("preview")]} value={editorMode} onChange={(e) => setEditorMode(e.value)} />
 			<MDEditor
 				autoFocus={true}
 				value={markdown}
@@ -46,7 +54,7 @@ const CustomMDXEditor: FC<EditorProps> = ({ text, isEditing }) => {
 				onChange={changeHandler}
 				height="70vh"
 				enableScroll={false}
-				preview={view === "Editor" ? "edit" : "preview"}
+				preview={editorMode === "Editor" ? "edit" : "preview"}
 				previewOptions={{
 					rehypePlugins: [[rehypeHighlight, { ignoreMissing: true }]],
 					remarkPlugins: [[remarkGfm, { singleTilde: false }]],

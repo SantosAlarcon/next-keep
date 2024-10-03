@@ -54,6 +54,10 @@
 	background-color: rgb(var(--background-start-rgb));
 }
 
+.p-confirm-dialog-message {
+    line-height: 1.5rem;
+}
+
 .p-dialog-content {
 	display: flex;
 	align-items: center;

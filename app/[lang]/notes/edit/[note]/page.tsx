@@ -22,7 +22,7 @@ const EditNotePage = async ({ params: { note, lang } }: { params: { note: string
 				<Suspense fallback={<BarLoader width="128px" height="128px" color="#eee" />}>
 					<LocalizedTitleInput placeholder={t("title")} title={foundNote ? foundNote.title : ""} isEditing={true} />
 					{/* @ts-ignore */}
-					<EditorComp editorRef={editorRef} text={foundNote ? foundNote?.data : ""} isEditing={true} />
+					<EditorComp lang={lang} editorRef={editorRef} text={foundNote ? foundNote?.data : ""} isEditing={true} />
 					<UpdateNoteButton label={t("update-note")} />
 				</Suspense>
 			</main>
