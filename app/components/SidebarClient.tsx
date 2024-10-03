@@ -72,7 +72,12 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 			command: () => {
 				confirmDialog({
 					header: t("group.group-delete-confirm-header"),
-					message: t("group.group-delete-confirm-message"),
+					message: (
+                        <p>
+                        {t("group.group-delete-confirm-message-1")}<br />
+                        {t("group.group-delete-confirm-message-2")}
+                        </p>
+                    ),
 					icon: "pi pi-info-circle",
 					acceptLabel: t("yes"),
 					rejectLabel: t("no"),
