@@ -19,6 +19,15 @@ const nextConfig = {
 					},
 				],
 			},
+			{
+				source: "/(.*)",
+				headers: [
+					{
+						key: "x-middleware-cache",
+						value: "no-cache",
+					},
+				],
+			}
 		];
 	},
 	pageExtensions: ["js", "jsx", "ts", "tsx", "mdx"],

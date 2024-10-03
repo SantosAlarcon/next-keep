@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
 			return NextResponse.json({ message: `New group ${body.title} is added to the DB` }, { status: 201 });
 		})
 		.catch((error) => {
-			console.log(error.message);
+			console.error(error.message);
 		});
 }
 
