@@ -1,4 +1,5 @@
 import { appwriteAccount } from "@/app/appwrite";
+import { mainURL } from "@/app/constants";
 import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -16,7 +17,7 @@ export async function GET(request: NextRequest) {
 		// secure: true,
 	});
 
-	return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL}/notes/all`, {
+	return NextResponse.redirect(`${mainURL}/notes/all`, {
 		status: 303
 	});
 }

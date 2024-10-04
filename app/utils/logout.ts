@@ -1,7 +1,7 @@
 "use server"
 
 import { cookies } from "next/headers";
-import { appwriteAPIKey, appwriteProjectId } from "../constants";
+import { apiEndpoint, appwriteAPIKey, appwriteProjectId } from "../constants";
 import { getSession } from "./getSession"
 
 // This action removes the session cookie and deletes the user sessions from the Appwrite project
@@ -10,7 +10,7 @@ export const logout = async () => {
 	const cookieList = cookies()
 	try {
 		const session = await getSession();
-		await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/users/${session.userId}/sessions`, {
+		await fetch(`${apiEndpoint}/users/${session.userId}/sessions`, {
 			method: "DELETE",
 			headers: {
 				"X-Appwrite-Project": appwriteProjectId,
