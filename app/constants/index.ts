@@ -34,6 +34,7 @@ export const logoVariants = {
     },
 };
 
+export const mainURL = process.env.NEXT_PUBLIC_URL!
 export const appwriteProjectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!
 export const appwriteAPIKey = process.env.NEXT_PUBLIC_APPWRITE_API_KEY!
 export const apiEndpoint = process.env.NEXT_PUBLIC_API_ENDPOINT!
