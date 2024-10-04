@@ -14,4 +14,4 @@ export const authStore = create(devtools((set) => ({
 	session: null,
 	setUser: (user: Models.User<Models.Preferences>) => set({ user }),
 	setSession: (session: Models.Session) => set({ session }),
-}), {name: "Auth Store"}))
+}), {name: "Auth Store", enabled: false}))

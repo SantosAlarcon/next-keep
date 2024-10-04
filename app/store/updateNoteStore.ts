@@ -18,4 +18,4 @@ export const useUpdateNoteStore = create(devtools((set) => ({
 		set(() => ({ updateNote: response }))
 	},
 	reset: () => set({ updateNote: {} }),
-}), { name: "update-note" }))
+}), { name: "update-note", enabled: process.env.NODE_ENV === "development" }))

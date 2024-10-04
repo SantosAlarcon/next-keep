@@ -8,4 +8,4 @@ export const groupStore = create(devtools((set) => ({
         const titles = await getAllGroupTitles()
         set({groupTitles: titles})
     }
-}), {name: "Group Store"}))
+}), {name: "Group Store", enabled: false}))
