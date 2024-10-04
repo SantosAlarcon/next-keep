@@ -1,98 +1,119 @@
 .login__page__container {
-	margin: 0 auto;
-	align-content: center;
-	padding: 6rem;
-	min-height: 100vh;
-	width: 80%;
+    margin: 0 auto;
+    align-content: center;
+    padding: 6rem;
+    min-height: 100vh;
+    width: 80%;
 
-	@media (width <=720px) {
-		padding: 2rem;
-		width: 80%;
-	}
+    @media (width <= 1024px) {
+        width: 100%;
+        padding: 3rem;
+    }
 
-	&>* {
-		color: var(--foreground);
-	}
+    @media (width <=720px) {
+        padding: 2rem;
+    }
+
+    @media (width <= 512px) {
+        /*width: 100%;*/
+    }
+
+    &>* {
+        color: var(--foreground);
+    }
 
 }
 
 .login__page__box {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	gap: 3rem;
-	border: .1rem var(--border) solid;
-	border-radius: 3rem;
-	padding: 3rem;
-	background: linear-gradient(#aaf3 0%, #66a 100%);
-	box-shadow: 0 1rem 1rem #1116;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 3rem;
+    border: .1rem var(--border) solid;
+    border-radius: 3rem;
+    padding: 3rem;
+    background: linear-gradient(#aaf3 0%, #66a 100%);
+    box-shadow: 0 1rem 1rem #1116;
 
-	@media (width <=720px) {
-		flex-direction: column;
-	}
+    @media (width <=720px) {
+        flex-direction: column;
+    }
+
+    @media (width <= 512px) {
+        padding: 2rem;
+    }
 }
 
 .login__page__left {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 1rem;
-	width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
 
-	& hr {
-		width: 80% !important;
-		border-color: var(--foreground);
-	}
+    & hr {
+        width: 80% !important;
+        border-color: var(--foreground);
+    }
 
-	& button {
-		display: flex;
-		gap: 1rem;
-		box-shadow: 0 .5rem 1rem #1133;
-	}
+    & button {
+        display: flex;
+        gap: 1rem;
+        box-shadow: 0 .5rem 1rem #1133;
+    }
 }
 
 .login__page__buttons {
-	display: flex;
-	gap: 1rem;
-	flex-direction: column;
-	justify-content: center;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: center;
 
-	& button {
-		width: 18rem;
-	}
+    & button {
+        width: 18rem;
+
+        @media (width <= 512px) {
+            width: 100%;
+        }
+    }
 }
 
 .login__page__right {
-	align-content: center;
+    align-content: center;
 
-	@media (width <=720px) {
-		display: none;
-	}
+    @media (width <=720px) {
+        display: none;
+    }
+}
+
+.login__page__right__image {
+    height: auto;
+    width: 36vw;
 }
 
 .login__page__form {
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-	width: 100%;
-	padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    padding-top: 1rem;
 }
 
 .login__page__form__label {
-	line-height: 0;
-	color: var(--foreground);
+    line-height: 0;
+    color: var(--foreground);
 }
 
 .login__page__form__input {
-	width: 100%;
-	box-shadow: 0 .5rem 1rem #1133;
+    width: 100%;
+    box-shadow: 0 .5rem 1rem #1133;
 
-	color: var(--foreground);
-	background-color: rgb(var(--background-input-rgb));
+    color: var(--foreground);
+    background-color: rgb(var(--background-input-rgb));
 
-	& .p-inputtext {
-		width: 100%;
-	}
+    & .p-inputtext {
+        width: 100%;
+    }
 }
