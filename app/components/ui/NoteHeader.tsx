@@ -22,17 +22,13 @@ const NoteHeader = async ({ lang, note }: { lang: string, note: Note }) => {
 					<ButtonGroup>
 						<BackButton lang={lang} />
 						<EditButton label={t("edit")} noteId={note.$id} />
-						{/* @ts-ignore */}
 						<ChangeGroupButton lang={lang} label={t("note.change-group")} note={note} groupTitle={noteGroupTitle} />
 						<TogglePinButton title={t("toggle-pin")} note={note} />
-						{<DeleteButton label={t("delete")} noteId={note.$id} localeStrings={{
-							confirmMessage: t("note-delete-confirm-1") + '\\n' + t("note-delete-confirm-2"),
-							confirmHeader: t("note-delete-confirm-header"),
-						}} />}
+						<DeleteButton label={t("delete")} noteId={note.$id} />
 					</ButtonGroup>
 				</div>
 			</section>
-			<span className={noteHeaderStyles.note__header__date}><b>{t("last-update")}:</b> {new Date(note.$updatedAt).toLocaleString(lang, {
+			<span className={noteHeaderStyles.note__header__date}><b>{t("last-update")}:</b> {new Date(note.lastUpdated).toLocaleString(lang, {
 				dateStyle: "full",
 				timeStyle: "short",
 			})}</span>

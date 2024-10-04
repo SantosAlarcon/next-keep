@@ -23,6 +23,8 @@ const SaveNoteButton = ({ lang, title }: { lang: string, title: string }) => {
 			toast.error(t("text-missing"), { position: "top-center" });
 		} else {
 			setPending(true);
+			newNote.lastUpdated = new Date().toISOString();
+			// setNewNote({...newNote, lastUpdated: new Date().toISOString()})
 			// @ts-ignore
 			saveNewNote(newNote)
 				.then(() => {

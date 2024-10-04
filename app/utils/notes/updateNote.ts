@@ -14,6 +14,7 @@ export const updateNote = async (updatedNote: Note) => {
 				data: {
 					data: updatedNote.data,
 					title: updatedNote.title,
+					lastUpdated: new Date().toISOString(),
 				},
 			}),
 		});

@@ -14,8 +14,7 @@ import { useTranslation } from "react-i18next";
 function DeleteButton({
 	label,
 	noteId,
-	localeStrings: { confirmMessage },
-}: { label: string; noteId: string; localeStrings: { confirmMessage: string } }) {
+}: { label: string; noteId: string; }) {
 	const [pending, setPending] = useState<boolean>(false);
 	const router = useRouter();
 	// @ts-ignore
@@ -28,11 +27,11 @@ function DeleteButton({
 			acceptLabel: t("yes"),
 			rejectLabel: t("no"),
 			message: (
-                <p>
-                    {t("note-delete-confirm-1")}<br/>
-                    {t("note-delete-confirm-2")}
-                </p>
-            ),
+				<p>
+					{t("note-delete-confirm-1")}<br />
+					{t("note-delete-confirm-2")}
+				</p>
+			),
 			header: t("note-delete-confirm-header"),
 			icon: "pi pi-exclamation-triangle",
 			breakpoints: { "640px": "85vw" },

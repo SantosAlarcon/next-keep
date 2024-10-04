@@ -178,6 +178,7 @@ export async function POST(req: NextRequest) {
 	newNote.isPinned = res.isPinned;
 	newNote.$createdAt = new Date().toISOString();
 	newNote.$updatedAt = new Date().toISOString();
+	newNote.lastUpdated = new Date().toISOString();
 
 	// Call the createNewNote function
 	// @ts-ignore
@@ -242,7 +243,7 @@ export async function PUT(req: NextRequest) {
 		...body,
 		title: body.title,
 		data: body.data,
-		updatedDate: pinStatusChanged ? foundNote?.updatedDate : new Date().toISOString(),
+		lastUpdated: pinStatusChanged ? foundNote?.updatedDate : new Date().toISOString(),
 		group: body.group,
 		isPinned: body.isPinned,
 	};

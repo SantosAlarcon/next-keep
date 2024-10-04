@@ -43,7 +43,7 @@
         "rename-group": "Cambiar el nombre del grupo",
         "delete-group": "Borrar grupo",
         "group-delete-confirm-header": "Confirmar borrado",
-        "group-delete-confirm-message-1": "Estás a punto de borrar este grupo. Todas las notas de este grupo SERÁN ELIMINADAS.",
+        "group-delete-confirm-message-1": "Estás a punto de borrar este grupo. Las notas de este grupo NO se borrarán.",
         "group-delete-confirm-message-2": "¿Estás segur@?",
         "group-delete-success": "Se ha borrado el grupo '{{name}}'",
         "group-rename-header": "Renombrar grupo",

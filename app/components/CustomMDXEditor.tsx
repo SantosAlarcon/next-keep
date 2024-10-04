@@ -8,14 +8,14 @@ import "@uiw/react-markdown-preview/markdown.css";
 import "@/app/styles/wmd-editor.css";
 
 interface EditorProps {
-    lang: string;
+	lang: string;
 	text: string;
 	isEditing: boolean;
 }
 
 enum EditorMode {
-    Editor = "Editor",
-    Preview = "Preview"
+	Editor = "Editor",
+	Preview = "Preview"
 }
 
 import MDEditor from "@uiw/react-md-editor";
@@ -28,7 +28,7 @@ const CustomMDXEditor: FC<EditorProps> = ({ lang, text, isEditing }) => {
 	const setNewNote = useNewNoteStore((state) => state.setNewNote)
 	const [markdown, setMarkdown] = useState<string>(text)
 	const [editorMode, setEditorMode] = useState<EditorMode>(EditorMode.Editor)
-    const {t} = useTranslation("common", {lng: lang})
+	const { t } = useTranslation("common", { lng: lang })
 
 	// @ts-ignore
 	const { updatedNote, setUpdatedNote } = useContext(UpdateNoteContext)

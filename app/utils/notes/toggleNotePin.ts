@@ -12,7 +12,7 @@ export const toggleNotePin = async (note: Note) => {
 		},
 		body: JSON.stringify({
 			data: {
-				isPinned: newPinnedState
+				isPinned: newPinnedState,
 			}
 		}),
 	});

@@ -21,6 +21,7 @@ import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 import { useTranslation } from "react-i18next";
 import User from "./ui/User";
+import { changeNoteGroupsToNull } from "../utils/notes/changeNoteGroupsToNull";
 
 const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 	const { t } = useTranslation("common", { lng: lang })
@@ -73,17 +74,20 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 				confirmDialog({
 					header: t("group.group-delete-confirm-header"),
 					message: (
-                        <p>
-                        {t("group.group-delete-confirm-message-1")}<br />
-                        {t("group.group-delete-confirm-message-2")}
-                        </p>
-                    ),
+						<p>
+							{t("group.group-delete-confirm-message-1")}<br />
+							{t("group.group-delete-confirm-message-2")}
+						</p>
+					),
 					icon: "pi pi-info-circle",
 					acceptLabel: t("yes"),
 					rejectLabel: t("no"),
 					accept: () => {
+						const groupId = selectedGroup?.$id;
 						// @ts-ignore
 						toast.promise(deleteGroupById(selectedGroup?.$id).then(() => {
+							// @ts-ignore
+							changeNoteGroupsToNull(groupId)
 							updateGroups();
 							setTimeout(() => {
 								router.refresh()

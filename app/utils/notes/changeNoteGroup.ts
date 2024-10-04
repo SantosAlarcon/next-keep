@@ -14,7 +14,7 @@ export const changeNoteGroup = async (note: Note, groupTitle: string) => {
 		body: JSON.stringify({
 			data: {
 				group: group[0]?.$id,
-			},
+			}
 		}),
 	});
 };

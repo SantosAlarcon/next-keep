@@ -1,4 +1,3 @@
-import { ID } from "appwrite";
 import { create } from "zustand";
 
 type newNoteFields = {
@@ -9,7 +8,8 @@ type newNoteFields = {
 		isPinned: boolean,
 		userId: string,
 		$createdAt: string,
-		$updatedAt: string
+		$updatedAt: string,
+		lastUpdated: string
 	}
 }
 
@@ -27,11 +27,12 @@ const newNoteStore = (set) => ({
 		data: "",
 		userId: "",
 		$createdAt: "",
-		$updatedAt: ""
+		$updatedAt: "",
+		lastUpdated: ""
 	},
 	// @ts-ignore
 	setNewNote: (field) => set((state) => ({ newNote: { ...state.newNote, ...field } })),
-	reset: () => set({ newNote: { group: null, title: "", isPinned: false, data: "", userId: "", $createdAt: "", $updatedAt: "" } }),
+	reset: () => set({ newNote: { group: null, title: "", isPinned: false, data: "", userId: "", $createdAt: "", $updatedAt: "", lastUpdated: "" } }),
 })
 
 // @ts-ignore

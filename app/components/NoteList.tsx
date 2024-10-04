@@ -67,7 +67,7 @@ const NoteList = ({ group, selected, lang }: { group: string; selected: string; 
 		}
 	}, [filter]);
 
-	filteredNotes?.sort((a, b) => b.$updatedAt.localeCompare(a.$updatedAt));
+	filteredNotes?.sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated));
 
 	return (
 		<ul className={NoteListStyles.note__list__container}>
