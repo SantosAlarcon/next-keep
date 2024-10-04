@@ -23,4 +23,23 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    justify-content: space-between;
+    height: inherit;
+}
+
+.drawer__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+.drawer__bottom {
+    width: 100%;
+    text-align: center;
+
+    & button {
+        width: 50%;
+    }
 }
