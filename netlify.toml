@@ -2,4 +2,4 @@
   package = "@netlify/plugin-nextjs"
 
 [build.environment]
-  TZ = "Europe/Madrid"
+  TZ = "UTC+02:00"
