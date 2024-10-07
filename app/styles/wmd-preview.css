@@ -1,63 +1,66 @@
 .w-md-editor-preview {
-    & > .wmde-markdown {
+    &>.wmde-markdown {
         padding: 0;
     }
 }
 
-
 .wmde-markdown {
-	font-family: inherit !important;
-	--color-fg-default: #111 !important;
-	padding: 1.5rem;
-	background-color: inherit !important;
+    font-family: inherit !important;
+    --color-fg-default: #111 !important;
+    padding: 1.5rem;
+    background-color: inherit !important;
 
-	@media (prefers-color-scheme: dark) {
-		background-color: transparent !important;
-		--color-fg-default: #eee !important;
-	}
+    @media (prefers-color-scheme: dark) {
+        background-color: transparent !important;
+        --color-fg-default: #eee !important;
+    }
 
-	& pre>code {
-		font-family: monospace;
-	}
+    & pre>code {
+        font-family: monospace;
+    }
 
-	& h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		border-bottom: 1px #0006 solid !important;
+    & h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        border-bottom: 1px #0006 solid !important;
 
-		@media (prefers-color-scheme: dark) {
-			border-bottom: 1px #fff6 solid !important;
-		}
-	}
+        @media (prefers-color-scheme: dark) {
+            border-bottom: 1px #fff6 solid !important;
+        }
+    }
 
-	& table {
-		box-shadow: .1rem .1rem .5rem #ddf6;
+    & table {
+        box-shadow: .1rem .1rem .5rem #ddf6;
 
-		&>thead>tr {
-			background-color: #ddf;
-		}
+        &>thead>tr {
+            background-color: #ddf;
+        }
 
-		&>tbody>tr:nth-child(even) {
-			background-color: #eef2;
-		}
+        &>tbody>tr:nth-child(even) {
+            background-color: #eef2;
+        }
 
-		@media (prefers-color-scheme: dark) {
-			box-shadow: .1rem .1rem .5rem #1116;
+        @media (prefers-color-scheme: dark) {
+            box-shadow: .1rem .1rem .5rem #1116;
 
-			&>thead>tr {
-				background-color: #0016;
-			}
+            &>thead>tr {
+                background-color: #0016;
+            }
 
-			&>tbody>tr:nth-child(even) {
-				background-color: #0011;
-			}
+            &>tbody>tr:nth-child(even) {
+                background-color: #0011;
+            }
 
-			&>tbody>tr:nth-child(odd) {
-				background-color: #0022;
-			}
-		}
-	}
+            &>tbody>tr:nth-child(odd) {
+                background-color: #0022;
+            }
+        }
+    }
+}
+
+.wmde-markdown img {
+    background-color: transparent !important;
 }

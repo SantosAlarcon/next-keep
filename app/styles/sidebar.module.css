@@ -8,6 +8,7 @@
 	height: 100dvh;
 	padding: 1rem;
 	gap: 1rem;
+    overflow: auto;
 
 	& h3 {
 		font-weight: 800;
