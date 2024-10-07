@@ -1,36 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<center><img src="https://next-keep.netlify.app/NextKeepText.svg" width=640 /></center>
 
-## Getting Started
+# Introduction
+**Next Keep** is a web application where users can take notes and manage groups for easy organization. This application has a built-in **Markdown** editor, so the user can use this markup language to stylize its notes.
 
-First, run the development server:
+## Features
++ Light/Dark theme according to the S.O. setting.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Stack used
++ [**NextJS**](https://www.nextjs.org): the most famous React framework created by [**Vercel**](https://www.vercel.com).
++ [**PrimeReact**](https://primereact.org): collection of UI "React based" components by **Prime**.
++ [**Sonner**](https://sonner.emilkowal.ski/): toast and notification library.
++ [**React Markdown Editor**](https://uiwjs.github.io/react-markdown-editor/): Markdown editor component with plugin support.
++ [**React Markdown Preview**](https://uiwjs.github.io/react-markdown-preview/): Markdown previewer component with plugin support.
++ [**Appwrite**](https://appwrite.io): BaaS (Backend as a Service) that has a builtin NO-SQL database, auth management, storage and more...
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Localization
+**Castilian Spanish** and **english** are the only available languages. In the future, **catalian language** will be added among more languages.
