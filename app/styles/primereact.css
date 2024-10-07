@@ -54,10 +54,6 @@
 	background-color: rgb(var(--background-start-rgb));
 }
 
-.p-confirm-dialog-message {
-    line-height: 1.5rem;
-}
-
 .p-dialog-content {
 	display: flex;
 	align-items: center;
@@ -79,11 +75,16 @@
 	& button {
 		padding: .5rem 1rem;
 		color: var(--foreground);
+        width: 8rem;
 	}
 }
 
 .p-dialog-mask {
 	backdrop-filter: blur(4px);
+}
+
+.p-confirm-dialog-message {
+    line-height: 1.5rem;
 }
 
 /* TOOLTIP */
