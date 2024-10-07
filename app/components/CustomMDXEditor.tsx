@@ -47,7 +47,7 @@ const CustomMDXEditor: FC<EditorProps> = ({ lang, text, isEditing }) => {
 		<>
 			<SelectButton options={[t("editor"), t("preview")]} value={editorMode} onChange={(e) => setEditorMode(e.value)} />
 			<MDEditor
-				autoFocus={true}
+				autoFocus={false}
 				value={markdown}
 				visibleDragbar={false}
 				extraCommands={[]}

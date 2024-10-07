@@ -5,29 +5,29 @@ import NewNotePageStyles from "@/app/styles/NewNotePage.module.css";
 import { useNewNoteStore } from "../store/newNoteStore";
 import UpdateNoteContext from "../context/UpdateNoteContext";
 
-const LocalizedTitleInput = ({ placeholder, title, isEditing }: { placeholder: string, title: string, isEditing: boolean }) => {
+const LocalizedTitleInput = ({ placeholder, title, isEditing }: { placeholder: string; title: string; isEditing: boolean }) => {
 	const newNoteTitle = useNewNoteStore((state) => state.newNote.title);
 	const setNewNote = useNewNoteStore((state) => state.setNewNote);
 	const inputRef = useRef<string | null>(title);
 
 	// @ts-ignore
-	const { updatedNote, setUpdatedNote } = useContext(UpdateNoteContext)
+	const { updatedNote, setUpdatedNote } = useContext(UpdateNoteContext);
 
 	useEffect(() => {
 		if (isEditing) {
 			//@ts-ignore
-			inputRef.current.value = updatedNote.title
+			inputRef.current.value = updatedNote.title;
 		} else {
 			//@ts-ignore
-			inputRef.current.value = newNoteTitle
+			inputRef.current.value = newNoteTitle;
 		}
 
 		return () => {
 			if (!isEditing) {
-				setNewNote({ title: "" })
+				setNewNote({ title: "" });
 			}
-		}
-	}, [])
+		};
+	}, []);
 
 	const onChangeHandler = () => {
 		if (isEditing) {
@@ -41,6 +41,7 @@ const LocalizedTitleInput = ({ placeholder, title, isEditing }: { placeholder: s
 
 	return (
 		<input
+			autoFocus
 			onChange={onChangeHandler}
 			className={NewNotePageStyles.new__note__page__title}
 			type="text"
