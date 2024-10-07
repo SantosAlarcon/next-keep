@@ -13,7 +13,7 @@ const ResetPasswordPage = ({ params: { lang } }: { params: { lang: string } }) =
 					<ResetPassword lang={lang} />
 				</div>
 				<div className={LoginStyles.login__page__right}>
-					<Image className={LoginStyles.login__page__right__image} priority src="/mockup.webp" alt="Next Keep Mockup" width={608} height={401} />
+					<Image className={LoginStyles.login__page__right__image} priority src="/mockup.webp" alt="Next Keep Mockup" width={1280} height={762} />
 				</div>
 			</section>
 		</main>

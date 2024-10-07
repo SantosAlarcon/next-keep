@@ -39,13 +39,13 @@ const Login = ({ lang }: { lang: string }) => {
 			<h1>{t("login-title")}</h1>
 			<div className={LoginStyles.login__page__buttons}>
 				<form action={() => loginToOAuth(OAuthProvider.Google)} className={LoginStyles.login__page__buttons__form}>
-				    <Button type="submit" label={t("login-google")} icon="pi pi-google" className="p-button-rounded" />
+					<Button type="submit" label={t("login-google")} icon="pi pi-google" className="p-button-rounded" />
 				</form>
 				<form action={() => loginToOAuth(OAuthProvider.Github)} className={LoginStyles.login__page__buttons__form}>
-                    <Button type="submit" label={t("login-github")} icon="pi pi-github" className="p-button-rounded" />
+					<Button type="submit" label={t("login-github")} icon="pi pi-github" className="p-button-rounded" />
 				</form>
 				<form action={() => loginToOAuth(OAuthProvider.Facebook)} className={LoginStyles.login__page__buttons__form}>
-                    <Button type="submit" label={t("login-facebook")} icon="pi pi-facebook" className="p-button-rounded" />
+					<Button type="submit" label={t("login-facebook")} icon="pi pi-facebook" className="p-button-rounded" />
 				</form>
 			</div>
 			<Link href={`/reset-password/${lang}`}>
