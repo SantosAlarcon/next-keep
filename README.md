@@ -5,6 +5,8 @@
 
 The main purpose of this project is to help **programmers**, **tech users**, **content creators**, among others, to keep their ideas well organized to **become more productive** and keep them in one place.
 
+<p align="center"><img src="https://next-keep.netlify.app/mockup.webp" width=1024 /></p>
+
 ## Features
 + App router (available since NextJS 13)
 + Light/Dark theme according to the O.S. customization setting
