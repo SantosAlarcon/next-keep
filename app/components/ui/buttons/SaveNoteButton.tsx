@@ -42,7 +42,7 @@ const SaveNoteButton = ({ lang, title }: { lang: string, title: string }) => {
 	};
 
 	return (
-		<button onClick={() => handleCreateNote()} type="button" className={saveButtonStyles.save__button__container}>
+		<button aria-label={title} onClick={() => handleCreateNote()} type="button" className={saveButtonStyles.save__button__container}>
 			<span className={saveButtonStyles.save__button__title}>
 				{pending ? <span className="pi pi-spin pi-spinner" /> : title}
 			</span>

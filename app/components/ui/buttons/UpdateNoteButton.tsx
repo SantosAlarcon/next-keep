@@ -36,7 +36,7 @@ const UpdateNoteButton = ({ label }: { label: string }) => {
 	};
 
 	return (
-		<button onClick={handleConfirmUpdate} type="button" className={saveButtonStyles.save__button__container}>
+		<button aria-label={label} onClick={handleConfirmUpdate} type="button" className={saveButtonStyles.save__button__container}>
 			<span className={saveButtonStyles.save__button__label}>{pending ? <span className="pi pi-spin pi-spinner" /> : label}</span>
 		</button>
 	);

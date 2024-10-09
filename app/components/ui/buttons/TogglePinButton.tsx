@@ -24,6 +24,7 @@ const TogglePinButton = ({ title, note }: { title: string; note: Note }) => {
 			tooltip={title}
 			tooltipOptions={{ position: "bottom" }}
 			type="button"
+            aria-label={title}
 			className={pinnedButtonStyles.pinned__button__container}
 		/>
 	);

@@ -11,7 +11,7 @@ const MobileHeader = ({lang}:{lang: string}) => {
 	return (
         <section className={MobileHeaderStyles.mobile__header__container}>
             <SidebarDrawerClient params={{lang: lang}} visible={visible} onHide={() => setVisible(false)} />
-            <Button onClick={() => setVisible(true)} className={MobileHeaderStyles.mobile__header__button} icon="pi pi-bars" />
+            <Button aria-label="Mobile menu" onClick={() => setVisible(true)} className={MobileHeaderStyles.mobile__header__button} icon="pi pi-bars" />
         </section>
     )
 };

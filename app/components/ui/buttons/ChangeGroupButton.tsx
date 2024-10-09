@@ -21,7 +21,7 @@ const ChangeGroupButton = ({ lang, label, note, groupTitle }: { lang: string, la
 
 	return (
 		<>
-			<Button onClick={handleDialog} icon="pi pi-folder" tooltip={label} tooltipOptions={{ position: "bottom" }} />
+			<Button aria-label={label} onClick={handleDialog} icon="pi pi-folder" tooltip={label} tooltipOptions={{ position: "bottom" }} />
 			<ChangeGroupDialog lang={lang} visible={visible} note={note} groupTitle={groupTitle} groupTitles={allGroupTitles} onHide={() => setVisible(false)} />
 		</>
 	);

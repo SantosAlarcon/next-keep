@@ -188,6 +188,7 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 					<User />
 					<Button
 						tooltip={expanded ? t("collapse") : t("expand")}
+                        aria-label={expanded ? t("collapse") : t("expand")}
 						tooltipOptions={{ position: "top" }}
 						severity="secondary"
 						label={expanded ? "<" : ">"}

@@ -63,6 +63,7 @@ function DeleteButton({
 			icon={pending ? <span className="pi pi-spin pi-spinner" /> : <DeleteIcon width="20px" height="20px" />}
 			onClick={handleClick}
 			type="button"
+            aria-label={label}
 			tooltip={label}
 			tooltipOptions={{ position: "bottom" }}
 		/>

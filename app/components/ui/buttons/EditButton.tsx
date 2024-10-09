@@ -10,7 +10,7 @@ function EditButton({ label, noteId }: { label: string; noteId: string }) {
 		router.push(`/notes/edit/${noteId}`);
 	};
 	return (
-		<Button icon={<EditIcon width="20px" height="20px" />} onClick={handleClick} tooltip={label} tooltipOptions={{ position: "bottom" }} />
+		<Button aria-label={label} icon={<EditIcon width="20px" height="20px" />} onClick={handleClick} tooltip={label} tooltipOptions={{ position: "bottom" }} />
 	);
 }
 

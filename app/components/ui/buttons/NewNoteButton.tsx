@@ -21,6 +21,7 @@ const NewNoteButton = ({ title, expanded }: { title: string; expanded: boolean }
 			tooltip-align={expanded ? null : "right"}
 			className={expanded ? sidebarStyles.sidebar__button : sidebarStyles.sidebar__new__note__button__collapsed}
 			onClick={createNewNote}
+            aria-label={title}
 			type="button"
 		>
 			<NewNoteIcon />
