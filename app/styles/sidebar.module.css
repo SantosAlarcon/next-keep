@@ -1,3 +1,12 @@
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #aaf;
+    border-radius: 1rem;
+}
+
 .sidebar__container {
 	display: flex;
 	flex-direction: column;

@@ -1,27 +1,27 @@
 "use client";
 
+import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
+import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { ContextMenu } from "primereact/contextmenu";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 import { logoVariants, mainSidebarLinks, variants } from "../constants";
 import { dataStore } from "../store/dataStore";
 import sidebarStyles from "../styles/sidebar.module.css";
 import type { Group } from "../types";
+import { deleteGroupById } from "../utils/groups/deleteGroupById";
+import { changeNoteGroupsToNull } from "../utils/notes/changeNoteGroupsToNull";
+import { updateGroups } from "../utils/updateData";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
-import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
-import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
-import { ContextMenu } from "primereact/contextmenu";
-import { deleteGroupById } from "../utils/groups/deleteGroupById";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { updateGroups } from "../utils/updateData";
-import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
-import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
-import { useTranslation } from "react-i18next";
 import User from "./ui/User";
-import { changeNoteGroupsToNull } from "../utils/notes/changeNoteGroupsToNull";
+import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 
 const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 	const { t } = useTranslation("common", { lng: lang })

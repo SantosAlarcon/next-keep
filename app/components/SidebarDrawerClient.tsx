@@ -20,8 +20,8 @@ import { deleteGroupById } from "../utils/groups/deleteGroupById";
 import { updateGroups } from "../utils/updateData";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
-import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 import User from "./ui/User";
+import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 
 const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { lang: string }; visible: boolean; onHide: () => void }) => {
 	const t = i18nClient.getFixedT(lang, "common");
