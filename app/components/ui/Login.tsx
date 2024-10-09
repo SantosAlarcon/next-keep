@@ -58,7 +58,7 @@ const Login = ({ lang }: { lang: string }) => {
 			<hr />
 			<form id="emailLoginForm" action={submitEmailLogin} className={LoginStyles.login__page__form}>
 				<FloatLabel>
-					<InputText type="email" className={LoginStyles.login__page__form__input} id="email" name="email" required />
+					<InputText aria-label={t("email")} type="email" className={LoginStyles.login__page__form__input} id="email" name="email" required />
 					<label className={LoginStyles.login__page__form__label} htmlFor="email">{t("email")}</label>
 				</FloatLabel>
 				<FloatLabel>
@@ -69,6 +69,7 @@ const Login = ({ lang }: { lang: string }) => {
 						required
 						feedback={false}
 						toggleMask
+						aria-label={t("password")}
 					/>
 					<label className={LoginStyles.login__page__form__label} htmlFor="password">{t("password")}</label>
 				</FloatLabel>
