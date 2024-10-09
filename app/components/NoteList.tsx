@@ -18,7 +18,6 @@ const NoteList = ({ group, selected, lang }: { group: string; selected: string; 
 	// @ts-ignore
 	const filter: string = dataStore((state) => state.filter);
 
-
 	useEffect(() => {
 		switch (group) {
 			case "all": {
@@ -40,7 +39,8 @@ const NoteList = ({ group, selected, lang }: { group: string; selected: string; 
 			}
 		}
 
-	}, [allNotes]);
+
+	}, [allNotes, filter]);
 
 	useEffect(() => {
 		if (filter.length > 0) {
@@ -69,9 +69,11 @@ const NoteList = ({ group, selected, lang }: { group: string; selected: string; 
 
 	filteredNotes?.sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated));
 
+	if (!allNotes && !filteredNotes) return null;
+
 	return (
 		<ul className={NoteListStyles.note__list__container}>
-			{filteredNotes.length > 0 ? (
+			{allNotes.length > 0 && filteredNotes.length > 0 ? (
 				filteredNotes.map((note) => (
 					<li
 						key={note.$id}
@@ -87,11 +89,13 @@ const NoteList = ({ group, selected, lang }: { group: string; selected: string; 
 				))
 			) : (
 				<h3>
-					{allNotes.length > 0
-						? t("no-results-found")
-						: selected === "pinned" || selected === "group"
-							? t("empty-note-list-group")
-							: t("note-list-empty")}
+					{
+						allNotes.length === 0
+							? t("note-list-empty")
+							: (filteredNotes.length === 0) && (filter === "" && ( selected === "pinned" || selected === "group" ))
+								? t("empty-note-list-group")
+								: t("no-results-found")
+					}
 				</h3>
 			)}
 		</ul>
