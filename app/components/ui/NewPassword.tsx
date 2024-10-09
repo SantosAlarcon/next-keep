@@ -43,6 +43,8 @@ const NewPassword = ({ lang }: { lang: string }) => {
 						className={LoginStyles.login__page__form__input}
 						id="password"
 						name="password"
+						aria-label={t("new-password-password")}
+						aria-required
 						required
 						feedback={false}
 						toggleMask
@@ -58,6 +60,8 @@ const NewPassword = ({ lang }: { lang: string }) => {
 						className={LoginStyles.login__page__form__input}
 						id="confirm-password"
 						name="confirm-password"
+						aria-label={t("new-password-confirm-password")}
+						aria-required
 						required
 						feedback={false}
 						toggleMask

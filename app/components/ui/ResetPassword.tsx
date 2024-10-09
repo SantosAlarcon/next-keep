@@ -30,7 +30,7 @@ const ResetPassword = ({ lang }: { lang: string }) => {
 			<form id="emailRegisterForm" action={submitResetPassword} className={LoginStyles.login__page__form}>
 				<p>{t("reset-password-text")}</p>
 				<FloatLabel>
-					<InputText type="email" className={LoginStyles.login__page__form__input} id="email" name="email" required />
+					<InputText aria-label={t("email")} aria-required type="email" className={LoginStyles.login__page__form__input} id="email" name="email" required />
 					<label className={LoginStyles.login__page__form__label} htmlFor="email">{t("reset-password-email")}</label>
 				</FloatLabel>
 				{/* @ts-ignore */}

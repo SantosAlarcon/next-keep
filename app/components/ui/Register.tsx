@@ -19,12 +19,14 @@ const Register = ({ lang }: { lang: string }) => {
 			<hr />
 			<form id="emailRegisterForm" action={emailRegister} className={LoginStyles.login__page__form}>
 				<FloatLabel>
-					<InputText type="email" className={LoginStyles.login__page__form__input} id="email" name="email" required />
+					<InputText aria-label={t("email")} aria-required type="email" className={LoginStyles.login__page__form__input} id="email" name="email" required />
 					<label className={LoginStyles.login__page__form__label} htmlFor="email">{t("register-email")}</label>
 				</FloatLabel>
 				<FloatLabel>
 					<Password
 						className={LoginStyles.login__page__form__input}
+						aria-label={t("password")}
+						aria-required
 						id="password"
 						name="password"
 						required
@@ -44,6 +46,8 @@ const Register = ({ lang }: { lang: string }) => {
 						name="confirm-password"
 						required
 						feedback={false}
+						aria-label={t("confirm-password")}
+						aria-required
 						toggleMask
 					/>
 					<label className={LoginStyles.login__page__form__label} htmlFor="confirm-password">{t("register-confirm-password")}</label>
