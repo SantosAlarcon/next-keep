@@ -24,7 +24,6 @@ The main purpose of this project is to help **programmers**, **tech users**, **c
 * Easily manage groups to keep your notes categorized.
 
 ### Markdown Support
-
 * Leverage the power of Markdown for rich text formatting in your notes.
 * Enhance your notes with headings, bold, italics, and more.
 
