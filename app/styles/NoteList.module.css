@@ -5,12 +5,7 @@
 	gap: .2rem;
 	font-size: 0.9rem;
 	height: 100vh;
-	border-right: none;
 	width: 100%;
-
-	@media(prefers-color-scheme: dark) {
-		border-right: 1px #fff6 solid;
-	}
 }
 
 .note__item__container {
