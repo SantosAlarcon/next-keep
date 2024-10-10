@@ -14,7 +14,24 @@ const Register = ({ lang }: { lang: string }) => {
 
 	return (
 		<>
-			<Image src="/NextKeep.svg" alt="Next Keep Logo" width={150} height={150} priority />
+			<div className={LoginStyles.login__page__logo}>
+				<Image
+					className={LoginStyles.login__page__logo__icon}
+					src="/NextKeep.svg"
+					alt="Next Keep Logo"
+					width={350}
+					height={150}
+					priority
+				/>
+				<Image
+					className={LoginStyles.login__page__logo__text}
+					src="/NextKeepTextOnly.svg"
+					alt="Next Keep Logo"
+					width={350}
+					height={150}
+					priority
+				/>
+			</div>
 			<h1>{t("register-title")}</h1>
 			<hr />
 			<form id="emailRegisterForm" action={emailRegister} className={LoginStyles.login__page__form}>

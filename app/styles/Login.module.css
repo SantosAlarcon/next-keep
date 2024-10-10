@@ -65,6 +65,32 @@
     }
 }
 
+.login__page__logo {
+    display: flex;
+    align-items: center;
+}
+
+.login__page__logo__icon {
+    width: 72px;
+    height: auto;
+
+    @media (width <= 512px) {
+        width: 25%;
+    }
+}
+
+.login__page__logo__text {
+    height: auto;
+    
+    @media (prefers-color-scheme: dark) {
+        mix-blend-mode: plus-lighter;
+    }
+
+    @media (width <= 512px) {
+        width: 75%;
+    }
+}
+
 .login__page__buttons {
     display: flex;
     gap: 1rem;

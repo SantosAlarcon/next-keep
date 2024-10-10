@@ -35,7 +35,10 @@ const Login = ({ lang }: { lang: string }) => {
 
 	return (
 		<>
-			<Image src="/NextKeep.svg" alt="Next Keep Logo" width={150} height={150} priority />
+            <div className={LoginStyles.login__page__logo}>
+                <Image className={LoginStyles.login__page__logo__icon} src="/NextKeep.svg" alt="Next Keep Logo" width={350} height={150} priority />
+                <Image className={LoginStyles.login__page__logo__text} src="/NextKeepTextOnly.svg" alt="Next Keep Logo" width={350} height={150} priority />
+            </div>
 			<h1>{t("login-title")}</h1>
 			<div className={LoginStyles.login__page__buttons}>
 				<form action={() => loginToOAuth(OAuthProvider.Google)} className={LoginStyles.login__page__buttons__form}>
