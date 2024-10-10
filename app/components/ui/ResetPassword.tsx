@@ -6,7 +6,6 @@ import LoginStyles from "@/app/styles/Login.module.css";
 import { useTranslation } from "react-i18next";
 import resetPassword from "@/app/utils/resetPassword";
 import { useState } from "react";
-import BarLoader from "./BarLoader";
 import { toast } from "sonner";
 
 const ResetPassword = ({ lang }: { lang: string }) => {
@@ -60,10 +59,8 @@ const ResetPassword = ({ lang }: { lang: string }) => {
 						{t("reset-password-email")}
 					</label>
 				</FloatLabel>
-				{/* @ts-ignore */}
-				<Button
-					type="submit"
-					label={pending ? <BarLoader width="24" height="24" color="#eee" /> : t("reset-password-title")}
+                {/* @ts-ignore */}
+				<Button type="submit" label={pending ? <span className="pi pi-spin pi-spinner" /> : t("reset-password-title")}
 					className="p-button-rounded"
 				/>
 			</form>

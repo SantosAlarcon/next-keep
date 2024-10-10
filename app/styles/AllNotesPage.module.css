@@ -8,6 +8,16 @@
 	@media (width <=1024px) {
 		max-height: calc(100vh - 53px)
 	}
+
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #aaf;
+        border-radius: 1rem;
+    }
+
 }
 
 .all__notes__page__right {
