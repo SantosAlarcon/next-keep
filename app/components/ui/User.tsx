@@ -11,6 +11,7 @@ const User = () => {
 	const { t } = useTranslation("common", { lng: locale });
 
 	const handleLogout = () => {
+		window.localStorage.removeItem("sidebar_expanded");
 		// @ts-ignore
 		logout().then(() => {
 			window.location.assign(`/login/${locale}`);
@@ -20,7 +21,7 @@ const User = () => {
 	return (
 		<Button
 			tooltip={t("logout")}
-            aria-label={t("logout")}
+			aria-label={t("logout")}
 			tooltipOptions={{ position: "top" }}
 			icon="pi pi-sign-out"
 			className={UserStyles.user__container}
