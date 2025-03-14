@@ -6,7 +6,8 @@ export const metadata: Metadata = {
     title: "New Note"
 }
 
-const NewNotePageLayout = async ({ params: { lang }, children }: { params: { lang: string }, children: ReactNode }) => {
+const NewNotePageLayout = async ({ params, children }: { params: Promise<{ lang: string }>, children: ReactNode }) => {
+	const { lang } = await params
 	const { t } = await initTranslations(lang, ["common"])
 	metadata.title = t("create-note")
 

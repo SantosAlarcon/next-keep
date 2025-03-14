@@ -9,9 +9,10 @@ import styles from "@/styles/NotePage.module.css";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
-const EditorComp = dynamic(() => import("@/app/components/CustomMDXEditor").then((mod) => mod.default), { ssr: false });
+const EditorComp = dynamic(() => import("@/app/components/CustomMDXEditor").then((mod) => mod.default));
 
-const EditNotePage = async ({ params: { note, lang } }: { params: { note: string; lang: string } }) => {
+const EditNotePage = async ({ params }: { params: Promise<{ note: string; lang: string }> }) => {
+	const { note, lang } = await params;
 	const foundNote = await getNoteById(note);
 	const { t } = await initTranslations(lang, ["common"]);
 

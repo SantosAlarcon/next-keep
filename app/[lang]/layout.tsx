@@ -34,18 +34,19 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic"
 
-const SidebarClientNoSSR = dynamic2(() => import("@/components/SidebarClient"), { ssr: false });
+const SidebarClientNoSSR = dynamic2(() => import("@/components/SidebarClient"));
 
 export default async function RootLayout({
 	children,
-	params: { lang },
+	params
 }: Readonly<{
 	children: ReactNode;
-	params: {
+	params: Promise<{
 		lang: string;
-	};
+	}>;
 }>) {
 	const state = await getAllData();
+	const { lang } = await params;
 
 	return (
 		<html lang={lang}>
@@ -57,7 +58,7 @@ export default async function RootLayout({
 					<Toaster richColors position="bottom-center" theme="dark" />
 					<MobileHeader lang={lang} />
 					<div className="main__body">
-						<SidebarClientNoSSR params={{ lang: lang }} />
+						<SidebarClientNoSSR lang={lang} />
 						{children}
 					</div>
 				</PrimeReactProvider>

@@ -4,8 +4,10 @@ import LoginStyles from "@/styles/Login.module.css";
 import Image from "next/image";
 import "@/app/i18n-client"
 import Register from "@/app/components/ui/Register";
+import { use } from "react";
 
-const RegisterPage = ({ params: { lang } }: { params: { lang: string } }) => {
+const RegisterPage = ({ params }: { params: Promise<{ lang: string }> }) => {
+	const { lang } = use(params);
 	return (
 		<main className={LoginStyles.login__page__container}>
 			<section className={LoginStyles.login__page__box}>

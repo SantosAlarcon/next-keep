@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 
 const useDebounce = (state: any, delay: number) => {
 	const [debouncedValue, setDebouncedValue] = useState<any>(state);
-	const timerRef = useRef();
+	const timerRef = useRef(null);
 	const [pending, setPending] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -14,7 +14,8 @@ const useDebounce = (state: any, delay: number) => {
 		}, delay);
 
 		return () => {
-			clearTimeout(timerRef.current);
+			// @ts-ignore
+			clearTimeout(timerRef?.current);
 		};
 	}, [state, delay]);
 

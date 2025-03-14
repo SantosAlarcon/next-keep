@@ -2,7 +2,7 @@
 
 import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
 import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "primereact/button";
@@ -23,8 +23,9 @@ import SidebarItem from "./SidebarItem";
 import User from "./ui/User";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 
-const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
+const SidebarClient = ({ lang }: { lang: string }) => {
 	const { t } = useTranslation("common", { lng: lang })
+	
 	// @ts-ignore
 	const { allNotes, allGroups, allPinnedNotes } = dataStore.getState();
 	const cmRef = useRef(null);
@@ -34,16 +35,20 @@ const SidebarClient = ({ params: { lang } }: { params: { lang: string } }) => {
 	const [expanded, setExpanded] = useState<boolean>(() => {
 		// The default sidebar behaviour is opened. First checks if the sidebar_expanded
 		// is in the Local Storage. If not, it creates the key.
-		if (!window.localStorage.getItem("sidebar_expanded")) {
-			window.localStorage.setItem("sidebar_expanded", "true")
-			return true;
-		}
+		
+		if (typeof window !== "undefined") {
+			if (!window.localStorage.getItem("sidebar_expanded")) {
+				window.localStorage.setItem("sidebar_expanded", "true")
+				return true;
+			}
 
-		if (window.localStorage.getItem("sidebar_expanded") === "true") {
-			return true;
+			if (window.localStorage.getItem("sidebar_expanded") === "true") {
+				return true;
+			}
 		}
 
 		return false;
+		
 	});
 
 	const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);

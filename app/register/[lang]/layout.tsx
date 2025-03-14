@@ -17,20 +17,22 @@ export function generateStaticParams() {
 	return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
 }
 
-export async function generateMetadata({ params: { lang } }: { params: { lang: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+	const { lang } = await params;
 	const { t } = await initTranslations(lang, ["register"])
 	return {
 		title: `${t("register-title")} - Next Keep`
 	}
 }
 
-export default function RegisterLayout({
+export default async function RegisterLayout({
 	children,
-	params: { lang }
+	params
 }: {
 	children: ReactNode,
-	params: { lang: string }
+	params: Promise<{ lang: string }>
 }) {
+	const { lang } = await params;
 	return (
 		<html lang={lang}>
 			<head>

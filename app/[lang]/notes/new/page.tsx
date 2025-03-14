@@ -9,9 +9,10 @@ import SaveNoteButton from "@/app/components/ui/buttons/SaveNoteButton";
 import UpdateNoteProvider from "@/app/components/UpdateNoteProvider";
 import BarLoader from "@/app/components/ui/BarLoader";
 
-const EditorComp = dynamic(() => import("@/app/components/CustomMDXEditor"), { ssr: false });
+const EditorComp = dynamic(() => import("@/app/components/CustomMDXEditor"));
 
-const NewNotePage = async ({ params: { lang } }: { params: { lang: string } }) => {
+const NewNotePage = async ({ params }: { params: Promise<{ lang: string }> }) => {
+	const { lang } = await params;
 	const { t } = await initTranslations(lang, ["common"]);
 	const newNote = useNewNoteStore.getState().newNote;
 

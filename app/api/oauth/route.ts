@@ -6,11 +6,12 @@ import { type NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
 	const userId = request.nextUrl.searchParams.get("userId");
 	const secret = request.nextUrl.searchParams.get("secret");
+	const cookieList = await cookies();
 
 	// @ts-ignore
 	const session = await appwriteAccount.createSession(userId, secret);
 
-	cookies().set("appwrite_session", JSON.stringify(session), {
+	cookieList.set("appwrite_session", JSON.stringify(session), {
 		path: "/",
 		// httpOnly: true,
 		// sameSite: "strict",

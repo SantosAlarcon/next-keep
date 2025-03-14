@@ -3,10 +3,11 @@ import allNotesPageStyles from '@/app/styles/AllNotesPage.module.css';
 import { getNoteById } from '@/app/utils/notes/getNoteById';
 import dynamic from 'next/dynamic';
 
-const PinnedNoteIdPage = async ({params: {note, lang}}: {params: {note: string, lang: string}}) => {
+const PinnedNoteIdPage = async ({params}: {params: Promise<{note: string, lang: string}>}) => {
+	const {note, lang} = await params
 	const foundNote = await getNoteById(note);
 
-    const MarkPreview = dynamic(() => import("@/components/MarkdownPreview").then((mod) => mod.default), {ssr: false})
+    const MarkPreview = dynamic(() => import("@/components/MarkdownPreview").then((mod) => mod.default))
 
 	return (
 		<main className={allNotesPageStyles.all__notes__page__container}>

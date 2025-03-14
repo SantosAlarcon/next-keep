@@ -2,7 +2,7 @@
 import { cookies } from "next/headers";
 
 export const getSession = async () => {
-	const cookieStore = cookies()
+	const cookieStore = await cookies()
 	const session = cookieStore.get("appwrite_session")?.value
 
 	try {

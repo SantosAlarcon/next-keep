@@ -2,7 +2,8 @@ import { getNoteById } from "@/app/utils/notes/getNoteById"
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
 
-export async function generateMetadata({ params: { note } }: { params: { note: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ note: string }> }): Promise<Metadata> {
+	const { note } = await params
 	const foundNote = await getNoteById(note)
 
 	return {

@@ -7,7 +7,7 @@ import { getSession } from "./getSession"
 // This action removes the session cookie and deletes the user sessions from the Appwrite project
 // using the Appwrite API.
 export const logout = async () => {
-	const cookieList = cookies()
+	const cookieList = await cookies()
 	try {
 		const session = await getSession();
 		await fetch(`${apiEndpoint}/users/${session.userId}/sessions`, {

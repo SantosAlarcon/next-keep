@@ -17,20 +17,22 @@ export function generateStaticParams() {
 	return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
 }
 
-export async function generateMetadata({ params: { lang } }: { params: { lang: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+	const { lang } = await params;
 	const { t } = await initTranslations(lang, ["reset-password"])
 	return {
 		title: `${t("reset-password-title")} - Next Keep`
 	}
 }
 
-export default function ResetPasswordLayout({
+export default async function ResetPasswordLayout({
 	children,
-	params: { lang }
+	params
 }: {
 	children: ReactNode,
-	params: { lang: string }
+	params: Promise<{ lang: string }>
 }) {
+	const { lang } = await params;
 	return (
 		<html lang={lang}>
 			<head>
