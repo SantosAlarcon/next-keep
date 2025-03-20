@@ -72,9 +72,9 @@ const RenameGroupDialog = ({
 								setPending(true);
 								updateGroupById(group?.$id, newTitle)
 									.then(() => {
-										// @ts-ignore
 										toast.success(
 											t("group.group-rename-success", {
+                                                // @ts-ignore
 												name: titleRef?.current?.value,
 											}),
 										);
@@ -95,12 +95,13 @@ const RenameGroupDialog = ({
 		>
 			<div className="p-dialog-content-input">
 				<p>{t("group.group-rename-message")}</p>
-				{/* @ts-ignore */}
 				<InputText
+                    // @ts-ignore
 					ref={titleRef}
 					required
 					aria-label={t("group.group-rename-message")}
 					defaultValue={group?.title}
+                    // @ts-ignore
 					onInput={(e) => setNewTitle(e.target.value)}
 				/>
 			</div>
