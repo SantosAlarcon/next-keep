@@ -40,9 +40,9 @@ const CreateGroupDialog = ({ lang, visible, onHide }: { lang: string, visible: b
 	return (
 		<Dialog header={t("group.create-group-header")} footer={
 			<>
-				<Button label={t("cancel")} onClick={() => { onHide(); setNewGroupTitle("") }} />
+				<Button aria-label={t("cancel")} label={t("cancel")} onClick={() => { onHide(); setNewGroupTitle("") }} />
 				{/* @ts-ignore */}
-				<Button label={pending ? <span className="pi pi-spinner pi-spin" /> : t("create")} onClick={handleCreateGroup} />
+				<Button aria-label={pending ? <span className="pi pi-spinner pi-spin" /> : t("create")} onClick={handleCreateGroup} label={t("create")} />
 			</>
 		} draggable={false}
 			resizable={false}
@@ -51,7 +51,7 @@ const CreateGroupDialog = ({ lang, visible, onHide }: { lang: string, visible: b
 			onHide={() => { onHide(); setNewGroupTitle("") }} visible={visible}>
 			<div className="p-dialog-content-input">
 				<p>{t("group.create-group-message")}</p>
-				<InputText required value={newGroupTitle} onChange={(e) => setNewGroupTitle(e.target.value)} />
+				<InputText required aria-label={t("group.create-group-message")} value={newGroupTitle} onChange={(e) => setNewGroupTitle(e.target.value)} />
 			</div>
 		</Dialog>
 	)

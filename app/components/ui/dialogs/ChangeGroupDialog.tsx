@@ -3,7 +3,6 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import type { Note } from "@/app/types";
 import { toast } from "sonner";
-import BarLoader from "../BarLoader";
 import { useState } from "react";
 import { updateNotes } from "@/app/utils/updateData";
 import { Dropdown, type DropdownChangeEvent } from "primereact/dropdown";
@@ -56,7 +55,7 @@ const ChangeGroupDialog = ({
 			footer={
 				<>
 					{/* @ts-ignore */}
-					<Button label={pending ? <span className="pi pi-spin pi-spinner" /> : t("change")} onClick={confirmChange} />
+					<Button label={pending ? <span className="pi pi-spin pi-spinner" /> : t("change")} onClick={confirmChange} aria-label={t("change")} />
 				</>
 			}
 			onHide={() => {

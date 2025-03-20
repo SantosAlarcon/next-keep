@@ -135,7 +135,7 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 				className={sidebarStyles.sidebar__container}
 			>
 				<section className={sidebarStyles.sidebar__top}>
-					<Link href="/notes/all" prefetch>
+					<Link href="/notes/all" prefetch aria-label="Next Keep logo">
 						<motion.img
 							className={sidebarStyles.sidebar__logo}
 							src="/NextKeep.svg"

@@ -5,7 +5,7 @@ import Image from "next/image";
 const GroupItem = ({ id, title, amount, expanded, onContextMenu }: { id: string; title: string; amount: number; expanded: boolean, onContextMenu: () => void }) => {
 	return (
 		<li onContextMenu={onContextMenu} data-title={expanded ? null : title} data-tooltip-align={expanded ? null : "right"} className={GroupItemStyles.group__item__container}>
-			<ActiveLink href={`/groups/${id}`}>
+			<ActiveLink href={`/groups/${id}`} title={title}>
 				<div className={expanded ? GroupItemStyles.group__item__group : GroupItemStyles.group__item__group__collapsed}>
 					<div className={GroupItemStyles.group__item__left}>
 						<Image className={GroupItemStyles.group__item__icon} src="/group.svg" width="20" height="20" alt="Group icon" />

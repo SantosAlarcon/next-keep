@@ -12,4 +12,8 @@
     &:hover {
         background-color: #66f;
     }
+
+	&:focus {
+		border-color: light-dark(#111, #eee);	
+	}
 }

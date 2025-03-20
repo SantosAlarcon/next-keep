@@ -47,7 +47,7 @@ const ResetPassword = ({ lang }: { lang: string }) => {
 				<p>{t("reset-password-text")}</p>
 				<FloatLabel>
 					<InputText
-						aria-label={t("email")}
+						aria-label={t("reset-password-email")}
 						aria-required
 						type="email"
 						className={LoginStyles.login__page__form__input}
@@ -60,7 +60,7 @@ const ResetPassword = ({ lang }: { lang: string }) => {
 					</label>
 				</FloatLabel>
                 {/* @ts-ignore */}
-				<Button type="submit" label={pending ? <span className="pi pi-spin pi-spinner" /> : t("reset-password-title")}
+				<Button type="submit" aria-label={t("reset-password-title")} label={pending ? <span className="pi pi-spin pi-spinner" /> : t("reset-password-title")}
 					className="p-button-rounded"
 				/>
 			</form>

@@ -42,19 +42,19 @@ const Login = ({ lang }: { lang: string }) => {
 			<h1>{t("login-title")}</h1>
 			<div className={LoginStyles.login__page__buttons}>
 				<form action={() => loginToOAuth(OAuthProvider.Google)} className={LoginStyles.login__page__buttons__form}>
-					<Button type="submit" label={t("login-google")} icon="pi pi-google" className="p-button-rounded" />
+					<Button type="submit" aria-label={t("login-google")} label={t("login-google")} icon="pi pi-google" className="p-button-rounded" />
 				</form>
 				<form action={() => loginToOAuth(OAuthProvider.Github)} className={LoginStyles.login__page__buttons__form}>
-					<Button type="submit" label={t("login-github")} icon="pi pi-github" className="p-button-rounded" />
+					<Button type="submit" aria-label={t("login-github")} label={t("login-github")} icon="pi pi-github" className="p-button-rounded" />
 				</form>
 				<form action={() => loginToOAuth(OAuthProvider.Facebook)} className={LoginStyles.login__page__buttons__form}>
-					<Button type="submit" label={t("login-facebook")} icon="pi pi-facebook" className="p-button-rounded" />
+					<Button type="submit" aria-label={t("login-facebook")} label={t("login-facebook")} icon="pi pi-facebook" className="p-button-rounded" />
 				</form>
 			</div>
-			<Link href={`/reset-password/${lang}`}>
+			<Link href={`/reset-password/${lang}`} aria-label={t("forgot-password")}>
 				{t("forgot-password")}
 			</Link>
-			<Link href={`/register/${lang}`}>
+			<Link href={`/register/${lang}`} aria-label={t("register")}>
 				{t("register")}
 			</Link>
 
@@ -78,7 +78,7 @@ const Login = ({ lang }: { lang: string }) => {
 					<label className={LoginStyles.login__page__form__label} htmlFor="password">{t("password")}</label>
 				</FloatLabel>
 				{ /* @ts-ignore */}
-				<Button type="submit" label={pending ? <span className="pi pi-spin pi-spinner" /> : t("login")} className="p-button-rounded" />
+				<Button type="submit" aria-label={t("login")} label={pending ? <span className="pi pi-spin pi-spinner" /> : t("login")} className="p-button-rounded" />
 			</form>
 		</>
 	)

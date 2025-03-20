@@ -5,6 +5,10 @@
 	border-radius: .6rem;
 }
 
+:is(.p-c, .p-component, .p-button):focus {
+	border: 2px light-dark(#111, #fff) solid;
+}
+
 .p-focus {
 	background-color: var(--focus-bg);
 }

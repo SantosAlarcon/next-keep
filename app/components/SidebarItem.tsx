@@ -15,7 +15,7 @@ const SidebarItem = ({
 			data-tooltip-align={expanded ? null : "right"}
 			className={SidebarItemStyles.sidebar__item__container}
 		>
-			<ActiveLink href={href}>
+			<ActiveLink href={href} title={title}>
 				<div className={`${expanded ? SidebarItemStyles.sidebar__item__group : SidebarItemStyles.sidebar__item__group__collapsed}`}>
 					<div className={SidebarItemStyles.sidebar__item__left}>
 						{/* @ts-ignore */}

@@ -61,5 +61,7 @@
     "empty-note-list-group": "No hay notas en este grupo. Cambia alguna a este grupo.",
     "logout": "Cerrar sesión",
     "editor": "Editor",
-    "preview": "Vista previa"
+    "preview": "Vista previa",
+	"elements": "elementos",
+	"element": "elemento"
 }
