@@ -22,6 +22,8 @@ import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import User from "./ui/User";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
+import { CollapseIcon } from "./icons/CollapseIcon";
+import { ExpandIcon } from "./icons/ExpandIcon";
 
 const SidebarClient = ({ lang }: { lang: string }) => {
 	const { t } = useTranslation("common", { lng: lang })
@@ -196,7 +198,8 @@ const SidebarClient = ({ lang }: { lang: string }) => {
                         aria-label={expanded ? t("collapse") : t("expand")}
 						tooltipOptions={{ position: "top" }}
 						severity="secondary"
-						label={expanded ? "<" : ">"}
+						//@ts-ignore
+						label={expanded ? <CollapseIcon width="20px" height="20px" /> : <ExpandIcon width="20px" height="20px" />}
 						className={expanded ? sidebarStyles.sidebar__expand__button : sidebarStyles.sidebar__expand__button__collapsed}
 						type="button"
 						onClick={handleClick}

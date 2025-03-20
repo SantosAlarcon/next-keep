@@ -226,6 +226,26 @@
 	top: 28%;
 }
 
+.pi-edit-icon {
+	&::before {
+		content: url("../../public/EditIcon.svg");
+
+		@media (prefers-color-scheme: dark) {
+			filter: invert(1);
+		}
+	}
+}
+
+.pi-remove-icon {
+	&::before {
+		content: url("../../public/RemoveIcon.svg");
+
+		@media (prefers-color-scheme: dark) {
+			filter: invert(1);
+		}
+	}
+}
+
 /* ANIMATIONS */
 @keyframes fade {
 	0% {

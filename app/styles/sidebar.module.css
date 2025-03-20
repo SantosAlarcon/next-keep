@@ -119,6 +119,12 @@
     width: 100%;
 }
 
+.sidebar__expand__button, .sidebar__expand__button__collapsed {
+    display: flex;
+    justify-content: center;
+	align-items: center;
+}
+
 .sidebar__item {
     padding: 0.3rem;
     border-radius: 0.3rem;

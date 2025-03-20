@@ -1,6 +1,5 @@
 "use client";
 
-import DeleteIcon from "@/app/components/icons/DeleteIcon";
 import { deleteNote } from "@/app/utils/notes/deleteNote";
 import { confirmDialog } from "primereact/confirmdialog";
 import { Button } from "primereact/button";
@@ -10,6 +9,7 @@ import { updateNotes } from "@/app/utils/updateData";
 import { localeStore } from "@/app/store/localeStore";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import "@/styles/primereact.css";
 
 function DeleteButton({
 	label,
@@ -60,7 +60,7 @@ function DeleteButton({
 	};
 	return (
 		<Button
-			icon={pending ? <span className="pi pi-spin pi-spinner" /> : <DeleteIcon width="20px" height="20px" />}
+			icon={pending ? <span className="pi pi-spin pi-spinner" /> : <span className="pi pi-remove-icon" />}
 			onClick={handleClick}
 			type="button"
             aria-label={label}
