@@ -8,7 +8,7 @@ export const getGroupByTitle = async (groupTitle: string) => {
                 "Content-Type": "application/json",
                 "X-Appwrite-Project": appwriteProjectId,
             },
-            cache: "force-cache",
+            cache: "no-cache",
         },
     );
     const group = await response.json();

@@ -7,7 +7,7 @@ export const getAllNotes = async () => {
 		headers: {
 			"X-Appwrite-Project": appwriteProjectId
 		},
-		cache: "force-cache"
+		cache: "no-cache"
 	})
 
 	const allNotes = await response.json()
