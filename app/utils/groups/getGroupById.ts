@@ -5,6 +5,6 @@ export const getGroupById = async (id: string) => {
         headers: {
             "X-Appwrite-Project": appwriteProjectId
         },
-	cache: "no-cache"
+	cache: "force-cache"
     }).then((response) => response.json())
 }
