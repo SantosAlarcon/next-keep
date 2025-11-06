@@ -1,5 +1,7 @@
+import { NextConfig } from "next";
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
 	async headers() {
 		return [
 			{
@@ -27,13 +29,18 @@ const nextConfig = {
 						value: "no-cache",
 					},
 				],
-			}
+			},
 		];
 	},
 	pageExtensions: ["js", "jsx", "ts", "tsx", "mdx"],
 	transpilePackages: ["swagger-ui-react", "i18next", "react-i18next"],
+	// reactCompiler: true,
 	experimental: {
-		optimizePackageImports: ["primereact", "@uiw/react-md-editor", "@uiw/react-markdown-preview"],
+		optimizePackageImports: [
+			"primereact",
+			"@uiw/react-md-editor",
+			"@uiw/react-markdown-preview",
+		],
 	},
 	images: {
 		remotePatterns: [

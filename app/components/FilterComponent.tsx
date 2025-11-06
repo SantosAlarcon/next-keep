@@ -8,10 +8,10 @@ import { dataStore } from "../store/dataStore";
 import { useTranslation } from "react-i18next";
 
 const FilterComponent = ({ lang }: { lang: string }) => {
+	const [input, setInput] = useState<string>("");
 	const { t } = useTranslation("common", { lng: lang })
 	// @ts-ignore
 	const setFilter = dataStore((state) => state.setFilter)
-	const [input, setInput] = useState<string>("");
 	const [debInput] = useDebounce(input, 250);
 
 	useEffect(() => {
