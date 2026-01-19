@@ -4,25 +4,25 @@ import { Query } from "appwrite";
 import { databaseID, notesCollectionID } from "@/app/constants";
 
 export async function getNoteAmountsByGroups() {
-	const session = getSession();
-	const response = await appwriteDatabase.listDocuments(
-		databaseID,
-		notesCollectionID,
-		[
-			// @ts-ignore
-			Query.equal("userId", session.userId),
-		],
-	);
+    const session = getSession();
+    const response = await appwriteDatabase.listRows({
+        databaseId: databaseID,
+        tableId: notesCollectionID,
+        queries: [
+            // @ts-ignore
+            Query.equal("userId", session.userId),
+        ],
+    });
 
-	const amountMap = new Map<string, number>();
-	// @ts-ignore
-	for (const note of response) {
-		if (note.group !== null) {
-			amountMap.set(note.group, note._count._all);
-		}
-	}
+    const amountMap = new Map<string, number>();
+    // @ts-ignore
+    for (const note of response) {
+        if (note.group !== null) {
+            amountMap.set(note.group, note._count._all);
+        }
+    }
 
-	const amountMapObject = Object.fromEntries(amountMap);
+    const amountMapObject = Object.fromEntries(amountMap);
 
-	return amountMapObject;
+    return amountMapObject;
 }

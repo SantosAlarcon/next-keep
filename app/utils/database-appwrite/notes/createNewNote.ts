@@ -5,7 +5,7 @@ import type { Note } from "@/app/types";
 import { getSession } from "../../getSession";
 
 export const createNewNote = async (note: Note) => {
-	const session = getSession();
+	const session = await getSession();
 
 	try {
 		await appwriteDatabase.createRow({
