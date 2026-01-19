@@ -140,10 +140,10 @@ const Login = ({ lang }: { lang: string }) => {
 						{t("password")}
 					</label>
 				</FloatLabel>
-				{/* @ts-ignore */}
 				<Button
 					type="submit"
 					aria-label={t("login")}
+                    // @ts-ignore
 					label={
 						pending ? <span className="pi pi-spin pi-spinner" /> : t("login")
 					}

@@ -1,15 +1,16 @@
-import { prismaClient } from "../../PrismaClient";
+import { appwriteDatabase } from "@/app/appwrite";
+import { databaseID, groupsCollectionID } from "@/app/constants";
 
 export const updateGroupById = async (id: string, title: string) => {
 	try {
-		await prismaClient.groups.update({
-			where: {
-				id: id,
-			},
-			data: {
-				title: title,
-			},
-		});
+		await appwriteDatabase.updateRow({
+            databaseId: databaseID,
+            tableId: groupsCollectionID,
+            rowId: id,
+            data: {
+                title: title,
+            }
+        })
 		return true;
 	} catch (error) {
 		console.error(error);

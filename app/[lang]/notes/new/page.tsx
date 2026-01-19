@@ -32,9 +32,9 @@ const NewNotePage = async ({
 						title={newNote.title}
 						isEditing={false}
 					/>
-					{/* @ts-ignore */}
 					<EditorComp
 						lang={lang}
+                        // @ts-ignore
 						editorRef={editorRef}
 						text={newNote.data}
 						isEditing={false}

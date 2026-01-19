@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { getAllGroupTitles } from "../utils/groups/getAllGroupTitles";
 import { devtools } from "zustand/middleware";
+import { getAllGroupTitles } from "../utils/groups/getAllGroupTitles";
 
 export const groupStore = create(
 	devtools(

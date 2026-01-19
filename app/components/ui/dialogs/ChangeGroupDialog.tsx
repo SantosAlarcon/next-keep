@@ -61,8 +61,8 @@ const ChangeGroupDialog = ({
 			breakpoints={{ "640px": "80vw" }}
 			footer={
 				<>
-					{/* @ts-ignore */}
 					<Button
+                        // @ts-ignore
 						label={
 							pending ? <span className="pi pi-spin pi-spinner" /> : t("change")
 						}

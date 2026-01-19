@@ -25,10 +25,10 @@ const FilterComponent = ({ lang }: { lang: string }) => {
 			<span className="p-inputgroup-addon">
 				<i className={"pi pi-filter"} />
 			</span>
-			{/* @ts-ignore */}
 			<InputText
 				className={FilterComponentStyles.filter__component__input}
 				placeholder={t("filter")}
+                // @ts-ignore
 				onInput={(e) => setInput(e.target.value)}
 			/>
 		</section>

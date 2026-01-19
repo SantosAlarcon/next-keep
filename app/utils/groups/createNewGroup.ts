@@ -6,9 +6,10 @@ import {
 import { getSession } from "../getSession";
 import { ID } from "appwrite";
 
-export const createNewGroup = async (newGroup: string) => {
+export const createNewGroup = async (newGroupTitle: string) => {
 	const session = await getSession();
-	return await fetch(groupsEndpoint, {
+	
+    return await fetch(groupsEndpoint, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -18,7 +19,7 @@ export const createNewGroup = async (newGroup: string) => {
 		body: JSON.stringify({
 			documentId: ID.unique(),
 			data: {
-				title: newGroup,
+				title: newGroupTitle,
 				userId: session?.userId,
 			},
 		}),

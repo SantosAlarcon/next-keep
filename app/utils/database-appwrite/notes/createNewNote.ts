@@ -19,7 +19,7 @@ export const createNewNote = async (note: Note) => {
 				isPinned: note.isPinned,
 				publishedDate: note.$createdAt,
 				updatedDate: note.$updatedAt,
-				userId: session.userId!,
+				userId: session.userId,
 			},
 		});
 		return true;

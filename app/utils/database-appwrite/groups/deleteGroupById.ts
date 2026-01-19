@@ -1,13 +1,13 @@
-import { prismaClient } from "../../PrismaClient";
+import { appwriteDatabase } from "@/app/appwrite";
+import { databaseID, groupsCollectionID } from "@/app/constants";
 
 export const deleteGroupById = async (id: string) => {
 	try {
-		await prismaClient.groups.delete({
-			where: {
-				id: id,
-			},
-		});
-
+		await appwriteDatabase.deleteRow({
+            databaseId: databaseID,
+            tableId: groupsCollectionID,
+            rowId: id
+        })
 		return true;
 	} catch (error) {
 		// @ts-ignore

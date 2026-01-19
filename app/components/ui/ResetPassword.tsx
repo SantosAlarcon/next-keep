@@ -70,10 +70,10 @@ const ResetPassword = ({ lang }: { lang: string }) => {
 						{t("reset-password-email")}
 					</label>
 				</FloatLabel>
-				{/* @ts-ignore */}
 				<Button
 					type="submit"
 					aria-label={t("reset-password-title")}
+                    // @ts-ignore
 					label={
 						pending ? (
 							<span className="pi pi-spin pi-spinner" />

@@ -34,9 +34,9 @@ const EditNotePage = async ({
 						title={foundNote ? foundNote.title : ""}
 						isEditing={true}
 					/>
-					{/* @ts-ignore */}
 					<EditorComp
 						lang={lang}
+                        // @ts-ignore
 						editorRef={editorRef}
 						text={foundNote ? foundNote?.data : ""}
 						isEditing={true}

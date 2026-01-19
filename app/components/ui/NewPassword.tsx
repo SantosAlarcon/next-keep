@@ -98,9 +98,9 @@ const NewPassword = ({ lang }: { lang: string }) => {
 						{t("new-password-confirm-password")}
 					</label>
 				</FloatLabel>
-				{/* @ts-ignore */}
 				<Button
 					type="submit"
+                    // @ts-ignore
 					label={
 						pending ? (
 							<BarLoader color="#eee" width="20px" height="20px" />

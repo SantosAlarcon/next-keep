@@ -19,8 +19,8 @@ const ChangeGroupButton = ({
 	groupTitle: string;
 }) => {
 	const [visible, setVisible] = useState<boolean>(false);
-	// @ts-ignore
 	const allGroupTitles = dataStore(
+        // @ts-ignore
 		(state: DataStoreProps) => state.allGroupTitles,
 	);
 	const handleDialog = () => {

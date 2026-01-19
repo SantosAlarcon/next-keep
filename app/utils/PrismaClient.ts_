@@ -1,3 +1,0 @@
-import PrismaClient from "@/app/generated/client";
-
-export const prismaClient = new PrismaClient()

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { getNoteById } from "../utils/database/notes/getNoteById";
+import { getNoteById } from "../utils/database-appwrite/notes/getNoteById";
 
 type updateNoteMethods = {
 	setUpdateNote: (field: any) => void;
@@ -13,8 +13,9 @@ export const useUpdateNoteStore = create(
 	devtools(
 		(set) => ({
 			updateNote: {},
-			// @ts-ignore
+            // @ts-ignore
 			setUpdateNote: (field) =>
+                // @ts-ignore
 				set((state) => ({ updateNote: { ...state.updateNote, ...field } })),
 			changeUpdateNote: async (noteId: string) => {
 				const response = await getNoteById(noteId);

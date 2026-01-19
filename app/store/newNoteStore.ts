@@ -30,8 +30,9 @@ const newNoteStore = (set) => ({
 		$updatedAt: "",
 		lastUpdated: "",
 	},
-	// @ts-ignore
+    // @ts-ignore
 	setNewNote: (field) =>
+        // @ts-ignore
 		set((state) => ({ newNote: { ...state.newNote, ...field } })),
 	reset: () =>
 		set({

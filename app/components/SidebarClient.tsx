@@ -92,8 +92,8 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 					rejectLabel: t("no"),
 					accept: () => {
 						const groupId = selectedGroup?.$id;
-						// @ts-ignore
 						toast.promise(
+                            // @ts-ignore
 							deleteGroupById(selectedGroup?.$id).then(() => {
 								// @ts-ignore
 								changeNoteGroupsToNull(groupId);
@@ -194,11 +194,11 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 					</ul>
 					<ContextMenu ref={cmRef} model={groupContextMenu} />
 					<ConfirmDialog resizable={false} draggable={false} />
-					{/* @ts-ignore */}
 					<RenameGroupDialog
 						lang={lang}
 						visible={renameGroupVisibleModal}
 						onHide={() => setRenameGroupVisibleModal(false)}
+                        // @ts-ignore
 						group={selectedGroup}
 					/>
 				</section>

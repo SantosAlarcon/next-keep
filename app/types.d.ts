@@ -4,10 +4,10 @@ export type Note = {
 	data: string;
 	group: string | null;
 	isPinned: boolean;
-	$createdAt: string;
-	$updatedAt: string;
 	userId: string;
 	lastUpdated: string;
+	$createdAt: string;
+	$updatedAt: string;
 };
 
 export type Group = {

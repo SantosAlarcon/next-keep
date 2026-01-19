@@ -1,11 +1,11 @@
 import NoteListStyles from "@/app/styles/NoteList.module.css";
-import { getAllNotes } from "../utils/database/notes/getAllNotes";
-import { getAllPinnedNotes } from "../utils/database/notes/getAllPinnedNotes";
-import { getNotesByGroup } from "../utils/database/notes/getNotesByGroup";
 import FixedIcon from "./icons/FixedIcon";
 import UnfixedIcon from "./icons/UnfixedIcon";
 import ActiveNoteLink from "./ui/ActiveNoteLink";
 import { Note } from "../types";
+import { getAllNotes } from "../utils/database-appwrite/notes/getAllNotes";
+import { getAllPinnedNotes } from "../utils/database-appwrite/notes/getAllPinnedNotes";
+import { getNotesByGroup } from "../utils/database-appwrite/notes/getNotesByGroup";
 
 const NoteList = async ({
 	group,
@@ -16,7 +16,6 @@ const NoteList = async ({
 	selected: string;
 	filter: string;
 }) => {
-	// biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
 	let notes;
 
 	let path: string = "";
@@ -39,12 +38,14 @@ const NoteList = async ({
 		}
 	}
 
+    // @ts-ignore
 	notes?.sort((a: Note, b: Note) => b.$updatedAt.localeCompare(a.$updatedAt));
 
 	if (!notes) return null;
 
 	return (
 		<ul className={NoteListStyles.note__list__container}>
+            {/* @ts-ignore */}
 			{notes.map((note: Note) => (
 				<li
 					key={note.$id}
