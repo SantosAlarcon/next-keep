@@ -1,21 +1,21 @@
 .dark-editor-custom {
-    --font-mono: "JetBrainsMono Nerd Font";
-    --baseBg: rgb(25, 25, 50);
-    --basePageBg: rgb(50, 50, 75);
-    font-family: inherit;
+	--font-mono: "JetBrainsMono Nerd Font";
+	--baseBg: rgb(25, 25, 50);
+	--basePageBg: rgb(50, 50, 75);
+	font-family: inherit;
 
-    & button {
-        font-family: inherit;
-    }
+	& button {
+		font-family: inherit;
+	}
 
-    --accentBg: rgb(0, 0, 255);
+	--accentBg: rgb(0, 0, 255);
 
-    height: 80svh;
-    border: 1px #fff6 solid;
-    border-radius: .5rem;
-    overflow-x: auto;
+	height: 80svh;
+	border: 1px #fff6 solid;
+	border-radius: 0.5rem;
+	overflow-x: auto;
 }
 
 .mdxeditor-source-editor {
-    background-color: #112;
+	background-color: #112;
 }

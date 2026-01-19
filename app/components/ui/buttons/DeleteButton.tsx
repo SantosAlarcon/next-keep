@@ -11,10 +11,7 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import "@/styles/primereact.css";
 
-function DeleteButton({
-	label,
-	noteId,
-}: { label: string; noteId: string; }) {
+function DeleteButton({ label, noteId }: { label: string; noteId: string }) {
 	const [pending, setPending] = useState<boolean>(false);
 	const router = useRouter();
 	// @ts-ignore
@@ -28,7 +25,8 @@ function DeleteButton({
 			rejectLabel: t("no"),
 			message: (
 				<p>
-					{t("note-delete-confirm-1")}<br />
+					{t("note-delete-confirm-1")}
+					<br />
 					{t("note-delete-confirm-2")}
 				</p>
 			),
@@ -55,15 +53,21 @@ function DeleteButton({
 					},
 				);
 			},
-			reject: () => { },
+			reject: () => {},
 		});
 	};
 	return (
 		<Button
-			icon={pending ? <span className="pi pi-spin pi-spinner" /> : <span className="pi pi-remove-icon" />}
+			icon={
+				pending ? (
+					<span className="pi pi-spin pi-spinner" />
+				) : (
+					<span className="pi pi-remove-icon" />
+				)
+			}
 			onClick={handleClick}
 			type="button"
-            aria-label={label}
+			aria-label={label}
 			tooltip={label}
 			tooltipOptions={{ position: "bottom" }}
 		/>

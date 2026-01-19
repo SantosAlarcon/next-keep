@@ -5,13 +5,18 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function proxy(request: NextRequest) {
 	// Get the language used in the browser
 	// @ts-ignore
-	const lang = request.headers.get("Accept-Language").split(",")[0].split("-")[0];
+	const lang = request.headers
+		.get("Accept-Language")
+		.split(",")[0]
+		.split("-")[0];
 
-	if (request.nextUrl.pathname.startsWith("/api/") ||
+	if (
+		request.nextUrl.pathname.startsWith("/api/") ||
 		request.nextUrl.pathname.startsWith("/login/") ||
 		request.nextUrl.pathname.startsWith("/register/") ||
 		request.nextUrl.pathname.startsWith("/reset-password/") ||
-		request.nextUrl.pathname.startsWith("/new-password/")) {
+		request.nextUrl.pathname.startsWith("/new-password/")
+	) {
 		return NextResponse.next();
 	}
 
@@ -21,5 +26,7 @@ export async function proxy(request: NextRequest) {
 // Apply this proxy only to files in the app directory and these directories
 export const config = {
 	//matcher: ["/((?!api|static|.*\\..*|_next).*)", "/login", "/register", "/reset-password", "/new-password"],
-	matcher: ["/((?!api|login|register|reset-password|new-password|static|.*\\..*|_next).*)"],
+	matcher: [
+		"/((?!api|login|register|reset-password|new-password|static|.*\\..*|_next).*)",
+	],
 };

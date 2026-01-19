@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import LoginStyles from "@/styles/Login.module.css";
 import Image from "next/image";
-import "@/app/i18n-client"
+import "@/app/i18n-client";
 import Register from "@/app/components/ui/Register";
 import { use } from "react";
 
@@ -15,7 +15,14 @@ const RegisterPage = ({ params }: { params: Promise<{ lang: string }> }) => {
 					<Register lang={lang} />
 				</div>
 				<div className={LoginStyles.login__page__right}>
-					<Image className={LoginStyles.login__page__right__image} priority src="/mockup.webp" alt="Next Keep Mockup" width={1280} height={762} />
+					<Image
+						className={LoginStyles.login__page__right__image}
+						priority
+						src="/mockup.webp"
+						alt="Next Keep Mockup"
+						width={1280}
+						height={762}
+					/>
 				</div>
 			</section>
 		</main>

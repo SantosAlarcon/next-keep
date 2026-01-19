@@ -1,4 +1,8 @@
-import { appwriteAPIKey, appwriteProjectId, notesEndpoint } from "@/app/constants";
+import {
+	appwriteAPIKey,
+	appwriteProjectId,
+	notesEndpoint,
+} from "@/app/constants";
 import type { Note } from "@/app/types";
 import { getGroupByTitle } from "../groups/getGroupByTitle";
 
@@ -14,7 +18,7 @@ export const changeNoteGroup = async (note: Note, groupTitle: string) => {
 		body: JSON.stringify({
 			data: {
 				group: group[0]?.$id,
-			}
+			},
 		}),
 	});
 };

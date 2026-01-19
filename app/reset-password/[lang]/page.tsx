@@ -1,12 +1,16 @@
-"use client"
+"use client";
 
 import LoginStyles from "@/styles/Login.module.css";
 import Image from "next/image";
-import "@/app/i18n-client"
+import "@/app/i18n-client";
 import ResetPassword from "@/app/components/ui/ResetPassword";
 import { use } from "react";
 
-const ResetPasswordPage = ({ params }: { params: Promise<{ lang: string }> }) => {
+const ResetPasswordPage = ({
+	params,
+}: {
+	params: Promise<{ lang: string }>;
+}) => {
 	const { lang } = use(params);
 	return (
 		<main className={LoginStyles.login__page__container}>
@@ -15,7 +19,14 @@ const ResetPasswordPage = ({ params }: { params: Promise<{ lang: string }> }) =>
 					<ResetPassword lang={lang} />
 				</div>
 				<div className={LoginStyles.login__page__right}>
-					<Image className={LoginStyles.login__page__right__image} priority src="/mockup.webp" alt="Next Keep Mockup" width={1280} height={762} />
+					<Image
+						className={LoginStyles.login__page__right__image}
+						priority
+						src="/mockup.webp"
+						alt="Next Keep Mockup"
+						width={1280}
+						height={762}
+					/>
 				</div>
 			</section>
 		</main>

@@ -7,10 +7,22 @@ import { dataStore } from "@/app/store/dataStore";
 import type { DataStoreProps } from "@/app/store/dataStore";
 import ChangeGroupDialog from "@/app/components/ui/dialogs/ChangeGroupDialog";
 
-const ChangeGroupButton = ({ lang, label, note, groupTitle }: { lang: string, label: string, note: Note, groupTitle: string }) => {
+const ChangeGroupButton = ({
+	lang,
+	label,
+	note,
+	groupTitle,
+}: {
+	lang: string;
+	label: string;
+	note: Note;
+	groupTitle: string;
+}) => {
 	const [visible, setVisible] = useState<boolean>(false);
 	// @ts-ignore
-	const allGroupTitles = dataStore((state: DataStoreProps) => state.allGroupTitles)
+	const allGroupTitles = dataStore(
+		(state: DataStoreProps) => state.allGroupTitles,
+	);
 	const handleDialog = () => {
 		setVisible(true);
 	};
@@ -21,8 +33,21 @@ const ChangeGroupButton = ({ lang, label, note, groupTitle }: { lang: string, la
 
 	return (
 		<>
-			<Button aria-label={label} onClick={handleDialog} icon="pi pi-folder" tooltip={label} tooltipOptions={{ position: "bottom" }} />
-			<ChangeGroupDialog lang={lang} visible={visible} note={note} groupTitle={groupTitle} groupTitles={allGroupTitles} onHide={() => setVisible(false)} />
+			<Button
+				aria-label={label}
+				onClick={handleDialog}
+				icon="pi pi-folder"
+				tooltip={label}
+				tooltipOptions={{ position: "bottom" }}
+			/>
+			<ChangeGroupDialog
+				lang={lang}
+				visible={visible}
+				note={note}
+				groupTitle={groupTitle}
+				groupTitles={allGroupTitles}
+				onHide={() => setVisible(false)}
+			/>
 		</>
 	);
 };

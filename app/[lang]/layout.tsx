@@ -32,13 +32,13 @@ export const metadata: Metadata = {
 	},
 };
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 
 const SidebarClientNoSSR = dynamic2(() => import("@/components/SidebarClient"));
 
 export default async function RootLayout({
 	children,
-	params
+	params,
 }: Readonly<{
 	children: ReactNode;
 	params: Promise<{

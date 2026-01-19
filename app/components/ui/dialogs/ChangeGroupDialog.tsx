@@ -16,7 +16,14 @@ const ChangeGroupDialog = ({
 	groupTitle,
 	onHide,
 	groupTitles,
-}: { lang: string; visible: boolean; note: Note; groupTitle: string; groupTitles: string[]; onHide: () => void }) => {
+}: {
+	lang: string;
+	visible: boolean;
+	note: Note;
+	groupTitle: string;
+	groupTitles: string[];
+	onHide: () => void;
+}) => {
 	const { t } = useTranslation("common", { lng: lang });
 	const [pending, setPending] = useState<boolean>(false);
 	const [selectedGroup, setSelectedGroup] = useState<string>(groupTitle);
@@ -55,7 +62,13 @@ const ChangeGroupDialog = ({
 			footer={
 				<>
 					{/* @ts-ignore */}
-					<Button label={pending ? <span className="pi pi-spin pi-spinner" /> : t("change")} onClick={confirmChange} aria-label={t("change")} />
+					<Button
+						label={
+							pending ? <span className="pi pi-spin pi-spinner" /> : t("change")
+						}
+						onClick={confirmChange}
+						aria-label={t("change")}
+					/>
 				</>
 			}
 			onHide={() => {
@@ -65,7 +78,11 @@ const ChangeGroupDialog = ({
 		>
 			<div className="p-dialog-content-input">
 				<p>{t("note.change-group-message")}</p>
-				<Dropdown value={selectedGroup} onChange={(e) => handleChange(e)} options={groupTitles} />
+				<Dropdown
+					value={selectedGroup}
+					onChange={(e) => handleChange(e)}
+					options={groupTitles}
+				/>
 			</div>
 		</Dialog>
 	);

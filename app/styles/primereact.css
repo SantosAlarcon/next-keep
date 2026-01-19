@@ -2,7 +2,7 @@
 .p-component,
 .p-inputtext {
 	font-family: inherit;
-	border-radius: .6rem;
+	border-radius: 0.6rem;
 }
 
 :is(.p-c, .p-component, .p-button):focus {
@@ -26,14 +26,14 @@
 	border-width: 1px;
 
 	&::placeholder {
-		color: rgba(var(--foreground-rgb), .5);
+		color: rgba(var(--foreground-rgb), 0.5);
 	}
 }
 
 /* CONTEXT MENU */
 .p-contextmenu {
 	width: auto;
-	font-size: .9rem;
+	font-size: 0.9rem;
 }
 
 .p-contextmenu-root-list {
@@ -52,8 +52,8 @@
 	color: var(--foreground);
 }
 
-.p-dialog>* {
-	padding: .5rem 1rem;
+.p-dialog > * {
+	padding: 0.5rem 1rem;
 	color: var(--foreground);
 	background-color: rgb(var(--background-start-rgb));
 }
@@ -77,9 +77,9 @@
 	gap: 1rem;
 
 	& button {
-		padding: .5rem 1rem;
+		padding: 0.5rem 1rem;
 		color: var(--foreground);
-        width: 8rem;
+		width: 8rem;
 	}
 }
 
@@ -88,42 +88,42 @@
 }
 
 .p-confirm-dialog-message {
-    line-height: 1.5rem;
+	line-height: 1.5rem;
 }
 
 /* TOOLTIP */
 .p-tooltip {
 	font-family: inherit;
 	margin-top: 1rem;
-	animation: fade .4s ease-in-out alternate;
+	animation: fade 0.4s ease-in-out alternate;
 	background-color: var(--tooltip-bg);
 	color: var(--tooltip-fg);
-	border-radius: .75rem;
+	border-radius: 0.75rem;
 }
 
 .p-tooltip-text {
-	padding: .5rem 1rem;
-	font-size: .8rem;
+	padding: 0.5rem 1rem;
+	font-size: 0.8rem;
 	font-weight: bold;
 }
 
 /* DROPDDOWN */
 .p-dropdown {
-	margin: .5rem 0;
+	margin: 0.5rem 0;
 	width: 100%;
 	color: var(--foreground);
 	background-color: rgb(var(--background-input-rgb));
 	border-width: 1px;
 }
 
-.p-dropdown-item>* {
+.p-dropdown-item > * {
 	font-family: inherit !important;
-	padding: .5rem;
+	padding: 0.5rem;
 	color: var(--foreground);
 }
 
 .p-dropdown-items-wrapper {
-	padding: .25rem;
+	padding: 0.25rem;
 	background-color: rgb(var(--background-start-rgb));
 }
 
@@ -133,10 +133,10 @@
 
 /* Input */
 .p-inputtext {
-	padding: .4rem;
+	padding: 0.4rem;
 
 	&::placeholder {
-		color: rgba(var(--foreground-rgb), .5);
+		color: rgba(var(--foreground-rgb), 0.5);
 	}
 }
 
@@ -154,8 +154,8 @@
 
 /* MENU */
 .p-menuitem-link {
-	padding: .5rem;
-	gap: .5rem;
+	padding: 0.5rem;
+	gap: 0.5rem;
 }
 
 /* SIDEBAR */
@@ -166,17 +166,17 @@
 }
 
 .p-sidebar-close {
-	color: var(--foreground)
+	color: var(--foreground);
 }
 
 .p-sidebar-mask {
 	backdrop-filter: blur(5px);
-	transition: all .2s ease-in-out;
+	transition: all 0.2s ease-in-out;
 }
 
 /* BUTTON */
 .p-button {
-	padding: .5rem 1rem;
+	padding: 0.5rem 1rem;
 	color: var(--foreground);
 }
 
@@ -185,11 +185,11 @@
 	font-family: inherit;
 
 	& .p-button:is(:first-of-type) {
-		border-radius: .5rem 0 0 .5rem;
+		border-radius: 0.5rem 0 0 0.5rem;
 	}
 
 	& .p-button:is(:last-of-type) {
-		border-radius: 0 .5rem .5rem 0;
+		border-radius: 0 0.5rem 0.5rem 0;
 	}
 
 	& .p-button {
@@ -204,14 +204,14 @@
 
 	& .p-button {
 		border: none;
-		background-color: rgba(var(--background-input-rgb), .5);
+		background-color: rgba(var(--background-input-rgb), 0.5);
 
 		&.p-highlight {
 			background-color: var(--focus-bg);
-			box-shadow: 0 .1rem .4rem rgb(var(--background-input-rgb));
+			box-shadow: 0 0.1rem 0.4rem rgb(var(--background-input-rgb));
 		}
 
-		&.p-highlight>* {
+		&.p-highlight > * {
 			font-weight: bold;
 		}
 	}
@@ -221,8 +221,7 @@
 	color: var(--foreground);
 }
 
-
-.p-icon-field>.p-input-icon {
+.p-icon-field > .p-input-icon {
 	top: 28%;
 }
 

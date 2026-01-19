@@ -1,4 +1,8 @@
-import { appwriteAPIKey, appwriteProjectId, notesEndpoint } from "@/app/constants";
+import {
+	appwriteAPIKey,
+	appwriteProjectId,
+	notesEndpoint,
+} from "@/app/constants";
 import type { Note } from "@/app/types";
 import { getNotesByGroup } from "./getNotesByGroup";
 
@@ -15,8 +19,8 @@ export const changeNoteGroupsToNull = async (groupId: string) => {
 			body: JSON.stringify({
 				data: {
 					group: null,
-				}
+				},
 			}),
 		});
-	})
+	});
 };

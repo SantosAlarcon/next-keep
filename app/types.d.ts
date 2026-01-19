@@ -8,14 +8,16 @@ export type Note = {
 	$updatedAt: string;
 	userId: string;
 	lastUpdated: string;
-}
+};
 
 export type Group = {
 	$id: string;
 	title: string;
 	userId: string;
-}
+};
 
 export enum AsyncFunctionState {
-	Pending = "Pending", OK = "OK", Error = "Error"
+	Pending = "Pending",
+	OK = "OK",
+	Error = "Error",
 }

@@ -19,12 +19,18 @@ const TogglePinButton = ({ title, note }: { title: string; note: Note }) => {
 
 	return (
 		<Button
-			icon={note.isPinned ? <FixedIcon width="20px" height="20px" /> : <UnfixedIcon width="20px" height="20px" />}
+			icon={
+				note.isPinned ? (
+					<FixedIcon width="20px" height="20px" />
+				) : (
+					<UnfixedIcon width="20px" height="20px" />
+				)
+			}
 			onClick={handleClick}
 			tooltip={title}
 			tooltipOptions={{ position: "bottom" }}
 			type="button"
-            aria-label={title}
+			aria-label={title}
 			className={pinnedButtonStyles.pinned__button__container}
 		/>
 	);

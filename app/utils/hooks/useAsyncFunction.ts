@@ -1,17 +1,18 @@
-import { AsyncFunctionState } from "@/app/types"
-import { useState } from "react"
+import { AsyncFunctionState } from "@/app/types";
+import { useState } from "react";
 
 export const useAsyncFunction = (func: () => void) => {
-    const [asyncFunctionState, setAsyncFunctionState] = useState<AsyncFunctionState>(AsyncFunctionState.OK)
+	const [asyncFunctionState, setAsyncFunctionState] =
+		useState<AsyncFunctionState>(AsyncFunctionState.OK);
 
-    try {
-        setAsyncFunctionState(AsyncFunctionState.Pending)
-        func()
-        setAsyncFunctionState(AsyncFunctionState.OK)
-    } catch (error) {
-        setAsyncFunctionState(AsyncFunctionState.Error)
-        console.error(error);
-    }
+	try {
+		setAsyncFunctionState(AsyncFunctionState.Pending);
+		func();
+		setAsyncFunctionState(AsyncFunctionState.OK);
+	} catch (error) {
+		setAsyncFunctionState(AsyncFunctionState.Error);
+		console.error(error);
+	}
 
-    return {asyncFunctionState}
-}
+	return { asyncFunctionState };
+};

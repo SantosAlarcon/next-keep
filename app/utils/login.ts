@@ -5,6 +5,6 @@ export async function emailLogin(data: FormData) {
 	const password = data.get("password")?.toString();
 
 	if (email && password) {
-		return await appwriteAccount.createEmailPasswordSession(email, password)
+		return await appwriteAccount.createEmailPasswordSession(email, password);
 	}
 }

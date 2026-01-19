@@ -1,10 +1,12 @@
 import { redirect } from "next/navigation";
 import { getSession } from "../utils/getSession";
 
-async function Page({ params }: {
+async function Page({
+	params,
+}: {
 	params: Promise<{
-		lang: string
-	}>
+		lang: string;
+	}>;
 }) {
 	const { lang } = await params;
 	const session = await getSession();
@@ -12,8 +14,8 @@ async function Page({ params }: {
 	if (session) {
 		return redirect("/notes/all");
 	} else {
-        return redirect(`/login/${lang}`)
-    }
+		return redirect(`/login/${lang}`);
+	}
 }
 
-export default Page
+export default Page;

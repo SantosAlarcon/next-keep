@@ -17,7 +17,11 @@ const ResetPassword = ({ lang }: { lang: string }) => {
 	const submitResetPassword = (data: FormData) => {
 		setPending(true);
 		resetPassword(lang, data)
-			.then(() => toast.success(t("reset-password-success", { email: data.get("email") })))
+			.then(() =>
+				toast.success(
+					t("reset-password-success", { email: data.get("email") }),
+				),
+			)
 			.finally(() => setPending(false));
 	};
 
@@ -43,7 +47,11 @@ const ResetPassword = ({ lang }: { lang: string }) => {
 			</div>
 			<h1>{t("reset-password-title")}</h1>
 			<hr />
-			<form id="emailRegisterForm" action={submitResetPassword} className={LoginStyles.login__page__form}>
+			<form
+				id="emailRegisterForm"
+				action={submitResetPassword}
+				className={LoginStyles.login__page__form}
+			>
 				<p>{t("reset-password-text")}</p>
 				<FloatLabel>
 					<InputText
@@ -55,12 +63,24 @@ const ResetPassword = ({ lang }: { lang: string }) => {
 						name="email"
 						required
 					/>
-					<label className={LoginStyles.login__page__form__label} htmlFor="email">
+					<label
+						className={LoginStyles.login__page__form__label}
+						htmlFor="email"
+					>
 						{t("reset-password-email")}
 					</label>
 				</FloatLabel>
-                {/* @ts-ignore */}
-				<Button type="submit" aria-label={t("reset-password-title")} label={pending ? <span className="pi pi-spin pi-spinner" /> : t("reset-password-title")}
+				{/* @ts-ignore */}
+				<Button
+					type="submit"
+					aria-label={t("reset-password-title")}
+					label={
+						pending ? (
+							<span className="pi pi-spin pi-spinner" />
+						) : (
+							t("reset-password-title")
+						)
+					}
 					className="p-button-rounded"
 				/>
 			</form>

@@ -1,5 +1,9 @@
 import type { Note } from "@/app/types";
-import { appwriteAPIKey, appwriteProjectId, notesEndpoint } from "@/app/constants";
+import {
+	appwriteAPIKey,
+	appwriteProjectId,
+	notesEndpoint,
+} from "@/app/constants";
 
 export const updateNote = async (updatedNote: Note) => {
 	try {

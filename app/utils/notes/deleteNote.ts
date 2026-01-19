@@ -7,6 +7,6 @@ export const deleteNote = async (noteId: string) => {
 			headers: {
 				"X-Appwrite-Project": appwriteProjectId,
 			},
-		})
+		});
 	}
 };

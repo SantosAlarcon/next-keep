@@ -1,19 +1,19 @@
 .delete__button__container {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    color: white;
-    padding: var(--button-padding);
-    border-radius: 0 .5rem .5rem 0;
-    background-color: #44f;
-    transition: all .2s ease-in-out;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: white;
+	padding: var(--button-padding);
+	border-radius: 0 0.5rem 0.5rem 0;
+	background-color: #44f;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
 
-    &:hover {
-        background-color: #66f;
-    }
+	&:hover {
+		background-color: #66f;
+	}
 
 	&:focus {
-		border-color: light-dark(#111, #eee);	
+		border-color: light-dark(#111, #eee);
 	}
 }

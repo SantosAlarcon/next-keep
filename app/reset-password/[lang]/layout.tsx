@@ -1,10 +1,10 @@
-import type { ReactNode } from "react"
+import type { ReactNode } from "react";
 import "primereact/resources/themes/viva-dark/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import "@/styles/globals.css"
-import "@/styles/primereact.css"
-import i18NextConfig from "@/i18n.config"
+import "@/styles/globals.css";
+import "@/styles/primereact.css";
+import i18NextConfig from "@/i18n.config";
 import initTranslations from "@/app/i18n";
 import { Figtree } from "next/font/google";
 import { PrimeReactProvider } from "primereact/api";
@@ -17,20 +17,24 @@ export function generateStaticParams() {
 	return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ lang: string }>;
+}) {
 	const { lang } = await params;
-	const { t } = await initTranslations(lang, ["reset-password"])
+	const { t } = await initTranslations(lang, ["reset-password"]);
 	return {
-		title: `${t("reset-password-title")} - Next Keep`
-	}
+		title: `${t("reset-password-title")} - Next Keep`,
+	};
 }
 
 export default async function ResetPasswordLayout({
 	children,
-	params
+	params,
 }: {
-	children: ReactNode,
-	params: Promise<{ lang: string }>
+	children: ReactNode;
+	params: Promise<{ lang: string }>;
 }) {
 	const { lang } = await params;
 	return (
@@ -47,6 +51,5 @@ export default async function ResetPasswordLayout({
 				</PrimeReactProvider>
 			</body>
 		</html>
-	)
+	);
 }
-

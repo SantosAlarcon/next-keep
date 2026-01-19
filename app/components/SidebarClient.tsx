@@ -26,8 +26,8 @@ import { CollapseIcon } from "./icons/CollapseIcon";
 import { ExpandIcon } from "./icons/ExpandIcon";
 
 const SidebarClient = ({ lang }: { lang: string }) => {
-	const { t } = useTranslation("common", { lng: lang })
-	
+	const { t } = useTranslation("common", { lng: lang });
+
 	// @ts-ignore
 	const { allNotes, allGroups, allPinnedNotes } = dataStore.getState();
 	const cmRef = useRef(null);
@@ -37,10 +37,10 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 	const [expanded, setExpanded] = useState<boolean>(() => {
 		// The default sidebar behaviour is opened. First checks if the sidebar_expanded
 		// is in the Local Storage. If not, it creates the key.
-		
+
 		if (typeof window !== "undefined") {
 			if (!window.localStorage.getItem("sidebar_expanded")) {
-				window.localStorage.setItem("sidebar_expanded", "true")
+				window.localStorage.setItem("sidebar_expanded", "true");
 				return true;
 			}
 
@@ -50,11 +50,11 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 		}
 
 		return false;
-		
 	});
 
 	const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
-	const [renameGroupVisibleModal, setRenameGroupVisibleModal] = useState<boolean>(false);
+	const [renameGroupVisibleModal, setRenameGroupVisibleModal] =
+		useState<boolean>(false);
 
 	const handleClick = () => {
 		setExpanded(!expanded);
@@ -62,11 +62,11 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 
 	useEffect(() => {
 		if (expanded) {
-			window.localStorage.setItem("sidebar_expanded", "true")
+			window.localStorage.setItem("sidebar_expanded", "true");
 		} else {
-			window.localStorage.setItem("sidebar_expanded", "false")
+			window.localStorage.setItem("sidebar_expanded", "false");
 		}
-	}, [expanded])
+	}, [expanded]);
 
 	const groupContextMenu = [
 		{
@@ -82,7 +82,8 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 					header: t("group.group-delete-confirm-header"),
 					message: (
 						<p>
-							{t("group.group-delete-confirm-message-1")}<br />
+							{t("group.group-delete-confirm-message-1")}
+							<br />
 							{t("group.group-delete-confirm-message-2")}
 						</p>
 					),
@@ -92,22 +93,27 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 					accept: () => {
 						const groupId = selectedGroup?.$id;
 						// @ts-ignore
-						toast.promise(deleteGroupById(selectedGroup?.$id).then(() => {
-							// @ts-ignore
-							changeNoteGroupsToNull(groupId)
-							updateGroups();
-							setTimeout(() => {
-								router.refresh()
-							}, 100)
-						}), {
-							loading: t("pending-operation"),
-							success: () => {
-								return t("group.group-delete-success", { name: selectedGroup?.title })
+						toast.promise(
+							deleteGroupById(selectedGroup?.$id).then(() => {
+								// @ts-ignore
+								changeNoteGroupsToNull(groupId);
+								updateGroups();
+								setTimeout(() => {
+									router.refresh();
+								}, 100);
+							}),
+							{
+								loading: t("pending-operation"),
+								success: () => {
+									return t("group.group-delete-success", {
+										name: selectedGroup?.title,
+									});
+								},
+								error: () => t("group.group-delete-error"),
 							},
-							error: () => t("group.group-delete-error"),
-						})
+						);
 					},
-					reject: () => { },
+					reject: () => {},
 				});
 			},
 		},
@@ -122,8 +128,8 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 	};
 
 	useEffect(() => {
-		setMounted(true)
-	}, [])
+		setMounted(true);
+	}, []);
 
 	if (!mounted) return null;
 
@@ -157,7 +163,11 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 								key={link.name}
 								title={t(link.name)}
 								href={link.path}
-								amount={link.name === "pinned" ? allPinnedNotes?.length : allNotes?.length}
+								amount={
+									link.name === "pinned"
+										? allPinnedNotes?.length
+										: allNotes?.length
+								}
 								expanded={expanded}
 							/>
 						))}
@@ -165,10 +175,7 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 					<hr className={sidebarStyles.sidebar__separator} />
 					<div className={sidebarStyles.sidebar__groups__header}>
 						{expanded ? <h3>{t("groups")}</h3> : null}
-						<CreateGroupButton
-							lang={lang}
-							title={t("group.create-group")}
-						/>
+						<CreateGroupButton lang={lang} title={t("group.create-group")} />
 					</div>
 					<ul className={sidebarStyles.sidebar__grouplist}>
 						{allGroups?.map((group: Group) => (
@@ -188,19 +195,34 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 					<ContextMenu ref={cmRef} model={groupContextMenu} />
 					<ConfirmDialog resizable={false} draggable={false} />
 					{/* @ts-ignore */}
-					<RenameGroupDialog lang={lang} visible={renameGroupVisibleModal} onHide={() => setRenameGroupVisibleModal(false)} group={selectedGroup} />
+					<RenameGroupDialog
+						lang={lang}
+						visible={renameGroupVisibleModal}
+						onHide={() => setRenameGroupVisibleModal(false)}
+						group={selectedGroup}
+					/>
 				</section>
 
 				<section className={sidebarStyles.sidebar__bottom}>
 					<User />
 					<Button
 						tooltip={expanded ? t("collapse") : t("expand")}
-                        aria-label={expanded ? t("collapse") : t("expand")}
+						aria-label={expanded ? t("collapse") : t("expand")}
 						tooltipOptions={{ position: "top" }}
 						severity="secondary"
 						//@ts-ignore
-						label={expanded ? <CollapseIcon width="20px" height="20px" /> : <ExpandIcon width="20px" height="20px" />}
-						className={expanded ? sidebarStyles.sidebar__expand__button : sidebarStyles.sidebar__expand__button__collapsed}
+						label={
+							expanded ? (
+								<CollapseIcon width="20px" height="20px" />
+							) : (
+								<ExpandIcon width="20px" height="20px" />
+							)
+						}
+						className={
+							expanded
+								? sidebarStyles.sidebar__expand__button
+								: sidebarStyles.sidebar__expand__button__collapsed
+						}
 						type="button"
 						onClick={handleClick}
 					/>

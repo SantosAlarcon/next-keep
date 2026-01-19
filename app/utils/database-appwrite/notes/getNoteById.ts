@@ -4,9 +4,13 @@ import { databaseID, notesCollectionID } from "@/app/constants";
 export const getNoteById = async (noteId: string) => {
 	if (!noteId) return null;
 	try {
-		const note = await appwriteDatabase.getDocument(databaseID, notesCollectionID, noteId)
+		const note = await appwriteDatabase.getDocument(
+			databaseID,
+			notesCollectionID,
+			noteId,
+		);
 		return note;
 	} catch (error) {
-		console.error(error)
+		console.error(error);
 	}
-}
+};

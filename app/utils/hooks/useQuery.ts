@@ -1,22 +1,25 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 const useQuery = (queryFn: () => void) => {
-	const [data, setData] = useState(null)
-	const [error, setError] = useState(null)
-	const [isPending, setIsPending] = useState<boolean>(false)
+	const [data, setData] = useState(null);
+	const [error, setError] = useState(null);
+	const [isPending, setIsPending] = useState<boolean>(false);
 
 	useEffect(() => {
-		setIsPending(true)
-        // @ts-ignore
-		queryFn().then((data) => {
-			setData(data)
-            // @ts-ignore
-		}).catch((err) => {
-			setError(err)
-		}).finally(() => setIsPending(false))
-	}, [queryFn])
+		setIsPending(true);
+		// @ts-ignore
+		queryFn()
+			.then((data) => {
+				setData(data);
+				// @ts-ignore
+			})
+			.catch((err) => {
+				setError(err);
+			})
+			.finally(() => setIsPending(false));
+	}, [queryFn]);
 
-	return { data, error, isPending }
-}
+	return { data, error, isPending };
+};
 
-export default useQuery
+export default useQuery;

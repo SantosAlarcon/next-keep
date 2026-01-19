@@ -6,7 +6,13 @@ import NewNoteIcon from "@/app/components/icons/NewNoteIcon";
 import { useNewNoteStore } from "@/app/store/newNoteStore";
 import { Button } from "primereact/button";
 
-const NewNoteButton = ({ title, expanded }: { title: string; expanded: boolean }) => {
+const NewNoteButton = ({
+	title,
+	expanded,
+}: {
+	title: string;
+	expanded: boolean;
+}) => {
 	const reset = useNewNoteStore.getState().reset;
 	reset();
 
@@ -19,9 +25,13 @@ const NewNoteButton = ({ title, expanded }: { title: string; expanded: boolean }
 		<Button
 			tooltip={expanded ? undefined : title}
 			tooltip-align={expanded ? null : "right"}
-			className={expanded ? sidebarStyles.sidebar__button : sidebarStyles.sidebar__new__note__button__collapsed}
+			className={
+				expanded
+					? sidebarStyles.sidebar__button
+					: sidebarStyles.sidebar__new__note__button__collapsed
+			}
 			onClick={createNewNote}
-            aria-label={title}
+			aria-label={title}
 			type="button"
 		>
 			<NewNoteIcon />

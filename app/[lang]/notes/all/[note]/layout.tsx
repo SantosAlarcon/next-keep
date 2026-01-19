@@ -1,9 +1,13 @@
 import { getNoteById } from "@/app/utils/notes/getNoteById";
 import type { ReactNode } from "react";
 
-export const generateMetadata = async ({ params }: { params: Promise<{ note: string }> }) => {
+export const generateMetadata = async ({
+	params,
+}: {
+	params: Promise<{ note: string }>;
+}) => {
 	const { note } = await params;
-	const foundNote = await getNoteById(note)
+	const foundNote = await getNoteById(note);
 
 	return {
 		title: `${foundNote?.title} - Next Keep`,

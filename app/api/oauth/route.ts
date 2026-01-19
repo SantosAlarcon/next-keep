@@ -20,6 +20,6 @@ export async function GET(request: NextRequest) {
 
 	return NextResponse.redirect(`${mainURL}/notes/all`, {
 		status: 303,
-		url: `${mainURL}/notes/all`
+		url: `${mainURL}/notes/all`,
 	});
 }

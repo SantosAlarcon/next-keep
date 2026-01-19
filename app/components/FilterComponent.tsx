@@ -9,22 +9,28 @@ import { useTranslation } from "react-i18next";
 
 const FilterComponent = ({ lang }: { lang: string }) => {
 	const [input, setInput] = useState<string>("");
-	const { t } = useTranslation("common", { lng: lang })
+	const { t } = useTranslation("common", { lng: lang });
 	// @ts-ignore
-	const setFilter = dataStore((state) => state.setFilter)
+	const setFilter = dataStore((state) => state.setFilter);
 	const [debInput] = useDebounce(input, 250);
 
 	useEffect(() => {
-		setFilter(debInput)
+		setFilter(debInput);
 	}, [debInput]);
 
 	return (
-		<section className={`${FilterComponentStyles.filter__component__container} p-inputgroup`}>
+		<section
+			className={`${FilterComponentStyles.filter__component__container} p-inputgroup`}
+		>
 			<span className="p-inputgroup-addon">
 				<i className={"pi pi-filter"} />
 			</span>
 			{/* @ts-ignore */}
-			<InputText className={FilterComponentStyles.filter__component__input} placeholder={t("filter")} onInput={(e) => setInput(e.target.value)} />
+			<InputText
+				className={FilterComponentStyles.filter__component__input}
+				placeholder={t("filter")}
+				onInput={(e) => setInput(e.target.value)}
+			/>
 		</section>
 	);
 };

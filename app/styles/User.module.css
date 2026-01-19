@@ -3,7 +3,7 @@
 	cursor: pointer;
 	flex-basis: 50%;
 
-	&>img {
+	& > img {
 		@media (prefers-color-scheme: dark) {
 			filter: invert(1);
 		}

@@ -11,7 +11,11 @@ import BarLoader from "@/app/components/ui/BarLoader";
 
 const EditorComp = dynamic(() => import("@/app/components/CustomMDXEditor"));
 
-const NewNotePage = async ({ params }: { params: Promise<{ lang: string }> }) => {
+const NewNotePage = async ({
+	params,
+}: {
+	params: Promise<{ lang: string }>;
+}) => {
 	const { lang } = await params;
 	const { t } = await initTranslations(lang, ["common"]);
 	const newNote = useNewNoteStore.getState().newNote;
@@ -20,10 +24,21 @@ const NewNotePage = async ({ params }: { params: Promise<{ lang: string }> }) =>
 		// @ts-ignore
 		<UpdateNoteProvider value={newNote}>
 			<main className={NewNotePageStyles.new__note__page__container}>
-				<Suspense fallback={<BarLoader width="128px" height="128px" color="#eee" />}>
-					<LocalizedTitleInput placeholder={t("title")} title={newNote.title} isEditing={false} />
+				<Suspense
+					fallback={<BarLoader width="128px" height="128px" color="#eee" />}
+				>
+					<LocalizedTitleInput
+						placeholder={t("title")}
+						title={newNote.title}
+						isEditing={false}
+					/>
 					{/* @ts-ignore */}
-					<EditorComp lang={lang} editorRef={editorRef} text={newNote.data} isEditing={false} />
+					<EditorComp
+						lang={lang}
+						editorRef={editorRef}
+						text={newNote.data}
+						isEditing={false}
+					/>
 					<SaveNoteButton lang={lang} title={t("save-note")} />
 				</Suspense>
 			</main>

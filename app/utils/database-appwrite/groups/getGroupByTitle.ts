@@ -1,9 +1,13 @@
-import { appwriteDatabase } from "@/app/appwrite"
-import { databaseID, groupsCollectionID } from "@/app/constants"
-import { Query } from "appwrite"
+import { appwriteDatabase } from "@/app/appwrite";
+import { databaseID, groupsCollectionID } from "@/app/constants";
+import { Query } from "appwrite";
 
 export const getGroupByTitle = async (title: string) => {
-	const group = await appwriteDatabase.listDocuments(databaseID, groupsCollectionID, [Query.equal("title", title)])
+	const group = await appwriteDatabase.listRows({
+		databaseId: databaseID,
+		tableId: groupsCollectionID,
+		queries: [Query.equal("title", title)],
+	});
 
-	return group.documents[0]
-}
+	return group.rows[0];
+};

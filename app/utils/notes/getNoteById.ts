@@ -5,6 +5,6 @@ export const getNoteById = async (id: string) => {
 		headers: {
 			"X-Appwrite-Project": appwriteProjectId,
 		},
-		cache: "no-cache"
+		cache: "no-cache",
 	}).then((response) => response.json());
 };

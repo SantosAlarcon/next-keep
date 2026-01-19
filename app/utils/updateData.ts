@@ -10,14 +10,19 @@ export const updateGroups = async () => {
 	const { setAllGroups, setAllGroupTitles } = dataStore.getState();
 
 	getAllGroups().then((groups: Group[]) => setAllGroups(groups));
-	getAllGroupTitles().then((groupTitles: string[]) => setAllGroupTitles(groupTitles));
+	getAllGroupTitles().then((groupTitles: string[]) =>
+		setAllGroupTitles(groupTitles),
+	);
 };
 
 export const updateNotes = () => {
 	// @ts-ignore
-	const { setAllNotes, setAllPinnedNotes, setAllNoteAmounts } = dataStore.getState();
+	const { setAllNotes, setAllPinnedNotes, setAllNoteAmounts } =
+		dataStore.getState();
 
 	getAllNotes().then((notes: Note[]) => setAllNotes(notes));
-	getAllPinnedNotes().then((pinnedNotes: Note[]) => setAllPinnedNotes(pinnedNotes));
+	getAllPinnedNotes().then((pinnedNotes: Note[]) =>
+		setAllPinnedNotes(pinnedNotes),
+	);
 	//getNoteAmountByGroups().then((noteAmounts: object) => setAllNoteAmounts(noteAmounts));
 };

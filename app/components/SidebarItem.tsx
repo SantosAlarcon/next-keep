@@ -8,7 +8,13 @@ const SidebarItem = ({
 	href,
 	amount,
 	expanded,
-}: { icon: string; title: string; href: string; amount: number; expanded: boolean }) => {
+}: {
+	icon: string;
+	title: string;
+	href: string;
+	amount: number;
+	expanded: boolean;
+}) => {
 	return (
 		<li
 			data-title={expanded ? null : title}
@@ -16,13 +22,30 @@ const SidebarItem = ({
 			className={SidebarItemStyles.sidebar__item__container}
 		>
 			<ActiveLink href={href} title={title}>
-				<div className={`${expanded ? SidebarItemStyles.sidebar__item__group : SidebarItemStyles.sidebar__item__group__collapsed}`}>
+				<div
+					className={`${expanded ? SidebarItemStyles.sidebar__item__group : SidebarItemStyles.sidebar__item__group__collapsed}`}
+				>
 					<div className={SidebarItemStyles.sidebar__item__left}>
 						{/* @ts-ignore */}
-						<Image alt={title} className={SidebarItemStyles.sidebar__item__icon} src={icon} width="24" height="24" priority />
-						{expanded ? <span className={SidebarItemStyles.sidebar__item__title}>{expanded ? title : null}</span> : null}
+						<Image
+							alt={title}
+							className={SidebarItemStyles.sidebar__item__icon}
+							src={icon}
+							width="24"
+							height="24"
+							priority
+						/>
+						{expanded ? (
+							<span className={SidebarItemStyles.sidebar__item__title}>
+								{expanded ? title : null}
+							</span>
+						) : null}
 					</div>
-					{amount > 0 && expanded && <span className={SidebarItemStyles.sidebar__item__amount}>{amount}</span>}
+					{amount > 0 && expanded && (
+						<span className={SidebarItemStyles.sidebar__item__amount}>
+							{amount}
+						</span>
+					)}
 				</div>
 			</ActiveLink>
 		</li>

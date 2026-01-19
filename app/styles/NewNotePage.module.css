@@ -12,7 +12,7 @@
 	gap: 1rem;
 	border: 1px #fff4 solid;
 	outline: none;
-	border-radius: .5rem;
+	border-radius: 0.5rem;
 	padding: 1rem;
 	width: 100%;
 }
@@ -20,7 +20,7 @@
 .new__note__page__field {
 	border: none;
 	outline: none;
-	padding: .5rem 0;
+	padding: 0.5rem 0;
 
 	&:not(:last-child) {
 		border-bottom: 1px #fff4 solid;
@@ -35,13 +35,13 @@
 	border: none;
 	outline: none;
 	border-bottom: 1px #0004 solid;
-	padding-bottom: .5rem;
+	padding-bottom: 0.5rem;
 	width: 100%;
 	color: #111;
 
 	&::placeholder {
 		color: #888;
-    }
+	}
 
 	@media (prefers-color-scheme: dark) {
 		color: #eee;

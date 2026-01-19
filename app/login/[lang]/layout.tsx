@@ -18,7 +18,11 @@ export function generateStaticParams() {
 	return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ lang: string }>;
+}) {
 	const { lang } = await params;
 	const { t } = await initTranslations(lang, ["login"]);
 	return {

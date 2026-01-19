@@ -15,11 +15,16 @@ import type { NextRequest } from "next/server";
  *         description: The 'Accept-Language' header does not exist
  */
 export async function GET(req: NextRequest) {
-	const locale = req.headers.get("Accept-Language")?.split(",")[0].split("-")[0]
+	const locale = req.headers
+		.get("Accept-Language")
+		?.split(",")[0]
+		.split("-")[0];
 
 	if (!locale) {
-		return Response.json("The 'Accept-Language' header does not exist", { status: 400 })
+		return Response.json("The 'Accept-Language' header does not exist", {
+			status: 400,
+		});
 	}
 
-	return Response.json(locale, { status: 200 })
+	return Response.json(locale, { status: 200 });
 }

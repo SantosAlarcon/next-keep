@@ -4,9 +4,9 @@ export async function getNoteAmountsByGroups() {
 	const response = await prismaClient.notes.groupBy({
 		by: ["group"],
 		_count: {
-			_all: true
-		}
-	})
+			_all: true,
+		},
+	});
 
 	const amountMap = new Map<string, number>();
 	for (const note of response) {

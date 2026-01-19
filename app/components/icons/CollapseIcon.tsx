@@ -1,7 +1,10 @@
 export const CollapseIcon = ({
 	width,
 	height,
-}: { width: string; height: string }) => {
+}: {
+	width: string;
+	height: string;
+}) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

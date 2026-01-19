@@ -28,7 +28,7 @@ const UpdateNoteButton = ({ label }: { label: string }) => {
 				updateNotes();
 
 				setTimeout(() => {
-				    router.refresh();
+					router.refresh();
 				}, 50);
 			})
 			.catch(() => toast.error(t("note-update-error")))
@@ -36,8 +36,15 @@ const UpdateNoteButton = ({ label }: { label: string }) => {
 	};
 
 	return (
-		<button aria-label={label} onClick={handleConfirmUpdate} type="button" className={saveButtonStyles.save__button__container}>
-			<span className={saveButtonStyles.save__button__label}>{pending ? <span className="pi pi-spin pi-spinner" /> : label}</span>
+		<button
+			aria-label={label}
+			onClick={handleConfirmUpdate}
+			type="button"
+			className={saveButtonStyles.save__button__container}
+		>
+			<span className={saveButtonStyles.save__button__label}>
+				{pending ? <span className="pi pi-spin pi-spinner" /> : label}
+			</span>
 		</button>
 	);
 };

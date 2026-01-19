@@ -16,7 +16,12 @@ const RenameGroupDialog = ({
 	visible,
 	onHide,
 	group,
-}: { lang: string; visible: boolean; onHide: () => void; group: Group }) => {
+}: {
+	lang: string;
+	visible: boolean;
+	onHide: () => void;
+	group: Group;
+}) => {
 	const [pending, setPending] = useState<boolean>(false);
 	const { t } = useTranslation("common", { lng: lang });
 	const [newTitle, setNewTitle] = useState<string>(group?.title);
@@ -74,7 +79,7 @@ const RenameGroupDialog = ({
 									.then(() => {
 										toast.success(
 											t("group.group-rename-success", {
-                                                // @ts-ignore
+												// @ts-ignore
 												name: titleRef?.current?.value,
 											}),
 										);
@@ -96,12 +101,12 @@ const RenameGroupDialog = ({
 			<div className="p-dialog-content-input">
 				<p>{t("group.group-rename-message")}</p>
 				<InputText
-                    // @ts-ignore
+					// @ts-ignore
 					ref={titleRef}
 					required
 					aria-label={t("group.group-rename-message")}
 					defaultValue={group?.title}
-                    // @ts-ignore
+					// @ts-ignore
 					onInput={(e) => setNewTitle(e.target.value)}
 				/>
 			</div>

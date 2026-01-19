@@ -5,7 +5,15 @@ import NewNotePageStyles from "@/app/styles/NewNotePage.module.css";
 import { useNewNoteStore } from "../store/newNoteStore";
 import UpdateNoteContext from "../context/UpdateNoteContext";
 
-const LocalizedTitleInput = ({ placeholder, title, isEditing }: { placeholder: string; title: string; isEditing: boolean }) => {
+const LocalizedTitleInput = ({
+	placeholder,
+	title,
+	isEditing,
+}: {
+	placeholder: string;
+	title: string;
+	isEditing: boolean;
+}) => {
 	const newNoteTitle = useNewNoteStore((state) => state.newNote.title);
 	const setNewNote = useNewNoteStore((state) => state.setNewNote);
 	const inputRef = useRef<string | null>(title);

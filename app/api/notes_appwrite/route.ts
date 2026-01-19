@@ -115,7 +115,10 @@ export async function GET(req: NextRequest) {
 		const foundNote = await getNoteById(id);
 
 		if (!foundNote) {
-			return Response.json({ message: "The ID provided doesn't exist in the DB" }, { status: 400 });
+			return Response.json(
+				{ message: "The ID provided doesn't exist in the DB" },
+				{ status: 400 },
+			);
 		}
 
 		return Response.json(foundNote, { status: 200 });
@@ -130,7 +133,10 @@ export async function GET(req: NextRequest) {
 		const groupNoteList = await getNotesByGroup(group);
 
 		if (!groupNoteList) {
-			return Response.json({ message: "The group with the ID provided doesn't exist in the DB" }, { status: 400 });
+			return Response.json(
+				{ message: "The group with the ID provided doesn't exist in the DB" },
+				{ status: 400 },
+			);
 		}
 
 		return Response.json(groupNoteList, { status: 200 });
@@ -167,7 +173,10 @@ export async function POST(req: NextRequest) {
 
 	// If there is no text and title in the request body, it shows an 400 error
 	if (!(res.hasOwnProperty("title") && res.hasOwnProperty("data"))) {
-		return Response.json({ message: "You need to provide the data and title in the request!" }, { status: 401 });
+		return Response.json(
+			{ message: "You need to provide the data and title in the request!" },
+			{ status: 401 },
+		);
 	}
 
 	const newNote = useNewNoteStore.getState().newNote;
@@ -185,13 +194,19 @@ export async function POST(req: NextRequest) {
 	const creationSuccess = await createNewNote(newNote);
 
 	if (!creationSuccess) {
-		return Response.json({ message: "Failed to add new note to the DB" }, { status: 400 });
+		return Response.json(
+			{ message: "Failed to add new note to the DB" },
+			{ status: 400 },
+		);
 	}
 
 	// Call the reset function of the store to create new note object
 	reset();
 
-	return Response.json({ message: `The note '${newNote.title}' has been added to the DB!` }, { status: 201 });
+	return Response.json(
+		{ message: `The note '${newNote.title}' has been added to the DB!` },
+		{ status: 201 },
+	);
 }
 
 /**
@@ -231,7 +246,10 @@ export async function PUT(req: NextRequest) {
 
 	// If ID is not provided in the search params, it returns an error
 	if (!id) {
-		return Response.json({ message: "You need to provide the note ID" }, { status: 401 });
+		return Response.json(
+			{ message: "You need to provide the note ID" },
+			{ status: 401 },
+		);
 	}
 
 	// It checks if the pin status has changed. It is useful to not update the updated date if the pin status hasn't changed.
@@ -243,7 +261,9 @@ export async function PUT(req: NextRequest) {
 		...body,
 		title: body.title,
 		data: body.data,
-		lastUpdated: pinStatusChanged ? foundNote?.updatedDate : new Date().toISOString(),
+		lastUpdated: pinStatusChanged
+			? foundNote?.updatedDate
+			: new Date().toISOString(),
 		group: body.group,
 		isPinned: body.isPinned,
 	};
@@ -252,10 +272,16 @@ export async function PUT(req: NextRequest) {
 	const updateSuccess = await updateNoteById(id, updatedNote);
 
 	if (!updateSuccess) {
-		return Response.json({ message: "The note with that ID doesn't exist in the DB" }, { status: 400 });
+		return Response.json(
+			{ message: "The note with that ID doesn't exist in the DB" },
+			{ status: 400 },
+		);
 	}
 
-	return Response.json({ message: `The note with the ID ${id} has been updated in the DB` }, { status: 200 });
+	return Response.json(
+		{ message: `The note with the ID ${id} has been updated in the DB` },
+		{ status: 200 },
+	);
 }
 
 /**
@@ -285,15 +311,24 @@ export async function DELETE(req: NextRequest) {
 
 	// If ID is not provided in the search params, it returns an error
 	if (id === null) {
-		return Response.json({ message: "You need to provide the note ID" }, { status: 401 });
+		return Response.json(
+			{ message: "You need to provide the note ID" },
+			{ status: 401 },
+		);
 	}
 
 	// Call the deleteById function to delete the note
 	const deleteSuccess = await deleteNoteById(id);
 
 	if (!deleteSuccess) {
-		return Response.json({ message: "The note with that ID doesn't exist in the DB" }, { status: 400 });
+		return Response.json(
+			{ message: "The note with that ID doesn't exist in the DB" },
+			{ status: 400 },
+		);
 	}
 
-	return Response.json({ message: `The note with the ID ${id} has been deleted from the DB` }, { status: 200 });
+	return Response.json(
+		{ message: `The note with the ID ${id} has been deleted from the DB` },
+		{ status: 200 },
+	);
 }

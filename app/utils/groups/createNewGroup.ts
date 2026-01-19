@@ -1,4 +1,8 @@
-import { appwriteAPIKey, appwriteProjectId, groupsEndpoint } from "@/app/constants";
+import {
+	appwriteAPIKey,
+	appwriteProjectId,
+	groupsEndpoint,
+} from "@/app/constants";
 import { getSession } from "../getSession";
 import { ID } from "appwrite";
 

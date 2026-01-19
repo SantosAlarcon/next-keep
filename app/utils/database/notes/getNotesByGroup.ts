@@ -4,11 +4,11 @@ export const getNotesByGroup = async (groupId: string) => {
 	try {
 		const notes = await prismaClient.notes.findMany({
 			where: {
-				group: groupId
-			}
-		})
+				group: groupId,
+			},
+		});
 		return notes;
 	} catch (error) {
-		console.error(error)
+		console.error(error);
 	}
-}
+};

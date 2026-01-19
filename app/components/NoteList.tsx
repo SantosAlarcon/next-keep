@@ -9,7 +9,15 @@ import type { Note } from "../types";
 import { dataStore } from "../store/dataStore";
 import { useTranslation } from "react-i18next";
 
-const NoteList = ({ group, selected, lang }: { group: string; selected: string; lang: string }) => {
+const NoteList = ({
+	group,
+	selected,
+	lang,
+}: {
+	group: string;
+	selected: string;
+	lang: string;
+}) => {
 	// @ts-ignore
 	const { allNotes } = dataStore.getState();
 	const [path, setPath] = useState<string>("");
@@ -26,25 +34,31 @@ const NoteList = ({ group, selected, lang }: { group: string; selected: string; 
 				break;
 			}
 			case "pinned": {
-				const pinnedNotes = allNotes.filter((note: Note) => note.isPinned === true);
+				const pinnedNotes = allNotes.filter(
+					(note: Note) => note.isPinned === true,
+				);
 				setFilteredNotes(pinnedNotes);
 				setPath("/notes/pinned");
 				break;
 			}
 			default: {
-				const groupNotes = allNotes.filter((note: Note) => note.group === group);
+				const groupNotes = allNotes.filter(
+					(note: Note) => note.group === group,
+				);
 				setFilteredNotes(groupNotes);
 				setPath(`/groups/${group}`);
 				break;
 			}
 		}
-
-
 	}, [allNotes, filter]);
 
 	useEffect(() => {
 		if (filter.length > 0) {
-			setFilteredNotes([...allNotes].filter((note) => note.title.toLowerCase().includes(filter)));
+			setFilteredNotes(
+				[...allNotes].filter((note) =>
+					note.title.toLowerCase().includes(filter),
+				),
+			);
 		} else {
 			switch (group) {
 				case "all": {
@@ -53,13 +67,17 @@ const NoteList = ({ group, selected, lang }: { group: string; selected: string; 
 				}
 
 				case "pinned": {
-					const pinnedNotes = allNotes.filter((note: Note) => note.isPinned === true);
+					const pinnedNotes = allNotes.filter(
+						(note: Note) => note.isPinned === true,
+					);
 					setFilteredNotes(pinnedNotes);
 					break;
 				}
 
 				default: {
-					const groupNotes = allNotes.filter((note: Note) => note.group === group);
+					const groupNotes = allNotes.filter(
+						(note: Note) => note.group === group,
+					);
 					setFilteredNotes(groupNotes);
 					break;
 				}
@@ -79,23 +97,34 @@ const NoteList = ({ group, selected, lang }: { group: string; selected: string; 
 						key={note.$id}
 						className={`${NoteListStyles.note__item__container} ${selected === note.$id ? NoteListStyles.note__item__selected : ""}`}
 					>
-						<ActiveNoteLink selected={selected === note.$id} href={`${path}/${note.$id}`} key={note.$id} title={note.title}>
-							<span className={NoteListStyles.note__item__title}>{note.title}</span>
+						<ActiveNoteLink
+							selected={selected === note.$id}
+							href={`${path}/${note.$id}`}
+							key={note.$id}
+							title={note.title}
+						>
+							<span className={NoteListStyles.note__item__title}>
+								{note.title}
+							</span>
 							<span className={NoteListStyles.note__item__pinned}>
-								{note.isPinned ? <FixedIcon width="20px" height="20px" /> : <UnfixedIcon width="20px" height="20px" />}
+								{note.isPinned ? (
+									<FixedIcon width="20px" height="20px" />
+								) : (
+									<UnfixedIcon width="20px" height="20px" />
+								)}
 							</span>
 						</ActiveNoteLink>
 					</li>
 				))
 			) : (
 				<h3>
-					{
-						allNotes.length === 0
-							? t("note-list-empty")
-							: (filteredNotes.length === 0) && (filter === "" && ( selected === "pinned" || selected === "group" ))
-								? t("empty-note-list-group")
-								: t("no-results-found")
-					}
+					{allNotes.length === 0
+						? t("note-list-empty")
+						: filteredNotes.length === 0 &&
+								filter === "" &&
+								(selected === "pinned" || selected === "group")
+							? t("empty-note-list-group")
+							: t("no-results-found")}
 				</h3>
 			)}
 		</ul>

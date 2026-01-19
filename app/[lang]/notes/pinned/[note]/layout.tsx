@@ -1,18 +1,20 @@
-import { getNoteById } from '@/app/utils/notes/getNoteById'
-import type { ReactNode } from 'react'
+import { getNoteById } from "@/app/utils/notes/getNoteById";
+import type { ReactNode } from "react";
 
-export const generateMetadata = async ({ params }: { params: Promise<{ note: string }> }) => {
-	const { note } = await params
-	const foundNote = await getNoteById(note)
+export const generateMetadata = async ({
+	params,
+}: {
+	params: Promise<{ note: string }>;
+}) => {
+	const { note } = await params;
+	const foundNote = await getNoteById(note);
 	return {
 		title: `${foundNote?.title} - Next Keep`,
-	}
-}
+	};
+};
 
 const PinnedNoteIdLayout = ({ children }: { children: ReactNode }) => {
-	return (
-		<>{children}</>
-	)
-}
+	return <>{children}</>;
+};
 
-export default PinnedNoteIdLayout
+export default PinnedNoteIdLayout;

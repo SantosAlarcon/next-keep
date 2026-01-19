@@ -23,7 +23,15 @@ import SidebarItem from "./SidebarItem";
 import User from "./ui/User";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 
-const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { lang: string }; visible: boolean; onHide: () => void }) => {
+const SidebarDrawerClient = ({
+	params: { lang },
+	visible,
+	onHide,
+}: {
+	params: { lang: string };
+	visible: boolean;
+	onHide: () => void;
+}) => {
 	const t = i18nClient.getFixedT(lang, "common");
 	// @ts-ignore
 	const { allNotes, allGroups, allPinnedNotes } = dataStore.getState();
@@ -31,7 +39,8 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 	const router = useRouter();
 
 	const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
-	const [renameGroupVisibleModal, setRenameGroupVisibleModal] = useState<boolean>(false);
+	const [renameGroupVisibleModal, setRenameGroupVisibleModal] =
+		useState<boolean>(false);
 
 	const groupContextMenu = [
 		{
@@ -69,7 +78,9 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 							{
 								loading: t("pending-operation"),
 								success: () => {
-									return t("group.group-delete-success", { name: selectedGroup?.title });
+									return t("group.group-delete-success", {
+										name: selectedGroup?.title,
+									});
 								},
 								error: () => t("group.group-delete-error"),
 							},
@@ -94,7 +105,13 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 			<aside className={DrawerStyles.drawer__container}>
 				<div className={DrawerStyles.drawer__top}>
 					<Link href="/notes/all" prefetch onClick={onHide}>
-						<Image className={sidebarStyles.sidebar__logo} width="128" height="128" src="/NextKeep.svg" alt="Next Keep logo" />
+						<Image
+							className={sidebarStyles.sidebar__logo}
+							width="128"
+							height="128"
+							src="/NextKeep.svg"
+							alt="Next Keep logo"
+						/>
 					</Link>
 					{/* @ts-ignore */}
 					<span onClick={onHide}>
@@ -109,7 +126,11 @@ const SidebarDrawerClient = ({ params: { lang }, visible, onHide }: { params: { 
 								key={link.name}
 								title={t(link.name)}
 								href={link.path}
-								amount={link.name === "pinned" ? allPinnedNotes?.length : allNotes?.length}
+								amount={
+									link.name === "pinned"
+										? allPinnedNotes?.length
+										: allNotes?.length
+								}
 							/>
 						))}
 					</ul>

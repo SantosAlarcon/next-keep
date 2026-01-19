@@ -1,141 +1,142 @@
 .sidebar__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    border-right: 1px #0006 solid;
-    max-width: 23rem;
-    height: 100dvh;
-    padding: 1rem;
-    gap: 1rem;
-    overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	border-right: 1px #0006 solid;
+	max-width: 23rem;
+	height: 100dvh;
+	padding: 1rem;
+	gap: 1rem;
+	overflow-x: hidden;
 
-    & h3 {
-        font-weight: 800;
-        align-self: start;
-    }
+	& h3 {
+		font-weight: 800;
+		align-self: start;
+	}
 
-    @media (width <=1024px) {
-        display: none;
-    }
+	@media (width <= 1024px) {
+		display: none;
+	}
 
-    @media (prefers-color-scheme: dark) {
-        border-right: 1px #fff6 solid;
-    }
+	@media (prefers-color-scheme: dark) {
+		border-right: 1px #fff6 solid;
+	}
 
-    &::-webkit-scrollbar {
-        width: 3px;
-    }
+	&::-webkit-scrollbar {
+		width: 3px;
+	}
 
-    &::-webkit-scrollbar-thumb {
-        background-color: #aaf;
-        border-radius: 1rem;
-    }
+	&::-webkit-scrollbar-thumb {
+		background-color: #aaf;
+		border-radius: 1rem;
+	}
 }
 
 .sidebar__top {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
 
 .sidebar__top {
-    align-items: center;
+	align-items: center;
 }
 
 .sidebar__bottom {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
 
-    &:has(.sidebar__expand__button__collapsed) {
-        flex-direction: column;
-    }
+	&:has(.sidebar__expand__button__collapsed) {
+		flex-direction: column;
+	}
 }
 
 .sidebar__separator {
-    width: 90%;
-    margin: 0 auto;
-    border: 1px #0006 solid;
+	width: 90%;
+	margin: 0 auto;
+	border: 1px #0006 solid;
 
-    @media (prefers-color-scheme: dark) {
-        border-color: #fff6;
-    }
+	@media (prefers-color-scheme: dark) {
+		border-color: #fff6;
+	}
 }
 
 .sidebar__groups__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
 
-    &>* {
-        align-self: center !important;
-    }
+	& > * {
+		align-self: center !important;
+	}
 }
 
 .sidebar__grouplist {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 .sidebar__button,
 .sidebar__new__note__button__collapsed {
-    border-radius: .5rem;
-    background-color: #44f;
-    padding: 0.75rem 1rem;
-    transition: all .2s ease-in-out;
-    margin: 0 auto;
-    font-size: .85rem;
-    outline: none;
-    border: none;
-    font-family: inherit;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    color: #eee;
+	border-radius: 0.5rem;
+	background-color: #44f;
+	padding: 0.75rem 1rem;
+	transition: all 0.2s ease-in-out;
+	margin: 0 auto;
+	font-size: 0.85rem;
+	outline: none;
+	border: none;
+	font-family: inherit;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: #eee;
 
-    &:hover {
-        background-color: #66f;
-        box-shadow: inset 0 0 .25rem #fff;
-    }
+	&:hover {
+		background-color: #66f;
+		box-shadow: inset 0 0 0.25rem #fff;
+	}
 }
 
 .sidebar__new__note__button__collapsed {
-    width: 100%;
+	width: 100%;
 }
 
 .sidebar__expand__button {
-    width: 45%;
+	width: 45%;
 }
 
 .sidebar__expand__button__collapsed {
-    width: 100%;
+	width: 100%;
 }
 
-.sidebar__expand__button, .sidebar__expand__button__collapsed {
-    display: flex;
-    justify-content: center;
+.sidebar__expand__button,
+.sidebar__expand__button__collapsed {
+	display: flex;
+	justify-content: center;
 	align-items: center;
 }
 
 .sidebar__item {
-    padding: 0.3rem;
-    border-radius: 0.3rem;
+	padding: 0.3rem;
+	border-radius: 0.3rem;
 }
 
 .sidebar__active {
-    background-color: #9494ff;
-    color: #111;
-    font-weight: 800;
+	background-color: #9494ff;
+	color: #111;
+	font-weight: 800;
 
-    & img {
-        filter: invert(0);
-    }
+	& img {
+		filter: invert(0);
+	}
 }

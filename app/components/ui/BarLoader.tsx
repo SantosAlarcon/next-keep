@@ -1,6 +1,20 @@
-const BarLoader = ({ width, height, color }: { width: string; height: string; color: string }) => {
+const BarLoader = ({
+	width,
+	height,
+	color,
+}: {
+	width: string;
+	height: string;
+	color: string;
+}) => {
 	return (
-		<svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill={color} viewBox="0 0 24 24">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width={width}
+			height={height}
+			fill={color}
+			viewBox="0 0 24 24"
+		>
 			<rect x="1" y="6" width="2.8" height="12">
 				<animate
 					id="spinner_CcmT"

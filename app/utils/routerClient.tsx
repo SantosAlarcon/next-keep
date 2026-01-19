@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const routerClient = () => {
-    const router = useRouter();
-    return router;
-}
+	const router = useRouter();
+	return router;
+};
 
-export default routerClient
+export default routerClient;

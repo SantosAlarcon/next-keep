@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
 import LoginStyles from "@/styles/Login.module.css";
 import Login from "@/app/components/ui/Login";
 import Image from "next/image";
-import "@/app/i18n-client"
+import "@/app/i18n-client";
 import { use } from "react";
 
 const LoginPage = ({ params }: { params: Promise<{ lang: string }> }) => {
@@ -15,7 +15,14 @@ const LoginPage = ({ params }: { params: Promise<{ lang: string }> }) => {
 					<Login lang={lang} />
 				</div>
 				<div className={LoginStyles.login__page__right}>
-					<Image className={LoginStyles.login__page__right__image} priority src="/mockup.webp" alt="Next Keep Mockup" width={1280} height={762} />
+					<Image
+						className={LoginStyles.login__page__right__image}
+						priority
+						src="/mockup.webp"
+						alt="Next Keep Mockup"
+						width={1280}
+						height={762}
+					/>
 				</div>
 			</section>
 		</main>

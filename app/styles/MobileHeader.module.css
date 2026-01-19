@@ -1,45 +1,45 @@
 .mobile__header__container {
-    display: none;
-    padding: .5rem;
-    position: fixed;
-    width: 100%;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 .1rem .5rem #0006;
-    background-color: #1129;
-    z-index: 1;
+	display: none;
+	padding: 0.5rem;
+	position: fixed;
+	width: 100%;
+	backdrop-filter: blur(4px);
+	box-shadow: 0 0.1rem 0.5rem #0006;
+	background-color: #1129;
+	z-index: 1;
 
-    @media (width < 1024px) {
-        display: block;
-    }
+	@media (width < 1024px) {
+		display: block;
+	}
 }
 
 .mobile__header__button {
-    width: fit-content;
+	width: fit-content;
 }
 
 .drawer__container {
-    padding: .5rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    justify-content: space-between;
-    height: inherit;
+	padding: 0.5rem 1.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	justify-content: space-between;
+	height: inherit;
 }
 
 .drawer__top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	gap: 1rem;
 }
 
 .drawer__bottom {
-    width: 100%;
-    text-align: center;
+	width: 100%;
+	text-align: center;
 
-    & button {
-        width: 50%;
-    }
+	& button {
+		width: 50%;
+	}
 }

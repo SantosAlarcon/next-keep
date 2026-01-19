@@ -1,16 +1,21 @@
 import { Client, Account } from "appwrite";
-import { Client as SVClient, Account as SVAccount, Databases as SVDatabases, Avatars as SVAvatars } from "node-appwrite";
+import {
+	Client as SVClient,
+	Account as SVAccount,
+	Avatars as SVAvatars,
+	TablesDB,
+} from "node-appwrite";
 import { apiEndpoint, appwriteAPIKey, appwriteProjectId } from "./constants";
 
 export const appwriteClient = new SVClient()
-    .setLocale("es")
-    .setEndpoint(apiEndpoint)
-    .setProject(appwriteProjectId)
-    .setKey(appwriteAPIKey)
+	.setLocale("es")
+	.setEndpoint(apiEndpoint)
+	.setProject(appwriteProjectId)
+	.setKey(appwriteAPIKey);
 
 export const appwriteAccount = new SVAccount(appwriteClient);
 
-export const appwriteDatabase = new SVDatabases(appwriteClient);
+export const appwriteDatabase = new TablesDB(appwriteClient);
 
 // export const appwriteServerClient = new SVClient()
 //     .setLocale("es")
@@ -21,7 +26,6 @@ export const appwriteDatabase = new SVDatabases(appwriteClient);
 // export const appwriteServerAccount = new SVAccount(appwriteServerClient);
 //
 // export const appwritesServerDatabase = new SVDatabases(appwriteServerClient);
-
 
 // @ts-ignore
 // const {setSession, setUser} = authStore.getState();
@@ -34,8 +38,8 @@ export const getInitials = () => {
 };
 
 export const getAccount = () => {
-    return appwriteAccount;
-}
+	return appwriteAccount;
+};
 
 export async function createSessionClient() {
 	const client = new Client()

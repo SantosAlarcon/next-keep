@@ -66,7 +66,10 @@ export async function GET(req: NextRequest) {
 		const group = await getGroupById(id);
 
 		if (!group) {
-			return Response.json({ message: "There is no group with that ID" }, { status: 400 });
+			return Response.json(
+				{ message: "There is no group with that ID" },
+				{ status: 400 },
+			);
 		}
 
 		return Response.json(group, { status: 200 });
@@ -77,7 +80,10 @@ export async function GET(req: NextRequest) {
 		const group = await getGroupByTitle(title);
 
 		if (!group) {
-			return Response.json({ message: "No group found with that title" }, { status: 400 });
+			return Response.json(
+				{ message: "No group found with that title" },
+				{ status: 400 },
+			);
 		}
 
 		return Response.json(group, { status: 200 });
@@ -113,13 +119,19 @@ export async function POST(req: NextRequest) {
 	const body = await req.json();
 
 	if (!body.hasOwnProperty("title") || !body) {
-		return Response.json({ message: "You need to provide the title" }, { status: 400 });
+		return Response.json(
+			{ message: "You need to provide the title" },
+			{ status: 400 },
+		);
 	}
 
 	// Call the createNewGroup function to add it to the DB
 	await createNewGroup(body.title)
 		.then(() => {
-			return NextResponse.json({ message: `New group ${body.title} is added to the DB` }, { status: 201 });
+			return NextResponse.json(
+				{ message: `New group ${body.title} is added to the DB` },
+				{ status: 201 },
+			);
 		})
 		.catch((error) => {
 			console.error(error.message);
@@ -152,7 +164,10 @@ export async function DELETE(req: NextRequest) {
 	const id = searchParams.get("id");
 
 	if (!id) {
-		return Response.json({ message: "You need to provide the ID to proceed the deletion" }, { status: 400 });
+		return Response.json(
+			{ message: "You need to provide the ID to proceed the deletion" },
+			{ status: 400 },
+		);
 	}
 
 	// Call the deleteGroupById to remove it from the DB
@@ -160,10 +175,16 @@ export async function DELETE(req: NextRequest) {
 
 	// If the deletion returns undefined, it means the record doesn't exist in the DB.
 	if (!deletion) {
-		return Response.json({ message: `The item with ID ${id} doesn't exist in the DB` }, { status: 400 });
+		return Response.json(
+			{ message: `The item with ID ${id} doesn't exist in the DB` },
+			{ status: 400 },
+		);
 	}
 
-	return Response.json({ message: `The item with ID ${id} has been removed from the DB` }, { status: 200 });
+	return Response.json(
+		{ message: `The item with ID ${id} has been removed from the DB` },
+		{ status: 200 },
+	);
 }
 
 /**
@@ -199,15 +220,24 @@ export async function PUT(req: NextRequest) {
 	const title = body.title;
 
 	if (!(id && title)) {
-		return Response.json({ message: "You need to provide the ID and the title." }, { status: 400 });
+		return Response.json(
+			{ message: "You need to provide the ID and the title." },
+			{ status: 400 },
+		);
 	}
 
 	// Call the updateGroupById to update the group title
 	const isUpdateSuccesful = await updateGroupById(id, title);
 
 	if (!isUpdateSuccesful) {
-		return Response.json({ message: "The group of that ID doesn't exist in the DB" }, { status: 400 });
+		return Response.json(
+			{ message: "The group of that ID doesn't exist in the DB" },
+			{ status: 400 },
+		);
 	}
 
-	return Response.json({ message: `Group has been renamed to ${title}` }, { status: 200 });
+	return Response.json(
+		{ message: `Group has been renamed to ${title}` },
+		{ status: 200 },
+	);
 }

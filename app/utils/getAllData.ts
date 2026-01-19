@@ -5,12 +5,13 @@ import { getAllNotes } from "./notes/getAllNotes";
 import { changeLastUpdate } from "./notes/changeLastUpdate";
 
 export async function getAllData() {
-	const [allNotes, allGroups, allPinnedNotes, allGroupTitles] = await Promise.all([
-		getAllNotes(),
-		getAllGroups(),
-		getAllPinnedNotes(),
-		getAllGroupTitles(),
-	]);
+	const [allNotes, allGroups, allPinnedNotes, allGroupTitles] =
+		await Promise.all([
+			getAllNotes(),
+			getAllGroups(),
+			getAllPinnedNotes(),
+			getAllGroupTitles(),
+		]);
 
 	return { allNotes, allGroups, allPinnedNotes, allGroupTitles };
 }
