@@ -1,12 +1,12 @@
 "use client";
 
+import { Button } from "@primereact/ui/button";
+import { useRouter } from "next/navigation";
 import FixedIcon from "@/app/components/icons/FixedIcon";
 import UnfixedIcon from "@/app/components/icons/UnfixedIcon";
-import type { Note } from "@/app/types";
 import pinnedButtonStyles from "@/app/styles/PinnedButton.module.css";
+import type { Note } from "@/app/types";
 import { toggleNotePin } from "@/app/utils/notes/toggleNotePin";
-import { useRouter } from "next/navigation";
-import { Button } from "primereact/button";
 import { updateNotes } from "@/app/utils/updateData";
 
 const TogglePinButton = ({ title, note }: { title: string; note: Note }) => {

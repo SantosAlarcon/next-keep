@@ -1,16 +1,16 @@
 "use client";
 
-import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
-import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
+import { Button } from "@primereact/ui/button";
+import { Sidebar } from "@primereact/ui/sidebar";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button } from "primereact/button";
-import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { ContextMenu } from "primereact/contextmenu";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
+import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
+import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
+import type { ContextMenuItem } from "@/app/types";
 import { logoVariants, mainSidebarLinks, variants } from "../constants";
 import { dataStore } from "../store/dataStore";
 import sidebarStyles from "../styles/sidebar.module.css";
@@ -19,11 +19,13 @@ import { deleteGroupById } from "../utils/groups/deleteGroupById";
 import { changeNoteGroupsToNull } from "../utils/notes/changeNoteGroupsToNull";
 import { updateGroups } from "../utils/updateData";
 import GroupItem from "./GroupItem";
-import SidebarItem from "./SidebarItem";
-import User from "./ui/User";
-import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 import { CollapseIcon } from "./icons/CollapseIcon";
 import { ExpandIcon } from "./icons/ExpandIcon";
+import SidebarItem from "./SidebarItem";
+import CustomContextMenu from "./ui/CustomContextMenu";
+import ConfirmDialog from "./ui/dialogs/ConfirmDialog";
+import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
+import User from "./ui/User";
 
 const SidebarClient = ({ lang }: { lang: string }) => {
 	const { t } = useTranslation("common", { lng: lang });
@@ -55,6 +57,7 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 	const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
 	const [renameGroupVisibleModal, setRenameGroupVisibleModal] =
 		useState<boolean>(false);
+	const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
 	const handleClick = () => {
 		setExpanded(!expanded);
@@ -68,7 +71,7 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 		}
 	}, [expanded]);
 
-	const groupContextMenu = [
+	const groupContextMenu: ContextMenuItem[] = [
 		{
 			label: t("group.rename-group"),
 			icon: "pi pi-fw pi-pencil",
@@ -93,7 +96,7 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 					accept: () => {
 						const groupId = selectedGroup?.$id;
 						toast.promise(
-                            // @ts-ignore
+							// @ts-ignore
 							deleteGroupById(selectedGroup?.$id).then(() => {
 								// @ts-ignore
 								changeNoteGroupsToNull(groupId);
@@ -113,7 +116,7 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 							},
 						);
 					},
-					reject: () => {},
+					reject: () => { },
 				});
 			},
 		},
@@ -135,99 +138,148 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 
 	return (
 		<AnimatePresence initial={false}>
-			<motion.aside
-				initial={expanded ? "collapsed" : "expanded"}
-				animate={expanded ? "expanded" : "collapsed"}
-				exit={expanded ? "collapsed" : "expanded"}
-				variants={variants}
-				className={sidebarStyles.sidebar__container}
-			>
-				<section className={sidebarStyles.sidebar__top}>
-					<Link href="/notes/all" prefetch aria-label="Next Keep logo">
-						<motion.img
-							className={sidebarStyles.sidebar__logo}
-							src="/NextKeep.svg"
-							alt="Next Keep logo"
-							initial={expanded ? "collapsed" : "expanded"}
-							animate={expanded ? "expanded" : "collapsed"}
-							exit={expanded ? "collapsed" : "expanded"}
-							variants={logoVariants}
-						/>
-					</Link>
-					<NewNoteButton title={t("create-note")} expanded={expanded} />
-					<ul className={sidebarStyles.sidebar__grouplist}>
-						{mainSidebarLinks.map((link) => (
-							// @ts-ignore
-							<SidebarItem
-								icon={link.icon}
-								key={link.name}
-								title={t(link.name)}
-								href={link.path}
-								amount={
-									link.name === "pinned"
-										? allPinnedNotes?.length
-										: allNotes?.length
+			<Sidebar.Root overlay={true} variant="sidebar" collapsible="icon">
+				<motion.aside
+					initial={expanded ? "collapsed" : "expanded"}
+					animate={expanded ? "expanded" : "collapsed"}
+					exit={expanded ? "collapsed" : "expanded"}
+					variants={variants}
+					className={sidebarStyles.sidebar__container}
+				>
+					<Sidebar.Panel>
+						<Sidebar.Header>
+							<section className={sidebarStyles.sidebar__top}>
+								<Link href="/notes/all" prefetch aria-label="Next Keep logo">
+									<motion.img
+										className={sidebarStyles.sidebar__logo}
+										src="/NextKeep.svg"
+										alt="Next Keep logo"
+										initial={expanded ? "collapsed" : "expanded"}
+										animate={expanded ? "expanded" : "collapsed"}
+										exit={expanded ? "collapsed" : "expanded"}
+										variants={logoVariants}
+									/>
+								</Link>
+							</section>
+						</Sidebar.Header>
+						<Sidebar.Content>
+							<NewNoteButton title={t("create-note")} expanded={expanded} />
+							<ul className={sidebarStyles.sidebar__grouplist}>
+								{mainSidebarLinks.map((link) => (
+									<SidebarItem
+										icon={link.icon}
+										key={link.name}
+										title={t(link.name)}
+										href={link.path}
+										amount={
+											link.name === "pinned"
+												? allPinnedNotes?.length
+												: allNotes?.length
+										}
+										expanded={expanded}
+									/>
+								))}
+							</ul>
+							<hr className={sidebarStyles.sidebar__separator} />
+							<div className={sidebarStyles.sidebar__groups__header}>
+								{expanded ? <h3>{t("groups")}</h3> : null}
+								<CreateGroupButton
+									lang={lang}
+									title={t("group.create-group")}
+								/>
+							</div>
+							<ul className={sidebarStyles.sidebar__grouplist}>
+								{allGroups?.map((group: Group) => (
+									<GroupItem
+										key={group.$id}
+										id={group.$id}
+										title={group.title}
+										// @ts-ignore
+										//amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
+										amount={0}
+										expanded={expanded}
+										// @ts-ignore
+										onContextMenu={(event) => handleContext(event, group)}
+									/>
+								))}
+							</ul>
+							<CustomContextMenu ref={cmRef} model={groupContextMenu} />
+							<RenameGroupDialog
+								lang={lang}
+								visible={renameGroupVisibleModal}
+								onHide={() => setRenameGroupVisibleModal(false)}
+								// @ts-ignore
+								group={selectedGroup}
+							/>
+							<ConfirmDialog
+								open={false}
+								header={t("group.group-delete-confirm-header")}
+								value={t("delete")}
+								severity="danger"
+								message={
+									<>
+										{t("group.group-delete-confirm-message-1")}
+										<br />
+										{t("group.group-delete-confirm-message-2")}
+									</>
 								}
-								expanded={expanded}
+								acceptLabel={t("yes")}
+								cancelLabel={t("no")}
+								accept={() => {
+									const groupId = selectedGroup?.$id;
+									toast.promise(
+										// @ts-ignore
+										deleteGroupById(selectedGroup?.$id).then(() => {
+											// @ts-ignore
+											changeNoteGroupsToNull(groupId);
+											updateGroups();
+											setTimeout(() => {
+												router.refresh();
+											}, 100);
+										}),
+										{
+											loading: t("pending-operation"),
+											success: () => {
+												return t("group.group-delete-success", {
+													name: selectedGroup?.title,
+												});
+											},
+											error: () => t("group.group-delete-error"),
+										},
+									);
+								}}
 							/>
-						))}
-					</ul>
-					<hr className={sidebarStyles.sidebar__separator} />
-					<div className={sidebarStyles.sidebar__groups__header}>
-						{expanded ? <h3>{t("groups")}</h3> : null}
-						<CreateGroupButton lang={lang} title={t("group.create-group")} />
-					</div>
-					<ul className={sidebarStyles.sidebar__grouplist}>
-						{allGroups?.map((group: Group) => (
-							<GroupItem
-								key={group.$id}
-								id={group.$id}
-								title={group.title}
-								// @ts-ignore
-								//amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
-								amount={0}
-								expanded={expanded}
-								// @ts-ignore
-								onContextMenu={(event) => handleContext(event, group)}
-							/>
-						))}
-					</ul>
-					<ContextMenu ref={cmRef} model={groupContextMenu} />
-					<ConfirmDialog resizable={false} draggable={false} />
-					<RenameGroupDialog
-						lang={lang}
-						visible={renameGroupVisibleModal}
-						onHide={() => setRenameGroupVisibleModal(false)}
-                        // @ts-ignore
-						group={selectedGroup}
-					/>
-				</section>
+						</Sidebar.Content>
 
-				<section className={sidebarStyles.sidebar__bottom}>
-					<User />
-					<Button
-						tooltip={expanded ? t("collapse") : t("expand")}
-						aria-label={expanded ? t("collapse") : t("expand")}
-						tooltipOptions={{ position: "top" }}
-						severity="secondary"
-						//@ts-ignore
-						label={
-							expanded ? (
-								<CollapseIcon width="20px" height="20px" />
-							) : (
-								<ExpandIcon width="20px" height="20px" />
-							)
-						}
-						className={
-							expanded
-								? sidebarStyles.sidebar__expand__button
-								: sidebarStyles.sidebar__expand__button__collapsed
-						}
-						type="button"
-						onClick={handleClick}
-					/>
-				</section>
-			</motion.aside>
+						<Sidebar.Footer>
+							<section className={sidebarStyles.sidebar__bottom}>
+								<User />
+								<Button
+									tooltip={expanded ? t("collapse") : t("expand")}
+									aria-label={expanded ? t("collapse") : t("expand")}
+									tooltipoptions={{ position: "top" }}
+									severity="secondary"
+									//@ts-ignore
+									label={
+										expanded ? (
+											<CollapseIcon width="20px" height="20px" />
+										) : (
+											<ExpandIcon width="20px" height="20px" />
+										)
+									}
+									className={
+										expanded
+											? sidebarStyles.sidebar__expand__button
+											: sidebarStyles.sidebar__expand__button__collapsed
+									}
+									type="button"
+									onClick={handleClick}
+								/>
+							</section>
+						</Sidebar.Footer>
+					</Sidebar.Panel>
+				</motion.aside>
+			</Sidebar.Root>
 		</AnimatePresence>
 	);
 };

@@ -1,8 +1,8 @@
 "use client";
 
-import LoginStyles from "@/styles/Login.module.css";
-import Login from "@/app/components/ui/Login";
 import Image from "next/image";
+import Login from "@/app/components/ui/Login";
+import LoginStyles from "@/styles/Login.module.css";
 import "@/app/i18n-client";
 import { use } from "react";
 

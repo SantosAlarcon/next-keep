@@ -1,8 +1,8 @@
 "use client";
 
-import { testPromise } from "@/app/utils/testPromise";
-import { Button } from "primereact/button";
+import { Button } from "@primereact/ui/button";
 import { toast } from "sonner";
+import { testPromise } from "@/app/utils/testPromise";
 
 const TestButton = () => {
 	// @ts-ignore

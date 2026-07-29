@@ -1,9 +1,9 @@
 "use client";
 
-import MobileHeaderStyles from "@/styles/MobileHeader.module.css";
-import { Button } from "primereact/button";
-import SidebarDrawerClient from "../SidebarDrawerClient";
+import { Button } from "@primereact/ui/button";
 import { useState } from "react";
+import MobileHeaderStyles from "@/styles/MobileHeader.module.css";
+import SidebarDrawerClient from "../SidebarDrawerClient";
 
 const MobileHeader = ({ lang }: { lang: string }) => {
 	const [visible, setVisible] = useState<boolean>(false);

@@ -52,7 +52,7 @@
 	color: var(--foreground);
 }
 
-.p-dialog > * {
+.p-dialog>* {
 	padding: 0.5rem 1rem;
 	color: var(--foreground);
 	background-color: rgb(var(--background-start-rgb));
@@ -116,7 +116,7 @@
 	border-width: 1px;
 }
 
-.p-dropdown-item > * {
+.p-dropdown-item>* {
 	font-family: inherit !important;
 	padding: 0.5rem;
 	color: var(--foreground);
@@ -211,7 +211,7 @@
 			box-shadow: 0 0.1rem 0.4rem rgb(var(--background-input-rgb));
 		}
 
-		&.p-highlight > * {
+		&.p-highlight>* {
 			font-weight: bold;
 		}
 	}
@@ -221,7 +221,7 @@
 	color: var(--foreground);
 }
 
-.p-icon-field > .p-input-icon {
+.p-icon-field>.p-input-icon {
 	top: 28%;
 }
 
@@ -243,6 +243,10 @@
 			filter: invert(1);
 		}
 	}
+}
+
+#p-license-host {
+	display: none !important;
 }
 
 /* ANIMATIONS */

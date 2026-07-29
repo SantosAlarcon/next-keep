@@ -1,17 +1,20 @@
+import { Button } from "@primereact/ui/button";
+import { FloatLabel } from "@primereact/ui/floatlabel";
+import { InputPassword } from "@primereact/ui/inputpassword";
+import { InputText } from "@primereact/ui/inputtext";
+import { OAuthProvider } from "appwrite";
 import Image from "next/image";
-import { Button } from "primereact/button";
-import { FloatLabel } from "primereact/floatlabel";
-import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
-import LoginStyles from "@/app/styles/Login.module.css";
-import { useTranslation } from "react-i18next";
 import Link from "next/link";
-import { useState } from "react";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
+import LoginStyles from "@/app/styles/Login.module.css";
 import { emailLogin } from "@/app/utils/login";
 import { loginToOAuth } from "@/app/utils/loginToOAuth";
-import { OAuthProvider } from "node-appwrite";
+import { Google } from "@primeicons/react/google";
+import { Github } from "@primeicons/react/github";
+import { Facebook } from "@primeicons/react/facebook";
 
 const Login = ({ lang }: { lang: string }) => {
 	const { t } = useTranslation("login", {
@@ -63,9 +66,11 @@ const Login = ({ lang }: { lang: string }) => {
 						type="submit"
 						aria-label={t("login-google")}
 						label={t("login-google")}
-						icon="pi pi-google"
 						className="p-button-rounded"
-					/>
+					>
+						<Google />
+						{t("login-google")}
+					</Button>
 				</form>
 				<form
 					action={() => loginToOAuth(OAuthProvider.Github)}
@@ -77,7 +82,10 @@ const Login = ({ lang }: { lang: string }) => {
 						label={t("login-github")}
 						icon="pi pi-github"
 						className="p-button-rounded"
-					/>
+					>
+						<Github />
+						{t("login-github")}
+					</Button>
 				</form>
 				<form
 					action={() => loginToOAuth(OAuthProvider.Facebook)}
@@ -89,13 +97,16 @@ const Login = ({ lang }: { lang: string }) => {
 						label={t("login-facebook")}
 						icon="pi pi-facebook"
 						className="p-button-rounded"
-					/>
+					>
+						<Facebook />
+						{t("login-facebook")}
+					</Button>
 				</form>
 			</div>
-			<Link href={`/reset-password/${lang}`} aria-label={t("forgot-password")}>
+			<Link href={`/reset-password`} aria-label={t("forgot-password")}>
 				{t("forgot-password")}
 			</Link>
-			<Link href={`/register/${lang}`} aria-label={t("register")}>
+			<Link href={`/register`} aria-label={t("register")}>
 				{t("register")}
 			</Link>
 
@@ -123,13 +134,12 @@ const Login = ({ lang }: { lang: string }) => {
 					</label>
 				</FloatLabel>
 				<FloatLabel>
-					<Password
+					<InputPassword
 						className={LoginStyles.login__page__form__input}
 						id="password"
 						name="password"
 						required
-						feedback={false}
-						toggleMask
+						mask
 						aria-label={t("password")}
 						aria-required
 					/>
@@ -143,12 +153,14 @@ const Login = ({ lang }: { lang: string }) => {
 				<Button
 					type="submit"
 					aria-label={t("login")}
-                    // @ts-ignore
+					// @ts-ignore
 					label={
 						pending ? <span className="pi pi-spin pi-spinner" /> : t("login")
 					}
 					className="p-button-rounded"
-				/>
+				>
+					{pending ? <span className="pi pi-spin pi-spinner" /> : t("login")}
+				</Button>
 			</form>
 		</>
 	);

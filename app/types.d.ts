@@ -21,3 +21,9 @@ export enum AsyncFunctionState {
 	OK = "OK",
 	Error = "Error",
 }
+
+export type ContextMenuItem = {
+	icon: string;
+	label: string;
+	command: () => void;
+};

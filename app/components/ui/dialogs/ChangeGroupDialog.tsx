@@ -1,11 +1,11 @@
 import { changeNoteGroup } from "@/app/utils/notes/changeNoteGroup";
-import { Button } from "primereact/button";
-import { Dialog } from "primereact/dialog";
+import { Button } from "@primereact/ui/button";
+import { Dialog } from "@primereact/ui/dialog";
 import type { Note } from "@/app/types";
 import { toast } from "sonner";
 import { useState } from "react";
 import { updateNotes } from "@/app/utils/updateData";
-import { Dropdown, type DropdownChangeEvent } from "primereact/dropdown";
+import { Dropdown, type DropdownChangeEvent } from "@primereact/ui/dropdown";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
@@ -62,7 +62,7 @@ const ChangeGroupDialog = ({
 			footer={
 				<>
 					<Button
-                        // @ts-ignore
+						// @ts-ignore
 						label={
 							pending ? <span className="pi pi-spin pi-spinner" /> : t("change")
 						}

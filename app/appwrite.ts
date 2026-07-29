@@ -1,19 +1,19 @@
-import { Client, Account } from "appwrite";
-import {
-	Client as SVClient,
-	Account as SVAccount,
-	Avatars as SVAvatars,
-	TablesDB,
-} from "node-appwrite";
+import { Account, Avatars, Client, TablesDB } from "appwrite";
+// import {
+// 	Account as SVAccount,
+// 	Avatars as SVAvatars,
+// 	Client as SVClient,
+// 	TablesDB,
+// } from "node-appwrite";
 import { apiEndpoint, appwriteAPIKey, appwriteProjectId } from "./constants";
 
-export const appwriteClient = new SVClient()
+export const appwriteClient = new Client()
 	.setLocale("es")
 	.setEndpoint(apiEndpoint)
 	.setProject(appwriteProjectId)
-	.setKey(appwriteAPIKey);
+// .setKey(appwriteAPIKey);
 
-export const appwriteAccount = new SVAccount(appwriteClient);
+export const appwriteAccount = new Account(appwriteClient);
 
 export const appwriteDatabase = new TablesDB(appwriteClient);
 
@@ -33,7 +33,7 @@ export const appwriteDatabase = new TablesDB(appwriteClient);
 // appwriteAccount.getSession("current").then((session) => setSession(session)).catch((error) => console.log(error))
 
 export const getInitials = () => {
-	const result = new SVAvatars(appwriteClient).getInitials();
+	const result = new Avatars(appwriteClient).getInitials();
 	return result;
 };
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Button } from "primereact/button";
-import { FloatLabel } from "primereact/floatlabel";
-import { InputText } from "primereact/inputtext";
+import { Button } from "@primereact/ui/button";
+import { FloatLabel } from "@primereact/ui/floatlabel";
+import { InputText } from "@primereact/ui/inputtext";
 import LoginStyles from "@/app/styles/Login.module.css";
 import { useTranslation } from "react-i18next";
 import resetPassword from "@/app/utils/resetPassword";
@@ -73,7 +73,7 @@ const ResetPassword = ({ lang }: { lang: string }) => {
 				<Button
 					type="submit"
 					aria-label={t("reset-password-title")}
-                    // @ts-ignore
+					// @ts-ignore
 					label={
 						pending ? (
 							<span className="pi pi-spin pi-spinner" />

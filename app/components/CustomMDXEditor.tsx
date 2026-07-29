@@ -19,10 +19,9 @@ enum EditorMode {
 }
 
 import MDEditor from "@uiw/react-md-editor";
-import { SelectButton } from "primereact/selectbutton";
+import { useTranslation } from "react-i18next";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
-import { useTranslation } from "react-i18next";
 
 const CustomMDXEditor: FC<EditorProps> = ({ lang, text, isEditing }) => {
 	const setNewNote = useNewNoteStore((state) => state.setNewNote);

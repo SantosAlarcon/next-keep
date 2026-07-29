@@ -1,15 +1,15 @@
 "use client";
 
+import { Button } from "@primereact/ui/button";
+import { FloatLabel } from "@primereact/ui/floatlabel";
+import { InputPassword } from "@primereact/ui/inputpassword";
 import Image from "next/image";
-import { Button } from "primereact/button";
-import { FloatLabel } from "primereact/floatlabel";
-import { Password } from "primereact/password";
-import LoginStyles from "@/app/styles/Login.module.css";
-import { useTranslation } from "react-i18next";
-import { useState } from "react";
-import BarLoader from "./BarLoader";
-import { changePassword } from "@/app/utils/changePassword";
 import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import LoginStyles from "@/app/styles/Login.module.css";
+import { changePassword } from "@/app/utils/changePassword";
+import BarLoader from "./BarLoader";
 
 const NewPassword = ({ lang }: { lang: string }) => {
 	const params = useSearchParams();
@@ -59,7 +59,7 @@ const NewPassword = ({ lang }: { lang: string }) => {
 				className={LoginStyles.login__page__form}
 			>
 				<FloatLabel>
-					<Password
+					<InputPassword
 						className={LoginStyles.login__page__form__input}
 						id="password"
 						name="password"
@@ -67,7 +67,7 @@ const NewPassword = ({ lang }: { lang: string }) => {
 						aria-required
 						required
 						feedback={false}
-						toggleMask
+						mask
 						promptLabel={t("write-password")}
 						strongLabel={t("strong-password")}
 						weakLabel={t("weak-password")}
@@ -81,7 +81,7 @@ const NewPassword = ({ lang }: { lang: string }) => {
 					</label>
 				</FloatLabel>
 				<FloatLabel>
-					<Password
+					<InputPassword
 						className={LoginStyles.login__page__form__input}
 						id="confirm-password"
 						name="confirm-password"
@@ -89,7 +89,7 @@ const NewPassword = ({ lang }: { lang: string }) => {
 						aria-required
 						required
 						feedback={false}
-						toggleMask
+						mask
 					/>
 					<label
 						className={LoginStyles.login__page__form__label}
@@ -100,7 +100,7 @@ const NewPassword = ({ lang }: { lang: string }) => {
 				</FloatLabel>
 				<Button
 					type="submit"
-                    // @ts-ignore
+					// @ts-ignore
 					label={
 						pending ? (
 							<BarLoader color="#eee" width="20px" height="20px" />

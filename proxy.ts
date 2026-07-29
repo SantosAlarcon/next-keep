@@ -1,32 +1,19 @@
-import i18nConfig from "@/i18n.config";
-import { i18nRouter } from "next-i18n-router";
-import { NextResponse, type NextRequest } from "next/server";
+import { createProxy } from "next-i18next/proxy";
+import i18nConfig from "./i18n.config";
 
-export async function proxy(request: NextRequest) {
-	// Get the language used in the browser
-	// @ts-ignore
-	const lang = request.headers
-		.get("Accept-Language")
-		.split(",")[0]
-		.split("-")[0];
-
-	if (
-		request.nextUrl.pathname.startsWith("/api/") ||
-		request.nextUrl.pathname.startsWith("/login/") ||
-		request.nextUrl.pathname.startsWith("/register/") ||
-		request.nextUrl.pathname.startsWith("/reset-password/") ||
-		request.nextUrl.pathname.startsWith("/new-password/")
-	) {
-		return NextResponse.next();
-	}
-
-	return i18nRouter(request, i18nConfig.i18n);
-}
+export const proxy = createProxy(i18nConfig);
 
 // Apply this proxy only to files in the app directory and these directories
 export const config = {
-	//matcher: ["/((?!api|static|.*\\..*|_next).*)", "/login", "/register", "/reset-password", "/new-password"],
-	matcher: [
-		"/((?!api|login|register|reset-password|new-password|static|.*\\..*|_next).*)",
-	],
+	matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+	// matcher: [
+	// 	"/((?!api|static|.*\\..*|_next).*)",
+	// 	"/login",
+	// 	"/register",
+	// 	"/reset-password",
+	// 	"/new-password",
+	// ],
+	// matcher: [
+	// 	"/((?!api|login|register|reset-password|new-password|static|.*\\..*|_next).*)",
+	// ],
 };

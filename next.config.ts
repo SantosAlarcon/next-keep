@@ -1,4 +1,4 @@
-import { NextConfig } from "next";
+import type { NextConfig } from "next";
 
 /** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
@@ -33,11 +33,11 @@ const nextConfig: NextConfig = {
 		];
 	},
 	pageExtensions: ["js", "jsx", "ts", "tsx", "mdx"],
-	transpilePackages: ["swagger-ui-react", "i18next", "react-i18next"],
+	// transpilePackages: ["swagger-ui-react", "i18next", "react-i18next"],
 	// reactCompiler: true,
 	experimental: {
 		optimizePackageImports: [
-			"primereact",
+			"@primereact",
 			"@uiw/react-md-editor",
 			"@uiw/react-markdown-preview",
 		],

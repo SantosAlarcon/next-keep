@@ -1,17 +1,16 @@
 "use client";
 
+import { Dialog } from "@primereact/ui/dialog";
+import { Sidebar } from "@primereact/ui/sidebar";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
+import { toast } from "sonner";
 import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
 import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
 import DrawerStyles from "@/styles/MobileHeader.module.css";
 import sidebarStyles from "@/styles/sidebar.module.css";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { confirmDialog } from "primereact/confirmdialog";
-import { ContextMenu } from "primereact/contextmenu";
-import { Sidebar } from "primereact/sidebar";
-import { useRef, useState } from "react";
-import { toast } from "sonner";
 import { mainSidebarLinks } from "../constants";
 import i18nClient from "../i18n-client";
 import { dataStore } from "../store/dataStore";
@@ -20,8 +19,9 @@ import { deleteGroupById } from "../utils/groups/deleteGroupById";
 import { updateGroups } from "../utils/updateData";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
-import User from "./ui/User";
+import CustomContextMenu from "./ui/CustomContextMenu";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
+import User from "./ui/User";
 
 const SidebarDrawerClient = ({
 	params: { lang },
@@ -52,7 +52,7 @@ const SidebarDrawerClient = ({
 			label: t("group.delete-group"),
 			icon: "pi pi-fw pi-trash",
 			command: () => {
-				confirmDialog({
+				Dialog({
 					resizable: false,
 					draggable: false,
 					header: t("group.group-delete-confirm-header"),
@@ -86,7 +86,7 @@ const SidebarDrawerClient = ({
 							},
 						);
 					},
-					reject: () => {},
+					reject: () => { },
 				});
 			},
 		},
@@ -101,72 +101,85 @@ const SidebarDrawerClient = ({
 	};
 
 	return (
-		<Sidebar blockScroll={true} visible={visible} onHide={onHide}>
-			<aside className={DrawerStyles.drawer__container}>
-				<div className={DrawerStyles.drawer__top}>
-					<Link href="/notes/all" prefetch onClick={onHide}>
-						<Image
-							className={sidebarStyles.sidebar__logo}
-							width="128"
-							height="128"
-							src="/NextKeep.svg"
-							alt="Next Keep logo"
-						/>
-					</Link>
-					{/* @ts-ignore */}
-					<span onClick={onHide}>
-						<NewNoteButton title={t("create-note")} expanded={true} />
-					</span>
-					<ul className={sidebarStyles.sidebar__grouplist} onClick={onHide}>
-						{mainSidebarLinks.map((link) => (
-							// @ts-ignore
-							<SidebarItem
-								icon={link.icon}
-								expanded={true}
-								key={link.name}
-								title={t(link.name)}
-								href={link.path}
-								amount={
-									link.name === "pinned"
-										? allPinnedNotes?.length
-										: allNotes?.length
-								}
-							/>
-						))}
-					</ul>
-					<hr className={sidebarStyles.sidebar__separator} />
-					<div className={sidebarStyles.sidebar__groups__header}>
-						<h3>{t("groups")}</h3>
-						<CreateGroupButton lang={lang} title={t("group.create-group")} />
-					</div>
-					<ul className={sidebarStyles.sidebar__grouplist} onClick={onHide}>
-						{allGroups?.map((group: Group) => (
-							<GroupItem
-								key={group.$id}
-								id={group.$id}
-								title={group.title}
-								expanded={true}
-								//amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
-								amount={0}
+		<Sidebar.Layout>
+			<Sidebar.Root id="main" collapsible="icon" defaultOpen={visible}>
+				<Sidebar.Aside className={DrawerStyles.drawer__container}>
+					<Sidebar.Panel>
+						<div className={DrawerStyles.drawer__top}>
+							<Link href="/notes/all" prefetch onClick={onHide}>
+								<Image
+									className={sidebarStyles.sidebar__logo}
+									width="128"
+									height="128"
+									src="/NextKeep.svg"
+									alt="Next Keep logo"
+								/>
+							</Link>
+							{/* @ts-ignore */}
+							<span onClick={onHide}>
+								<NewNoteButton title={t("create-note")} expanded={true} />
+							</span>
+
+							<ul className={sidebarStyles.sidebar__grouplist} onClick={onHide}>
+								{mainSidebarLinks.map((link) => (
+									// @ts-ignore
+									<SidebarItem
+										icon={link.icon}
+										expanded={true}
+										key={link.name}
+										title={t(link.name)}
+										href={link.path}
+										amount={
+											link.name === "pinned"
+												? allPinnedNotes?.length
+												: allNotes?.length
+										}
+									/>
+								))}
+							</ul>
+							<Sidebar.Spacer className={sidebarStyles.sidebar__separator} />
+							<Sidebar.Content
+								className={sidebarStyles.sidebar__groups__header}
+							>
+								<Sidebar.GroupLabel>{t("groups")}</Sidebar.GroupLabel>
+								<Sidebar.GroupContent>
+									<Sidebar.Menu></Sidebar.Menu>
+								</Sidebar.GroupContent>
+								<CreateGroupButton
+									lang={lang}
+									title={t("group.create-group")}
+								/>
+							</Sidebar.Content>
+							<ul className={sidebarStyles.sidebar__grouplist} onClick={onHide}>
+								{allGroups?.map((group: Group) => (
+									<GroupItem
+										key={group.$id}
+										id={group.$id}
+										title={group.title}
+										expanded={true}
+										//amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
+										amount={0}
+										// @ts-ignore
+										onContextMenu={(event) => handleContext(event, group)}
+									/>
+								))}
+							</ul>
+							<CustomContextMenu ref={cmRef} model={groupContextMenu} />
+							<RenameGroupDialog
+								lang={lang}
+								visible={renameGroupVisibleModal}
+								onHide={() => setRenameGroupVisibleModal(false)}
 								// @ts-ignore
-								onContextMenu={(event) => handleContext(event, group)}
+								group={selectedGroup}
 							/>
-						))}
-					</ul>
-					<ContextMenu ref={cmRef} model={groupContextMenu} />
-					<RenameGroupDialog
-						lang={lang}
-						visible={renameGroupVisibleModal}
-						onHide={() => setRenameGroupVisibleModal(false)}
-						// @ts-ignore
-						group={selectedGroup}
-					/>
-				</div>
-				<div className={DrawerStyles.drawer__bottom}>
-					<User />
-				</div>
-			</aside>
-		</Sidebar>
+						</div>
+						<div className={DrawerStyles.drawer__bottom}>
+							<User />
+						</div>
+					</Sidebar.Panel>
+				</Sidebar.Aside>
+			</Sidebar.Root>
+		</Sidebar.Layout>
 	);
 };
 

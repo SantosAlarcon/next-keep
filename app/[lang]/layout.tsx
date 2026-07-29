@@ -1,24 +1,26 @@
-import i18NextConfig from "@/i18n.config";
+import {
+	initServerI18next,
+	getT,
+	getResources,
+	generateI18nStaticParams,
+} from "next-i18next/server";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import type { ReactNode } from "react";
-import "primereact/resources/themes/viva-dark/theme.css";
-import "primereact/resources/primereact.min.css";
-import "primeicons/primeicons.css";
 import "../styles/globals.css";
 import "../styles/primereact.css";
-import { PrimeReactProvider } from "primereact/api";
-import { Toaster } from "sonner";
-import { DataSync } from "../components/DataSync";
+import { I18nProvider } from "next-i18next/client";
+import i18nConfig from "@/i18n.config";
 import { LocaleSync } from "../components/LocaleSync";
-import MobileHeader from "../components/ui/MobileHeader";
-import { getAllData } from "../utils/getAllData";
-import dynamic2 from "next/dynamic";
+import { PrimeReactProvider } from "@primereact/core"
+import Ice from "../themes/ice";
 
 const font = Figtree({ subsets: ["latin"], weight: ["400", "700", "800"] });
 
+initServerI18next(i18nConfig);
+
 export async function generateStaticParams() {
-	return i18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
+	return generateI18nStaticParams();
 }
 
 export const metadata: Metadata = {
@@ -32,10 +34,6 @@ export const metadata: Metadata = {
 	},
 };
 
-export const dynamic = "force-dynamic";
-
-const SidebarClientNoSSR = dynamic2(() => import("@/components/SidebarClient"));
-
 export default async function RootLayout({
 	children,
 	params,
@@ -45,23 +43,24 @@ export default async function RootLayout({
 		lang: string;
 	}>;
 }>) {
-	const state = await getAllData();
 	const { lang } = await params;
+	const { i18n } = await getT();
+	const resources = getResources(i18n);
 
 	return (
 		<html lang={lang}>
 			<body className={font.className}>
-				{/* @ts-ignore */}
-				<DataSync state={state} />
-				<LocaleSync state={{ locale: lang }} />
-				<PrimeReactProvider value={{ ripple: true }}>
-					<Toaster richColors position="bottom-center" theme="dark" />
-					<MobileHeader lang={lang} />
-					<div className="main__body">
-						<SidebarClientNoSSR lang={lang} />
-						{children}
-					</div>
-				</PrimeReactProvider>
+				<I18nProvider language={lang} resources={resources}>
+					<LocaleSync state={{ locale: lang }} />
+					<PrimeReactProvider theme={{
+						preset: Ice,
+						options: {
+							cssVariables: true
+						}
+					}}>{
+							children
+						}</PrimeReactProvider>
+				</I18nProvider>
 			</body>
 		</html>
 	);

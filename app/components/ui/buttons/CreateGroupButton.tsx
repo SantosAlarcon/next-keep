@@ -1,8 +1,9 @@
 "use client";
 
-import { Button } from "primereact/button";
+import { Button } from "@primereact/ui/button";
 import { useState } from "react";
 import CreateGroupDialog from "@/app/components/ui/dialogs/CreateGroupDialog";
+import CustomTooltip from "../CustomTooltip";
 
 const CreateGroupButton = ({
 	lang,
@@ -20,13 +21,13 @@ const CreateGroupButton = ({
 				visible={visible}
 				onHide={() => setVisible(false)}
 			/>
-			<Button
-				aria-label={title}
-				onClick={() => setVisible(true)}
-				icon="pi pi-plus"
-				tooltip={title}
-				tooltipOptions={{ position: "right" }}
-			/>
+			<CustomTooltip side={"right"} align={"center"} tooltipText={title}>
+				<Button
+					aria-label={title}
+					onClick={() => setVisible(true)}
+					icon="pi pi-plus"
+				/>
+			</CustomTooltip>
 		</>
 	);
 };

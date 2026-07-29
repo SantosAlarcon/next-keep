@@ -1,10 +1,10 @@
 "use client";
 
+import { Button } from "@primereact/ui/button";
 import { useRouter } from "next/navigation";
-import sidebarStyles from "@/app/styles/sidebar.module.css";
 import NewNoteIcon from "@/app/components/icons/NewNoteIcon";
 import { useNewNoteStore } from "@/app/store/newNoteStore";
-import { Button } from "primereact/button";
+import sidebarStyles from "@/app/styles/sidebar.module.css";
 
 const NewNoteButton = ({
 	title,

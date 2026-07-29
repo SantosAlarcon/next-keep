@@ -1,8 +1,8 @@
 "use client";
 
-import i18nClient from "@/app/i18n-client";
+import { Button } from "@primereact/ui/button";
 import { useRouter } from "next/navigation";
-import { Button } from "primereact/button";
+import i18nClient from "@/app/i18n-client";
 
 const BackButton = ({ lang }: { lang: string }) => {
 	const t = i18nClient.getFixedT(lang, "common");

@@ -1,11 +1,12 @@
 "use client";
 
-import type { Note } from "@/app/types";
-import { Button } from "primereact/button";
+import { Button } from "@primereact/ui/button";
 import { useState } from "react";
-import { dataStore } from "@/app/store/dataStore";
-import type { DataStoreProps } from "@/app/store/dataStore";
 import ChangeGroupDialog from "@/app/components/ui/dialogs/ChangeGroupDialog";
+import type { DataStoreProps } from "@/app/store/dataStore";
+import { dataStore } from "@/app/store/dataStore";
+import type { Note } from "@/app/types";
+import CustomTooltip from "../CustomTooltip";
 
 const ChangeGroupButton = ({
 	lang,
@@ -20,7 +21,7 @@ const ChangeGroupButton = ({
 }) => {
 	const [visible, setVisible] = useState<boolean>(false);
 	const allGroupTitles = dataStore(
-        // @ts-ignore
+		// @ts-ignore
 		(state: DataStoreProps) => state.allGroupTitles,
 	);
 	const handleDialog = () => {
@@ -33,13 +34,9 @@ const ChangeGroupButton = ({
 
 	return (
 		<>
-			<Button
-				aria-label={label}
-				onClick={handleDialog}
-				icon="pi pi-folder"
-				tooltip={label}
-				tooltipOptions={{ position: "bottom" }}
-			/>
+			<CustomTooltip side={"top"} align={"start"} tooltipText={label}>
+				<Button aria-label={label} onClick={handleDialog} icon="pi pi-folder" />
+			</CustomTooltip>
 			<ChangeGroupDialog
 				lang={lang}
 				visible={visible}

@@ -1,22 +1,20 @@
-const i18NextConfig = {
-	debug: process.env.NODE_ENV === "development",
-	i18n: {
-		locales: ["en", "es"],
-		defaultLocale: "en",
-	},
-	fallbackNS: "common",
+import type { I18nConfig } from "next-i18next/proxy";
+
+const i18NextConfig: I18nConfig = {
+	supportedLngs: ["en", "es"],
+	fallbackLng: "en",
 	defaultNS: "common",
 	ns: ["common", "login", "register", "reset-password", "new-password"],
-	load: "all",
-	preload: ["en", "es"],
+	resourceLoader: (language, namespace) =>
+		import(`./locales/${language}/${namespace}.json`),
 };
 
 export const getOptions = (lang: string, ns: string | string[]) => {
 	return {
-		supportedLangs: i18NextConfig.i18n.locales,
+		supportedLangs: i18NextConfig.supportedLngs,
 		lang,
 		ns,
-		fallbackNS: i18NextConfig.fallbackNS,
+		fallbackNS: i18NextConfig.fallbackLng,
 		defaultNS: i18NextConfig.defaultNS,
 	};
 };

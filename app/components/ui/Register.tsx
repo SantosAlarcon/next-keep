@@ -1,10 +1,10 @@
+import { Button } from "@primereact/ui/button";
+import { FloatLabel } from "@primereact/ui/floatlabel";
+import { InputPassword } from "@primereact/ui/inputpassword";
+import { InputText } from "@primereact/ui/inputtext";
 import Image from "next/image";
-import { Button } from "primereact/button";
-import { FloatLabel } from "primereact/floatlabel";
-import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
-import LoginStyles from "@/app/styles/Login.module.css";
 import { useTranslation } from "react-i18next";
+import LoginStyles from "@/app/styles/Login.module.css";
 import { emailRegister } from "@/app/utils/register";
 
 const Register = ({ lang }: { lang: string }) => {
@@ -57,7 +57,7 @@ const Register = ({ lang }: { lang: string }) => {
 					</label>
 				</FloatLabel>
 				<FloatLabel>
-					<Password
+					<InputPassword
 						className={LoginStyles.login__page__form__input}
 						aria-label={t("register-password")}
 						aria-required
@@ -65,7 +65,7 @@ const Register = ({ lang }: { lang: string }) => {
 						name="password"
 						required
 						feedback={false}
-						toggleMask
+						mask
 						promptLabel={t("write-password")}
 						strongLabel={t("strong-password")}
 						weakLabel={t("weak-password")}
@@ -79,7 +79,7 @@ const Register = ({ lang }: { lang: string }) => {
 					</label>
 				</FloatLabel>
 				<FloatLabel>
-					<Password
+					<InputPassword
 						className={LoginStyles.login__page__form__input}
 						id="confirm-password"
 						name="confirm-password"
@@ -87,7 +87,7 @@ const Register = ({ lang }: { lang: string }) => {
 						feedback={false}
 						aria-label={t("register-confirm-password")}
 						aria-required
-						toggleMask
+						mask
 					/>
 					<label
 						className={LoginStyles.login__page__form__label}

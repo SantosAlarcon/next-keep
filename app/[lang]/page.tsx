@@ -12,9 +12,9 @@ async function Page({
 	const session = await getSession();
 
 	if (session) {
-		return redirect("/notes/all");
+		return redirect(`${lang}/notes/all`);
 	} else {
-		return redirect(`/login/${lang}`);
+		return redirect(`${lang}/login`);
 	}
 }
 

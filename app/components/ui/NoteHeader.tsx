@@ -1,13 +1,13 @@
 import initTranslations from "@/app/i18n";
 import noteHeaderStyles from "@/app/styles/NoteHeader.module.css";
-import type { Note } from "@/app/types";
-import { ButtonGroup } from "primereact/buttongroup";
+import { ButtonGroup } from "@primereact/ui/buttongroup";
 import ChangeGroupButton from "@/app/components/ui/buttons/ChangeGroupButton";
 import DeleteButton from "@/app/components/ui/buttons/DeleteButton";
 import EditButton from "@/app/components/ui/buttons/EditButton";
 import TogglePinButton from "@/app/components/ui/buttons/TogglePinButton";
 import BackButton from "./buttons/BackButton";
 import { getGroupById } from "@/app/utils/groups/getGroupById";
+import type { Note } from "@/app/types";
 
 const NoteHeader = async ({ lang, note }: { lang: string; note: Note }) => {
 	const { t } = await initTranslations(lang, ["common"]);
