@@ -3,14 +3,19 @@ import { FloatLabel } from "@primereact/ui/floatlabel";
 import { InputPassword } from "@primereact/ui/inputpassword";
 import { InputText } from "@primereact/ui/inputtext";
 import Image from "next/image";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoginStyles from "@/app/styles/Login.module.css";
 import { emailRegister } from "@/app/utils/register";
+import Spinner from "./Spinner";
+import CustomPassword from "./CustomPassword";
 
 const Register = ({ lang }: { lang: string }) => {
 	const { t } = useTranslation("register", {
 		lng: lang,
 	});
+
+    const [pending, setPending] = useState<boolean>(false);
 
 	return (
 		<>
@@ -57,19 +62,14 @@ const Register = ({ lang }: { lang: string }) => {
 					</label>
 				</FloatLabel>
 				<FloatLabel>
-					<InputPassword
+					<CustomPassword
 						className={LoginStyles.login__page__form__input}
 						aria-label={t("register-password")}
 						aria-required
 						id="password"
 						name="password"
 						required
-						feedback={false}
-						mask
-						promptLabel={t("write-password")}
-						strongLabel={t("strong-password")}
-						weakLabel={t("weak-password")}
-						mediumLabel={t("medium-password")}
+                        value={""}
 					/>
 					<label
 						className={LoginStyles.login__page__form__label}
@@ -79,15 +79,13 @@ const Register = ({ lang }: { lang: string }) => {
 					</label>
 				</FloatLabel>
 				<FloatLabel>
-					<InputPassword
+					<CustomPassword
 						className={LoginStyles.login__page__form__input}
 						id="confirm-password"
 						name="confirm-password"
 						required
-						feedback={false}
 						aria-label={t("register-confirm-password")}
-						aria-required
-						mask
+                        value={""}
 					/>
 					<label
 						className={LoginStyles.login__page__form__label}
@@ -101,7 +99,9 @@ const Register = ({ lang }: { lang: string }) => {
 					aria-label={t("register-title")}
 					label={t("register-title")}
 					className="p-button-rounded"
-				/>
+				>
+                    {pending ? <Spinner width="16" height="16" color="" /> : t("register-title")}
+                </Button>
 			</form>
 		</>
 	);

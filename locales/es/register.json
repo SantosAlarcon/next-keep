@@ -7,7 +7,8 @@
 	"register-passwords-dont-match": "Las contraseñas no coinciden. Intenta escribirlas otra vez.",
 	"register-minimum-length": "La contraseña debe tener 8 carácteres como mínimo.",
 	"write-password": "Escribe una contraseña",
-	"weak-password": "Contraseña débil",
-	"medium-password": "Complejidad media",
-	"strong-password": "Contraseña fuerte"
+	"weak-password": "Débil",
+	"medium-password": "Media",
+	"strong-password": "Fuerte",
+	"very-strong-password": "Muy fuerte"
 }

@@ -1,10 +1,10 @@
 "use client";
 
-import LoginStyles from "@/styles/Login.module.css";
 import Image from "next/image";
+import LoginStyles from "@/styles/Login.module.css";
 import "@/app/i18n-client";
-import ResetPassword from "@/app/components/ui/ResetPassword";
 import { use } from "react";
+import ResetPassword from "@/app/components/ui/ResetPassword";
 
 const ResetPasswordPage = ({
 	params,

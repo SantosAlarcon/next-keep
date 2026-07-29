@@ -29,6 +29,7 @@ export default async function LoginLayout({
 	params: Promise<{ lang: string }>;
 }) {
 	const { lang } = await params;
+
 	return (
 		<>
 			<AuthSync

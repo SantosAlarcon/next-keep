@@ -1,10 +1,10 @@
 "use client";
 
-import LoginStyles from "@/styles/Login.module.css";
 import Image from "next/image";
+import LoginStyles from "@/styles/Login.module.css";
 import "@/app/i18n-client";
-import NewPassword from "@/app/components/ui/NewPassword";
 import { use } from "react";
+import NewPassword from "@/app/components/ui/NewPassword";
 
 const NewPasswordPage = ({ params }: { params: Promise<{ lang: string }> }) => {
 	const { lang } = use(params);

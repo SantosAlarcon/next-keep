@@ -18,7 +18,7 @@ export async function generateMetadata({
 	const { lang } = await params;
 	const { t } = await initTranslations(lang, ["register"]);
 	return {
-		title: `${t("register-title")} - Next Keep`,
+		title: `${t("register-title")}`,
 	};
 }
 

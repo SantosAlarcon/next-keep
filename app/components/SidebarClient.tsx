@@ -116,7 +116,7 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 							},
 						);
 					},
-					reject: () => { },
+					reject: () => {},
 				});
 			},
 		},
@@ -274,7 +274,13 @@ const SidebarClient = ({ lang }: { lang: string }) => {
 									}
 									type="button"
 									onClick={handleClick}
-								/>
+								>
+									{expanded ? (
+										<CollapseIcon width="20px" height="20px" />
+									) : (
+										<ExpandIcon width="20px" height="20px" />
+									)}
+								</Button>
 							</section>
 						</Sidebar.Footer>
 					</Sidebar.Panel>

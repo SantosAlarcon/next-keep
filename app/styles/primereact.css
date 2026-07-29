@@ -245,6 +245,15 @@
 	}
 }
 
+.p-custom-password-info {
+    margin: .5rem 0;
+}
+
+.p-custom-password-label {
+    margin: .5rem 0;
+}
+
+
 #p-license-host {
 	display: none !important;
 }

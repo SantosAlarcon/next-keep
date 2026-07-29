@@ -2,7 +2,6 @@
 
 import { Button } from "@primereact/ui/button";
 import { useRouter } from "next/navigation";
-import "@/styles/@primereact/ui.css";
 
 function EditButton({ label, noteId }: { label: string; noteId: string }) {
 	const router = useRouter();

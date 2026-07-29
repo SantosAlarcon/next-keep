@@ -2,7 +2,6 @@
 
 import { Button } from "@primereact/ui/button";
 import { FloatLabel } from "@primereact/ui/floatlabel";
-import { InputPassword } from "@primereact/ui/inputpassword";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -10,6 +9,8 @@ import { useTranslation } from "react-i18next";
 import LoginStyles from "@/app/styles/Login.module.css";
 import { changePassword } from "@/app/utils/changePassword";
 import BarLoader from "./BarLoader";
+import CustomPassword from "./CustomPassword";
+import Spinner from "./Spinner";
 
 const NewPassword = ({ lang }: { lang: string }) => {
 	const params = useSearchParams();
@@ -59,19 +60,14 @@ const NewPassword = ({ lang }: { lang: string }) => {
 				className={LoginStyles.login__page__form}
 			>
 				<FloatLabel>
-					<InputPassword
+					<CustomPassword
 						className={LoginStyles.login__page__form__input}
 						id="password"
 						name="password"
 						aria-label={t("new-password-password")}
 						aria-required
 						required
-						feedback={false}
-						mask
-						promptLabel={t("write-password")}
-						strongLabel={t("strong-password")}
-						weakLabel={t("weak-password")}
-						mediumLabel={t("medium-password")}
+						value=""
 					/>
 					<label
 						className={LoginStyles.login__page__form__label}
@@ -81,15 +77,14 @@ const NewPassword = ({ lang }: { lang: string }) => {
 					</label>
 				</FloatLabel>
 				<FloatLabel>
-					<InputPassword
+					<CustomPassword
 						className={LoginStyles.login__page__form__input}
 						id="confirm-password"
 						name="confirm-password"
 						aria-label={t("new-password-confirm-password")}
 						aria-required
 						required
-						feedback={false}
-						mask
+						value=""
 					/>
 					<label
 						className={LoginStyles.login__page__form__label}
@@ -100,7 +95,6 @@ const NewPassword = ({ lang }: { lang: string }) => {
 				</FloatLabel>
 				<Button
 					type="submit"
-					// @ts-ignore
 					label={
 						pending ? (
 							<BarLoader color="#eee" width="20px" height="20px" />
@@ -109,7 +103,11 @@ const NewPassword = ({ lang }: { lang: string }) => {
 						)
 					}
 					className="p-button-rounded"
-				/>
+				>
+					pending ? (
+                        <Spinner color="" width="20px" height="20px" />) : t("new-password-title") 
+                    )
+				</Button>
 			</form>
 		</>
 	);
