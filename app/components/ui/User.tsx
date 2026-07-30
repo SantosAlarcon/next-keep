@@ -1,21 +1,20 @@
 "use client";
+import {SignOut} from "@primeicons/react/sign-out"
 import { Button } from "@primereact/ui/button";
-import { useTranslation } from "react-i18next";
-import { localeStore } from "@/app/store/localeStore";
+import { useT } from "next-i18next/client";
+import { toast } from "sonner";
 import UserStyles from "@/app/styles/User.module.css";
 import { logout } from "@/app/utils/logout";
 import CustomTooltip from "./CustomTooltip";
 
 const User = () => {
-	// @ts-ignore
-	const { locale } = localeStore.getState();
-	const { t } = useTranslation("common", { lng: locale });
+	const { t } = useT("common");
 
 	const handleLogout = () => {
+        toast.loading(t("logging-out"));
 		window.localStorage.removeItem("sidebar_expanded");
-		// @ts-ignore
 		logout().then(() => {
-			window.location.assign(`/login/${locale}`);
+			window.location.assign(`/login`);
 		});
 	};
 
@@ -23,10 +22,11 @@ const User = () => {
 		<CustomTooltip side={"top"} align={"center"} tooltipText={t("logout")}>
 			<Button
 				aria-label={t("logout")}
-				icon="pi pi-sign-out"
 				className={UserStyles.user__container}
 				onClick={handleLogout}
-			/>
+			>
+                <SignOut />
+            </Button>
 		</CustomTooltip>
 	);
 };

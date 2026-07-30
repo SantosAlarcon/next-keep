@@ -23,7 +23,13 @@ export enum AsyncFunctionState {
 }
 
 export type ContextMenuItem = {
-	icon: string;
+	icon: JSX;
+	label: string;
+	command: () => void;
+};
+
+export type MenuItem = {
+	icon: JSX;
 	label: string;
 	command: () => void;
 };

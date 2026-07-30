@@ -1,7 +1,6 @@
 .user__container {
 	margin: 0 auto;
 	cursor: pointer;
-	flex-basis: 50%;
 
 	& > img {
 		@media (prefers-color-scheme: dark) {
