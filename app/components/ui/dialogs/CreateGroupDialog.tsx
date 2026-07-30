@@ -61,6 +61,7 @@ const CreateGroupDialog = ({
 								required
 								aria-label={t("group.create-group-message")}
 								value={newGroupTitle}
+								// @ts-ignore
 								onChange={(e) => setNewGroupTitle(e.target.value)}
 							/>
 						</div>

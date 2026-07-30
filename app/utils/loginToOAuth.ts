@@ -1,17 +1,17 @@
 "use server";
 
+import type { Account, OAuthProvider } from "appwrite";
 import { redirect } from "next/navigation";
-import type { OAuthProvider } from "appwrite";
 import { getAccount } from "../appwrite";
 import { mainURL } from "../constants";
 
 export async function loginToOAuth(provider: OAuthProvider) {
-	const account = getAccount();
-	const redirectUrl = await account.createOAuth2Token(
-		provider,
-		`${mainURL}/api/oauth`,
-		`${mainURL}/login/es`,
-	);
+	const account: Account = getAccount();
+	const redirectUrl = account.createOAuth2Token({
+		provider: provider,
+		success: `${mainURL}/api/oauth`,
+		failure: `${mainURL}/login`,
+	});
 
-	return redirect(redirectUrl);
+	return redirect(redirectUrl as string);
 }

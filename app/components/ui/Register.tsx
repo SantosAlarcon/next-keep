@@ -1,21 +1,20 @@
 import { Button } from "@primereact/ui/button";
 import { FloatLabel } from "@primereact/ui/floatlabel";
-import { InputPassword } from "@primereact/ui/inputpassword";
 import { InputText } from "@primereact/ui/inputtext";
 import Image from "next/image";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import LoginStyles from "@/app/styles/Login.module.css";
 import { emailRegister } from "@/app/utils/register";
-import Spinner from "./Spinner";
 import CustomPassword from "./CustomPassword";
+import Spinner from "./Spinner";
 
 const Register = ({ lang }: { lang: string }) => {
 	const { t } = useTranslation("register", {
 		lng: lang,
 	});
 
-    const [pending, setPending] = useState<boolean>(false);
+	const [pending, setPending] = useState<boolean>(false);
 
 	return (
 		<>
@@ -69,7 +68,7 @@ const Register = ({ lang }: { lang: string }) => {
 						id="password"
 						name="password"
 						required
-                        value={""}
+						value={""}
 					/>
 					<label
 						className={LoginStyles.login__page__form__label}
@@ -85,7 +84,7 @@ const Register = ({ lang }: { lang: string }) => {
 						name="confirm-password"
 						required
 						aria-label={t("register-confirm-password")}
-                        value={""}
+						value={""}
 					/>
 					<label
 						className={LoginStyles.login__page__form__label}
@@ -100,8 +99,12 @@ const Register = ({ lang }: { lang: string }) => {
 					label={t("register-title")}
 					className="p-button-rounded"
 				>
-                    {pending ? <Spinner width="16" height="16" color="" /> : t("register-title")}
-                </Button>
+					{pending ? (
+						<Spinner width="16" height="16" color="" />
+					) : (
+						t("register-title")
+					)}
+				</Button>
 			</form>
 		</>
 	);

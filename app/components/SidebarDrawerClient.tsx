@@ -1,10 +1,10 @@
 "use client";
 
-import { Dialog } from "@primereact/ui/dialog";
 import { Sidebar } from "@primereact/ui/sidebar";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useT } from "next-i18next/client";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
@@ -12,7 +12,6 @@ import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
 import DrawerStyles from "@/styles/MobileHeader.module.css";
 import sidebarStyles from "@/styles/sidebar.module.css";
 import { mainSidebarLinks } from "../constants";
-import i18nClient from "../i18n-client";
 import { dataStore } from "../store/dataStore";
 import type { Group } from "../types";
 import { deleteGroupById } from "../utils/groups/deleteGroupById";
@@ -32,7 +31,9 @@ const SidebarDrawerClient = ({
 	visible: boolean;
 	onHide: () => void;
 }) => {
-	const t = i18nClient.getFixedT(lang, "common");
+	const {
+		t
+	} = useT("common")
 	// @ts-ignore
 	const { allNotes, allGroups, allPinnedNotes } = dataStore.getState();
 	const cmRef = useRef(null);
@@ -52,43 +53,26 @@ const SidebarDrawerClient = ({
 			label: t("group.delete-group"),
 			icon: "pi pi-fw pi-trash",
 			command: () => {
-				Dialog({
-					resizable: false,
-					draggable: false,
-					header: t("group.group-delete-confirm-header"),
-					message: (
-						<p>
-							{t("group.group-delete-confirm-message-1")}
-							<br />
-							{t("group.group-delete-confirm-message-2")}
-						</p>
-					),
-					icon: "pi pi-info-circle",
-					acceptLabel: t("yes"),
-					rejectLabel: t("no"),
-					accept: () => {
-						toast.promise(
-							// @ts-ignore
-							deleteGroupById(selectedGroup?.$id).then(() => {
-								updateGroups();
-								setTimeout(() => {
-									router.refresh();
-								}, 200);
-							}),
-							{
-								loading: t("pending-operation"),
-								success: () => {
-									return t("group.group-delete-success", {
-										name: selectedGroup?.title,
-									});
-								},
-								error: () => t("group.group-delete-error"),
-							},
-						);
+				toast.promise(
+					// @ts-ignore
+					deleteGroupById(selectedGroup?.$id).then(() => {
+						updateGroups();
+						setTimeout(() => {
+							router.refresh();
+						}, 200);
+					}),
+					{
+						loading: t("pending-operation"),
+						success: () => {
+							return t("group.group-delete-success", {
+								name: selectedGroup?.title,
+							});
+						},
+						error: () => t("group.group-delete-error"),
 					},
-					reject: () => { },
-				});
+				);
 			},
+			reject: () => { },
 		},
 	];
 
@@ -117,7 +101,7 @@ const SidebarDrawerClient = ({
 							</Link>
 							{/* @ts-ignore */}
 							<span onClick={onHide}>
-								<NewNoteButton title={t("create-note")} expanded={true} />
+								<NewNoteButton expanded={true} />
 							</span>
 
 							<ul className={sidebarStyles.sidebar__grouplist} onClick={onHide}>

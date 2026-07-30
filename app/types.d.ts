@@ -27,3 +27,8 @@ export type ContextMenuItem = {
 	label: string;
 	command: () => void;
 };
+
+export type SelectOption = {
+	label: string;
+	value: string;
+};

@@ -1,13 +1,13 @@
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import LocalizedTitleInput from "@/app/components/LocalizedTitleInput";
 import UpdateNoteProvider from "@/app/components/UpdateNoteProvider";
 import BarLoader from "@/app/components/ui/BarLoader";
 import UpdateNoteButton from "@/app/components/ui/buttons/UpdateNoteButton";
 import initTranslations from "@/app/i18n";
-import { getNoteById } from "@/app/utils/notes/getNoteById";
 import { editorRef } from "@/app/utils/editorRef";
+import { getNoteById } from "@/app/utils/notes/getNoteById";
 import styles from "@/styles/NotePage.module.css";
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
 
 const EditorComp = dynamic(() =>
 	import("@/app/components/CustomMDXEditor").then((mod) => mod.default),
@@ -36,7 +36,7 @@ const EditNotePage = async ({
 					/>
 					<EditorComp
 						lang={lang}
-                        // @ts-ignore
+						// @ts-ignore
 						editorRef={editorRef}
 						text={foundNote ? foundNote?.data : ""}
 						isEditing={true}

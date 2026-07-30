@@ -33,22 +33,20 @@ const ConfirmDialog = ({
 						<Dialog.Popup>
 							<Dialog.Header>{header}</Dialog.Header>
 							<Dialog.Content>
-								<div className="">
-									<p className="">{message}</p>
-									<div className="confirm__dialog__buttons">
-										<Dialog.Close as={Button} severity="secondary">
-											{cancelLabel}
-										</Dialog.Close>
-										<Dialog.Close
-											as={Button}
-											severity={severity}
-											pt-root-onClick={accept}
-										>
-											{acceptLabel}
-										</Dialog.Close>
-									</div>
-								</div>
+								<div className="">{message}</div>
 							</Dialog.Content>
+							<Dialog.Footer>
+								<Dialog.Close as={Button} severity="secondary">
+									{cancelLabel}
+								</Dialog.Close>
+								<Dialog.Close
+									as={Button}
+									severity={severity}
+									pt-root-onClick={accept}
+								>
+									{acceptLabel}
+								</Dialog.Close>
+							</Dialog.Footer>
 						</Dialog.Popup>
 					</Dialog.Positioner>
 				</Dialog.Portal>

@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import { DataSync } from "@/app/components/DataSync";
 import { LocaleSync } from "@/app/components/LocaleSync";
 import MobileHeader from "@/app/components/ui/MobileHeader";
+import { dataStore } from "@/app/store/dataStore";
 import { getAllData } from "@/app/utils/getAllData";
 
 export const dynamic = "force-dynamic";
@@ -27,10 +28,26 @@ export default async function RootLayout({
 		queryFn: getAllData,
 	});
 
+	// @ts-ignore
+	const { filter } = dataStore.getState();
+
 	return (
 		<>
-			<LocaleSync state={lang} />
-			<DataSync state={state} />
+			<LocaleSync
+				state={{
+					locale: lang,
+				}}
+			/>
+			<DataSync
+				state={{
+					allGroupTitles: state.allGroupTitles,
+					allGroups: state.allGroups,
+					allNoteAmounts: state.allGroups,
+					allNotes: state.allNotes,
+					allPinnedNotes: state.allPinnedNotes,
+					filter: filter,
+				}}
+			/>
 			<Toaster richColors position="bottom-center" theme="dark" />
 			<MobileHeader lang={lang} />
 			<div className="main__body">

@@ -1,20 +1,23 @@
 "use client";
 
+import { ArrowLeft } from "@primeicons/react/arrow-left";
 import { Button } from "@primereact/ui/button";
 import { useRouter } from "next/navigation";
-import i18nClient from "@/app/i18n-client";
+import { useT } from "next-i18next/client";
 
-const BackButton = ({ lang }: { lang: string }) => {
-	const t = i18nClient.getFixedT(lang, "common");
+const BackButton = () => {
+	const { t } = useT("common");
 	const router = useRouter();
 	return (
 		<Button
 			aria-label={t("back")}
 			tooltip={t("back")}
-			tooltipOptions={{ position: "bottom" }}
-			icon="pi pi-arrow-left"
+			tooltipoptions={{ position: "bottom" }}
 			onClick={() => router.back()}
-		/>
+		>
+			<ArrowLeft />
+			{t("back")}
+		</Button>
 	);
 };
 

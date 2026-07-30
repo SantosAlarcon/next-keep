@@ -1,3 +1,8 @@
+:root {
+	--p-form-field-font-size: 1rem !important;
+}
+
+
 /* Remove font family from components */
 .p-component,
 .p-inputtext {
@@ -15,7 +20,6 @@
 
 .p-inputgroup-addon {
 	color: var(--foreground);
-	background-color: rgb(var(--background-inputgroup-rgb));
 	border-width: 1px;
 }
 
@@ -158,6 +162,13 @@
 	gap: 0.5rem;
 }
 
+/* LINK */
+.p-link {
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
 /* SIDEBAR */
 .p-sidebar {
 	background-color: rgb(var(--background-start-rgb));
@@ -178,6 +189,7 @@
 .p-button {
 	padding: 0.5rem 1rem;
 	color: var(--foreground);
+	font-size: 1rem !important;
 }
 
 /* BUTTON GROUP */
@@ -246,11 +258,11 @@
 }
 
 .p-custom-password-info {
-    margin: .5rem 0;
+	margin: .5rem 0;
 }
 
 .p-custom-password-label {
-    margin: .5rem 0;
+	margin: .5rem 0;
 }
 
 

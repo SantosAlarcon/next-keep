@@ -1,11 +1,13 @@
 "use client";
 
+import { Filter } from "@primeicons/react/filter";
+import { IconField } from "@primereact/ui/iconfield";
 import { InputText } from "primereact/inputtext";
-import FilterComponentStyles from "@/styles/FilterComponent.module.css";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import FilterComponentStyles from "@/styles/FilterComponent.module.css";
 import useDebounce from "@/utils/hooks/useDebounce";
 import { dataStore } from "../store/dataStore";
-import { useTranslation } from "react-i18next";
 
 const FilterComponent = ({ lang }: { lang: string }) => {
 	const [input, setInput] = useState<string>("");
@@ -20,17 +22,19 @@ const FilterComponent = ({ lang }: { lang: string }) => {
 
 	return (
 		<section
-			className={`${FilterComponentStyles.filter__component__container} p-inputgroup`}
+			className={`${FilterComponentStyles.filter__component__container}`}
 		>
-			<span className="p-inputgroup-addon">
-				<i className={"pi pi-filter"} />
-			</span>
-			<InputText
-				className={FilterComponentStyles.filter__component__input}
-				placeholder={t("filter")}
-                // @ts-ignore
-				onInput={(e) => setInput(e.target.value)}
-			/>
+			<IconField.Root>
+				<InputText
+					className={FilterComponentStyles.filter__component__input}
+					placeholder={t("filter")}
+					// @ts-ignore
+					onInput={(e) => setInput(e.target.value)}
+				/>
+			</IconField.Root>
+			<IconField.Inset>
+				<Filter />
+			</IconField.Inset>
 		</section>
 	);
 };

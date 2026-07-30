@@ -1,6 +1,6 @@
 "use client";
 
-import { dataStore, type DataStoreProps } from "../store/dataStore";
+import { type DataStoreProps, dataStore } from "../store/dataStore";
 import { useStoreSync } from "../utils/hooks/useStoreSync";
 
 export const DataSync = ({ state }: { state: DataStoreProps }) => {

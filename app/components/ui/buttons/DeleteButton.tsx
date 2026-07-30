@@ -1,130 +1,65 @@
 "use client";
 
+import { Trash } from "@primeicons/react/trash";
 import { Button } from "@primereact/ui/button";
 import { useRouter } from "next/navigation";
+import { useT } from "next-i18next/client";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import { localeStore } from "@/app/store/localeStore";
 import { deleteNote } from "@/app/utils/notes/deleteNote";
 import { updateNotes } from "@/app/utils/updateData";
+import CustomTooltip from "../CustomTooltip";
 import ConfirmDialog from "../dialogs/ConfirmDialog";
 
 function DeleteButton({ label, noteId }: { label: string; noteId: string }) {
-    const [pending, setPending] = useState<boolean>(false);
-    const router = useRouter();
-    // @ts-ignore
-    const { locale } = localeStore.getState();
-    const { t } = useTranslation("common", { lng: locale });
+	const router = useRouter();
+	const { t } = useT("common");
+	const [deleteModal, setDeleteModal] = useState<boolean>(false);
+	return (
+		<>
+			<CustomTooltip side="bottom" align="center" tooltipText={t("delete")}>
+				<Button
+					onClick={() => setDeleteModal(true)}
+					aria-label={label}
+					severity="danger"
+				>
+					<Trash />
+				</Button>
+			</CustomTooltip>
+			<ConfirmDialog
+				open={deleteModal}
+				value={""}
+				header={t("note-delete-confirm-header")}
+				message={
+					<p>
+						{t("note-delete-confirm-1")}
+						<br />
+						{t("note-delete-confirm-2")}
+					</p>
+				}
+				severity={"danger"}
+				acceptLabel={t("yes")}
+				cancelLabel={t("no")}
+				accept={() => {
+					toast.promise(
+						deleteNote(noteId).then(() => {
+							router.back();
+							updateNotes();
 
-    const handleClick = () => {
-        setPending(true);
-        toast.promise(
-            deleteNote(noteId).then(() => {
-                router.back();
-                updateNotes();
-
-                setTimeout(() => {
-                    router.refresh();
-                }, 50);
-            }),
-            {
-                loading: t("pending-operation"),
-                success: () => t("note-delete-success"),
-                error: () => t("note-delete-error"),
-                finally: () => setPending(false),
-            },
-        );
-    };
-    // const handleClick = () => {
-    //         confirmDialog({
-    //             acceptLabel: t("yes"),
-    //             rejectLabel: t("no"),
-    //             message: (
-    //                 <p>
-    //                     {t("note-delete-confirm-1")}
-    //                     <br />
-    //                     {t("note-delete-confirm-2")}
-    //                 </p>
-    //             ),
-    //             header: t("note-delete-confirm-header"),
-    //             icon: "pi pi-exclamation-triangle",
-    //             breakpoints: { "640px": "85vw" },
-    //             blockScroll: true,
-    //             accept: () => {
-    //                 setPending(true);
-    //                 toast.promise(
-    //                     deleteNote(noteId).then(() => {
-    //                         router.back();
-    //                         updateNotes();
-    //
-    //                         setTimeout(() => {
-    //                             router.refresh();
-    //                         }, 50);
-    //                     }),
-    //                     {
-    //                         loading: t("pending-operation"),
-    //                         success: () => t("note-delete-success"),
-    //                         error: () => t("note-delete-error"),
-    //                         finally: () => setPending(false),
-    //                     },
-    //                 );
-    //             },
-    //             reject: () => { },
-    //         });
-    //     };
-    return (
-        <>
-            <Button
-                icon={
-                    pending ? (
-                        <span className="pi pi-spin pi-spinner" />
-                    ) : (
-                        <span className="pi pi-remove-icon" />
-                    )
-                }
-                onClick={handleClick}
-                type="button"
-                aria-label={label}
-                tooltip={label}
-                tooltipoptions={{ position: "bottom" }}
-            />
-            <ConfirmDialog
-                open={false}
-                value={""}
-                header={t("note-delete-confirm-header")}
-                message={
-                    <p>
-                        {t("note-delete-confirm-1")}
-                        <br />
-                        {t("note-delete-confirm-2")}
-                    </p>
-                }
-                severity={"danger"}
-                acceptLabel={t("yes")}
-                cancelLabel={t("no")}
-                accept={() => {
-                    setPending(true);
-                    toast.promise(
-                        deleteNote(noteId).then(() => {
-                            router.back();
-                            updateNotes();
-
-                            setTimeout(() => {
-                                router.refresh();
-                            }, 50);
-                        }),
-                        {
-                            loading: t("pending-operation"),
-                            success: () => t("note-delete-success"),
-                            error: () => t("note-delete-error"),
-                            finally: () => setPending(false),
-                        },
-                    );
-                }}
-            />
-        </>
-    );
+							setTimeout(() => {
+								router.refresh();
+							}, 50);
+						}),
+						{
+							loading: t("pending-operation"),
+							success: () => t("note-delete-success"),
+							error: () => t("note-delete-error"),
+						},
+					);
+				}}
+			/>
+		</>
+	);
 }
 
 export default DeleteButton;

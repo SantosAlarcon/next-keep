@@ -1,5 +1,6 @@
 "use client";
 
+import { Folder } from "@primeicons/react/folder";
 import { Button } from "@primereact/ui/button";
 import { useState } from "react";
 import ChangeGroupDialog from "@/app/components/ui/dialogs/ChangeGroupDialog";
@@ -19,15 +20,11 @@ const ChangeGroupButton = ({
 	note: Note;
 	groupTitle: string;
 }) => {
-	const [visible, setVisible] = useState<boolean>(false);
+	const [modalVisible, setModalVisible] = useState<boolean>(false);
 	const allGroupTitles = dataStore(
 		// @ts-ignore
 		(state: DataStoreProps) => state.allGroupTitles,
 	);
-	const handleDialog = () => {
-		setVisible(true);
-	};
-
 	if (!allGroupTitles) {
 		return null;
 	}
@@ -35,15 +32,17 @@ const ChangeGroupButton = ({
 	return (
 		<>
 			<CustomTooltip side={"top"} align={"start"} tooltipText={label}>
-				<Button aria-label={label} onClick={handleDialog} icon="pi pi-folder" />
+				<Button aria-label={label} onClick={() => setModalVisible(true)}>
+					<Folder />
+				</Button>
 			</CustomTooltip>
 			<ChangeGroupDialog
 				lang={lang}
-				visible={visible}
+				visible={modalVisible}
 				note={note}
 				groupTitle={groupTitle}
 				groupTitles={allGroupTitles}
-				onHide={() => setVisible(false)}
+				onHide={() => setModalVisible(false)}
 			/>
 		</>
 	);

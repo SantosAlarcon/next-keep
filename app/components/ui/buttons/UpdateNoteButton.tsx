@@ -1,14 +1,16 @@
 "use client";
 
+import { Spinner } from "@primeicons/react/spinner";
+import { Button } from "@primereact/ui/button";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 import UpdateNoteContext from "@/app/context/UpdateNoteContext";
 import { localeStore } from "@/app/store/localeStore";
 import saveButtonStyles from "@/app/styles/SaveButton.module.css";
 import { updateNote } from "@/app/utils/notes/updateNote";
 import { updateNotes } from "@/app/utils/updateData";
-import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
 const UpdateNoteButton = ({ label }: { label: string }) => {
 	const router = useRouter();
@@ -36,16 +38,14 @@ const UpdateNoteButton = ({ label }: { label: string }) => {
 	};
 
 	return (
-		<button
+		<Button
 			aria-label={label}
 			onClick={handleConfirmUpdate}
-			type="button"
 			className={saveButtonStyles.save__button__container}
+			severity="primary"
 		>
-			<span className={saveButtonStyles.save__button__label}>
-				{pending ? <span className="pi pi-spin pi-spinner" /> : label}
-			</span>
-		</button>
+			{pending ? <Spinner size={32} /> : label}
+		</Button>
 	);
 };
 

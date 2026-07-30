@@ -1,18 +1,17 @@
-import initTranslations from "@/app/i18n";
-import noteHeaderStyles from "@/app/styles/NoteHeader.module.css";
 import { ButtonGroup } from "@primereact/ui/buttongroup";
 import ChangeGroupButton from "@/app/components/ui/buttons/ChangeGroupButton";
 import DeleteButton from "@/app/components/ui/buttons/DeleteButton";
 import EditButton from "@/app/components/ui/buttons/EditButton";
 import TogglePinButton from "@/app/components/ui/buttons/TogglePinButton";
-import BackButton from "./buttons/BackButton";
-import { getGroupById } from "@/app/utils/groups/getGroupById";
+import initTranslations from "@/app/i18n";
+import noteHeaderStyles from "@/app/styles/NoteHeader.module.css";
 import type { Note } from "@/app/types";
+import { getGroupById } from "@/app/utils/groups/getGroupById";
+import BackButton from "./buttons/BackButton";
 
 const NoteHeader = async ({ lang, note }: { lang: string; note: Note }) => {
 	const { t } = await initTranslations(lang, ["common"]);
-	// @ts-ignore
-	const noteGroupTitle = await getGroupById(note.group).then(
+	const noteGroupTitle = await getGroupById(note.group as string).then(
 		(data) => data?.title,
 	);
 
@@ -22,8 +21,8 @@ const NoteHeader = async ({ lang, note }: { lang: string; note: Note }) => {
 				<h1 className={noteHeaderStyles.note__header__title}>{note.title}</h1>
 				<div className={noteHeaderStyles.note__header__upper__right}>
 					<ButtonGroup>
-						<BackButton lang={lang} />
-						<EditButton label={t("edit")} noteId={note.$id} />
+						<BackButton />
+						<EditButton noteId={note.$id} />
 						<ChangeGroupButton
 							lang={lang}
 							label={t("note.change-group")}

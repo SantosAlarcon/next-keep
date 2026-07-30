@@ -6,6 +6,11 @@ import { useNewNoteStore } from "../store/newNoteStore";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 import "@/app/styles/wmd-editor.css";
+import { ToggleButton } from "@primereact/ui/togglebutton";
+import {
+	ToggleButtonGroup,
+	type ToggleButtonGroupValueChangeEvent,
+} from "@primereact/ui/togglebuttongroup";
 
 interface EditorProps {
 	lang: string;
@@ -44,11 +49,21 @@ const CustomMDXEditor: FC<EditorProps> = ({ lang, text, isEditing }) => {
 
 	return (
 		<>
-			<SelectButton
-				options={[t("editor"), t("preview")]}
+			<ToggleButtonGroup
+				defaultValue={t("editor")}
 				value={editorMode}
-				onChange={(e) => setEditorMode(e.value)}
-			/>
+				onValueChange={(e: ToggleButtonGroupValueChangeEvent) =>
+					// @ts-ignore
+					setEditorMode(e.value as string)
+				}
+			>
+				<ToggleButton.Root value={t("editor")}>
+					<ToggleButton.Indicator>{t("editor")}</ToggleButton.Indicator>
+				</ToggleButton.Root>
+				<ToggleButton.Root value={t("preview")}>
+					<ToggleButton.Indicator>{t("preview")}</ToggleButton.Indicator>
+				</ToggleButton.Root>
+			</ToggleButtonGroup>
 			<MDEditor
 				autoFocus={false}
 				value={markdown}

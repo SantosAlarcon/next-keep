@@ -1,5 +1,5 @@
-import SidebarItemStyles from "@/app/styles/SidebarItem.module.css";
 import Image from "next/image";
+import SidebarItemStyles from "@/app/styles/SidebarItem.module.css";
 import ActiveLink from "./ui/ActiveLink";
 
 const SidebarItem = ({

@@ -2,17 +2,13 @@
 
 import { Button } from "@primereact/ui/button";
 import { useRouter } from "next/navigation";
+import { useT } from "next-i18next/client";
 import NewNoteIcon from "@/app/components/icons/NewNoteIcon";
 import { useNewNoteStore } from "@/app/store/newNoteStore";
 import sidebarStyles from "@/app/styles/sidebar.module.css";
 
-const NewNoteButton = ({
-	title,
-	expanded,
-}: {
-	title: string;
-	expanded: boolean;
-}) => {
+const NewNoteButton = ({ expanded }: { expanded: boolean }) => {
+	const { t } = useT("common");
 	const reset = useNewNoteStore.getState().reset;
 	reset();
 
@@ -23,19 +19,17 @@ const NewNoteButton = ({
 
 	return (
 		<Button
-			tooltip={expanded ? undefined : title}
-			tooltip-align={expanded ? null : "right"}
 			className={
 				expanded
 					? sidebarStyles.sidebar__button
 					: sidebarStyles.sidebar__new__note__button__collapsed
 			}
 			onClick={createNewNote}
-			aria-label={title}
+			aria-label={t("create-note")}
 			type="button"
 		>
 			<NewNoteIcon />
-			{expanded ? <span>{title}</span> : null}
+			{expanded ? <span>{t("create-note")}</span> : null}
 		</Button>
 	);
 };

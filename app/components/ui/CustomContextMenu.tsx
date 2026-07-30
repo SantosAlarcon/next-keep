@@ -6,7 +6,7 @@ const CustomContextMenu = ({
 	ref,
 	model,
 }: {
-	ref: Ref;
+	ref: Ref<unknown>;
 	model: ContextMenuItem[];
 }) => {
 	return (

@@ -14,8 +14,8 @@ const CustomTooltip = ({
 }) => {
 	return (
 		<Tooltip.Root>
+			<Tooltip.Trigger>{children}</Tooltip.Trigger>
 			<Tooltip.Portal>
-				<Tooltip.Trigger>{children}</Tooltip.Trigger>
 				<Tooltip.Positioner side={side} align={align}>
 					<Tooltip.Popup>
 						<Tooltip.Arrow />
