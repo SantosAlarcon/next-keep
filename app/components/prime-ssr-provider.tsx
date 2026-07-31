@@ -14,8 +14,6 @@ export default function PrimeSSRProvider({
 	useServerInsertedHTML(() => {
 		const styleElements = styledStyleSheet.getAllElements();
 
-		console.log("STYLE ELEMENTS: ", styleElements);
-
 		styledStyleSheet.clear();
 
 		return <>{styleElements}</>;

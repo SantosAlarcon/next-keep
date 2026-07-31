@@ -1,20 +1,33 @@
 import { Tooltip } from "@primereact/ui/tooltip";
-import type { ReactNode } from "react";
+import type { ComponentType, ReactNode } from "react";
 
 const CustomTooltip = ({
 	children,
 	side,
 	align,
 	tooltipText,
+	onClick,
+	severity,
+	as,
 }: {
 	children: ReactNode;
 	side: "top" | "left" | "right" | "bottom";
 	align: "start" | "center" | "end";
 	tooltipText: string;
+	onClick: () => void;
+	severity: "warn" | "info" | "hint" | "danger" | "primary" | "secondary";
+	as?: ComponentType;
 }) => {
 	return (
 		<Tooltip.Root>
-			<Tooltip.Trigger>{children}</Tooltip.Trigger>
+			<Tooltip.Trigger
+				as={as}
+				pt-root-onClick={onClick}
+				severity={severity}
+				pt-root-aria-label={tooltipText}
+			>
+				{children}
+			</Tooltip.Trigger>
 			<Tooltip.Portal>
 				<Tooltip.Positioner side={side} align={align}>
 					<Tooltip.Popup>

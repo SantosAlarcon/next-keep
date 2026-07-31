@@ -10,9 +10,8 @@ const BackButton = () => {
 	const router = useRouter();
 	return (
 		<Button
+			severity="secondary"
 			aria-label={t("back")}
-			tooltip={t("back")}
-			tooltipoptions={{ position: "bottom" }}
 			onClick={() => router.back()}
 		>
 			<ArrowLeft />

@@ -68,6 +68,7 @@ const Login = ({ lang }: { lang: string }) => {
 						aria-label={t("login-google")}
 						label={t("login-google")}
 						className="p-button-rounded"
+						severity="secondary"
 					>
 						<Google />
 						{t("login-google")}
@@ -83,6 +84,7 @@ const Login = ({ lang }: { lang: string }) => {
 						label={t("login-github")}
 						icon="pi pi-github"
 						className="p-button-rounded"
+						severity="secondary"
 					>
 						<Github width="64" height="64" />
 						{t("login-github")}
@@ -98,6 +100,7 @@ const Login = ({ lang }: { lang: string }) => {
 						label={t("login-facebook")}
 						icon="pi pi-facebook"
 						className="p-button-rounded"
+						severity="secondary"
 					>
 						<Facebook />
 						{t("login-facebook")}
@@ -156,6 +159,7 @@ const Login = ({ lang }: { lang: string }) => {
 					</label>
 				</FloatLabel>
 				<Button
+					severity="secondary"
 					type="submit"
 					aria-label={t("login")}
 					label={

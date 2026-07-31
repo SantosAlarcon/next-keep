@@ -2,22 +2,21 @@ import { Button } from "@primereact/ui/button";
 import { Dialog } from "@primereact/ui/dialog";
 import { InputText } from "@primereact/ui/inputtext";
 import { useRouter } from "next/navigation";
+import { useT } from "next-i18next/client";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { createNewGroup } from "@/app/utils/groups/createNewGroup";
 import { updateGroups } from "@/app/utils/updateData";
+import Spinner from "../Spinner";
 
 const CreateGroupDialog = ({
-	lang,
 	visible,
 	onHide,
 }: {
-	lang: string;
 	visible: boolean;
 	onHide: () => void;
 }) => {
-	const { t } = useTranslation("common", { lng: lang });
+	const { t } = useT("common");
 	const [newGroupTitle, setNewGroupTitle] = useState<string>("");
 	const [pending, setPending] = useState<boolean>(false);
 	const router = useRouter();
@@ -48,80 +47,55 @@ const CreateGroupDialog = ({
 	};
 
 	return (
-		<Dialog.Root open={visible}>
+		<Dialog.Root open={visible} draggable={false} dismissable>
 			<Dialog.Portal>
-				<Dialog.Popup>
-					<Dialog.Header>
-						<div className="">{t("group.create-group-header")}</div>
-					</Dialog.Header>
-					<Dialog.Content>
-						<div className="p-dialog-content-input">
-							<p>{t("group.create-group-message")}</p>
-							<InputText
-								required
-								aria-label={t("group.create-group-message")}
-								value={newGroupTitle}
-								// @ts-ignore
-								onChange={(e) => setNewGroupTitle(e.target.value)}
-							/>
-						</div>
-					</Dialog.Content>
-					<Dialog.Footer>
-						<Dialog.Close
-							severity="secondary"
-							pt-root-aria-label={t("cancel")}
-							pt-root-onClick={() => {
-								onHide();
-								setNewGroupTitle("");
-							}}
-							as={Button}
-						>
-							t{"cancel"}
-						</Dialog.Close>
-						<Dialog.Close
-							severity="primary"
-							pt-root-aria-label={t("create")}
-							pt-root-onClick={handleCreateGroup}
-							as={Button}
-						>
-							t{"create"}
-						</Dialog.Close>
-					</Dialog.Footer>
-				</Dialog.Popup>
+				<Dialog.Backdrop />
+				<Dialog.Positioner>
+					<Dialog.Popup>
+						<Dialog.Header>
+							<div className="">{t("group.create-group-header")}</div>
+						</Dialog.Header>
+						<Dialog.Content>
+							<div className="p-dialog-content-input">
+								<p>{t("group.create-group-message")}</p>
+								<InputText
+									required
+									aria-label={t("group.create-group-message")}
+									value={newGroupTitle}
+									// @ts-ignore
+									onChange={(e) => setNewGroupTitle(e.target.value)}
+								/>
+							</div>
+						</Dialog.Content>
+						<Dialog.Footer>
+							<Dialog.Close
+								severity="secondary"
+								pt-root-aria-label={t("cancel")}
+								pt-root-onClick={() => {
+									onHide();
+									setNewGroupTitle("");
+								}}
+								as={Button}
+							>
+								{t("cancel")}
+							</Dialog.Close>
+							<Dialog.Close
+								severity="primary"
+								pt-root-aria-label={t("create")}
+								pt-root-onClick={handleCreateGroup}
+								as={Button}
+							>
+								{pending ? (
+									<Spinner width="20" height="20" color="" />
+								) : (
+									t("create")
+								)}
+							</Dialog.Close>
+						</Dialog.Footer>
+					</Dialog.Popup>
+				</Dialog.Positioner>
 			</Dialog.Portal>
 		</Dialog.Root>
-		// <Dialog
-		// 	footer={
-		// 		<>
-		// 			<Button
-		// 				aria-label={t("cancel")}
-		// 				label={t("cancel")}
-		// 				onClick={() => {
-		// 					onHide();
-		// 					setNewGroupTitle("");
-		// 				}}
-		// 			/>
-		// 			{/* @ts-ignore */}
-		// 			<Button
-		// 				aria-label={
-		// 					pending ? <span className="pi pi-spinner pi-spin" /> : t("create")
-		// 				}
-		// 				onClick={handleCreateGroup}
-		// 				label={t("create")}
-		// 			/>
-		// 		</>
-		// 	}
-		// 	draggable={false}
-		// 	resizable={false}
-		// 	blockScroll={true}
-		// 	breakpoints={{ "640px": "85vw" }}
-		// 	onHide={() => {
-		// 		onHide();
-		// 		setNewGroupTitle("");
-		// 	}}
-		// 	visible={visible}
-		// >
-		// </Dialog>
 	);
 };
 

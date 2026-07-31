@@ -4,11 +4,8 @@ import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 import { DataSync } from "@/app/components/DataSync";
 import { LocaleSync } from "@/app/components/LocaleSync";
-import MobileHeader from "@/app/components/ui/MobileHeader";
 import { dataStore } from "@/app/store/dataStore";
 import { getAllData } from "@/app/utils/getAllData";
-
-export const dynamic = "force-dynamic";
 
 const SidebarClientNoSSR = dynamic2(() => import("@/components/SidebarClient"));
 
@@ -49,9 +46,9 @@ export default async function RootLayout({
 				}}
 			/>
 			<Toaster richColors position="bottom-center" theme="dark" />
-			<MobileHeader lang={lang} />
+			{/* <MobileHeader lang={lang} /> */}
 			<div className="main__body">
-				<SidebarClientNoSSR lang={lang} />
+				<SidebarClientNoSSR />
 				{children}
 			</div>
 		</>

@@ -18,7 +18,7 @@ import { deleteGroupById } from "../utils/groups/deleteGroupById";
 import { updateGroups } from "../utils/updateData";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
-import CustomContextMenu from "./ui/CustomContextMenu";
+import CustomSidebarMenu from "./ui/CustomSidebarMenu";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 import User from "./ui/User";
 
@@ -31,9 +31,7 @@ const SidebarDrawerClient = ({
 	visible: boolean;
 	onHide: () => void;
 }) => {
-	const {
-		t
-	} = useT("common")
+	const { t } = useT("common");
 	// @ts-ignore
 	const { allNotes, allGroups, allPinnedNotes } = dataStore.getState();
 	const cmRef = useRef(null);
@@ -75,14 +73,6 @@ const SidebarDrawerClient = ({
 			reject: () => { },
 		},
 	];
-
-	const handleContext = (event: PointerEvent, group: Group) => {
-		if (cmRef.current) {
-			setSelectedGroup(group);
-			// @ts-ignore
-			cmRef.current.show(event);
-		}
-	};
 
 	return (
 		<Sidebar.Layout>
@@ -129,10 +119,7 @@ const SidebarDrawerClient = ({
 								<Sidebar.GroupContent>
 									<Sidebar.Menu></Sidebar.Menu>
 								</Sidebar.GroupContent>
-								<CreateGroupButton
-									lang={lang}
-									title={t("group.create-group")}
-								/>
+								<CreateGroupButton title={t("group.create-group")} />
 							</Sidebar.Content>
 							<ul className={sidebarStyles.sidebar__grouplist} onClick={onHide}>
 								{allGroups?.map((group: Group) => (
@@ -143,12 +130,10 @@ const SidebarDrawerClient = ({
 										expanded={true}
 										//amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
 										amount={0}
-										// @ts-ignore
-										onContextMenu={(event) => handleContext(event, group)}
 									/>
 								))}
 							</ul>
-							<CustomContextMenu ref={cmRef} model={groupContextMenu} />
+							<CustomSidebarMenu model={groupContextMenu} />
 							<RenameGroupDialog
 								lang={lang}
 								visible={renameGroupVisibleModal}

@@ -94,6 +94,7 @@ const Register = ({ lang }: { lang: string }) => {
 					</label>
 				</FloatLabel>
 				<Button
+					severity="secondary"
 					type="submit"
 					aria-label={t("register-title")}
 					label={t("register-title")}

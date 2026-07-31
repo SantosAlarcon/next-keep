@@ -94,6 +94,7 @@ const NewPassword = ({ lang }: { lang: string }) => {
 					</label>
 				</FloatLabel>
 				<Button
+					severity="secondary"
 					type="submit"
 					label={
 						pending ? (
@@ -105,8 +106,8 @@ const NewPassword = ({ lang }: { lang: string }) => {
 					className="p-button-rounded"
 				>
 					pending ? (
-                        <Spinner color="" width="20px" height="20px" />) : t("new-password-title") 
-                    )
+					<Spinner color="" width="20px" height="20px" />) :
+					t("new-password-title") )
 				</Button>
 			</form>
 		</>

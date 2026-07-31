@@ -8,6 +8,8 @@ import { updateNotes } from "@/app/utils/updateData";
 import { useNewNoteStore } from "@/app/store/newNoteStore";
 import i18nClient from "@/app/i18n-client";
 import { toast } from "sonner";
+import { Spinner } from "@primeicons/react/spinner";
+import { Button } from "@primereact/ui/button";
 
 const SaveNoteButton = ({ lang, title }: { lang: string; title: string }) => {
 	const t = i18nClient.getFixedT(lang, ["common"]);
@@ -42,16 +44,15 @@ const SaveNoteButton = ({ lang, title }: { lang: string; title: string }) => {
 	};
 
 	return (
-		<button
+		<Button
 			aria-label={title}
 			onClick={() => handleCreateNote()}
-			type="button"
 			className={saveButtonStyles.save__button__container}
 		>
 			<span className={saveButtonStyles.save__button__title}>
-				{pending ? <span className="pi pi-spin pi-spinner" /> : title}
+				{pending ? <Spinner width="20" height="20" /> : title}
 			</span>
-		</button>
+		</Button>
 	);
 };
 

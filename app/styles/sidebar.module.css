@@ -15,7 +15,7 @@
 		align-self: start;
 	}
 
-	@media (width <= 1024px) {
+	@media (width <=1024px) {
 		display: none;
 	}
 
@@ -50,10 +50,6 @@
 	align-items: center;
 	justify-content: center;
 	gap: 0.5rem;
-
-	&:has(.sidebar__expand__button__collapsed) {
-		flex-direction: column;
-	}
 }
 
 .sidebar__separator {
@@ -72,7 +68,7 @@
 	align-items: center;
 	width: 100%;
 
-	& > * {
+	&>* {
 		align-self: center !important;
 	}
 }
@@ -138,5 +134,11 @@
 
 	& img {
 		filter: invert(0);
+	}
+}
+
+.p-sidebar[data-state="collapsed"] {
+	& .sidebar__bottom {
+		flex-direction: column;
 	}
 }

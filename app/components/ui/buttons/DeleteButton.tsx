@@ -11,22 +11,24 @@ import { updateNotes } from "@/app/utils/updateData";
 import CustomTooltip from "../CustomTooltip";
 import ConfirmDialog from "../dialogs/ConfirmDialog";
 
-function DeleteButton({ label, noteId }: { label: string; noteId: string }) {
+function DeleteButton({ noteId }: { noteId: string }) {
 	const router = useRouter();
 	const { t } = useT("common");
 	const [deleteModal, setDeleteModal] = useState<boolean>(false);
 	return (
 		<>
-			<CustomTooltip side="bottom" align="center" tooltipText={t("delete")}>
-				<Button
-					onClick={() => setDeleteModal(true)}
-					aria-label={label}
-					severity="danger"
-				>
-					<Trash />
-				</Button>
+			<CustomTooltip
+				side="bottom"
+				align="center"
+				tooltipText={t("delete")}
+				onClick={() => setDeleteModal(true)}
+				severity="secondary"
+				as={Button}
+			>
+				<Trash size={20} />
 			</CustomTooltip>
 			<ConfirmDialog
+				onHide={setDeleteModal(false)}
 				open={deleteModal}
 				value={""}
 				header={t("note-delete-confirm-header")}

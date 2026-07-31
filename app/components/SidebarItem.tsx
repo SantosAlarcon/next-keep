@@ -1,6 +1,7 @@
+import { Sidebar } from "@primereact/ui/sidebar";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import SidebarItemStyles from "@/app/styles/SidebarItem.module.css";
-import ActiveLink from "./ui/ActiveLink";
 
 const SidebarItem = ({
 	icon,
@@ -16,39 +17,22 @@ const SidebarItem = ({
 	expanded: boolean;
 }) => {
 	return (
-		<li
-			data-title={expanded ? null : title}
-			data-tooltip-align={expanded ? null : "right"}
-			className={SidebarItemStyles.sidebar__item__container}
-		>
-			<ActiveLink href={href} title={title}>
-				<div
-					className={`${expanded ? SidebarItemStyles.sidebar__item__group : SidebarItemStyles.sidebar__item__group__collapsed}`}
-				>
-					<div className={SidebarItemStyles.sidebar__item__left}>
-						{/* @ts-ignore */}
-						<Image
-							alt={title}
-							className={SidebarItemStyles.sidebar__item__icon}
-							src={icon}
-							width="24"
-							height="24"
-							priority
-						/>
-						{expanded ? (
-							<span className={SidebarItemStyles.sidebar__item__title}>
-								{expanded ? title : null}
-							</span>
-						) : null}
-					</div>
-					{amount > 0 && expanded && (
-						<span className={SidebarItemStyles.sidebar__item__amount}>
-							{amount}
-						</span>
-					)}
-				</div>
-			</ActiveLink>
-		</li>
+		<Sidebar.MenuItem key={title}>
+			<Sidebar.MenuButton pt-root-onClick={() => redirect(href)}>
+				<Image
+					alt={title}
+					className={SidebarItemStyles.sidebar__item__icon}
+					src={icon}
+					width="24"
+					height="24"
+					priority
+				/>
+				{expanded ? <span>{expanded ? title : null}</span> : null}
+				{amount > 0 && expanded && (
+					<Sidebar.MenuBadge>{amount}</Sidebar.MenuBadge>
+				)}
+			</Sidebar.MenuButton>
+		</Sidebar.MenuItem>
 	);
 };
 
