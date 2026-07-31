@@ -29,7 +29,7 @@ function DeleteButton({ noteId }: { noteId: string }) {
 			</CustomTooltip>
 			<ConfirmDialog
 				onHide={() => setDeleteModal(false)}
-				open={() => deleteModal()}
+				open={deleteModal}
 				value={""}
 				header={t("note-delete-confirm-header")}
 				message={
