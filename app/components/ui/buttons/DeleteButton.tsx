@@ -28,7 +28,7 @@ function DeleteButton({ noteId }: { noteId: string }) {
 				<Trash size={20} />
 			</CustomTooltip>
 			<ConfirmDialog
-				onHide={setDeleteModal(false)}
+				onHide={() => setDeleteModal(false)}
 				open={() => deleteModal()}
 				value={""}
 				header={t("note-delete-confirm-header")}
