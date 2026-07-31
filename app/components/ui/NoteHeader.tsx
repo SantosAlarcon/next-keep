@@ -29,7 +29,7 @@ const NoteHeader = async ({ lang, note }: { lang: string; note: Note }) => {
                             groupTitle={noteGroupTitle}
                         />
                         <TogglePinButton note={note} />
-                        <DeleteButton label={t("delete")} noteId={note.$id} />
+                        <DeleteButton noteId={note.$id} />
                     </ButtonGroup>
                 </div>
             </section>
