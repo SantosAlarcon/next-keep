@@ -2,16 +2,18 @@ const Spinner = ({
 	width,
 	height,
 	color,
+    size
 }: {
-	width: string;
-	height: string;
+	width?: string;
+	height?: string;
+    size?: string;
 	color: string;
 }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			width={width}
-			height={height}
+			width={size ?? width}
+			height={size ?? height}
 			fill={color}
 			viewBox="0 0 24 24"
 		>

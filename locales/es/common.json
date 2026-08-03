@@ -16,7 +16,7 @@
 	"update-note": "Actualizar nota",
 	"title-missing": "Debes escribir un título",
 	"text-missing": "Debes escribir un texto en el editor",
-	"note-saved": "La nota se ha guardado con éxito",
+	"note-saved": "La nota '{{name}}' se ha guardado con éxito",
 	"error-saving-note": "Ha habido un fallo al guardar la nota",
 	"note-update-success": "La nota se ha actualizado correctamente",
 	"note-update-error": "Ha habido un fallo al actualizar la nota",
@@ -48,9 +48,11 @@
 		"group-delete-confirm-message-1": "Estás a punto de borrar este grupo. Las notas de este grupo NO se borrarán.",
 		"group-delete-confirm-message-2": "¿Estás segur@?",
 		"group-delete-success": "Se ha borrado el grupo '{{name}}'",
+		"group-delete-error": "Fallo al borrar el grupo",
 		"group-rename-header": "Renombrar grupo",
 		"group-rename-message": "Introduce el nuevo nombre de este grupo:",
-		"group-rename-success": "El grupo se ha renombrado a '{{name}}'"
+		"group-rename-success": "El grupo se ha renombrado a '{{name}}'",
+		"group-update-error": "Fallo al cambiar de nombre del grupo"
 	},
 	"rename": "Renombrar",
 	"pending-operation": "Realizando operación...",

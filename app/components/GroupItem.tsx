@@ -92,7 +92,7 @@ const GroupItem = ({
 							updateGroups();
 							setTimeout(() => {
 								router.refresh();
-							}, 100);
+							}, 50);
 						}),
 						{
 							loading: t("pending-operation"),
@@ -102,6 +102,7 @@ const GroupItem = ({
 								});
 							},
 							error: () => t("group.group-delete-error"),
+                            finally: () => setDeleteGroupModal(false)
 						},
 					);
 					setDeleteGroupModal(false);

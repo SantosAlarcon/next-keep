@@ -1,18 +1,18 @@
 "use client";
 
-import saveButtonStyles from "@/app/styles/SaveButton.module.css";
-import { saveNewNote } from "@/app/utils/notes/saveNewNote";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { updateNotes } from "@/app/utils/updateData";
-import { useNewNoteStore } from "@/app/store/newNoteStore";
-import i18nClient from "@/app/i18n-client";
-import { toast } from "sonner";
 import { Spinner } from "@primeicons/react/spinner";
 import { Button } from "@primereact/ui/button";
+import { useRouter } from "next/navigation";
+import { useT } from "next-i18next/client";
+import { useState } from "react";
+import { toast } from "sonner";
+import { useNewNoteStore } from "@/app/store/newNoteStore";
+import saveButtonStyles from "@/app/styles/SaveButton.module.css";
+import { saveNewNote } from "@/app/utils/notes/saveNewNote";
+import { updateNotes } from "@/app/utils/updateData";
 
-const SaveNoteButton = ({ lang, title }: { lang: string; title: string }) => {
-	const t = i18nClient.getFixedT(lang, ["common"]);
+const SaveNoteButton = ({ title }: { title: string }) => {
+    const {t} = useT("common")
 	const newNote = useNewNoteStore((state) => state.newNote);
 	const router = useRouter();
 
@@ -30,7 +30,7 @@ const SaveNoteButton = ({ lang, title }: { lang: string; title: string }) => {
 			// @ts-ignore
 			saveNewNote(newNote)
 				.then(() => {
-					toast.success(t("note-saved"));
+					toast.success(t("note-saved", {name: newNote.title}));
 					updateNotes();
 					router.back();
 

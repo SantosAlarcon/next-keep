@@ -193,6 +193,7 @@
 
 .p-sidebar-group-action {
 	position: relative !important;
+    top: 0 !important;
 }
 
 /* BUTTON */

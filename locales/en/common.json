@@ -16,7 +16,7 @@
 	"update-note": "Update note",
 	"title-missing": "You must write a title",
 	"text-missing": "You must write a text in the editor",
-	"note-saved": "Note has been saved",
+	"note-saved": "Note '{{name}}' has been saved",
 	"error-saving-note": "Failed to save note",
 	"note-update-success": "Note has been updated",
 	"note-update-error": "Failed to update note",

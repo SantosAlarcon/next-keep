@@ -5,7 +5,7 @@ import { Dialog } from "@primereact/ui/dialog";
 import { InputText } from "@primereact/ui/inputtext";
 import { useRouter } from "next/navigation";
 import { useT } from "next-i18next/client";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import type { Group } from "@/app/types";
 import { updateGroupById } from "@/app/utils/groups/updateGroupById";

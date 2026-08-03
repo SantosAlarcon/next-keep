@@ -26,7 +26,7 @@ const NewNoteButton = ({ expanded }: { expanded: boolean }) => {
 			}
 			onClick={createNewNote}
 			aria-label={t("create-note")}
-			type="button"
+            severity="secondary"
 		>
 			<NewNoteIcon />
 			{expanded ? <span>{t("create-note")}</span> : null}
