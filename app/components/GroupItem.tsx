@@ -1,89 +1,115 @@
-import { Trash as Delete } from "@primeicons/react/trash";
+import { FileEdit } from "@primeicons/react/file-edit";
+import { Trash } from "@primeicons/react/trash";
 import { Sidebar } from "@primereact/ui/sidebar";
 import Image from "next/image";
-import { redirect, useParams } from "next/navigation";
-import { useRef } from "react";
+import { redirect, useParams, useRouter } from "next/navigation";
+import { useT } from "next-i18next/client";
+import { useRef, useState } from "react";
+import { toast } from "sonner";
 import GroupItemStyles from "@/app/styles/GroupItem.module.css";
-import type { ContextMenuItem } from "../types";
+import type { ContextMenuItem, Group } from "../types";
+import { deleteGroupById } from "../utils/groups/deleteGroupById";
+import { updateGroups } from "../utils/updateData";
 import CustomSidebarMenu from "./ui/CustomSidebarMenu";
-
-const groupContext: ContextMenuItem[] = [
-	{
-		icon: <Delete />,
-		label: "Delete",
-		command: () => console.log("Holi"),
-	},
-];
+import ConfirmDialog from "./ui/dialogs/ConfirmDialog";
+import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 
 const GroupItem = ({
-	id,
+	selectedGroup,
 	title,
 	amount,
 	expanded,
 }: {
-	id: string;
+	selectedGroup: Group;
 	title: string;
 	amount: number;
 	expanded: boolean;
 }) => {
 	const itemRef = useRef<unknown>(null);
+	const { t } = useT("common");
+	const router = useRouter();
 	const { group } = useParams();
 
+	const [renameGroupVisibleModal, setRenameGroupVisibleModal] =
+		useState<boolean>(false);
+	const [deleteGroupModal, setDeleteGroupModal] = useState<boolean>(false);
+
+	const groupContextMenu: ContextMenuItem[] = [
+		{
+			label: t("group.rename-group"),
+			icon: FileEdit,
+			command: () => setRenameGroupVisibleModal(true),
+		},
+		{
+			label: t("group.delete-group"),
+			icon: Trash,
+			command: () => setDeleteGroupModal(true),
+		},
+	];
+
 	return (
-		<Sidebar.MenuItem key={id} ref={itemRef}>
-			<Sidebar.MenuButton
-				pt-root-onClick={() => redirect(`/groups/${id}`)}
-				isActive={group === id}
-			>
-				<Image
-					className={GroupItemStyles.group__item__icon}
-					src="/group.svg"
-					width="20"
-					height="20"
-					alt="Group icon"
-				/>
-				{expanded ? (
+		<>
+			<Sidebar.MenuItem key={selectedGroup.$id} ref={itemRef}>
+				<Sidebar.MenuButton
+					pt-root-onClick={() => redirect(`/groups/${selectedGroup.$id}`)}
+					isActive={group === selectedGroup.$id}
+				>
+					<Image
+						className={GroupItemStyles.group__item__icon}
+						src="/group.svg"
+						width="20"
+						height="20"
+						alt="Group icon"
+					/>
 					<span className={GroupItemStyles.group__item__title}>{title}</span>
-				) : null}
-			</Sidebar.MenuButton>
-			<CustomSidebarMenu model={groupContext} />
-		</Sidebar.MenuItem>
-		// <li
-		// 	onContextMenu={onContextMenu}
-		// 	data-title={expanded ? null : title}
-		// 	data-tooltip-align={expanded ? null : "right"}
-		// 	className={GroupItemStyles.group__item__container}
-		// >
-		// 	<ActiveLink href={`/groups/${id}`} title={title}>
-		// 		<div
-		// 			className={
-		// 				expanded
-		// 					? GroupItemStyles.group__item__group
-		// 					: GroupItemStyles.group__item__group__collapsed
-		// 			}
-		// 		>
-		// 			<div className={GroupItemStyles.group__item__left}>
-		// 				<Image
-		// 					className={GroupItemStyles.group__item__icon}
-		// 					src="/group.svg"
-		// 					width="20"
-		// 					height="20"
-		// 					alt="Group icon"
-		// 				/>
-		// 				{expanded ? (
-		// 					<span className={GroupItemStyles.group__item__title}>
-		// 						{title}
-		// 					</span>
-		// 				) : null}
-		// 			</div>
-		// 			{amount > 0 && expanded && (
-		// 				<span className={GroupItemStyles.group__item__amount}>
-		// 					{amount}
-		// 				</span>
-		// 			)}
-		// 		</div>
-		// 	</ActiveLink>
-		// </li>
+				</Sidebar.MenuButton>
+				<CustomSidebarMenu model={groupContextMenu} />
+			</Sidebar.MenuItem>
+			<RenameGroupDialog
+				visible={renameGroupVisibleModal}
+				onHide={() => setRenameGroupVisibleModal(false)}
+				group={selectedGroup}
+			/>
+			<ConfirmDialog
+				open={deleteGroupModal}
+				value={""}
+				header={t("group.group-delete-confirm-header")}
+				message={
+					<p>
+						{t("group.group-delete-confirm-message-1")}
+						<br />
+						{t("group.group-delete-confirm-message-2")}
+					</p>
+				}
+				severity={"danger"}
+				acceptLabel={t("yes")}
+				cancelLabel={t("no")}
+				accept={() => {
+					toast.promise(
+						// @ts-ignore
+						deleteGroupById(selectedGroup.$id).then(() => {
+							// @ts-ignore
+							changeNoteGroupsToNull(groupId);
+							updateGroups();
+							setTimeout(() => {
+								router.refresh();
+							}, 100);
+						}),
+						{
+							loading: t("pending-operation"),
+							success: () => {
+								return t("group.group-delete-success", {
+									name: selectedGroup?.title,
+								});
+							},
+							error: () => t("group.group-delete-error"),
+						},
+					);
+					setDeleteGroupModal(false);
+				}}
+				onHide={() => setDeleteGroupModal(false)}
+			/>
+		</>
 	);
 };
 

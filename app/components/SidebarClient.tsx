@@ -8,21 +8,15 @@ import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useT } from "next-i18next/client";
-import { useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
+import { useEffect, useState } from "react";
 import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
 import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
-import type { ContextMenuItem } from "@/app/types";
 import { logoVariants, mainSidebarLinks, variants } from "../constants";
 import { dataStore } from "../store/dataStore";
 import sidebarStyles from "../styles/sidebar.module.css";
 import type { Group } from "../types";
-import { deleteGroupById } from "../utils/groups/deleteGroupById";
-import { changeNoteGroupsToNull } from "../utils/notes/changeNoteGroupsToNull";
-import { updateGroups } from "../utils/updateData";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
-import CustomContextMenu from "./ui/CustomContextMenu";
 import User from "./ui/User";
 
 const SidebarClient = () => {
@@ -30,7 +24,6 @@ const SidebarClient = () => {
 
 	// @ts-ignore
 	const { allNotes, allGroups, allPinnedNotes } = dataStore.getState();
-	const cmRef = useRef(null);
 	const router = useRouter();
 
 	const [mounted, setMounted] = useState<boolean>(false);
@@ -53,13 +46,6 @@ const SidebarClient = () => {
 	});
 
 	const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
-	const [renameGroupVisibleModal, setRenameGroupVisibleModal] =
-		useState<boolean>(false);
-	const [deleteModal, setDeleteModal] = useState<boolean>(false);
-
-	const handleClick = () => {
-		setExpanded(!expanded);
-	};
 
 	useEffect(() => {
 		if (expanded) {
@@ -68,41 +54,6 @@ const SidebarClient = () => {
 			window.localStorage.setItem("sidebar_expanded", "false");
 		}
 	}, [expanded]);
-
-	const groupContextMenu: ContextMenuItem[] = [
-		{
-			label: t("group.rename-group"),
-			icon: "pi pi-fw pi-pencil",
-			command: () => setRenameGroupVisibleModal(true),
-		},
-		{
-			label: t("group.delete-group"),
-			icon: "pi pi-fw pi-trash",
-			command: () => {
-				const groupId = selectedGroup?.$id;
-				toast.promise(
-					// @ts-ignore
-					deleteGroupById(selectedGroup?.$id).then(() => {
-						// @ts-ignore
-						changeNoteGroupsToNull(groupId);
-						updateGroups();
-						setTimeout(() => {
-							router.refresh();
-						}, 100);
-					}),
-					{
-						loading: t("pending-operation"),
-						success: () => {
-							return t("group.group-delete-success", {
-								name: selectedGroup?.title,
-							});
-						},
-						error: () => t("group.group-delete-error"),
-					},
-				);
-			},
-		},
-	];
 
 	useEffect(() => {
 		setMounted(true);
@@ -169,7 +120,7 @@ const SidebarClient = () => {
 									{allGroups?.map((group: Group) => (
 										<GroupItem
 											key={group.$id}
-											id={group.$id}
+											selectedGroup={group}
 											title={group.title}
 											//amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
 											amount={0}
@@ -177,7 +128,6 @@ const SidebarClient = () => {
 										/>
 									))}
 								</ul>
-								<CustomContextMenu ref={cmRef} model={groupContextMenu} />
 							</Sidebar.Content>
 
 							<Sidebar.Footer>

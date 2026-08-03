@@ -53,6 +53,11 @@
 	user-select: none;
 }
 
+.p-dialog-header {
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
 .p-dialog-header-icon {
 	color: var(--foreground);
 }

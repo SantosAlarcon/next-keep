@@ -1,6 +1,7 @@
+import { Spinner } from "@primeicons/react/spinner";
 import { Button } from "@primereact/ui/button";
 import { Dialog } from "@primereact/ui/dialog";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 const ConfirmDialog = ({
 	open,
@@ -23,6 +24,7 @@ const ConfirmDialog = ({
 	accept: () => void;
 	onHide: () => void;
 }) => {
+	const [pending, setPending] = useState<boolean>(false);
 	return (
 		<Dialog.Root open={open} draggable={false} dismissable>
 			<Dialog.Trigger as={Button} severity={severity}>
@@ -47,9 +49,16 @@ const ConfirmDialog = ({
 							<Dialog.Close
 								as={Button}
 								severity={severity}
-								pt-root-onClick={accept}
+								pt-root-onClick={() => {
+									setPending(true);
+									accept();
+									setPending(false);
+								}}
+								onHide={() => {
+									if (pending) setPending(false);
+								}}
 							>
-								{acceptLabel}
+								{pending ? <Spinner size={20} /> : acceptLabel}
 							</Dialog.Close>
 						</Dialog.Footer>
 					</Dialog.Popup>
