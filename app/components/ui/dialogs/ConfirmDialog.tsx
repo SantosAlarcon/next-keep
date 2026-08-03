@@ -15,7 +15,7 @@ const ConfirmDialog = ({
 	onHide,
 }: {
 	open: boolean;
-	value: string;
+	value?: string;
 	header: string;
 	message: ReactNode;
 	severity: "warn" | "info" | "danger" | "hint";
@@ -27,9 +27,9 @@ const ConfirmDialog = ({
 	const [pending, setPending] = useState<boolean>(false);
 	return (
 		<Dialog.Root open={open} draggable={false} dismissable>
-			<Dialog.Trigger as={Button} severity={severity}>
+			{ value && <Dialog.Trigger as={Button} severity={severity}>
 				{value}
-			</Dialog.Trigger>
+			</Dialog.Trigger> }
 			<Dialog.Portal>
 				<Dialog.Backdrop />
 				<Dialog.Positioner>
@@ -53,9 +53,7 @@ const ConfirmDialog = ({
 									setPending(true);
 									accept();
 									setPending(false);
-								}}
-								onHide={() => {
-									if (pending) setPending(false);
+                                    onHide()
 								}}
 							>
 								{pending ? <Spinner size={20} /> : acceptLabel}

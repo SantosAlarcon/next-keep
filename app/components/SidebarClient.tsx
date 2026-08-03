@@ -131,22 +131,7 @@ const SidebarClient = () => {
 							</Sidebar.Content>
 
 							<Sidebar.Footer>
-								{/* <section className={sidebarStyles.sidebar__bottom}> */}
 								<User />
-								{/* <CustomTooltip */}
-								{/* 	align="center" */}
-								{/* 	side="top" */}
-								{/* 	tooltipText={expanded ? t("collapse") : t("expand")} */}
-								{/* 	onClick={handleClick} */}
-								{/* 	severity="secondary" */}
-								{/* > */}
-								{/* 	{expanded ? ( */}
-								{/* 		<CollapseIcon width="20px" height="20px" /> */}
-								{/* 	) : ( */}
-								{/* 		<ExpandIcon width="20px" height="20px" /> */}
-								{/* 	)} */}
-								{/* </CustomTooltip> */}
-								{/* </section> */}
 							</Sidebar.Footer>
 							<Sidebar.Main>
 								<Sidebar.Trigger

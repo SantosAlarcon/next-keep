@@ -72,7 +72,6 @@ const GroupItem = ({
 			/>
 			<ConfirmDialog
 				open={deleteGroupModal}
-				value={""}
 				header={t("group.group-delete-confirm-header")}
 				message={
 					<p>
