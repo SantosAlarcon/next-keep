@@ -25,6 +25,9 @@ const User = () => {
 			onClick={handleLogout}
 			severity="secondary"
 			as={SidebarMenuButton}
+			style={{
+				justifyContent: "center",
+			}}
 		>
 			<SignOut size={"20"} />
 		</CustomTooltip>

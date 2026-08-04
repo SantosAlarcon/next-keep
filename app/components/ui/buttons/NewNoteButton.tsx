@@ -26,10 +26,13 @@ const NewNoteButton = ({ expanded }: { expanded: boolean }) => {
 			}
 			onClick={createNewNote}
 			aria-label={t("create-note")}
-            severity="secondary"
+			severity="secondary"
+			style={{
+				minHeight: "fit-content",
+			}}
 		>
 			<NewNoteIcon />
-			{expanded ? <span>{t("create-note")}</span> : null}
+			{expanded ? t("create-note") : null}
 		</Button>
 	);
 };

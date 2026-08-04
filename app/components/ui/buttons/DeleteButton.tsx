@@ -42,22 +42,24 @@ function DeleteButton({ noteId }: { noteId: string }) {
 				severity={"danger"}
 				acceptLabel={t("yes")}
 				cancelLabel={t("no")}
-				accept={() => {
-					toast.promise(
-						deleteNote(noteId).then(() => {
-							router.back();
-							updateNotes();
+				accept={async () => {
+					await toast
+						.promise(
+							deleteNote(noteId).then(() => {
+								router.back();
+								updateNotes();
 
-							setTimeout(() => {
-								router.refresh();
-							}, 50);
-						}),
-						{
-							loading: t("pending-operation"),
-							success: () => t("note-delete-success"),
-							error: () => t("note-delete-error"),
-						},
-					);
+								setTimeout(() => {
+									router.refresh();
+								}, 50);
+							}),
+							{
+								loading: t("pending-operation"),
+								success: () => t("note-delete-success"),
+								error: () => t("note-delete-error"),
+							},
+						)
+						.unwrap();
 				}}
 			/>
 		</>

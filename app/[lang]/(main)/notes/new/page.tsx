@@ -34,12 +34,12 @@ const NewNotePage = async ({
 					/>
 					<EditorComp
 						lang={lang}
-                        // @ts-ignore
+						// @ts-ignore
 						editorRef={editorRef}
 						text={newNote.data}
 						isEditing={false}
 					/>
-					<SaveNoteButton lang={lang} title={t("save-note")} />
+					<SaveNoteButton title={t("save-note")} />
 				</Suspense>
 			</main>
 		</UpdateNoteProvider>

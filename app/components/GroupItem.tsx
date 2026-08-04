@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import GroupItemStyles from "@/app/styles/GroupItem.module.css";
 import type { ContextMenuItem, Group } from "../types";
 import { deleteGroupById } from "../utils/groups/deleteGroupById";
+import { changeNoteGroupsToNull } from "../utils/notes/changeNoteGroupsToNull";
 import { updateGroups } from "../utils/updateData";
 import CustomSidebarMenu from "./ui/CustomSidebarMenu";
 import ConfirmDialog from "./ui/dialogs/ConfirmDialog";
@@ -83,29 +84,30 @@ const GroupItem = ({
 				severity={"danger"}
 				acceptLabel={t("yes")}
 				cancelLabel={t("no")}
-				accept={() => {
-					toast.promise(
-						// @ts-ignore
-						deleteGroupById(selectedGroup.$id).then(() => {
+				accept={async () => {
+					await toast
+						.promise(
 							// @ts-ignore
-							changeNoteGroupsToNull(groupId);
-							updateGroups();
-							setTimeout(() => {
-								router.refresh();
-							}, 50);
-						}),
-						{
-							loading: t("pending-operation"),
-							success: () => {
-								return t("group.group-delete-success", {
-									name: selectedGroup?.title,
-								});
+							deleteGroupById(selectedGroup.$id).then(() => {
+								// @ts-ignore
+								changeNoteGroupsToNull(selectedGroup.$id);
+								updateGroups();
+								setTimeout(() => {
+									router.refresh();
+								}, 50);
+							}),
+							{
+								loading: t("pending-operation"),
+								success: () => {
+									return t("group.group-delete-success", {
+										name: selectedGroup?.title,
+									});
+								},
+								error: () => t("group.group-delete-error"),
+								finally: () => setDeleteGroupModal(false)
 							},
-							error: () => t("group.group-delete-error"),
-                            finally: () => setDeleteGroupModal(false)
-						},
-					);
-					setDeleteGroupModal(false);
+						)
+						.unwrap();
 				}}
 				onHide={() => setDeleteGroupModal(false)}
 			/>

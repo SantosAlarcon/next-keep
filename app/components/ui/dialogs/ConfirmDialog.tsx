@@ -1,6 +1,6 @@
 import { Button } from "@primereact/ui/button";
 import { Dialog } from "@primereact/ui/dialog";
-import { useState, type ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import Spinner from "../Spinner";
 
 const ConfirmDialog = ({
@@ -21,16 +21,18 @@ const ConfirmDialog = ({
 	severity: "warn" | "info" | "danger" | "hint";
 	acceptLabel: string;
 	cancelLabel: string;
-	accept: () => void;
+	accept: () => void | Promise<void>;
 	onHide: () => void;
 }) => {
 	const [pending, setPending] = useState<boolean>(false);
-	
-    return (
+
+	return (
 		<Dialog.Root open={open} draggable={false} dismissable>
-			{ value && <Dialog.Trigger as={Button} severity={severity}>
-				{value}
-			</Dialog.Trigger> }
+			{value && (
+				<Dialog.Trigger as={Button} severity={severity}>
+					{value}
+				</Dialog.Trigger>
+			)}
 			<Dialog.Portal>
 				<Dialog.Backdrop />
 				<Dialog.Positioner>
@@ -44,16 +46,21 @@ const ConfirmDialog = ({
 								as={Button}
 								severity="secondary"
 								pt-root-onClick={onHide}
+								pt-root-aria-label={cancelLabel}
 							>
 								{cancelLabel}
 							</Dialog.Close>
 							<Dialog.Close
 								as={Button}
 								severity={severity}
-								pt-root-onClick={() => {
+								pt-root-aria-label={acceptLabel}
+								pt-root-onClick={async () => {
 									setPending(true);
-									accept();
-									setPending(false);
+									try {
+										await accept();
+									} finally {
+										setPending(false);
+									}
 								}}
 							>
 								{pending ? <Spinner size={"20"} color="" /> : acceptLabel}

@@ -1,6 +1,5 @@
 "use client";
 
-import { Spinner } from "@primeicons/react/spinner";
 import { Button } from "@primereact/ui/button";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
@@ -11,6 +10,7 @@ import { localeStore } from "@/app/store/localeStore";
 import saveButtonStyles from "@/app/styles/SaveButton.module.css";
 import { updateNote } from "@/app/utils/notes/updateNote";
 import { updateNotes } from "@/app/utils/updateData";
+import Spinner from "../Spinner";
 
 const UpdateNoteButton = ({ label }: { label: string }) => {
 	const router = useRouter();
@@ -44,7 +44,7 @@ const UpdateNoteButton = ({ label }: { label: string }) => {
 			className={saveButtonStyles.save__button__container}
 			severity="primary"
 		>
-			{pending ? <Spinner size={32} /> : label}
+			{pending ? <Spinner size={"32"} color="" /> : label}
 		</Button>
 	);
 };
