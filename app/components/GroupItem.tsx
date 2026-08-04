@@ -58,8 +58,8 @@ const GroupItem = ({
 					<Image
 						className={GroupItemStyles.group__item__icon}
 						src="/group.svg"
-						width="20"
-						height="20"
+						width="16"
+						height="16"
 						alt="Group icon"
 					/>
 					<span className={GroupItemStyles.group__item__title}>{title}</span>
