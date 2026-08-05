@@ -196,14 +196,4 @@ input[type="checkbox"] {
 
 .main__body {
 	display: flex;
-
-	@media (width <=1024px) {
-		padding-top: 3.25rem;
-	}
-}
-
-@media (prefers-color-scheme: dark) {
-	html {
-		color-scheme: dark;
-	}
 }

@@ -32,7 +32,11 @@ const NewNoteButton = ({ expanded }: { expanded: boolean }) => {
 			}}
 		>
 			<NewNoteIcon />
-			{expanded ? t("create-note") : null}
+			{expanded && (
+				<span className="sidebarStyles.sidebar__new__note__button__label">
+					{t("create-note")}
+				</span>
+			)}
 		</Button>
 	);
 };

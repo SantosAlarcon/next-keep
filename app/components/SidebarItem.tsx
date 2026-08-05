@@ -23,11 +23,11 @@ const SidebarItem = ({
 					alt={title}
 					className={SidebarItemStyles.sidebar__item__icon}
 					src={icon}
-					width="24"
-					height="24"
+					width="20"
+					height="20"
 					priority
 				/>
-				{expanded ? <span>{expanded ? title : null}</span> : null}
+				<span>{title}</span>
 				{amount > 0 && expanded && (
 					<Sidebar.MenuBadge>{amount}</Sidebar.MenuBadge>
 				)}

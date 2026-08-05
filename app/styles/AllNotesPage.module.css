@@ -5,9 +5,9 @@
 	overflow: auto;
 	flex-direction: column;
 
-	@media (width <= 1024px) {
-		max-height: calc(100vh - 53px);
-	}
+	/* @media (width <= 1024px) { */
+	/* 	max-height: calc(100vh - 53px); */
+	/* } */
 
 	&::-webkit-scrollbar {
 		width: 3px;
@@ -27,7 +27,7 @@
 }
 
 .all__notes__page__bottom {
-	@media (width <= 1024px) {
+	@media (width <=1024px) {
 		height: calc(100vh - 53px);
 	}
 }
