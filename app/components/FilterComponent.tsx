@@ -2,16 +2,16 @@
 
 import { Filter } from "@primeicons/react/filter";
 import { IconField } from "@primereact/ui/iconfield";
+import { useT } from "next-i18next/client";
 import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import FilterComponentStyles from "@/styles/FilterComponent.module.css";
 import useDebounce from "@/utils/hooks/useDebounce";
 import { dataStore } from "../store/dataStore";
 
-const FilterComponent = ({ lang }: { lang: string }) => {
+const FilterComponent = () => {
 	const [input, setInput] = useState<string>("");
-	const { t } = useTranslation("common", { lng: lang });
+	const { t } = useT("common");
 	// @ts-ignore
 	const setFilter = dataStore((state) => state.setFilter);
 	const [debInput] = useDebounce(input, 250);

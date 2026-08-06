@@ -41,6 +41,7 @@ const nextConfig: NextConfig = {
 			"@uiw/react-md-editor",
 			"@uiw/react-markdown-preview",
 		],
+		useTypeScriptCli: true
 	},
 	images: {
 		remotePatterns: [

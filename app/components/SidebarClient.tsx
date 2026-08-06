@@ -17,6 +17,7 @@ import type { Group } from "../types";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import User from "./ui/User";
+import FilterComponent from "./FilterComponent";
 
 const SidebarClient = () => {
 	const { t } = useT("common");
@@ -24,13 +25,15 @@ const SidebarClient = () => {
 	// @ts-ignore
 	const { allNotes, allGroups, allPinnedNotes } = dataStore.getState();
 
+	const isMobile = useIsMobile(768);
+
 	const [mounted, setMounted] = useState<boolean>(false);
 	const [expanded, setExpanded] = useState<boolean>(() => {
 		// The default sidebar behaviour is opened. First checks if the sidebar_expanded
 		// is in the Local Storage. If not, it creates the key.
 
 		if (typeof window !== "undefined") {
-			if (!window.localStorage.getItem("sidebar_expanded")) {
+			if (!window.localStorage.getItem("sidebar_expanded") && !isMobile) {
 				window.localStorage.setItem("sidebar_expanded", "true");
 				return true;
 			}
@@ -44,18 +47,16 @@ const SidebarClient = () => {
 	});
 
 	useEffect(() => {
-		if (expanded) {
+		if (expanded && !isMobile) {
 			window.localStorage.setItem("sidebar_expanded", "true");
 		} else {
 			window.localStorage.setItem("sidebar_expanded", "false");
 		}
-	}, [expanded]);
+	}, [expanded, isMobile]);
 
 	useEffect(() => {
 		setMounted(true);
 	}, []);
-
-	const isMobile = useIsMobile(768);
 
 	if (!mounted) return null;
 

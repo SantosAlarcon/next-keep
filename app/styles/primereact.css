@@ -191,7 +191,7 @@
 }
 
 .p-sidebar-layout {
-	width: fit-content !important;
+	width: 100%;
 }
 
 .p-sidebar-content {
