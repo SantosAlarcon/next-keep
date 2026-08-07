@@ -10,7 +10,7 @@ const AllNotesPage = async ({
 	const { lang } = await params;
 	return (
 		<main className={allNotesPageStyles.all__notes__page__container}>
-			<FilterComponent lang={lang} />
+			<FilterComponent />
 			<NoteList selected="pinned" group="pinned" lang={lang} />
 		</main>
 	);

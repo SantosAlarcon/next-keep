@@ -10,7 +10,7 @@ const GroupPage = async ({
 	const { lang, group } = await params;
 	return (
 		<main className={allNotesPageStyles.all__notes__page__container}>
-			<FilterComponent lang={lang} />
+			<FilterComponent />
 			<NoteList selected={"group"} group={group} lang={lang} />
 		</main>
 	);
