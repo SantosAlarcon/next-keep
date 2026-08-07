@@ -1,9 +1,11 @@
 "use client";
+
 import { SignOut } from "@primeicons/react/sign-out";
 import { SidebarMenuButton } from "@primereact/ui/sidebar";
 import { useT } from "next-i18next/client";
 import { toast } from "sonner";
 import { logout } from "@/app/utils/logout";
+import SidebarStyles from "@/styles/sidebar.module.css";
 import CustomTooltip from "./CustomTooltip";
 
 const User = () => {
@@ -25,6 +27,7 @@ const User = () => {
 			onClick={handleLogout}
 			severity="secondary"
 			as={SidebarMenuButton}
+			className={SidebarStyles.sidebar__button}
 			style={{
 				justifyContent: "center",
 			}}

@@ -1,6 +1,6 @@
+import type { ReactNode } from "react";
 import groupPageStyles from "@/app/styles/groupPage.module.css";
 import { getGroupById } from "@/app/utils/groups/getGroupById";
-import type { ReactNode } from "react";
 
 export async function generateMetadata({
 	params,

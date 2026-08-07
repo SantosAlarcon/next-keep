@@ -7,7 +7,7 @@ import { Sidebar } from "@primereact/ui/sidebar";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useT } from "next-i18next/client";
-import { useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
 import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
 import { logoVariants, mainSidebarLinks } from "../constants";
@@ -17,9 +17,12 @@ import type { Group } from "../types";
 import GroupItem from "./GroupItem";
 import SidebarItem from "./SidebarItem";
 import User from "./ui/User";
-import FilterComponent from "./FilterComponent";
 
-const SidebarClient = () => {
+const SidebarClient = ({
+	children
+}: {
+	children: ReactNode
+}) => {
 	const { t } = useT("common");
 
 	// @ts-ignore
@@ -163,6 +166,12 @@ const SidebarClient = () => {
 						</Sidebar.Panel>
 					</Sidebar.Aside>
 				</Sidebar.Root>
+
+				<Sidebar.Main>
+					{
+						children
+					}
+				</Sidebar.Main>
 			</Sidebar.Layout>
 		</AnimatePresence>
 	);

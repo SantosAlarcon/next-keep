@@ -10,6 +10,7 @@ const CustomTooltip = ({
 	severity,
 	as,
 	style,
+	className,
 }: {
 	children: ReactNode;
 	side: "top" | "left" | "right" | "bottom";
@@ -18,7 +19,8 @@ const CustomTooltip = ({
 	onClick: () => void;
 	severity: "warn" | "info" | "hint" | "danger" | "primary" | "secondary";
 	as?: ComponentType;
-	style?: Object;
+	style?: Record<string, string>;
+	className?: string;
 }) => {
 	return (
 		<Tooltip.Root>
@@ -28,6 +30,7 @@ const CustomTooltip = ({
 				severity={severity}
 				pt-root-aria-label={tooltipText}
 				style={style}
+				className={className}
 			>
 				{children}
 			</Tooltip.Trigger>

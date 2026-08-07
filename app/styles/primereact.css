@@ -1,5 +1,7 @@
 :root {
 	--p-form-field-font-size: 1rem !important;
+	--px-sidebar-width: 19rem !important;
+	--p-sidebar-main-background: light-dark(#eee, var(--p-surface-950)) !important;
 }
 
 /* Remove font family from components */
@@ -100,6 +102,10 @@
 	line-height: 1.5rem;
 }
 
+.p-icon {
+	color: light-dark(#111, #eee) !important;
+}
+
 /* TOOLTIP */
 .p-tooltip {
 	font-family: inherit;
@@ -176,13 +182,27 @@
 
 /* SIDEBAR */
 .p-sidebar {
-	background-color: rgb(var(--background-start-rgb));
-	color: var(--foreground);
+	/* background-color: rgb(var(--background-start-rgb)); */
 	border: none;
+
+	& .p-sidebar-menu-badge,
+	.p-menu-trigger-button,
+	.p-icon {
+		color: light-dark(#111, #eee) !important;
+	}
 }
 
 .p-sidebar-close {
 	color: var(--foreground);
+}
+
+.p-sidebar-content {
+	padding: 0 .5rem;
+}
+
+.p-sidebar-layout {
+	width: 100%;
+	background-color: light-dark(#eee, var(--p-surface-950)) !important;
 }
 
 .p-sidebar-mask {
@@ -190,12 +210,8 @@
 	transition: all 0.2s ease-in-out;
 }
 
-.p-sidebar-layout {
-	width: 100%;
-}
-
-.p-sidebar-content {
-	padding: 0 .5rem;
+.p-sidebar-panel {
+	background-color: light-dark(#eee, var(--p-surface-950)) !important;
 }
 
 .p-sidebar-group-action {
@@ -213,6 +229,13 @@
 	padding: 0.5rem 1rem;
 	color: var(--foreground);
 	font-size: 1rem !important;
+}
+
+.p-button-secondary {
+	&:hover {
+		background-color: light-dark(var(--p-surface-400), var(--p-surface-600)) !important;
+		color: light-dark(#111, #eee) !important;
+	}
 }
 
 /* BUTTON GROUP */

@@ -48,8 +48,7 @@ export default async function RootLayout({
 			<Toaster richColors position="bottom-center" theme="dark" />
 			{/* <MobileHeader lang={lang} /> */}
 			<div className="main__body">
-				<SidebarClientNoSSR />
-				{children}
+				<SidebarClientNoSSR>{children}</SidebarClientNoSSR>
 			</div>
 		</>
 	);
