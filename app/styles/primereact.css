@@ -57,10 +57,15 @@
 .p-dialog-header {
 	font-size: 1.25rem;
 	font-weight: 600;
+	border-radius: 0.7rem 0.7rem 0 0;
 }
 
 .p-dialog-header-icon {
 	color: var(--foreground);
+}
+
+.p-dialog-footer {
+	border-radius: 0 0 0.7rem 0.7rem;
 }
 
 .p-dialog>* {
@@ -89,7 +94,7 @@
 
 	& button {
 		padding: 0.5rem 1rem;
-		color: var(--foreground);
+		/* color: var(--foreground); */
 		width: 8rem;
 	}
 }

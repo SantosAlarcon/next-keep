@@ -31,7 +31,7 @@ const Ice = definePreset(Aura, {
 			900: "{blue.900}",
 			950: "{blue.950}",
 			color: "light-dark({surface.950}, #ffffff)",
-			contrastColor: "light-dark(#ffffff, {surface.950})",
+			contrastColor: "light-dark(#eeeeee, #111111)",
 			hoverColor: "light-dark({surface.800}, #ffffff)",
 			activeColor: "light-dark({surface.700}, {surface.400})",
 		},
