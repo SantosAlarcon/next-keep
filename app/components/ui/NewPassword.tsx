@@ -96,6 +96,8 @@ const NewPassword = ({ lang }: { lang: string }) => {
 				<Button
 					severity="secondary"
 					type="submit"
+					aria-label={t("new-password-title")}
+					aria-busy={pending}
 					label={
 						pending ? (
 							<BarLoader color="#eee" width="20px" height="20px" />
@@ -104,11 +106,7 @@ const NewPassword = ({ lang }: { lang: string }) => {
 						)
 					}
 					className="p-button-rounded"
-				>
-					pending ? (
-					<Spinner color="" width="20px" height="20px" />) :
-					t("new-password-title") )
-				</Button>
+				/>
 			</form>
 		</>
 	);

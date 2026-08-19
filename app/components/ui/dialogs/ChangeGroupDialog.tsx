@@ -66,6 +66,7 @@ const ChangeGroupDialog = ({
 										setSelectedGroup(e.value as string)
 									}
 									options={groupTitles}
+									ariaLabel={t("note.change-group-message")}
 								/>
 							</div>
 						</Dialog.Content>
@@ -82,11 +83,13 @@ const ChangeGroupDialog = ({
 								severity="primary"
 								pt-root-onClick={confirmChange}
 							>
-								{pending ? (
-									<Spinner width="16" height="16" color="" />
-								) : (
-									t("change")
-								)}
+								<span aria-busy={pending}>
+									{pending ? (
+										<Spinner width="16" height="16" color="" />
+									) : (
+										t("change")
+									)}
+								</span>
 							</Dialog.Close>
 						</Dialog.Footer>
 					</Dialog.Popup>

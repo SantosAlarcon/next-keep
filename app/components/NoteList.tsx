@@ -117,7 +117,7 @@ const NoteList = ({
 					</li>
 				))
 			) : (
-				<h3>
+				<p className={NoteListStyles.note__list__empty} role="status">
 					{allNotes.length === 0
 						? t("note-list-empty")
 						: filteredNotes.length === 0 &&
@@ -125,7 +125,7 @@ const NoteList = ({
 								(selected === "pinned" || selected === "group")
 							? t("empty-note-list-group")
 							: t("no-results-found")}
-				</h3>
+				</p>
 			)}
 		</ul>
 	);

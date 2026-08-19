@@ -1,6 +1,7 @@
 const UnfixedIcon = ({ width, height }: { width: string; height: string }) => {
 	return (
 		<svg
+			aria-hidden="true"
 			xmlns="http://www.w3.org/2000/svg"
 			id="mdil-pin"
 			viewBox="0 0 24 24"

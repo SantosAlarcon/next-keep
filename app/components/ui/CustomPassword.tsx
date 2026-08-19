@@ -101,7 +101,10 @@ const CustomPassword = ({
             />
             {info && (
                 <div className="p-custom-password-info">
-                    <ProgressBar.Root value={info.percent}>
+                    <ProgressBar.Root
+                        value={info.percent}
+                        aria-label={`Password strength: ${info.label}`}
+                    >
                         <ProgressBar.Track style={{ height: "6px" }}>
                             <ProgressBar.Indicator style={{ backgroundColor: info.color }} />
                         </ProgressBar.Track>

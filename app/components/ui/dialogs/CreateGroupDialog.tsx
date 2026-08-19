@@ -85,11 +85,13 @@ const CreateGroupDialog = ({
                                 pt-root-onClick={handleCreateGroup}
                                 as={Button}
                             >
-                                {pending ? (
-                                    <Spinner width="20" height="20" color="" />
-                                ) : (
-                                    t("create")
-                                )}
+                                <span aria-busy={pending}>
+                                    {pending ? (
+                                        <Spinner width="20" height="20" color="" />
+                                    ) : (
+                                        t("create")
+                                    )}
+                                </span>
                             </Dialog.Close>
                         </Dialog.Footer>
                     </Dialog.Popup>

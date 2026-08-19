@@ -28,12 +28,13 @@ const FilterComponent = () => {
 				<InputText
 					className={FilterComponentStyles.filter__component__input}
 					placeholder={t("filter")}
+					aria-label={t("filter")}
 					// @ts-ignore
 					onInput={(e) => setInput(e.target.value)}
 				/>
 			</IconField.Root>
 			<IconField.Inset>
-				<Filter />
+				<Filter aria-hidden="true" />
 			</IconField.Inset>
 		</section>
 	);

@@ -14,6 +14,7 @@ const BarLoader = ({
 			height={height}
 			fill={color}
 			viewBox="0 0 24 24"
+			aria-hidden="true"
 		>
 			<rect x="1" y="6" width="2.8" height="12">
 				<animate

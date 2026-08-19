@@ -11,6 +11,7 @@ const CustomTooltip = ({
 	as,
 	style,
 	className,
+	ariaPressed,
 }: {
 	children: ReactNode;
 	side: "top" | "left" | "right" | "bottom";
@@ -21,6 +22,7 @@ const CustomTooltip = ({
 	as?: ComponentType;
 	style?: Record<string, string>;
 	className?: string;
+	ariaPressed?: boolean;
 }) => {
 	return (
 		<Tooltip.Root>
@@ -29,6 +31,7 @@ const CustomTooltip = ({
 				pt-root-onClick={onClick}
 				severity={severity}
 				pt-root-aria-label={tooltipText}
+				pt-root-aria-pressed={ariaPressed}
 				style={style}
 				className={className}
 			>

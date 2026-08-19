@@ -56,6 +56,7 @@ const LocalizedTitleInput = ({
 			//@ts-ignore
 			ref={inputRef}
 			placeholder={placeholder}
+			aria-label={placeholder}
 		/>
 	);
 };

@@ -9,7 +9,7 @@ import { use } from "react";
 const RegisterPage = ({ params }: { params: Promise<{ lang: string }> }) => {
 	const { lang } = use(params);
 	return (
-		<main className={LoginStyles.login__page__container}>
+		<main className={LoginStyles.login__page__container} id="main-content">
 			<section className={LoginStyles.login__page__box}>
 				<div className={LoginStyles.login__page__left}>
 					<Register lang={lang} />

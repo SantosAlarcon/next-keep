@@ -1,6 +1,7 @@
 const DeleteIcon = ({ width, height }: { width: string; height: string }) => {
 	return (
 		<svg
+			aria-hidden="true"
 			xmlns="http://www.w3.org/2000/svg"
 			width="48px"
 			height="48px"

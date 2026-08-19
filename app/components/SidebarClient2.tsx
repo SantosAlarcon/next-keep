@@ -136,8 +136,8 @@ export default function SidebarClient2() {
 									<Sidebar.Group key={group.label}>
 										<Sidebar.GroupLabel>{group.label}</Sidebar.GroupLabel>
 										{group.action && (
-											<Sidebar.GroupAction>
-												<Plus />
+											<Sidebar.GroupAction aria-label="Add new item">
+												<Plus aria-hidden="true" />
 											</Sidebar.GroupAction>
 										)}
 										<Sidebar.GroupContent>
@@ -172,8 +172,8 @@ export default function SidebarClient2() {
 																{item.badge}
 															</Sidebar.MenuBadge>
 														) : (
-															<Sidebar.MenuAction showOnHover>
-																<EllipsisV />
+															<Sidebar.MenuAction showOnHover aria-label="More options">
+																<EllipsisV aria-hidden="true" />
 															</Sidebar.MenuAction>
 														)}
 													</Sidebar.MenuItem>
@@ -221,8 +221,9 @@ export default function SidebarClient2() {
 							variant="text"
 							size="small"
 							iconOnly
+							aria-label="Toggle sidebar"
 						>
-							<SidebarIcon />
+							<SidebarIcon aria-hidden="true" />
 						</Sidebar.Trigger>
 					</header>
 					<div

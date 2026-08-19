@@ -6,18 +6,20 @@ const CustomSelect = ({
 	onValueChange,
 	options,
 	placeholder,
+	ariaLabel,
 }: {
 	value: string;
 	onValueChange: (e: SelectValueChangeEvent) => void;
 	options: string[];
 	placeholder?: string;
+	ariaLabel?: string;
 }) => {
 	return (
 		<Select.Root value={value} onValueChange={onValueChange} options={options}>
-			<Select.Trigger>
+			<Select.Trigger aria-label={ariaLabel}>
 				<Select.Value placeholder={placeholder}></Select.Value>
 				<Select.Indicator>
-					<ChevronDown />
+					<ChevronDown aria-hidden="true" />
 				</Select.Indicator>
 			</Select.Trigger>
 

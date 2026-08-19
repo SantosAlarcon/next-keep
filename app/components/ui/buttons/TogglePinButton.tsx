@@ -27,6 +27,7 @@ const TogglePinButton = ({ note }: { note: Note }) => {
 			severity="secondary"
 			onClick={handleClick}
 			as={Button}
+			aria-pressed={note.isPinned}
 		>
 			{note.isPinned ? (
 				<FixedIcon width="20px" height="20px" />

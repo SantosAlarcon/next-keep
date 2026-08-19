@@ -104,6 +104,7 @@ const SidebarClient = ({
 							<Sidebar.Content>
 								<NewNoteButton expanded={expanded} />
 								<Sidebar.Spacer />
+								<nav aria-label={t("main-navigation")}>
 								<ul className={sidebarStyles.sidebar__grouplist}>
 									{mainSidebarLinks.map((link) => (
 										<SidebarItem
@@ -120,6 +121,7 @@ const SidebarClient = ({
 										/>
 									))}
 								</ul>
+								</nav>
 								<Sidebar.Spacer />
 								<div className={sidebarStyles.sidebar__groups__header}>
 									{expanded ? (
@@ -151,6 +153,7 @@ const SidebarClient = ({
 									as={Button}
 									severity="secondary"
 									iconOnly
+									aria-label={expanded ? t("collapse-sidebar") : t("expand-sidebar")}
 									pt-root-onClick={() => {
 										if (!expanded) {
 											setExpanded(true);

@@ -54,6 +54,9 @@ export default async function RootLayout({
 	return (
 		<html lang={lang}>
 			<body className={font.className}>
+				<a href="#main-content" className="skip-link">
+					Skip to content
+				</a>
 				<I18nProvider language={lang} resources={resources}>
 					<LocaleSync state={{ locale: lang }} />
 					<PrimeReactProvider

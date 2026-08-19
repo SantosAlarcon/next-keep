@@ -40,11 +40,21 @@
 	color: #111;
 
 	&::placeholder {
-		color: #888;
+		color: #666;
+	}
+
+	&:focus-visible {
+		outline: 2px solid #44f;
+		outline-offset: 2px;
+		border-radius: 0.25rem;
 	}
 
 	@media (prefers-color-scheme: dark) {
 		color: #eee;
 		border-bottom: 1px #fff4 solid;
+
+		&::placeholder {
+			color: #999;
+		}
 	}
 }

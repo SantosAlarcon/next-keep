@@ -63,7 +63,9 @@ const ConfirmDialog = ({
 									}
 								}}
 							>
-								{pending ? <Spinner size={"20"} color="" /> : acceptLabel}
+								<span aria-busy={pending}>
+									{pending ? <Spinner size={"20"} color="" /> : acceptLabel}
+								</span>
 							</Dialog.Close>
 						</Dialog.Footer>
 					</Dialog.Popup>

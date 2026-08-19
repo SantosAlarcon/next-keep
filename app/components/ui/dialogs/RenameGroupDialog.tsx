@@ -81,11 +81,13 @@ const RenameGroupDialog = ({
                                         .finally(() => setPending(false));
                                 }}
                             >
-                                {pending ? (
-                                    <Spinner width="20" height="20" color="" />
-                                ) : (
-                                    t("rename")
-                                )}
+                                <span aria-busy={pending}>
+                                    {pending ? (
+                                        <Spinner width="20" height="20" color="" />
+                                    ) : (
+                                        t("rename")
+                                    )}
+                                </span>
                             </Dialog.Close>
                         </Dialog.Footer>
                     </Dialog.Popup>

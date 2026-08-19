@@ -162,6 +162,7 @@ const Login = ({ lang }: { lang: string }) => {
 					severity="secondary"
 					type="submit"
 					aria-label={t("login")}
+					aria-busy={pending}
 					label={
 						pending ? <span className="pi pi-spin pi-spinner" /> : t("login")
 					}

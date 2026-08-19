@@ -16,6 +16,7 @@ const Spinner = ({
 			height={size ?? height}
 			fill={color}
 			viewBox="0 0 24 24"
+			aria-hidden="true"
 		>
 			<path
 				d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"

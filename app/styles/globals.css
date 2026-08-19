@@ -103,7 +103,32 @@ body {
 
 a {
 	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: currentColor;
+	text-underline-offset: 2px;
+	text-decoration-thickness: 1px;
+}
+
+a:hover {
+	text-decoration-thickness: 2px;
+}
+
+.skip-link {
+	position: absolute;
+	top: -100%;
+	left: 0;
+	padding: 0.5rem 1rem;
+	background: #44f;
+	color: #eee;
+	font-weight: 700;
+	z-index: 100000;
+	border-radius: 0 0 0.5rem 0;
+	transition: top 0.2s ease-in-out;
 	text-decoration: none;
+}
+
+.skip-link:focus {
+	top: 0;
 }
 
 [data-title]:hover:after {
@@ -158,6 +183,22 @@ button {
 
 	&:hover {
 		background: linear-gradient(inherit 0%, #fff6 100%);
+	}
+
+	&:focus-visible {
+		outline: 2px solid #44f;
+		outline-offset: 2px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
 	}
 }
 
