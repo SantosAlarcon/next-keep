@@ -5,7 +5,7 @@ export function useFetchNotesByGroup(groupId: string) {
 	const [notes, setNotes] = useState<Note[]>([]);
 
 	useEffect(() => {
-		fetch(`/api/notes?group=${groupId}`)
+		fetch(`/api/notes_appwrite?group=${groupId}`)
 			.then((res) => res.json())
 			.then((data) => setNotes(data));
 	}, [groupId]);

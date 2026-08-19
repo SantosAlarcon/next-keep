@@ -1,10 +1,21 @@
+import { type NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 import { createNewGroup } from "@/app/utils/database-appwrite/groups/createNewGroup";
 import { deleteGroupById } from "@/app/utils/database-appwrite/groups/deleteGroupById";
 import { getGroupById } from "@/app/utils/database-appwrite/groups/getGroupById";
 import { getGroupByTitle } from "@/app/utils/database-appwrite/groups/getGroupByTitle";
 import { getGroupsByUser } from "@/app/utils/database-appwrite/groups/getGroupsByUser";
 import { updateGroupById } from "@/app/utils/database-appwrite/groups/updateGroupById";
-import { NextResponse, type NextRequest } from "next/server";
+import { getSession } from "@/app/utils/getSession";
+import { checkRateLimit } from "@/app/utils/rateLimit";
+
+const CreateGroupSchema = z.object({
+	title: z.string().min(1).max(100),
+});
+
+const UpdateGroupSchema = z.object({
+	title: z.string().min(1).max(100),
+});
 
 /**
  * @swagger
@@ -56,6 +67,14 @@ import { NextResponse, type NextRequest } from "next/server";
  *         description: Returns the groups that belong to the user with that ID
  */
 export async function GET(req: NextRequest) {
+	const rateLimitResult = checkRateLimit(req);
+	if (rateLimitResult.limited) return rateLimitResult.response;
+
+	const session = await getSession();
+	if (!session) {
+		return Response.json({ message: "Unauthorized" }, { status: 401 });
+	}
+
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id");
 	const title = searchParams.get("title");
@@ -116,26 +135,37 @@ export async function GET(req: NextRequest) {
  *         description: Title has not been provided
  */
 export async function POST(req: NextRequest) {
-	const body = await req.json();
+	const rateLimitResult = checkRateLimit(req);
+	if (rateLimitResult.limited) return rateLimitResult.response;
 
-	if (!body.hasOwnProperty("title") || !body) {
+	const session = await getSession();
+	if (!session) {
+		return Response.json({ message: "Unauthorized" }, { status: 401 });
+	}
+
+	const body = await req.json();
+	const parsed = CreateGroupSchema.safeParse(body);
+
+	if (!parsed.success) {
 		return Response.json(
-			{ message: "You need to provide the title" },
+			{ message: "Invalid input", details: parsed.error.flatten() },
 			{ status: 400 },
 		);
 	}
 
-	// Call the createNewGroup function to add it to the DB
-	await createNewGroup(body.title)
-		.then(() => {
-			return NextResponse.json(
-				{ message: `New group ${body.title} is added to the DB` },
-				{ status: 201 },
-			);
-		})
-		.catch((error) => {
-			console.error(error.message);
-		});
+	const result = await createNewGroup(parsed.data.title);
+
+	if (!result) {
+		return Response.json(
+			{ message: "Failed to create group" },
+			{ status: 500 },
+		);
+	}
+
+	return NextResponse.json(
+		{ message: `New group ${parsed.data.title} is added to the DB` },
+		{ status: 201 },
+	);
 }
 
 /**
@@ -160,6 +190,14 @@ export async function POST(req: NextRequest) {
  *         description: ID has not been provided to delete the group or the ID provided doesn't exist in the database.
  */
 export async function DELETE(req: NextRequest) {
+	const rateLimitResult = checkRateLimit(req);
+	if (rateLimitResult.limited) return rateLimitResult.response;
+
+	const session = await getSession();
+	if (!session) {
+		return Response.json({ message: "Unauthorized" }, { status: 401 });
+	}
+
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id");
 
@@ -214,20 +252,34 @@ export async function DELETE(req: NextRequest) {
  *         description: Title or id have not been provided, or the ID provided doesn't exist in the database.
  */
 export async function PUT(req: NextRequest) {
+	const rateLimitResult = checkRateLimit(req);
+	if (rateLimitResult.limited) return rateLimitResult.response;
+
+	const session = await getSession();
+	if (!session) {
+		return Response.json({ message: "Unauthorized" }, { status: 401 });
+	}
+
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id");
 	const body = await req.json();
-	const title = body.title;
+	const parsed = UpdateGroupSchema.safeParse(body);
 
-	if (!(id && title)) {
+	if (!parsed.success) {
 		return Response.json(
-			{ message: "You need to provide the ID and the title." },
+			{ message: "Invalid input", details: parsed.error.flatten() },
 			{ status: 400 },
 		);
 	}
 
-	// Call the updateGroupById to update the group title
-	const isUpdateSuccesful = await updateGroupById(id, title);
+	if (!id) {
+		return Response.json(
+			{ message: "You need to provide the ID" },
+			{ status: 400 },
+		);
+	}
+
+	const isUpdateSuccesful = await updateGroupById(id, parsed.data.title);
 
 	if (!isUpdateSuccesful) {
 		return Response.json(
@@ -237,7 +289,7 @@ export async function PUT(req: NextRequest) {
 	}
 
 	return Response.json(
-		{ message: `Group has been renamed to ${title}` },
+		{ message: `Group has been renamed to ${parsed.data.title}` },
 		{ status: 200 },
 	);
 }

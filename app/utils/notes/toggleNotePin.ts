@@ -1,5 +1,6 @@
+"use server";
+
 import {
-	appwriteAPIKey,
 	appwriteProjectId,
 	notesEndpoint,
 } from "@/app/constants";
@@ -12,7 +13,7 @@ export const toggleNotePin = async (note: Note) => {
 		headers: {
 			"Content-Type": "application/json",
 			"X-Appwrite-Project": appwriteProjectId,
-			"X-Appwrite-Key": appwriteAPIKey,
+			"X-Appwrite-Key": process.env.APPWRITE_API_KEY!,
 		},
 		body: JSON.stringify({
 			data: {

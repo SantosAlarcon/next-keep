@@ -1,13 +1,12 @@
 import { ID, Permission, Role } from "appwrite";
 import { appwriteDatabase } from "@/app/appwrite";
-import { databaseID, groupsCollectionID } from "@/app/constants";
 import { getSession } from "../../getSession";
 
 export const createNewGroup = async (title: string) => {
 	const session = await getSession();
 	return await appwriteDatabase.createRow({
-		databaseId: databaseID,
-		tableId: groupsCollectionID,
+		databaseId: process.env.NEXT_PUBLIC_DATABASE_ID!,
+		tableId: process.env.NEXT_PUBLIC_GROUPS_COLLECTION_ID!,
 		rowId: ID.unique(),
 		data: {
 			title,

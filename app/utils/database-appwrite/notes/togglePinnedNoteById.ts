@@ -13,9 +13,7 @@ export const togglePinnedByNote = async (id: string, pinnedValue: boolean) => {
         });
 
         return true;
-    } catch (error) {
-        // @ts-ignore
-        console.error(error.message);
+    } catch {
         return false;
     }
 };

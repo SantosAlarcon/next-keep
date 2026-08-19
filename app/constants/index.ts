@@ -36,12 +36,9 @@ export const logoVariants = {
 
 export const mainURL = process.env.NEXT_PUBLIC_URL!;
 export const appwriteProjectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!;
-export const appwriteAPIKey = process.env.NEXT_PUBLIC_APPWRITE_API_KEY!;
 export const apiEndpoint = process.env.NEXT_PUBLIC_API_ENDPOINT!;
 export const databaseID = process.env.NEXT_PUBLIC_DATABASE_ID!;
 export const notesCollectionID = process.env.NEXT_PUBLIC_NOTES_COLLECTION_ID!;
 export const groupsCollectionID = process.env.NEXT_PUBLIC_GROUPS_COLLECTION_ID!;
 export const notesEndpoint = `${apiEndpoint}/databases/${databaseID}/collections/${notesCollectionID}/documents`;
 export const groupsEndpoint = `${apiEndpoint}/databases/${databaseID}/collections/${groupsCollectionID}/documents`;
-export const clientNotesEndpoint = `${process.env.NEXT_PUBLIC_API_ENDPOINT!}/databases/${process.env.NEXT_PUBLIC_DATABASE_ID!}/collections/${process.env.NEXT_PUBLIC_NOTES_COLLECTION_ID!}/documents`;
-export const clientGroupsEndpoint = `${process.env.NEXT_PUBLIC_API_ENDPOINT!}/databases/${process.env.NEXT_PUBLIC_DATABASE_ID!}/collections/${process.env.NEXT_PUBLIC_GROUPS_COLLECTION_ID!}/documents`;

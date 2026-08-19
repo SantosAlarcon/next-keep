@@ -3,11 +3,15 @@ import { cookies } from "next/headers";
 
 export const getSession = async () => {
 	const cookieStore = await cookies();
-	const session = cookieStore.get("appwrite_session")?.value;
+	const sessionData = cookieStore.get("appwrite_session")?.value;
+
+	if (!sessionData) return null;
 
 	try {
-		if (session) return JSON.parse(session);
-	} catch (error) {
+		const parsed = JSON.parse(sessionData);
+		if (!parsed?.userId) return null;
+		return parsed;
+	} catch {
 		return null;
 	}
 };

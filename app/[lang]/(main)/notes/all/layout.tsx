@@ -1,5 +1,5 @@
-import initTranslations from "@/app/i18n";
 import { type ReactNode } from "react";
+import initTranslations from "@/app/i18n";
 
 export async function generateMetadata({
 	params,

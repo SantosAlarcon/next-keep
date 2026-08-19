@@ -1,5 +1,5 @@
-import { getAllNotes } from "./getAllNotes";
 import type { Note } from "@/app/types";
+import { getAllNotes } from "./getAllNotes";
 
 export const getAllPinnedNotes = async () => {
 	const pinnedNotes = await getAllNotes();

@@ -1,36 +1,13 @@
 import { Account, Avatars, Client, TablesDB } from "appwrite";
-// import {
-// 	Account as SVAccount,
-// 	Avatars as SVAvatars,
-// 	Client as SVClient,
-// 	TablesDB,
-// } from "node-appwrite";
-import { apiEndpoint, appwriteAPIKey, appwriteProjectId } from "./constants";
 
 export const appwriteClient = new Client()
 	.setLocale("es")
-	.setEndpoint(apiEndpoint)
-	.setProject(appwriteProjectId)
-// .setKey(appwriteAPIKey);
+	.setEndpoint(process.env.NEXT_PUBLIC_API_ENDPOINT!)
+	.setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
 
 export const appwriteAccount = new Account(appwriteClient);
 
 export const appwriteDatabase = new TablesDB(appwriteClient);
-
-// export const appwriteServerClient = new SVClient()
-//     .setLocale("es")
-//     .setEndpoint(process.env.NEXT_PUBLIC_API_ENDPOINT!)
-//     .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!)
-//     .setKey(process.env.NEXT_PUBLIC_APPWRITE_API_KEY!)
-//
-// export const appwriteServerAccount = new SVAccount(appwriteServerClient);
-//
-// export const appwritesServerDatabase = new SVDatabases(appwriteServerClient);
-
-// @ts-ignore
-// const {setSession, setUser} = authStore.getState();
-// appwriteAccount.get().then((account) => setUser(account)).catch((error) => console.log(error))
-// appwriteAccount.getSession("current").then((session) => setSession(session)).catch((error) => console.log(error))
 
 export const getInitials = () => {
 	const result = new Avatars(appwriteClient).getInitials();
@@ -43,8 +20,8 @@ export const getAccount = () => {
 
 export async function createSessionClient() {
 	const client = new Client()
-		.setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-		.setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!);
+		.setEndpoint(process.env.NEXT_PUBLIC_API_ENDPOINT!)
+		.setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
 
 	return {
 		get account() {

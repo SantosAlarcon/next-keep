@@ -4,7 +4,7 @@ import { Query } from "appwrite";
 import { databaseID, notesCollectionID } from "@/app/constants";
 
 export async function getNoteAmountsByGroups() {
-    const session = getSession();
+    const session = await getSession();
     const response = await appwriteDatabase.listRows({
         databaseId: databaseID,
         tableId: notesCollectionID,

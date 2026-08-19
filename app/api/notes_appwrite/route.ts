@@ -1,14 +1,31 @@
+import type { NextURL } from "next/dist/server/web/next-url";
+import type { NextRequest } from "next/server";
+import { z } from "zod";
 import { useNewNoteStore } from "@/app/store/newNoteStore";
-import getNotesByUser from "@/app/utils/database-appwrite/notes/getNotesByUser";
 import { createNewNote } from "@/app/utils/database-appwrite/notes/createNewNote";
 import { deleteNoteById } from "@/app/utils/database-appwrite/notes/deleteNoteById";
 import { getAllPinnedNotes } from "@/app/utils/database-appwrite/notes/getAllPinnedNotes";
 import { getNoteAmountsByGroups } from "@/app/utils/database-appwrite/notes/getNoteAmountByGroups";
 import { getNoteById } from "@/app/utils/database-appwrite/notes/getNoteById";
 import { getNotesByGroup } from "@/app/utils/database-appwrite/notes/getNotesByGroup";
+import getNotesByUser from "@/app/utils/database-appwrite/notes/getNotesByUser";
 import { updateNoteById } from "@/app/utils/database-appwrite/notes/updateNoteById";
-import type { NextURL } from "next/dist/server/web/next-url";
-import type { NextRequest } from "next/server";
+import { getSession } from "@/app/utils/getSession";
+import { checkRateLimit } from "@/app/utils/rateLimit";
+
+const CreateNoteSchema = z.object({
+	title: z.string().min(1).max(200),
+	data: z.string().max(100_000),
+	group: z.string().nullable().optional(),
+	isPinned: z.boolean().optional(),
+});
+
+const UpdateNoteSchema = z.object({
+	title: z.string().min(1).max(200).optional(),
+	data: z.string().max(100_000).optional(),
+	group: z.string().nullable().optional(),
+	isPinned: z.boolean().optional(),
+});
 
 /**
  * @swagger
@@ -97,6 +114,14 @@ import type { NextRequest } from "next/server";
  *            description: Failed to connect to the database
  */
 export async function GET(req: NextRequest) {
+	const rateLimitResult = checkRateLimit(req);
+	if (rateLimitResult.limited) return rateLimitResult.response;
+
+	const session = await getSession();
+	if (!session) {
+		return Response.json({ message: "Unauthorized" }, { status: 401 });
+	}
+
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id");
 	const pinned = searchParams.get("pinned");
@@ -169,22 +194,30 @@ export async function GET(req: NextRequest) {
  *        description: Body object must have a title and the data
  */
 export async function POST(req: NextRequest) {
-	const res = await req.json();
+	const rateLimitResult = checkRateLimit(req);
+	if (rateLimitResult.limited) return rateLimitResult.response;
 
-	// If there is no text and title in the request body, it shows an 400 error
-	if (!(res.hasOwnProperty("title") && res.hasOwnProperty("data"))) {
+	const session = await getSession();
+	if (!session) {
+		return Response.json({ message: "Unauthorized" }, { status: 401 });
+	}
+
+	const res = await req.json();
+	const parsed = CreateNoteSchema.safeParse(res);
+
+	if (!parsed.success) {
 		return Response.json(
-			{ message: "You need to provide the data and title in the request!" },
-			{ status: 401 },
+			{ message: "Invalid input", details: parsed.error.flatten() },
+			{ status: 400 },
 		);
 	}
 
 	const newNote = useNewNoteStore.getState().newNote;
 	const reset = useNewNoteStore.getState().reset;
-	newNote.title = res.title;
-	newNote.data = res.data;
-	newNote.group = res.group;
-	newNote.isPinned = res.isPinned;
+	newNote.title = parsed.data.title;
+	newNote.data = parsed.data.data;
+	newNote.group = parsed.data.group ?? null;
+	newNote.isPinned = parsed.data.isPinned ?? false;
 	newNote.$createdAt = new Date().toISOString();
 	newNote.$updatedAt = new Date().toISOString();
 	newNote.lastUpdated = new Date().toISOString();
@@ -237,35 +270,49 @@ export async function POST(req: NextRequest) {
  *      description: ID and body object must have a title and the data, or ID doesn't exists in the DB.
  */
 export async function PUT(req: NextRequest) {
+	const rateLimitResult = checkRateLimit(req);
+	if (rateLimitResult.limited) return rateLimitResult.response;
+
+	const session = await getSession();
+	if (!session) {
+		return Response.json({ message: "Unauthorized" }, { status: 401 });
+	}
+
 	const searchParams: URLSearchParams = req.nextUrl.searchParams;
 	const id = searchParams.get("id");
 	// @ts-ignore
 	const foundNote = await getNoteById(req.nextUrl.searchParams.get("id"));
 	const body = await req.json();
-	let pinStatusChanged: boolean = false;
+	const parsed = UpdateNoteSchema.safeParse(body);
 
-	// If ID is not provided in the search params, it returns an error
-	if (!id) {
+	if (!parsed.success) {
 		return Response.json(
-			{ message: "You need to provide the note ID" },
-			{ status: 401 },
+			{ message: "Invalid input", details: parsed.error.flatten() },
+			{ status: 400 },
 		);
 	}
 
-	// It checks if the pin status has changed. It is useful to not update the updated date if the pin status hasn't changed.
-	if (foundNote?.isPinned !== body.isPinned) {
+	let pinStatusChanged: boolean = false;
+
+	if (!id) {
+		return Response.json(
+			{ message: "You need to provide the note ID" },
+			{ status: 400 },
+		);
+	}
+
+	if (foundNote?.isPinned !== parsed.data.isPinned) {
 		pinStatusChanged = true;
 	}
 
 	const updatedNote = {
-		...body,
-		title: body.title,
-		data: body.data,
+		title: parsed.data.title ?? foundNote?.title,
+		data: parsed.data.data ?? foundNote?.data,
 		lastUpdated: pinStatusChanged
 			? foundNote?.updatedDate
 			: new Date().toISOString(),
-		group: body.group,
-		isPinned: body.isPinned,
+		group: parsed.data.group !== undefined ? parsed.data.group : foundNote?.group,
+		isPinned: parsed.data.isPinned !== undefined ? parsed.data.isPinned : foundNote?.isPinned,
 	};
 
 	// @ts-ignore
@@ -306,6 +353,14 @@ export async function PUT(req: NextRequest) {
  *        description: The ID provided doesn't exist in the DB or no ID provided in the query.
  */
 export async function DELETE(req: NextRequest) {
+	const rateLimitResult = checkRateLimit(req);
+	if (rateLimitResult.limited) return rateLimitResult.response;
+
+	const session = await getSession();
+	if (!session) {
+		return Response.json({ message: "Unauthorized" }, { status: 401 });
+	}
+
 	const searchParams: NextURL = req.nextUrl;
 	const id = searchParams.searchParams.get("id");
 

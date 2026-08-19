@@ -9,10 +9,7 @@ export const deleteGroupById = async (id: string) => {
             rowId: id
         })
 		return true;
-	} catch (error) {
-		// @ts-ignore
-		console.error(error.meta.cause);
-
+	} catch {
 		return false;
 	}
 };

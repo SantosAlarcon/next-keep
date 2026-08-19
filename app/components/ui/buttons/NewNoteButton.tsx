@@ -3,6 +3,7 @@
 import { Button } from "@primereact/ui/button";
 import { useRouter } from "next/navigation";
 import { useT } from "next-i18next/client";
+import { useEffect } from "react";
 import NewNoteIcon from "@/app/components/icons/NewNoteIcon";
 import { useNewNoteStore } from "@/app/store/newNoteStore";
 import sidebarStyles from "@/app/styles/sidebar.module.css";
@@ -10,7 +11,10 @@ import sidebarStyles from "@/app/styles/sidebar.module.css";
 const NewNoteButton = ({ expanded }: { expanded: boolean }) => {
 	const { t } = useT("common");
 	const reset = useNewNoteStore.getState().reset;
-	reset();
+
+	useEffect(() => {
+		reset();
+	}, [reset])
 
 	const router = useRouter();
 	const createNewNote = () => {

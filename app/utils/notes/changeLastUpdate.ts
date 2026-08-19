@@ -1,7 +1,8 @@
+"use server";
+
 import { Note } from "@/app/types";
 import { getAllNotes } from "./getAllNotes";
 import {
-	appwriteAPIKey,
 	appwriteProjectId,
 	notesEndpoint,
 } from "@/app/constants";
@@ -15,7 +16,7 @@ export const changeLastUpdate = async () => {
 			headers: {
 				"Content-Type": "application/json",
 				"X-Appwrite-Project": appwriteProjectId,
-				"X-Appwrite-Key": appwriteAPIKey,
+				"X-Appwrite-Key": process.env.APPWRITE_API_KEY!,
 			},
 			body: JSON.stringify({
 				data: {

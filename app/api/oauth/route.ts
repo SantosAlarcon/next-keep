@@ -1,7 +1,6 @@
-import { appwriteAccount } from "@/app/appwrite";
-import { mainURL } from "@/app/constants";
 import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
+import { appwriteAccount } from "@/app/appwrite";
 
 export async function GET(request: NextRequest) {
 	const userId = request.nextUrl.searchParams.get("userId");
@@ -13,13 +12,14 @@ export async function GET(request: NextRequest) {
 
 	cookieList.set("appwrite_session", JSON.stringify(session), {
 		path: "/",
-		// httpOnly: true,
-		// sameSite: "strict",
-		// secure: true,
+		httpOnly: true,
+		secure: process.env.NODE_ENV === "production",
+		sameSite: "lax",
+		maxAge: 60 * 60 * 24 * 30,
 	});
 
-	return NextResponse.redirect(`${mainURL}/notes/all`, {
+	return NextResponse.redirect(`${process.env.NEXT_PUBLIC_URL!}/notes/all`, {
 		status: 303,
-		url: `${mainURL}/notes/all`,
+		url: `${process.env.NEXT_PUBLIC_URL!}/notes/all`,
 	});
 }
