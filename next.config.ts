@@ -38,6 +38,7 @@ const nextConfig: NextConfig = {
 	experimental: {
 		optimizePackageImports: [
 			"@primereact",
+			"@primeicons/react",
 			"@uiw/react-md-editor",
 			"@uiw/react-markdown-preview",
 		],

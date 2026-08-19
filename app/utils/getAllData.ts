@@ -1,16 +1,18 @@
 import { getAllGroups } from "./groups/getAllGroups";
-import { getAllGroupTitles } from "./groups/getAllGroupTitles";
 import { getAllNotes } from "./notes/getAllNotes";
-import { getAllPinnedNotes } from "./notes/getAllPinnedNotes";
 
 export async function getAllData() {
-	const [allNotes, allGroups, allPinnedNotes, allGroupTitles] =
-		await Promise.all([
-			getAllNotes(),
-			getAllGroups(),
-			getAllPinnedNotes(),
-			getAllGroupTitles(),
-		]);
+	const [allNotes, allGroups] = await Promise.all([
+		getAllNotes(),
+		getAllGroups(),
+	]);
+
+	const allPinnedNotes = allNotes.filter(
+		(note: { isPinned: boolean }) => note.isPinned === true,
+	);
+	const allGroupTitles = allGroups?.map(
+		(group: { title: string }) => group.title,
+	);
 
 	return { allNotes, allGroups, allPinnedNotes, allGroupTitles };
 }

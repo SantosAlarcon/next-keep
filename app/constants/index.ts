@@ -14,26 +14,6 @@ export const mainSidebarLinks = [
 	},
 ];
 
-export const variants = {
-	expanded: {
-		width: "23rem",
-	},
-	collapsed: {
-		width: "5rem",
-	},
-};
-
-export const logoVariants = {
-	expanded: {
-		width: "100px",
-		height: "100px",
-	},
-	collapsed: {
-		width: "35px",
-		height: "35px",
-	},
-};
-
 export const mainURL = process.env.NEXT_PUBLIC_URL!;
 export const appwriteProjectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!;
 export const apiEndpoint = process.env.NEXT_PUBLIC_API_ENDPOINT!;

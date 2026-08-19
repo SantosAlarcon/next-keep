@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { Toaster } from "sonner";
 import { AuthSync } from "@/app/components/AuthSync";
 import { LocaleSync } from "@/app/components/LocaleSync";
 import initTranslations from "@/app/i18n";
@@ -40,7 +39,6 @@ export default async function LoginLayout({
 				}}
 			/>
 			<LocaleSync state={{ locale: lang }} />
-			<Toaster richColors position="top-center" />
 			{children}
 		</>
 	);

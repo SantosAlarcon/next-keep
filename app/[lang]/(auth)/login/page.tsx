@@ -15,14 +15,14 @@ const LoginPage = ({ params }: { params: Promise<{ lang: string }> }) => {
 					<Login lang={lang} />
 				</div>
 				<div className={LoginStyles.login__page__right}>
-					<Image
-						className={LoginStyles.login__page__right__image}
-						priority
-						src="/mockup.webp"
-						alt="Next Keep Mockup"
-						width={1280}
-						height={762}
-					/>
+				<Image
+					className={LoginStyles.login__page__right__image}
+					sizes="(max-width: 768px) 100vw, 50vw"
+					src="/mockup.webp"
+					alt="Next Keep Mockup"
+					width={1280}
+					height={762}
+				/>
 				</div>
 			</section>
 		</main>

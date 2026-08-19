@@ -7,6 +7,7 @@ import {
 	initServerI18next,
 } from "next-i18next/server";
 import type { ReactNode } from "react";
+import { Toaster } from "sonner";
 import "../styles/globals.css";
 import "../styles/primereact.css";
 import { PrimeReactProvider } from "@primereact/core";
@@ -59,16 +60,17 @@ export default async function RootLayout({
 				</a>
 				<I18nProvider language={lang} resources={resources}>
 					<LocaleSync state={{ locale: lang }} />
-					<PrimeReactProvider
-						theme={{
-							preset: Ice,
-							options: {
-								cssVariables: true,
-							},
-						}}
-					>
-						{children}
-					</PrimeReactProvider>
+				<PrimeReactProvider
+					theme={{
+						preset: Ice,
+						options: {
+							cssVariables: true,
+						},
+					}}
+				>
+					<Toaster richColors position="top-center" theme="dark" />
+					{children}
+				</PrimeReactProvider>
 				</I18nProvider>
 			</body>
 		</html>

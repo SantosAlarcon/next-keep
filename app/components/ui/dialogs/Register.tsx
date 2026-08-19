@@ -19,7 +19,6 @@ const Register = ({ lang }: { lang: string }) => {
 				alt="Next Keep Logo"
 				width={150}
 				height={150}
-				priority
 			/>
 			<h1>{t("register-title")}</h1>
 			<hr />

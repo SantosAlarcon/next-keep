@@ -41,7 +41,6 @@ const NewPassword = ({ lang }: { lang: string }) => {
 					alt="Next Keep Logo"
 					width={350}
 					height={150}
-					priority
 				/>
 				<Image
 					className={LoginStyles.login__page__logo__text}
@@ -49,7 +48,6 @@ const NewPassword = ({ lang }: { lang: string }) => {
 					alt="Next Keep Logo"
 					width={350}
 					height={150}
-					priority
 				/>
 			</div>
 			<h1>{t("new-password-title")}</h1>

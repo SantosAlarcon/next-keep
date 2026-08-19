@@ -13,7 +13,6 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import LoginStyles from "@/app/styles/Login.module.css";
-import "@/app/styles/primereact.css";
 import { emailLogin } from "@/app/utils/login";
 import { loginToOAuth } from "@/app/utils/loginToOAuth";
 import Spinner from "./Spinner";
@@ -46,7 +45,6 @@ const Login = ({ lang }: { lang: string }) => {
 					alt="Next Keep Logo"
 					width={350}
 					height={150}
-					priority
 				/>
 				<Image
 					className={LoginStyles.login__page__logo__text}
@@ -54,7 +52,6 @@ const Login = ({ lang }: { lang: string }) => {
 					alt="Next Keep Logo"
 					width={350}
 					height={150}
-					priority
 				/>
 			</div>
 			<h1>{t("login-title")}</h1>

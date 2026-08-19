@@ -4,7 +4,7 @@ import NoteListStyles from "@/app/styles/NoteList.module.css";
 import FixedIcon from "./icons/FixedIcon";
 import UnfixedIcon from "./icons/UnfixedIcon";
 import ActiveNoteLink from "./ui/ActiveNoteLink";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import type { Note } from "../types";
 import { dataStore } from "../store/dataStore";
 import { useTranslation } from "react-i18next";
@@ -18,74 +18,46 @@ const NoteList = ({
 	selected: string;
 	lang: string;
 }) => {
-	// @ts-ignore
-	const { allNotes } = dataStore.getState();
-	const [path, setPath] = useState<string>("");
-	const [filteredNotes, setFilteredNotes] = useState<Note[]>([]);
+	const allNotes: Note[] = dataStore((state: any) => state.allNotes);
+	const filter: string = dataStore((state: any) => state.filter);
 	const { t } = useTranslation("common", { lng: lang });
-	// @ts-ignore
-	const filter: string = dataStore((state) => state.filter);
 
-	useEffect(() => {
-		switch (group) {
-			case "all": {
-				setFilteredNotes(allNotes);
-				setPath("/notes/all");
-				break;
-			}
-			case "pinned": {
-				const pinnedNotes = allNotes.filter(
-					(note: Note) => note.isPinned === true,
-				);
-				setFilteredNotes(pinnedNotes);
-				setPath("/notes/pinned");
-				break;
-			}
-			default: {
-				const groupNotes = allNotes.filter(
-					(note: Note) => note.group === group,
-				);
-				setFilteredNotes(groupNotes);
-				setPath(`/groups/${group}`);
-				break;
-			}
-		}
-	}, [allNotes, filter]);
+	const filteredNotes = useMemo(() => {
+		let notes: Note[];
 
-	useEffect(() => {
 		if (filter.length > 0) {
-			setFilteredNotes(
-				[...allNotes].filter((note) =>
-					note.title.toLowerCase().includes(filter),
-				),
+			notes = allNotes.filter((note: Note) =>
+				note.title.toLowerCase().includes(filter),
 			);
 		} else {
 			switch (group) {
-				case "all": {
-					setFilteredNotes(allNotes);
+				case "all":
+					notes = allNotes;
 					break;
-				}
-
-				case "pinned": {
-					const pinnedNotes = allNotes.filter(
-						(note: Note) => note.isPinned === true,
-					);
-					setFilteredNotes(pinnedNotes);
+				case "pinned":
+					notes = allNotes.filter((note: Note) => note.isPinned === true);
 					break;
-				}
-
-				default: {
-					const groupNotes = allNotes.filter(
-						(note: Note) => note.group === group,
-					);
-					setFilteredNotes(groupNotes);
+				default:
+					notes = allNotes.filter((note: Note) => note.group === group);
 					break;
-				}
 			}
 		}
-	}, [filter]);
 
-	filteredNotes?.sort((a, b) => b.lastUpdated.localeCompare(a.lastUpdated));
+		return [...notes].sort((a, b) =>
+			b.lastUpdated.localeCompare(a.lastUpdated),
+		);
+	}, [allNotes, filter, group]);
+
+	const path = useMemo(() => {
+		switch (group) {
+			case "all":
+				return "/notes/all";
+			case "pinned":
+				return "/notes/pinned";
+			default:
+				return `/groups/${group}`;
+		}
+	}, [group]);
 
 	if (!allNotes && !filteredNotes) return null;
 

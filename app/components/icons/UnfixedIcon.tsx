@@ -1,4 +1,6 @@
-const UnfixedIcon = ({ width, height }: { width: string; height: string }) => {
+import { memo } from "react";
+
+const UnfixedIcon = memo(({ width, height }: { width: string; height: string }) => {
 	return (
 		<svg
 			aria-hidden="true"
@@ -15,6 +17,8 @@ const UnfixedIcon = ({ width, height }: { width: string; height: string }) => {
 			/>
 		</svg>
 	);
-};
+});
+
+UnfixedIcon.displayName = "UnfixedIcon";
 
 export default UnfixedIcon;

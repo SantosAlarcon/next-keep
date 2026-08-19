@@ -4,13 +4,12 @@ import { Sidebar as SidebarIcon } from "@primeicons/react/sidebar";
 import { useIsMobile } from "@primereact/hooks/use-is-mobile";
 import { Button } from "@primereact/ui/button";
 import { Sidebar } from "@primereact/ui/sidebar";
-import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useT } from "next-i18next/client";
-import { type ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useState } from "react";
 import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
 import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
-import { logoVariants, mainSidebarLinks } from "../constants";
+import { mainSidebarLinks } from "../constants";
 import { dataStore } from "../store/dataStore";
 import sidebarStyles from "../styles/sidebar.module.css";
 import type { Group } from "../types";
@@ -25,16 +24,14 @@ const SidebarClient = ({
 }) => {
 	const { t } = useT("common");
 
-	// @ts-ignore
-	const { allNotes, allGroups, allPinnedNotes } = dataStore.getState();
+	const allNotes = dataStore((state: any) => state.allNotes);
+	const allGroups = dataStore((state: any) => state.allGroups);
+	const allPinnedNotes = dataStore((state: any) => state.allPinnedNotes);
 
 	const isMobile = useIsMobile(768);
 
 	const [mounted, setMounted] = useState<boolean>(false);
 	const [expanded, setExpanded] = useState<boolean>(() => {
-		// The default sidebar behaviour is opened. First checks if the sidebar_expanded
-		// is in the Local Storage. If not, it creates the key.
-
 		if (typeof window !== "undefined") {
 			if (!window.localStorage.getItem("sidebar_expanded") && !isMobile) {
 				window.localStorage.setItem("sidebar_expanded", "true");
@@ -61,10 +58,15 @@ const SidebarClient = ({
 		setMounted(true);
 	}, []);
 
+	const toggleExpanded = useCallback(
+		() => setExpanded((prev) => !prev),
+		[],
+	);
+
 	if (!mounted) return null;
 
 	return (
-		<AnimatePresence initial={false}>
+		<>
 			<Sidebar.Layout>
 				{isMobile && <Sidebar.Backdrop className="sidebar__backdrop" />}
 				<Sidebar.Root
@@ -72,30 +74,22 @@ const SidebarClient = ({
 					variant="sidebar"
 					collapsible="icon"
 					open={expanded}
-				// onOpenChange={() => setExpanded(!expanded)}
 				>
 					<Sidebar.Spacer />
 					<Sidebar.Aside>
-						{/* <motion.aside */}
-						{/* 	initial={expanded ? "collapsed" : "expanded"} */}
-						{/* 	animate={expanded ? "expanded" : "collapsed"} */}
-						{/* 	exit={expanded ? "collapsed" : "expanded"} */}
-						{/* 	variants={variants} */}
-						{/* 	className={sidebarStyles.sidebar__container} */}
-						{/* > */}
-						{/* 	<Sidebar.Panel> */}
 						<Sidebar.Panel>
 							<Sidebar.Header>
 								<section className={sidebarStyles.sidebar__top}>
 									<Link href="/notes/all" prefetch aria-label="Next Keep logo">
-										<motion.img
+										<img
 											className={sidebarStyles.sidebar__logo}
 											src="/NextKeep.svg"
 											alt="Next Keep logo"
-											initial={expanded ? "collapsed" : "expanded"}
-											animate={expanded ? "expanded" : "collapsed"}
-											exit={expanded ? "collapsed" : "expanded"}
-											variants={logoVariants}
+											style={{
+												width: expanded ? "100px" : "35px",
+												height: expanded ? "100px" : "35px",
+												transition: "width 0.3s ease, height 0.3s ease",
+											}}
 										/>
 									</Link>
 								</section>
@@ -135,7 +129,6 @@ const SidebarClient = ({
 											key={group.$id}
 											selectedGroup={group}
 											title={group.title}
-											//amount={allNoteAmounts[group.$id] ? allNoteAmounts[group.$id] : 0}
 											amount={0}
 											expanded={expanded}
 										/>
@@ -154,13 +147,7 @@ const SidebarClient = ({
 									severity="secondary"
 									iconOnly
 									aria-label={expanded ? t("collapse-sidebar") : t("expand-sidebar")}
-									pt-root-onClick={() => {
-										if (!expanded) {
-											setExpanded(true);
-										} else {
-											setExpanded(false);
-										}
-									}}
+									pt-root-onClick={toggleExpanded}
 								>
 									<SidebarIcon />
 								</Sidebar.Trigger>
@@ -176,7 +163,7 @@ const SidebarClient = ({
 					}
 				</Sidebar.Main>
 			</Sidebar.Layout>
-		</AnimatePresence>
+		</>
 	);
 };
 

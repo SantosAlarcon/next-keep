@@ -10,19 +10,21 @@ import {
 export const changeLastUpdate = async () => {
 	const noteList: Note[] = await getAllNotes();
 
-	noteList.map((note) => {
-		fetch(`${notesEndpoint}/${note.$id}`, {
-			method: "PATCH",
-			headers: {
-				"Content-Type": "application/json",
-				"X-Appwrite-Project": appwriteProjectId,
-				"X-Appwrite-Key": process.env.APPWRITE_API_KEY!,
-			},
-			body: JSON.stringify({
-				data: {
-					lastUpdated: note.$updatedAt,
+	await Promise.all(
+		noteList.map((note) =>
+			fetch(`${notesEndpoint}/${note.$id}`, {
+				method: "PATCH",
+				headers: {
+					"Content-Type": "application/json",
+					"X-Appwrite-Project": appwriteProjectId,
+					"X-Appwrite-Key": process.env.APPWRITE_API_KEY!,
 				},
+				body: JSON.stringify({
+					data: {
+						lastUpdated: note.$updatedAt,
+					},
+				}),
 			}),
-		});
-	});
+		),
+	);
 };

@@ -1,4 +1,6 @@
-const FixedIcon = ({ width, height }: { width: string; height: string }) => {
+import { memo } from "react";
+
+const FixedIcon = memo(({ width, height }: { width: string; height: string }) => {
 	return (
 		<svg
 			aria-hidden="true"
@@ -18,6 +20,8 @@ const FixedIcon = ({ width, height }: { width: string; height: string }) => {
 			/>
 		</svg>
 	);
-};
+});
+
+FixedIcon.displayName = "FixedIcon";
 
 export default FixedIcon;

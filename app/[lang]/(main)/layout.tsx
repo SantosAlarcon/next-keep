@@ -1,7 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 import dynamic2 from "next/dynamic";
 import type { ReactNode } from "react";
-import { Toaster } from "sonner";
 import { DataSync } from "@/app/components/DataSync";
 import { LocaleSync } from "@/app/components/LocaleSync";
 import { dataStore } from "@/app/store/dataStore";
@@ -39,13 +38,12 @@ export default async function RootLayout({
 				state={{
 					allGroupTitles: state.allGroupTitles,
 					allGroups: state.allGroups,
-					allNoteAmounts: state.allGroups,
+					allNoteAmounts: {},
 					allNotes: state.allNotes,
 					allPinnedNotes: state.allPinnedNotes,
 					filter: filter,
 				}}
 			/>
-			<Toaster richColors position="bottom-center" theme="dark" />
 			{/* <MobileHeader lang={lang} /> */}
 			<div className="main__body">
 				<SidebarClientNoSSR>

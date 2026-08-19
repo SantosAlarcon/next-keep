@@ -2,8 +2,9 @@ import { Sidebar } from "@primereact/ui/sidebar";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import SidebarItemStyles from "@/app/styles/SidebarItem.module.css";
+import { memo } from "react";
 
-const SidebarItem = ({
+const SidebarItem = memo(({
 	icon,
 	title,
 	href,
@@ -25,7 +26,6 @@ const SidebarItem = ({
 					src={icon}
 					width="20"
 					height="20"
-					priority
 				/>
 				<span>{title}</span>
 				{amount > 0 && expanded && (
@@ -34,6 +34,8 @@ const SidebarItem = ({
 			</Sidebar.MenuButton>
 		</Sidebar.MenuItem>
 	);
-};
+});
+
+SidebarItem.displayName = "SidebarItem";
 
 export default SidebarItem;

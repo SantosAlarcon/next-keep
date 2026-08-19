@@ -4,7 +4,7 @@ import { Sidebar } from "@primereact/ui/sidebar";
 import Image from "next/image";
 import { redirect, useParams, useRouter } from "next/navigation";
 import { useT } from "next-i18next/client";
-import { useRef, useState } from "react";
+import { memo, useCallback, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import GroupItemStyles from "@/app/styles/GroupItem.module.css";
 import type { ContextMenuItem, Group } from "../types";
@@ -15,7 +15,7 @@ import CustomSidebarMenu from "./ui/CustomSidebarMenu";
 import ConfirmDialog from "./ui/dialogs/ConfirmDialog";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 
-const GroupItem = ({
+const GroupItem = memo(({
 	selectedGroup,
 	title,
 	amount,
@@ -35,18 +35,64 @@ const GroupItem = ({
 		useState<boolean>(false);
 	const [deleteGroupModal, setDeleteGroupModal] = useState<boolean>(false);
 
-	const groupContextMenu: ContextMenuItem[] = [
-		{
-			label: t("group.rename-group"),
-			icon: FileEdit,
-			command: () => setRenameGroupVisibleModal(true),
-		},
-		{
-			label: t("group.delete-group"),
-			icon: Trash,
-			command: () => setDeleteGroupModal(true),
-		},
-	];
+	const openRename = useCallback(
+		() => setRenameGroupVisibleModal(true),
+		[],
+	);
+	const closeRename = useCallback(
+		() => setRenameGroupVisibleModal(false),
+		[],
+	);
+	const openDelete = useCallback(
+		() => setDeleteGroupModal(true),
+		[],
+	);
+	const closeDelete = useCallback(
+		() => setDeleteGroupModal(false),
+		[],
+	);
+
+	const groupContextMenu: ContextMenuItem[] = useMemo(
+		() => [
+			{
+				label: t("group.rename-group"),
+				icon: FileEdit,
+				command: openRename,
+			},
+			{
+				label: t("group.delete-group"),
+				icon: Trash,
+				command: openDelete,
+			},
+		],
+		[t, openRename, openDelete],
+	);
+
+	const handleAcceptDelete = useCallback(async () => {
+		await toast
+			.promise(
+				// @ts-ignore
+				deleteGroupById(selectedGroup.$id).then(() => {
+					// @ts-ignore
+					changeNoteGroupsToNull(selectedGroup.$id);
+					updateGroups();
+					setTimeout(() => {
+						router.refresh();
+					}, 50);
+				}),
+				{
+					loading: t("pending-operation"),
+					success: () => {
+						return t("group.group-delete-success", {
+							name: selectedGroup?.title,
+						});
+					},
+					error: () => t("group.group-delete-error"),
+					finally: closeDelete,
+				},
+			)
+			.unwrap();
+	}, [selectedGroup, t, router, closeDelete]);
 
 	return (
 		<>
@@ -66,53 +112,35 @@ const GroupItem = ({
 				</Sidebar.MenuButton>
 				<CustomSidebarMenu model={groupContextMenu} />
 			</Sidebar.MenuItem>
-			<RenameGroupDialog
-				visible={renameGroupVisibleModal}
-				onHide={() => setRenameGroupVisibleModal(false)}
-				group={selectedGroup}
-			/>
-			<ConfirmDialog
-				open={deleteGroupModal}
-				header={t("group.group-delete-confirm-header")}
-				message={
-					<p>
-						{t("group.group-delete-confirm-message-1")}
-						<br />
-						{t("group.group-delete-confirm-message-2")}
-					</p>
-				}
-				severity={"danger"}
-				acceptLabel={t("yes")}
-				cancelLabel={t("no")}
-				accept={async () => {
-					await toast
-						.promise(
-							// @ts-ignore
-							deleteGroupById(selectedGroup.$id).then(() => {
-								// @ts-ignore
-								changeNoteGroupsToNull(selectedGroup.$id);
-								updateGroups();
-								setTimeout(() => {
-									router.refresh();
-								}, 50);
-							}),
-							{
-								loading: t("pending-operation"),
-								success: () => {
-									return t("group.group-delete-success", {
-										name: selectedGroup?.title,
-									});
-								},
-								error: () => t("group.group-delete-error"),
-								finally: () => setDeleteGroupModal(false)
-							},
-						)
-						.unwrap();
-				}}
-				onHide={() => setDeleteGroupModal(false)}
-			/>
+			{renameGroupVisibleModal && (
+				<RenameGroupDialog
+					visible={renameGroupVisibleModal}
+					onHide={closeRename}
+					group={selectedGroup}
+				/>
+			)}
+			{deleteGroupModal && (
+				<ConfirmDialog
+					open={deleteGroupModal}
+					header={t("group.group-delete-confirm-header")}
+					message={
+						<p>
+							{t("group.group-delete-confirm-message-1")}
+							<br />
+							{t("group.group-delete-confirm-message-2")}
+						</p>
+					}
+					severity={"danger"}
+					acceptLabel={t("yes")}
+					cancelLabel={t("no")}
+					accept={handleAcceptDelete}
+					onHide={closeDelete}
+				/>
+			)}
 		</>
 	);
-};
+});
+
+GroupItem.displayName = "GroupItem";
 
 export default GroupItem;
