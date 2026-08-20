@@ -1,0 +1,14 @@
+{
+	"register-title": "注册",
+	"register-email": "邮箱",
+	"register-password": "密码",
+	"register-confirm-password": "确认密码",
+	"register-success": "账户创建成功。请验证您的邮箱以激活账户。",
+	"register-passwords-dont-match": "两次输入的密码不一致，请重新输入。",
+	"register-minimum-length": "密码至少需要 8 个字符",
+	"write-password": "输入密码",
+	"weak-password": "弱",
+	"medium-password": "中等",
+	"strong-password": "强",
+	"very-strong-password": "非常强"
+}

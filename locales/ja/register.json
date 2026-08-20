@@ -1,0 +1,14 @@
+{
+	"register-title": "新規登録",
+	"register-email": "メールアドレス",
+	"register-password": "パスワード",
+	"register-confirm-password": "パスワード確認",
+	"register-success": "アカウントが正常に作成されました。メールを確認してアカウントを有効化してください。",
+	"register-passwords-dont-match": "パスワードが一致しません。もう一度入力してください。",
+	"register-minimum-length": "パスワードは8文字以上必要です",
+	"write-password": "パスワードを入力",
+	"weak-password": "弱い",
+	"medium-password": "普通",
+	"strong-password": "強い",
+	"very-strong-password": "非常に強い"
+}

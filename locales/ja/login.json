@@ -1,0 +1,15 @@
+{
+	"login-title": "ログイン",
+	"email": "メールアドレス",
+	"password": "パスワード",
+	"remember": "ログイン状態を保持",
+	"login-email": "メールアドレスでログイン",
+	"login-google": "Googleでログイン",
+	"login-facebook": "Facebookでログイン",
+	"login-github": "GitHubでログイン",
+	"login": "ログイン",
+	"login-error": "ログインに失敗しました。認証情報を確認してください。",
+	"login-success": "ログイン成功",
+	"forgot-password": "パスワードをお忘れですか？",
+	"register": "新規登録"
+}

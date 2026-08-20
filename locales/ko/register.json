@@ -1,0 +1,14 @@
+{
+	"register-title": "회원가입",
+	"register-email": "이메일",
+	"register-password": "비밀번호",
+	"register-confirm-password": "비밀번호 확인",
+	"register-success": "계정이 성공적으로 생성되었습니다. 이메일을 확인하여 계정을 활성화하세요.",
+	"register-passwords-dont-match": "비밀번호가 일치하지 않습니다. 다시 입력해 주세요.",
+	"register-minimum-length": "비밀번호는 8자 이상이어야 합니다",
+	"write-password": "비밀번호 입력",
+	"weak-password": "약함",
+	"medium-password": "보통",
+	"strong-password": "강함",
+	"very-strong-password": "매우 강함"
+}

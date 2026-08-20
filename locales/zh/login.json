@@ -1,0 +1,15 @@
+{
+	"login-title": "登录",
+	"email": "邮箱",
+	"password": "密码",
+	"remember": "记住我",
+	"login-email": "使用邮箱登录",
+	"login-google": "使用 Google 登录",
+	"login-facebook": "使用 Facebook 登录",
+	"login-github": "使用 GitHub 登录",
+	"login": "登录",
+	"login-error": "登录失败，请检查您的凭据。",
+	"login-success": "登录成功",
+	"forgot-password": "忘记密码？",
+	"register": "注册"
+}
