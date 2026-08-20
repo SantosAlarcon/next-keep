@@ -1,7 +1,6 @@
 import type { NextURL } from "next/dist/server/web/next-url";
 import type { NextRequest } from "next/server";
 import { z } from "zod";
-import { useNewNoteStore } from "@/app/store/newNoteStore";
 import { createNewNote } from "@/app/utils/database-appwrite/notes/createNewNote";
 import { deleteNoteById } from "@/app/utils/database-appwrite/notes/deleteNoteById";
 import { getAllPinnedNotes } from "@/app/utils/database-appwrite/notes/getAllPinnedNotes";
@@ -212,15 +211,16 @@ export async function POST(req: NextRequest) {
 		);
 	}
 
-	const newNote = useNewNoteStore.getState().newNote;
-	const reset = useNewNoteStore.getState().reset;
-	newNote.title = parsed.data.title;
-	newNote.data = parsed.data.data;
-	newNote.group = parsed.data.group ?? null;
-	newNote.isPinned = parsed.data.isPinned ?? false;
-	newNote.$createdAt = new Date().toISOString();
-	newNote.$updatedAt = new Date().toISOString();
-	newNote.lastUpdated = new Date().toISOString();
+	const now = new Date().toISOString();
+	const newNote = {
+		title: parsed.data.title,
+		data: parsed.data.data,
+		group: parsed.data.group ?? null,
+		isPinned: parsed.data.isPinned ?? false,
+		$createdAt: now,
+		$updatedAt: now,
+		lastUpdated: now,
+	};
 
 	// Call the createNewNote function
 	// @ts-ignore
@@ -232,9 +232,6 @@ export async function POST(req: NextRequest) {
 			{ status: 400 },
 		);
 	}
-
-	// Call the reset function of the store to create new note object
-	reset();
 
 	return Response.json(
 		{ message: `The note '${newNote.title}' has been added to the DB!` },

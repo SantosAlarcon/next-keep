@@ -1,6 +1,6 @@
 "use client";
 
-import { type FC, useContext, useState } from "react";
+import { type FC, useContext, useEffect, useRef, useState } from "react";
 import UpdateNoteContext from "../context/UpdateNoteContext";
 import { useNewNoteStore } from "../store/newNoteStore";
 import "@uiw/react-md-editor/markdown-editor.css";
@@ -33,6 +33,7 @@ const CustomMDXEditor: FC<EditorProps> = ({ lang, text, isEditing }) => {
 	const [markdown, setMarkdown] = useState<string>(text);
 	const [editorMode, setEditorMode] = useState<EditorMode>(EditorMode.Editor);
 	const { t } = useTranslation("common", { lng: lang });
+	const isDirty = useRef(false);
 
 	// @ts-ignore
 	const { updatedNote, setUpdatedNote } = useContext(UpdateNoteContext);
@@ -40,12 +41,24 @@ const CustomMDXEditor: FC<EditorProps> = ({ lang, text, isEditing }) => {
 	// When the Markdown changes, it updates the new note store
 	const changeHandler = (value: string | undefined) => {
 		setMarkdown(value || "");
+		isDirty.current = true;
 		if (isEditing) {
 			setUpdatedNote({ ...updatedNote, data: value });
 		} else {
 			setNewNote({ data: value });
 		}
 	};
+
+	useEffect(() => {
+		const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+			if (isDirty.current) {
+				e.preventDefault();
+			}
+		};
+
+		window.addEventListener("beforeunload", handleBeforeUnload);
+		return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+	}, []);
 
 	return (
 		<>

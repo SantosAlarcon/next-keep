@@ -1,7 +1,7 @@
 import type { I18nConfig } from "next-i18next/proxy";
 
 const i18NextConfig: I18nConfig = {
-	supportedLngs: ["en", "es"],
+	supportedLngs: ["en", "es", "ca"],
 	fallbackLng: "en",
 	defaultNS: "common",
 	ns: ["common", "login", "register", "reset-password", "new-password"],

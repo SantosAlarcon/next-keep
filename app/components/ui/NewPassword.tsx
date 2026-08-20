@@ -29,7 +29,7 @@ const NewPassword = ({ lang }: { lang: string }) => {
 	};
 
 	if (!userId && !secret) {
-		return <p>UserId and secret must be present to access the form.</p>;
+		return <p>{t("new-password-missing-params")}</p>;
 	}
 
 	return (

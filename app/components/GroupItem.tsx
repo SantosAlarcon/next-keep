@@ -12,6 +12,7 @@ import { deleteGroupById } from "../utils/groups/deleteGroupById";
 import { changeNoteGroupsToNull } from "../utils/notes/changeNoteGroupsToNull";
 import { updateGroups } from "../utils/updateData";
 import CustomSidebarMenu from "./ui/CustomSidebarMenu";
+import CustomTooltip from "./ui/CustomTooltip";
 import ConfirmDialog from "./ui/dialogs/ConfirmDialog";
 import RenameGroupDialog from "./ui/dialogs/RenameGroupDialog";
 
@@ -97,19 +98,42 @@ const GroupItem = memo(({
 	return (
 		<>
 			<Sidebar.MenuItem key={selectedGroup.$id} ref={itemRef}>
-				<Sidebar.MenuButton
-					pt-root-onClick={() => redirect(`/groups/${selectedGroup.$id}`)}
-					isActive={group === selectedGroup.$id}
-				>
-					<Image
-						className={GroupItemStyles.group__item__icon}
-						src="/group.svg"
-						width="16"
-						height="16"
-						alt="Group icon"
-					/>
-					<span className={GroupItemStyles.group__item__title}>{title}</span>
-				</Sidebar.MenuButton>
+				{!expanded ? (
+					<CustomTooltip
+						side="right"
+						align="center"
+						tooltipText={title}
+						onClick={() => redirect(`/groups/${selectedGroup.$id}`)}
+						severity="secondary"
+					>
+						<Sidebar.MenuButton
+							isActive={group === selectedGroup.$id}
+						>
+							<Image
+								className={GroupItemStyles.group__item__icon}
+								src="/group.svg"
+								width="16"
+								height="16"
+								alt="Group icon"
+							/>
+							<span className={GroupItemStyles.group__item__title}>{title}</span>
+						</Sidebar.MenuButton>
+					</CustomTooltip>
+				) : (
+					<Sidebar.MenuButton
+						pt-root-onClick={() => redirect(`/groups/${selectedGroup.$id}`)}
+						isActive={group === selectedGroup.$id}
+					>
+						<Image
+							className={GroupItemStyles.group__item__icon}
+							src="/group.svg"
+							width="16"
+							height="16"
+							alt="Group icon"
+						/>
+						<span className={GroupItemStyles.group__item__title}>{title}</span>
+					</Sidebar.MenuButton>
+				)}
 				<CustomSidebarMenu model={groupContextMenu} />
 			</Sidebar.MenuItem>
 			{renameGroupVisibleModal && (

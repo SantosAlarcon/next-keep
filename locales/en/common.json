@@ -70,5 +70,9 @@
 	"editor": "Editor",
 	"preview": "Preview",
 	"elements": "Elements",
-	"element": "Element"
+	"element": "Element",
+	"export-note": "Export as Markdown",
+	"main-navigation": "Main navigation",
+	"collapse-sidebar": "Collapse sidebar",
+	"expand-sidebar": "Expand sidebar"
 }

@@ -1,0 +1,15 @@
+{
+	"login-title": "Iniciar sessió",
+	"email": "Correu electrònic",
+	"password": "Contrasenya",
+	"remember": "Recordar-me",
+	"login-email": "Iniciar sessió amb correu electrònic",
+	"login-google": "Iniciar sessió amb Google",
+	"login-facebook": "Iniciar sessió amb Facebook",
+	"login-github": "Iniciar sessió amb Github",
+	"login": "Iniciar sessió",
+	"login-error": "Error en iniciar sessió. Comprova les teves credencials.",
+	"login-success": "Sessió iniciada correctament",
+	"forgot-password": "Has oblidat la contrasenya?",
+	"register": "Registrar-se"
+}

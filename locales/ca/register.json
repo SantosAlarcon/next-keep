@@ -1,0 +1,14 @@
+{
+	"register-title": "Registrar-se",
+	"register-email": "Correu electrònic",
+	"register-password": "Contrasenya",
+	"register-confirm-password": "Confirmar contrasenya",
+	"register-success": "El compte s'ha creat correctament. Ara has de verificar el teu correu electrònic per activar-lo.",
+	"register-passwords-dont-match": "Les contrasenyes no coincideixen. Si us plau, introdueix-les de nou.",
+	"register-minimum-length": "La contrasenya ha de tenir 8 caràcters com a mínim",
+	"write-password": "Escriu una contrasenya",
+	"weak-password": "Feble",
+	"medium-password": "Mitjana",
+	"strong-password": "Forta",
+	"very-strong-password": "Molt forta"
+}

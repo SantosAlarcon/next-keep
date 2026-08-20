@@ -8,6 +8,9 @@ import { useMemo } from "react";
 import type { Note } from "../types";
 import { dataStore } from "../store/dataStore";
 import { useTranslation } from "react-i18next";
+import { getRelativeTime, getMarkdownPreview } from "@/app/utils/relativeTime";
+import { useRouter } from "next/navigation";
+import { useNewNoteStore } from "@/app/store/newNoteStore";
 
 const NoteList = ({
 	group,
@@ -21,13 +24,17 @@ const NoteList = ({
 	const allNotes: Note[] = dataStore((state: any) => state.allNotes);
 	const filter: string = dataStore((state: any) => state.filter);
 	const { t } = useTranslation("common", { lng: lang });
+	const router = useRouter();
+	const reset = useNewNoteStore((state) => state.reset);
 
 	const filteredNotes = useMemo(() => {
 		let notes: Note[];
 
 		if (filter.length > 0) {
+			const lowerFilter = filter.toLowerCase();
 			notes = allNotes.filter((note: Note) =>
-				note.title.toLowerCase().includes(filter),
+				note.title.toLowerCase().includes(lowerFilter) ||
+				note.data.toLowerCase().includes(lowerFilter),
 			);
 		} else {
 			switch (group) {
@@ -59,6 +66,11 @@ const NoteList = ({
 		}
 	}, [group]);
 
+	const handleCreateNote = () => {
+		reset();
+		router.push(`/${lang}/notes/new`);
+	};
+
 	if (!allNotes && !filteredNotes) return null;
 
 	return (
@@ -75,8 +87,18 @@ const NoteList = ({
 							key={note.$id}
 							title={note.title}
 						>
-							<span className={NoteListStyles.note__item__title}>
-								{note.title}
+							<span className={NoteListStyles.note__item__content}>
+								<span className={NoteListStyles.note__item__title}>
+									{note.title}
+								</span>
+								{note.data && (
+									<span className={NoteListStyles.note__item__preview}>
+										{getMarkdownPreview(note.data)}
+									</span>
+								)}
+								<span className={NoteListStyles.note__item__time}>
+									{getRelativeTime(note.lastUpdated, lang)}
+								</span>
 							</span>
 							<span className={NoteListStyles.note__item__pinned}>
 								{note.isPinned ? (
@@ -89,15 +111,35 @@ const NoteList = ({
 					</li>
 				))
 			) : (
-				<p className={NoteListStyles.note__list__empty} role="status">
-					{allNotes.length === 0
-						? t("note-list-empty")
-						: filteredNotes.length === 0 &&
-								filter === "" &&
-								(selected === "pinned" || selected === "group")
-							? t("empty-note-list-group")
-							: t("no-results-found")}
-				</p>
+				<li className={NoteListStyles.note__list__empty} role="status">
+					<div className={NoteListStyles.note__empty__illustration}>
+						<img
+							src="/note.svg"
+							alt=""
+							width="64"
+							height="64"
+							aria-hidden="true"
+						/>
+					</div>
+					<p>
+						{allNotes.length === 0
+							? t("note-list-empty")
+							: filteredNotes.length === 0 &&
+									filter === "" &&
+									(selected === "pinned" || selected === "group")
+								? t("empty-note-list-group")
+								: t("no-results-found")}
+					</p>
+					{allNotes.length === 0 && (
+						<button
+							className={NoteListStyles.note__empty__cta}
+							onClick={handleCreateNote}
+							type="button"
+						>
+							{t("create-note")}
+						</button>
+					)}
+				</li>
 			)}
 		</ul>
 	);

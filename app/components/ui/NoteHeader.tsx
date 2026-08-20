@@ -2,6 +2,7 @@ import { ButtonGroup } from "@primereact/ui/buttongroup";
 import ChangeGroupButton from "@/app/components/ui/buttons/ChangeGroupButton";
 import DeleteButton from "@/app/components/ui/buttons/DeleteButton";
 import EditButton from "@/app/components/ui/buttons/EditButton";
+import ExportNoteButton from "@/app/components/ui/buttons/ExportNoteButton";
 import TogglePinButton from "@/app/components/ui/buttons/TogglePinButton";
 import initTranslations from "@/app/i18n";
 import noteHeaderStyles from "@/app/styles/NoteHeader.module.css";
@@ -23,6 +24,7 @@ const NoteHeader = async ({ lang, note }: { lang: string; note: Note }) => {
                     <ButtonGroup>
                         <BackButton />
                         <EditButton noteId={note.$id} />
+                        <ExportNoteButton note={note} />
                         <ChangeGroupButton
                             label={t("note.change-group")}
                             note={note}

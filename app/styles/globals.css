@@ -173,7 +173,6 @@ a:hover {
 }
 
 button {
-	outline: none;
 	border: none;
 	font-family: inherit;
 	border-radius: 0.45rem;
@@ -183,6 +182,10 @@ button {
 
 	&:hover {
 		background: linear-gradient(inherit 0%, #fff6 100%);
+	}
+
+	&:focus:not(:focus-visible) {
+		outline: none;
 	}
 
 	&:focus-visible {

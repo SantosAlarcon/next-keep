@@ -1,0 +1,21 @@
+.mobile__header {
+	display: none;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.5rem 1rem;
+	border-bottom: 1px light-dark(#0006, #fff6) solid;
+	background-color: light-dark(#eee, var(--p-surface-950));
+	position: sticky;
+	top: 0;
+	z-index: 100;
+
+	@media (width <= 768px) {
+		display: flex;
+	}
+}
+
+.mobile__header__logo {
+	width: 32px;
+	height: 32px;
+}

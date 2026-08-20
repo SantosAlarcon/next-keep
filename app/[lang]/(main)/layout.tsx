@@ -7,6 +7,7 @@ import { dataStore } from "@/app/store/dataStore";
 import { getAllData } from "@/app/utils/getAllData";
 
 const SidebarClientNoSSR = dynamic2(() => import("@/components/SidebarClient"));
+const MainShellNoSSR = dynamic2(() => import("@/app/components/MainShell"));
 
 export default async function RootLayout({
 	children,
@@ -44,12 +45,13 @@ export default async function RootLayout({
 					filter: filter,
 				}}
 			/>
-			{/* <MobileHeader lang={lang} /> */}
-			<div className="main__body">
-				<SidebarClientNoSSR>
-					<main id="main-content">{children}</main>
-				</SidebarClientNoSSR>
-			</div>
+			<MainShellNoSSR lang={lang}>
+				<div className="main__body">
+					<SidebarClientNoSSR>
+						<main id="main-content">{children}</main>
+					</SidebarClientNoSSR>
+				</div>
+			</MainShellNoSSR>
 		</>
 	);
 }

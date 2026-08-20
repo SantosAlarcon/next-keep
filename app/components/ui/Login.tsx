@@ -30,7 +30,7 @@ const Login = ({ lang }: { lang: string }) => {
 		emailLogin(data)
 			.then((response) => {
 				document.cookie = `appwrite_session=${JSON.stringify(response)}; path=/;`;
-				router.push("/notes/all");
+				router.push(`/${lang}/notes/all`);
 			})
 			.catch(() => toast.error(t("login-error")))
 			.finally(() => setPending(false));
@@ -105,13 +105,13 @@ const Login = ({ lang }: { lang: string }) => {
 				</form>
 			</div>
 			<Link
-				href={`/reset-password`}
+				href={`/${lang}/reset-password`}
 				aria-label={t("forgot-password")}
 				className="p-link"
 			>
 				{t("forgot-password")}
 			</Link>
-			<Link href={`/register`} aria-label={t("register")} className="p-link">
+			<Link href={`/${lang}/register`} aria-label={t("register")} className="p-link">
 				{t("register")}
 			</Link>
 

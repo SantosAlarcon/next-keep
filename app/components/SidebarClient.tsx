@@ -6,7 +6,7 @@ import { Button } from "@primereact/ui/button";
 import { Sidebar } from "@primereact/ui/sidebar";
 import Link from "next/link";
 import { useT } from "next-i18next/client";
-import { type ReactNode, useCallback, useEffect, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import CreateGroupButton from "@/app/components/ui/buttons/CreateGroupButton";
 import NewNoteButton from "@/app/components/ui/buttons/NewNoteButton";
 import { mainSidebarLinks } from "../constants";
@@ -30,40 +30,36 @@ const SidebarClient = ({
 
 	const isMobile = useIsMobile(768);
 
-	const [mounted, setMounted] = useState<boolean>(false);
-	const [expanded, setExpanded] = useState<boolean>(() => {
-		if (typeof window !== "undefined") {
-			if (!window.localStorage.getItem("sidebar_expanded") && !isMobile) {
-				window.localStorage.setItem("sidebar_expanded", "true");
-				return true;
-			}
-
-			if (window.localStorage.getItem("sidebar_expanded") === "true") {
-				return true;
-			}
-		}
-
-		return false;
-	});
+	const [expanded, setExpanded] = useState<boolean>(true);
 
 	useEffect(() => {
-		if (expanded && !isMobile) {
+		const stored = window.localStorage.getItem("sidebar_expanded");
+		if (stored !== null) {
+			setExpanded(stored === "true");
+		} else if (!isMobile) {
 			window.localStorage.setItem("sidebar_expanded", "true");
-		} else {
-			window.localStorage.setItem("sidebar_expanded", "false");
+			setExpanded(true);
 		}
-	}, [expanded, isMobile]);
+	}, [isMobile]);
 
 	useEffect(() => {
-		setMounted(true);
-	}, []);
+		window.localStorage.setItem("sidebar_expanded", String(expanded));
+	}, [expanded]);
 
 	const toggleExpanded = useCallback(
 		() => setExpanded((prev) => !prev),
 		[],
 	);
 
-	if (!mounted) return null;
+	const groupNoteCounts = useMemo(() => {
+		const counts: Record<string, number> = {};
+		allNotes?.forEach((note: any) => {
+			if (note.group) {
+				counts[note.group] = (counts[note.group] || 0) + 1;
+			}
+		});
+		return counts;
+	}, [allNotes]);
 
 	return (
 		<>
@@ -129,7 +125,7 @@ const SidebarClient = ({
 											key={group.$id}
 											selectedGroup={group}
 											title={group.title}
-											amount={0}
+											amount={groupNoteCounts[group.$id] || 0}
 											expanded={expanded}
 										/>
 									))}
